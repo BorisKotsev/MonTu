@@ -1,0 +1,5 @@
+Screen_Size: 1366 768
+
+Image: background.bmp
+
+Colls_and_Rows: 25 15

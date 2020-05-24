@@ -5,7 +5,7 @@ World::World()
     m_main_window = NULL;
     m_main_renderer = NULL;
     m_backgroundTexture = NULL;
-    m_menuState = NOSCENE;
+    m_gameState = NOSCENE;
     m_quitScene = false;
 }
 
@@ -23,26 +23,28 @@ void World::initSDL(string configFile)
 
     string tmp;
     string backgroundImg;
+    string menuImg;
 
     stream.open(configFile.c_str());
     stream >> tmp >> m_SCREEN_WIDTH >> m_SCREEN_HEIGHT;
     stream >> tmp >> backgroundImg;
+    stream >> tmp >> menuImg;
+    stream >> tmp >> m_playButtonRect.x >> m_playButtonRect.y >> m_playButtonRect.w >> m_playButtonRect.h;
     stream >> tmp >> m_colls >> m_rows;
     stream.close();
 
     SDL_Init(SDL_INIT_EVERYTHING);
+    TTF_Init();
 
     m_main_window = SDL_CreateWindow("Montu", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_SCREEN_WIDTH, m_SCREEN_HEIGHT, 0);
     m_main_renderer = SDL_CreateRenderer(m_main_window, -1, SDL_RENDERER_ACCELERATED);
 
+
     m_configManager.init("config_manager.txt", m_main_renderer);
     m_soundManager.init("SoundManager.txt");
 
-    backgroundImg = "img\\" + backgroundImg;
-
-    SDL_Surface* loadingSurface = SDL_LoadBMP(backgroundImg.c_str());
-    m_backgroundTexture = SDL_CreateTextureFromSurface(m_main_renderer, loadingSurface);
-    SDL_FreeSurface(loadingSurface);
+    m_backgroundTexture = LoadTexture(backgroundImg, m_main_renderer);
+    m_menuTexture = LoadTexture(menuImg, m_main_renderer);
 
     initTiles("tileMap.txt");
 
@@ -89,7 +91,7 @@ void World::cleaner()
 
 void World::destroySDL()
 {
-    m_menuState = NOSCENE;
+    m_gameState = NOSCENE;
     SDL_DestroyTexture(m_backgroundTexture);
     SDL_DestroyRenderer(m_main_renderer);
     SDL_DestroyWindow(m_main_window);
@@ -110,18 +112,48 @@ void World::input()
     {
         m_mouseIsPressed = true;
     }
+    ///cout << m_mouse.x << " " << m_mouse.y << endl;
+}
+
+void World::initSession(GAME_STATE state)
+{
+    if(state == PICK_BAN)
+    {
+        m_available.push_back(ARCHER);
+        m_available.push_back(WARRIOR);
+    }
 }
 
 void World::menu()
 {
     //Draw the menu img
+    SDL_RenderCopy(m_main_renderer, m_menuTexture, NULL, NULL);
+
+    coordinates buff;
+    buff.x = m_playButtonRect.x + 115;
+    buff.y = m_playButtonRect.y + 10;
+    write("PLAY", buff, m_main_renderer, 40);
 
     //Switch scenes if needed
+    if(m_mouseIsPressed)
+    {
+        if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_playButtonRect))
+        {
+            m_quitScene = true;
+            m_gameState = GAME;
+        }
+    }
+    //Print
+    SDL_RenderPresent(m_main_renderer);
 }
 
 void World::pickAndBan()
 {
-
+    //Check for mouse input and select squad to ban
+    if(false)
+    {
+        ///m_banned.push_back();
+    }
 }
 
 void World::initTiles(string configFile)
@@ -131,8 +163,8 @@ void World::initTiles(string configFile)
 
     string tmp;
 
-    int hexagonWidth, hexagonHeight;
-    int sizeOfHexagon;
+    short int hexagonWidth, hexagonHeight;
+    short int sizeOfHexagon;
 
     stream.open(configFile.c_str());
     stream >> tmp >> sizeOfHexagon;
@@ -145,10 +177,10 @@ void World::initTiles(string configFile)
     Tile* tile = NULL;
     SDL_Point* buffPoint = NULL;
 
-    for (int r = 0; r < m_rows; r ++)
+    for (short int r = 0; r < m_rows; r ++)
     {
         m_tiles.push_back(vector<Tile*>());
-        for (int c = 0; c < m_colls; c ++)
+        for (short int c = 0; c < m_colls; c ++)
         {
             tile = new Tile(*(m_configManager.modelTile));
             if(r % 2 == 0)
@@ -199,9 +231,9 @@ void World::initTiles(string configFile)
 
 void World::selectTile()
 {
-    for(int i = 0; i < m_tiles.size(); i++)
+    for(short int i = 0; i < m_tiles.size(); i++)
     {
-        for(int j = 0; j < m_tiles[i].size(); j++)
+        for(short int j = 0; j < m_tiles[i].size(); j++)
         {
             if(m_mouseIsPressed)
             {

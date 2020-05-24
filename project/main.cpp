@@ -8,20 +8,20 @@ int main(int argc, char* argv[])
 
     world.initSDL("world.txt");
 
-    world.m_menuState = GAME;
+    world.m_gameState = MENU;
 
     while(true)
     {
-        if(world.m_menuState == MENU)
+        if(world.m_gameState == MENU)
         {
             while(!world.m_quitScene)
             {
                 world.input();
-
+                world.menu();
             }
             world.m_quitScene = false;
         }
-        if(world.m_menuState == PICK_BAN)
+        if(world.m_gameState == PICK_BAN)
         {
             while(!world.m_quitScene)
             {
@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
             }
             world.m_quitScene = false;
         }
-        if(world.m_menuState == GAME)
+        if(world.m_gameState == GAME)
         {
             while(!world.m_quitScene)
             {

@@ -1,5 +1,9 @@
 Screen_Size: 1366 768
 
-Image: background.bmp
+Background_Image: background.bmp
+
+Menu_Image: UI_Menu.bmp
+
+Play_Button_Rect: 514 305 322 75
 
 Colls_and_Rows: 25 15

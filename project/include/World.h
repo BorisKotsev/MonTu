@@ -25,6 +25,13 @@ class World
         SDL_Window* m_main_window;
         SDL_Renderer* m_main_renderer;
         SDL_Texture* m_backgroundTexture;
+        SDL_Texture* m_menuTexture;
+
+        SDL_Rect m_playButtonRect;
+        SDL_Rect m_exitButtonRect;
+
+        TTF_Font* m_font;
+
 
         ConfigManager m_configManager;
         SoundManager m_soundManager;
@@ -36,11 +43,14 @@ class World
         coordinates m_mouse;
         bool m_mouseIsPressed;
         SDL_Event m_event;
-        MENU_STATE m_menuState;
+        GAME_STATE m_gameState;
         bool m_quitScene;
 
         vector<vector<Tile*> > m_tiles;
         vector<Squad*> m_squads;
+
+        vector<SQUAD> m_available;
+        vector<SQUAD> m_banned;
 
         void initSDL(string configFile);
         void draw();
@@ -48,6 +58,8 @@ class World
         void cleaner();
         void destroySDL();
         void input();
+
+        void initSession(GAME_STATE state);
 
         void menu();
 

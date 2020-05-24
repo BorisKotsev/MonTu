@@ -11,13 +11,20 @@ enum OWNER
     PLAYER2 = 2
 };
 
-enum MENU_STATE
+enum GAME_STATE
 {
     NOSCENE = 0,
     MENU = 1,
     PICK_BAN = 2,
     GAME = 3,
     STATS = 4
+};
+
+enum SQUAD
+{
+    NOSQUAD = 0,
+    ARCHER = 1,
+    WARRIOR = 2
 };
 
 struct coordinates

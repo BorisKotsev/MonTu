@@ -56,3 +56,44 @@ bool isInsideAHexagon(vector<SDL_Point*> points, SDL_Point* mousePoint)
     }
     return false;
 }
+
+bool checkForMouseCollision(int mouseX, int mouseY, SDL_Rect object)
+{
+    if(mouseX > object.x && mouseX < object.x + object.w && mouseY > object.y && mouseY < object.y + object.h)
+    {
+        return true;
+    }
+    return false;
+}
+
+void write(string text, coordinates coor, SDL_Renderer* renderer, int FONT_SIZE)
+{
+    SDL_Texture* texture;
+    SDL_Surface* surface;
+    SDL_Rect rect;
+    SDL_Color fcolor;
+    TTF_Font* font;
+
+    string str = "ttf/Roboto-Regular.ttf";
+    font = TTF_OpenFont(str.c_str(), FONT_SIZE);
+
+    if (font == NULL)
+    {
+        fprintf(stderr, "error: font not found\n");
+        exit(EXIT_FAILURE);
+    }
+
+    fcolor.r = 255;
+    fcolor.g = 255;
+    fcolor.b = 255;
+    const char* t = text.c_str();
+    surface = TTF_RenderText_Solid(font, t, fcolor);
+    texture = SDL_CreateTextureFromSurface(renderer, surface);
+    rect.w = surface->w;
+    rect.h = surface->h;
+    rect.x = coor.x;
+    rect.y = coor.y;
+    SDL_RenderCopy(renderer, texture, NULL, &rect);
+    SDL_FreeSurface(surface);
+    SDL_DestroyTexture(texture);
+}

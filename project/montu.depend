@@ -1209,11 +1209,11 @@
 	"defines.h"
 	"Engine.h"
 
-1590319476 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\defines.h
+1592570771 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\defines.h
 	<SDL2/SDL.h>
 	<cmath>
 
-1590323374 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\engine.h
+1594156535 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\engine.h
 	<cmath>
 	<vector>
 	<string>
@@ -1221,7 +1221,7 @@
 	"SDL2/SDL_TTF.h"
 	"defines.h"
 
-1590323812 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\engine.cpp
+1594154000 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\engine.cpp
 	"Engine.h"
 
 1588586457 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\soundmanager.cpp
@@ -1253,11 +1253,11 @@
 1589792736 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\tile.cpp
 	"Tile.h"
 
-1590320753 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\main.cpp
+1592817817 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\main.cpp
 	<SDL2/SDL.h>
 	"World.h"
 
-1590321911 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
+1594157651 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -1266,15 +1266,26 @@
 	<SDL2/SDL.h>
 	"ConfigManager.h"
 	"SoundManager.h"
+	"PickAndBan.h"
 	"Engine.h"
 	"Tile.h"
 	"Squad.h"
 
-1590323944 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
+1594158696 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
 	"World.h"
 
 1589183663 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_ttf.h
 	"SDL.h"
 	"begin_code.h"
 	"close_code.h"
+
+1592817542 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\pickandban.cpp
+	"PickAndBan.h"
+
+1592817172 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\pickandban.h
+	<vector>
+	<fstream>
+	<iostream>
+	"defines.h"
+	"Engine.h"
 

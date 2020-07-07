@@ -7,6 +7,8 @@ World::World()
     m_backgroundTexture = NULL;
     m_gameState = NOSCENE;
     m_quitScene = false;
+    m_selected.x = 3;
+    m_selected.y = 3;
 }
 
 World::~World()
@@ -42,6 +44,7 @@ void World::initSDL(string configFile)
 
     m_configManager.init("config_manager.txt", m_main_renderer);
     m_soundManager.init("SoundManager.txt");
+    m_pickAndBan.init("pick_And_Ban.txt", m_main_renderer);
 
     m_backgroundTexture = LoadTexture(backgroundImg, m_main_renderer);
     m_menuTexture = LoadTexture(menuImg, m_main_renderer);
@@ -49,8 +52,26 @@ void World::initSDL(string configFile)
     initTiles("tileMap.txt");
 
     m_soundManager.play_sound("General.mp3");
-}
 
+    initDirection("directions.txt");
+
+}
+void World::initDirection(string configFile)
+{
+    // Declaring the value of the directions used for the giveNeighbor function
+    configFile = "config\\" + configFile;
+    fstream stream;
+
+    stream.open(configFile.c_str());
+
+    for(int i = 0; i < 2; i ++)
+    {
+        for (int j = 0; j < 6; j++)
+        {
+            stream >> directions[i][j].x >> directions[i][j].y;
+        }
+    }
+}
 void World::update()
 {
     selectTile();
@@ -239,9 +260,49 @@ void World::selectTile()
             {
                 if(isInsideAHexagon(m_tiles[i][j]->m_collisionPoints, LoadPoint(m_mouse)))
                 {
-                    cout << i << " " << j << endl;
+                    cout << "selected " << i << " " << j << endl;
+                    m_selected.x = i;
+                    m_selected.y = j;
                 }
             }
         }
     }
+}
+
+Tile* World::giveNeighbor(coordinates coor, int direction)
+{
+    /*
+    the value of direction should be the following:
+    *short version* - starts from right and goes backwards
+    0 - right
+    1 - top right
+    2 - left right
+    3 - left
+    4 - down left
+    5 - down right
+    */
+
+    int evenR = (coor.y % 2 == 0) ? 0 : 1;
+    //selects the coordinates that we add to the current position
+    coordinates addedCoor = directions[evenR][direction];
+
+    return m_tiles[coor.y + addedCoor.y][coor.x + addedCoor.x];
+}
+
+
+bool World::canTravel(coordinates position, coordinates desiredPosition, int movement)
+{
+    int movementMap[m_rows][m_colls];
+    // Makes all tiles uncrossable (giving impossible values)
+    for (short int r = 0; r < m_rows; r ++)
+    {
+        for (short int c = 0; c < m_colls; c ++)
+        {
+            movementMap[r][c] = -1;
+        }
+    }
+    // We need 0 movement for traveling to our own position
+    movement[position.x][position.y] = 0;
+
+    // TO-DO: give value to every hexagon in the map by starting from out position and subtract the walkingDifficulty
 }

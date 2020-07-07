@@ -1,3 +1,27 @@
-iconSize: 100 100
-colls_and_rows: 5 5
-spacing: 15
+numberOfSquads: 8
+iconSize: 125 125
+background: pickAndBanBackground.bmp
+
+coordinates: 328 60
+img: 
+
+coordinates: 518 60
+img: 
+
+coordinates: 708 60
+img:
+
+coordinates: 898 60
+img:
+
+coordinates: 1088 60
+img:
+
+coordinates: 1278 60
+img:
+
+coordinates: 328 245
+img:
+
+coordinates: 518 245
+img:

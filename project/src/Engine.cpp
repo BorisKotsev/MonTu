@@ -27,6 +27,11 @@ void CoordinatesToRect(coordinates coor, SDL_Rect& rect)
     rect.y = coor.y;
 }
 
+int hexDistance(coordinates a, coordinates b)
+{
+    return (abs(a.x - b.x) + abs(a.x + a.y - b.x - b.y) + abs(a.y - b.y)) / 2;
+}
+
 float triangleArea(SDL_Point* point1, SDL_Point* point2, SDL_Point* point3)
 {
    return abs((point1->x * (point2->y - point3->y) + point2->x * (point3 -> y - point1->y) + point3 -> x*(point1->y - point2->y))/2.0);
@@ -47,11 +52,17 @@ bool isInsideATriangle(SDL_Point* triangle1, SDL_Point* triangle2, SDL_Point* tr
 
 bool isInsideAHexagon(vector<SDL_Point*> points, SDL_Point* mousePoint)
 {
-    for(int i = 2; i < points.size(); i++)
+    for(int i = 0; i < points.size(); i++)
     {
-        if(isInsideATriangle(points[0], points[1], points[i], mousePoint) == true)
+        for(int j = i + 1; j < points.size(); j++)
         {
-            return true;
+            for(int m = j + 1; m < points.size(); m++)
+            {
+                if(isInsideATriangle(points[i], points[j], points[m], mousePoint) == true)
+                {
+                    return true;
+                }
+            }
         }
     }
     return false;
@@ -62,6 +73,16 @@ bool checkForMouseCollision(int mouseX, int mouseY, SDL_Rect object)
     if(mouseX > object.x && mouseX < object.x + object.w && mouseY > object.y && mouseY < object.y + object.h)
     {
         return true;
+    }
+    return false;
+}
+
+bool checkForPossibleMove(int distance, int &movement)
+{
+    if(distance <= movement)
+    {
+        return true;
+        /// movement -= distance;
     }
     return false;
 }

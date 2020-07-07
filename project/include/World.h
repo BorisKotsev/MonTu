@@ -10,6 +10,7 @@
 
 #include "ConfigManager.h"
 #include "SoundManager.h"
+#include "PickAndBan.h"
 #include "Engine.h"
 
 #include "Tile.h"
@@ -32,9 +33,9 @@ class World
 
         TTF_Font* m_font;
 
-
         ConfigManager m_configManager;
         SoundManager m_soundManager;
+        PickAndBan m_pickAndBan;
 
         int m_SCREEN_WIDTH;
         int m_SCREEN_HEIGHT;
@@ -46,13 +47,22 @@ class World
         GAME_STATE m_gameState;
         bool m_quitScene;
 
+        coordinates directions[2][6];
+
+        coordinates m_selected;
+
         vector<vector<Tile*> > m_tiles;
         vector<Squad*> m_squads;
 
         vector<SQUAD> m_available;
         vector<SQUAD> m_banned;
 
+        bool canTravel(coordinates position, coordinates desiredPosition);
+        Tile* giveNeighbor(coordinates coor, int direction);
+
+
         void initSDL(string configFile);
+        void initDirection(string configFile);
         void draw();
         void update();
         void cleaner();

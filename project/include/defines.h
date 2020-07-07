@@ -27,6 +27,21 @@ enum SQUAD
     WARRIOR = 2
 };
 
+enum ICON_STATE
+{
+    AVAILABLE = 0,
+    BANNED = 1,
+    PICKED = 2
+};
+
+struct icon
+{
+    SQUAD m_type;
+    ICON_STATE m_iconState;
+    SDL_Rect m_rect;
+    SDL_Texture* m_texture;
+};
+
 struct coordinates
 {
     int x;

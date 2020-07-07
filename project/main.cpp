@@ -26,6 +26,8 @@ int main(int argc, char* argv[])
             while(!world.m_quitScene)
             {
                 world.input();
+                world.m_pickAndBan.update();
+                world.m_pickAndBan.draw();
             }
             world.m_quitScene = false;
         }

@@ -40,6 +40,7 @@
 		</Linker>
 		<Unit filename="include/ConfigManager.h" />
 		<Unit filename="include/Engine.h" />
+		<Unit filename="include/PickAndBan.h" />
 		<Unit filename="include/SoundManager.h" />
 		<Unit filename="include/Squad.h" />
 		<Unit filename="include/Tile.h" />
@@ -48,6 +49,7 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/ConfigManager.cpp" />
 		<Unit filename="src/Engine.cpp" />
+		<Unit filename="src/PickAndBan.cpp" />
 		<Unit filename="src/SoundManager.cpp" />
 		<Unit filename="src/Squad.cpp" />
 		<Unit filename="src/Tile.cpp" />

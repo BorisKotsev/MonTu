@@ -1221,7 +1221,7 @@
 	"SDL2/SDL_TTF.h"
 	"defines.h"
 
-1594154000 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\engine.cpp
+1594159081 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\engine.cpp
 	"Engine.h"
 
 1588586457 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\soundmanager.cpp
@@ -1257,7 +1257,7 @@
 	<SDL2/SDL.h>
 	"World.h"
 
-1594157651 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
+1594210956 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -1271,7 +1271,7 @@
 	"Tile.h"
 	"Squad.h"
 
-1594158696 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
+1594591600 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
 	"World.h"
 
 1589183663 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_ttf.h

@@ -71,6 +71,7 @@ void World::initDirection(string configFile)
             stream >> directions[i][j].x >> directions[i][j].y;
         }
     }
+    stream.close();
 }
 void World::update()
 {
@@ -80,6 +81,7 @@ void World::update()
     {
         ///(*it) -> update(m_main_renderer);
     }
+
 
     cleaner();
 }
@@ -286,6 +288,10 @@ Tile* World::giveNeighbor(coordinates coor, int direction)
     //selects the coordinates that we add to the current position
     coordinates addedCoor = directions[evenR][direction];
 
+    if(coor.y + addedCoor.y < 0 || coor.y + addedCoor.y >= m_rows || coor.x + addedCoor.x < 0 || coor.x + addedCoor.x >= m_colls)
+    {
+        return NULL;
+    }
     return m_tiles[coor.y + addedCoor.y][coor.x + addedCoor.x];
 }
 
@@ -302,7 +308,59 @@ bool World::canTravel(coordinates position, coordinates desiredPosition, int mov
         }
     }
     // We need 0 movement for traveling to our own position
-    movement[position.x][position.y] = 0;
+    movementMap[position.y][position.x] = 0;
 
-    // TO-DO: give value to every hexagon in the map by starting from out position and subtract the walkingDifficulty
+    // Used to find the neighbor with smallest walkingDifficulty
+    int minimum;
+    int indexBuff;
+    coordinates buff;
+    bool valueFound = false;
+
+    while(!valueFound)
+    {
+        for (short int r = 0; r < m_rows; r ++)
+        {
+            for (short int c = 0; c < m_colls; c ++)
+            {
+                // For every single tile look around and find the neighbor that is the shortest movement point
+
+                buff.x = c;
+                buff.y = r;
+                minimum = -1;
+                for (int i = 0; i < 6; i++)
+                {
+                    if(giveNeighbor(buff, i) != NULL)
+                    {
+                        /// cout << " Neighbor value: " << movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] << " ";
+                        if(movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] != -1)
+                        {
+                            if(movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] < minimum || minimum == -1)
+                            {
+                                indexBuff = i;
+                                minimum = movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x];
+                            }
+                        }
+                    }
+                }
+                // If we found the best road, than assign the value to the movementMap
+                if(minimum != -1)
+                {
+                    movementMap[r][c] = minimum + m_tiles[r][c]->m_walkDifficulty;
+                }
+
+                /// cout << r << " " << c << " " << movementMap[r][c] << endl;
+                if(c == desiredPosition.x && r == desiredPosition.y && movementMap[r][c] != -1)
+                {
+                    valueFound = true;
+                    if (movementMap[r][c] <= movement)
+                    {
+                        return true;
+                    }else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
 }

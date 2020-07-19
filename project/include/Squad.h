@@ -4,6 +4,8 @@
 #include <SDL2/SDL.h>
 #include "defines.h"
 
+#include "Engine.h"
+
 class Squad
 {
     public:
@@ -19,6 +21,8 @@ class Squad
         short int m_attackRange;
         short int m_attackDamage;
         short int m_units;
+
+        vector<coordinates> m_path;
 
 
     protected:

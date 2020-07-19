@@ -55,6 +55,14 @@ void World::initSDL(string configFile)
 
     initDirection("directions.txt");
 
+    coordinates buff1;
+    coordinates buff2;
+    buff1.x = 0;
+    buff1.y = 1;
+    buff2.x = 4;
+    buff2.y = 3;
+    cout << canTravel(buff1, buff2, 5) << endl;
+
 }
 void World::initDirection(string configFile)
 {
@@ -322,40 +330,72 @@ bool World::canTravel(coordinates position, coordinates desiredPosition, int mov
         {
             for (short int c = 0; c < m_colls; c ++)
             {
-                // For every single tile look around and find the neighbor that is the shortest movement point
-
                 buff.x = c;
                 buff.y = r;
-                minimum = -1;
-                for (int i = 0; i < 6; i++)
+
+                // If we have found a cell that has assigned value than we continue the algorithm
+                if (movementMap[r][c] != -1)
                 {
-                    if(giveNeighbor(buff, i) != NULL)
+                    for (int i = 0; i < 6; i++)
                     {
-                        /// cout << " Neighbor value: " << movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] << " ";
-                        if(movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] != -1)
+                        if(giveNeighbor(buff, i) != NULL)
                         {
-                            if(movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] < minimum || minimum == -1)
+                            /// cout << " Neighbor value: " << movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] << " ";
+                            if(movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] != -1)
                             {
-                                indexBuff = i;
-                                minimum = movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x];
+                                if(movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] > movementMap[r][c] + giveNeighbor(buff, i)->m_walkDifficulty)
+                                {
+                                    movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] = movementMap[r][c] + giveNeighbor(buff, i)->m_walkDifficulty;
+                                }
+                            }
+                            else
+                            {
+                                movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] = movementMap[r][c] + giveNeighbor(buff, i)->m_walkDifficulty;
                             }
                         }
                     }
                 }
-                // If we found the best road, than assign the value to the movementMap
-                if(minimum != -1)
-                {
-                    movementMap[r][c] = minimum + m_tiles[r][c]->m_walkDifficulty;
-                }
-
                 /// cout << r << " " << c << " " << movementMap[r][c] << endl;
                 if(c == desiredPosition.x && r == desiredPosition.y && movementMap[r][c] != -1)
                 {
                     valueFound = true;
                     if (movementMap[r][c] <= movement)
                     {
+                        // We want to find the road tile by tile
+                        valueFound = false;
+                        // Here we store the path
+                        vector<coordinates> path;
+                        buff.x = c;
+                        buff.y = r;
+                        while(!valueFound)
+                        {
+                            short int minimumIndex = 0;
+                            short int minimumValue = movementMap[giveNeighbor(buff, minimumIndex)->m_mapCoordinates.y][giveNeighbor(buff, minimumIndex)->m_mapCoordinates.x];
+                            for (int i = 0; i < 6; i++)
+                            {
+                                if(movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] <
+                                   minimumValue)
+                                {
+                                    minimumValue = movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x];
+                                    minimumIndex = i;
+                                }
+                            }
+                            // We store the road
+                            path.push_back(buff);
+                            // Then we move to the next tile
+                            buff = giveNeighbor(buff, minimumIndex)->m_mapCoordinates;
+                            if(movementMap[buff.y][buff.x] == 0)
+                            {
+                                valueFound = true;
+                            }
+                        }
+                        for(int i = 0; i < path.size(); i++)
+                        {
+                            cout << path[i].x << " " << path[i].y << endl;
+                        }
                         return true;
-                    }else
+                    }
+                    else
                     {
                         return false;
                     }

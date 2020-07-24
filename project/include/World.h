@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <ctime>
+#include <cstdlib>
 #include <SDL2/SDL.h>
 
 #include "ConfigManager.h"
@@ -47,6 +48,8 @@ class World
         GAME_STATE m_gameState;
         bool m_quitScene;
 
+        char field[26][16];
+
         coordinates directions[2][6];
 
         coordinates m_selected;
@@ -77,6 +80,10 @@ class World
 
         void initTiles(string configFile);
         void selectTile();
+
+        void initMap(string configFile);
+        void Choose_Map();
+
 
     protected:
 

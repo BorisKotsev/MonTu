@@ -20,9 +20,36 @@ void ConfigManager::init(string configFile, SDL_Renderer* renderer)
     stream.open(configFile.c_str());
 
     stream >> tmp >> buff;
+    modelTileGrass = new Tile;
+    modelTileGrass->load(buff, renderer);
 
-    modelTile = new Tile;
-    modelTile->load(buff, renderer);
+    stream >> tmp >> buff;
+    modelTileWater = new Tile;
+    modelTileWater->load(buff, renderer);
+
+    stream >> tmp >> buff;
+    modelTileMountain = new Tile;
+    modelTileMountain->load(buff, renderer);
+
+    stream >> tmp >> buff;
+    modelTileForest = new Tile;
+    modelTileForest->load(buff, renderer);
+
+    stream >> tmp >> buff;
+    modelTileDesert = new Tile;
+    modelTileDesert->load(buff, renderer);
+
+    stream >> tmp >> buff;
+    modelTileStone = new Tile;
+    modelTileStone->load(buff, renderer);
+
+    stream >> tmp >> buff;
+    modelTileVolcano = new Tile;
+    modelTileVolcano->load(buff, renderer);
+
+    stream >> tmp >> buff;
+    modelTileLava = new Tile;
+    modelTileLava->load(buff, renderer);
 
     stream.close();
 }

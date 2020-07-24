@@ -6,4 +6,4 @@ Menu_Image: UI_Menu.bmp
 
 Play_Button_Rect: 514 305 322 75
 
-Colls_and_Rows: 25 15
+Colls_and_Rows: 26 16

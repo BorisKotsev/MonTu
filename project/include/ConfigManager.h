@@ -14,7 +14,14 @@ public:
     ConfigManager();
     virtual ~ConfigManager();
 
-    Tile* modelTile = NULL;
+    Tile* modelTileGrass = NULL;
+    Tile* modelTileWater = NULL;
+    Tile* modelTileMountain = NULL;
+    Tile* modelTileForest = NULL;
+    Tile* modelTileDesert = NULL;
+    Tile* modelTileStone = NULL;
+    Tile* modelTileVolcano = NULL;
+    Tile* modelTileLava = NULL;
 
     void init(string configFile, SDL_Renderer* renderer);
 

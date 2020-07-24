@@ -49,12 +49,14 @@ void World::initSDL(string configFile)
     m_backgroundTexture = LoadTexture(backgroundImg, m_main_renderer);
     m_menuTexture = LoadTexture(menuImg, m_main_renderer);
 
+    Choose_Map();
+
     initTiles("tileMap.txt");
 
     m_soundManager.play_sound("General.mp3");
 
     initDirection("directions.txt");
-
+    /**
     coordinates buff1;
     coordinates buff2;
     buff1.x = 0;
@@ -62,7 +64,7 @@ void World::initSDL(string configFile)
     buff2.x = 4;
     buff2.y = 3;
     cout << canTravel(buff1, buff2, 5) << endl;
-
+    **/
 }
 void World::initDirection(string configFile)
 {
@@ -89,7 +91,6 @@ void World::update()
     {
         ///(*it) -> update(m_main_renderer);
     }
-
 
     cleaner();
 }
@@ -213,7 +214,33 @@ void World::initTiles(string configFile)
         m_tiles.push_back(vector<Tile*>());
         for (short int c = 0; c < m_colls; c ++)
         {
-            tile = new Tile(*(m_configManager.modelTile));
+            switch(field[c][r])
+            {
+            case 'G':
+                tile = new Tile(*(m_configManager.modelTileGrass));
+                break;
+            case 'W':
+                tile = new Tile(*(m_configManager.modelTileWater));
+                break;
+            case 'M':
+                tile = new Tile(*(m_configManager.modelTileMountain));
+                break;
+            case 'F':
+                tile = new Tile(*(m_configManager.modelTileForest));
+                break;
+            case 'D':
+                tile = new Tile(*(m_configManager.modelTileDesert));
+                break;
+            case 'S':
+                tile = new Tile(*(m_configManager.modelTileStone));
+                break;
+            case 'V':
+                tile = new Tile(*(m_configManager.modelTileVolcano));
+                break;
+            case 'L':
+                tile = new Tile(*(m_configManager.modelTileLava));
+                break;
+            }
             if(r % 2 == 0)
             {
                 tile->m_drawCoordinates.x = c * hexagonWidth;
@@ -402,5 +429,49 @@ bool World::canTravel(coordinates position, coordinates desiredPosition, int mov
                 }
             }
         }
+    }
+}
+
+void World::initMap(string configFile)
+{
+    configFile = "config\\Maps\\" + configFile;
+
+    fstream in_file;
+
+    in_file.open(configFile.c_str());
+
+    int counter = 0;
+
+    for(int r = 0; r < m_rows; r++)
+    {
+        for(int c = 0; c < m_colls; c++)
+        {
+            in_file >> field[c][r];
+        }
+    }
+
+    in_file.close();
+}
+
+void World::Choose_Map()
+{
+    int random_number;
+    random_number = rand() % 4;
+
+    if(random_number == 0)
+    {
+        initMap("Map1.txt");
+    }
+    if (random_number == 1)
+    {
+        initMap("Map2.txt");
+    }
+    if(random_number == 2)
+    {
+        initMap("Map3.txt");
+    }
+     if (random_number == 3)
+    {
+        initMap("Map4.txt");
     }
 }

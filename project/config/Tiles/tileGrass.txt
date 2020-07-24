@@ -1,0 +1,5 @@
+walkingDiff: 5
+
+img: Grass.bmp
+
+Can_Build:

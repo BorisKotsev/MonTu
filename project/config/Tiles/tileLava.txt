@@ -1,0 +1,5 @@
+walkingDiff: 1000
+
+img: Lava.bmp
+
+Can_Build:

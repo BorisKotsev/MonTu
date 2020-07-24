@@ -1,0 +1,5 @@
+walkingDiff: 10
+
+img: Desert.bmp
+
+Can_Build:

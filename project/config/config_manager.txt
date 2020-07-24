@@ -1,1 +1,16 @@
-TileModel: tile.txt
+Tile_Grass: Tiles\\tileGrass.txt
+
+TIle_Water: Tiles\\tileWater.txt
+
+Tile_Mountain: Tiles\\tileMountain.txt
+
+Tile_Forest: Tiles\\tileForest.txt
+
+Tile_Desert: Tiles\\tileDesert.txt
+
+Tile_Stone: Tiles\\tileStone.txt
+
+Tile_Volcano: Tiles\\tileVolcano.txt
+
+Tile_Lava: Tiles\\tileLava.txt
+

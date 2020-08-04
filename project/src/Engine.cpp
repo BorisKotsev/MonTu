@@ -37,6 +37,12 @@ float triangleArea(SDL_Point* point1, SDL_Point* point2, SDL_Point* point3)
    return abs((point1->x * (point2->y - point3->y) + point2->x * (point3 -> y - point1->y) + point3 -> x*(point1->y - point2->y))/2.0);
 }
 
+float returnAngleByCoordinates(coordinates direction)
+{
+
+    return atan2(direction.x, -1*direction.y) * 180 / PI;
+}
+
 bool isInsideATriangle(SDL_Point* triangle1, SDL_Point* triangle2, SDL_Point* triangle3, SDL_Point* mousePoint)
 {
    float A = triangleArea (triangle1, triangle2, triangle3);
@@ -118,3 +124,4 @@ void write(string text, coordinates coor, SDL_Renderer* renderer, int FONT_SIZE)
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
 }
+

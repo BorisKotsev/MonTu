@@ -61,6 +61,7 @@ class World
         vector<SQUAD> m_banned;
 
         bool canTravel(coordinates position, coordinates desiredPosition, int movement);
+        bool canShoot(coordinates position, coordinates targetPosition);
         Tile* giveNeighbor(coordinates coor, int direction);
 
 

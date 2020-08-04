@@ -41,6 +41,7 @@ void World::initSDL(string configFile)
     m_main_window = SDL_CreateWindow("Montu", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_SCREEN_WIDTH, m_SCREEN_HEIGHT, 0);
     m_main_renderer = SDL_CreateRenderer(m_main_window, -1, SDL_RENDERER_ACCELERATED);
 
+    SDL_SetWindowFullscreen(m_main_window, SDL_WINDOW_FULLSCREEN);
 
     m_configManager.init("config_manager.txt", m_main_renderer);
     m_soundManager.init("SoundManager.txt");
@@ -53,18 +54,18 @@ void World::initSDL(string configFile)
 
     initTiles("tileMap.txt");
 
-    m_soundManager.play_sound("General.mp3");
+    /// m_soundManager.play_sound("General.mp3");
 
     initDirection("directions.txt");
-    /**
+
     coordinates buff1;
     coordinates buff2;
-    buff1.x = 0;
-    buff1.y = 1;
-    buff2.x = 4;
-    buff2.y = 3;
-    cout << canTravel(buff1, buff2, 5) << endl;
-    **/
+    buff1.x = 4;
+    buff1.y = 3;
+    buff2.x = 0;
+    buff2.y = 1;
+    cout << canShoot(buff1, buff2) << endl;
+
 }
 void World::initDirection(string configFile)
 {
@@ -330,7 +331,6 @@ Tile* World::giveNeighbor(coordinates coor, int direction)
     return m_tiles[coor.y + addedCoor.y][coor.x + addedCoor.x];
 }
 
-
 bool World::canTravel(coordinates position, coordinates desiredPosition, int movement)
 {
     int movementMap[m_rows][m_colls];
@@ -456,22 +456,54 @@ void World::initMap(string configFile)
 void World::Choose_Map()
 {
     int random_number;
-    random_number = rand() % 4;
+    random_number = rand() % 4 + 1;
+    initMap("Map" + to_string(random_number) + ".txt");
+}
 
-    if(random_number == 0)
+bool World::canShoot(coordinates position, coordinates targetPosition)
+{
+    coordinates logicalPosition = position;
+    position.x = m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.x + (m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.w) / 2;
+    position.y = m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.y + (m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.h) / 2;
+    cout << position.x << " " << position.y << endl;
+    coordinates logicalTargetostion = targetPosition;
+    targetPosition.x = m_tiles[logicalTargetostion.y][logicalTargetostion.x]->m_objectRect.x + (m_tiles[logicalTargetostion.y][logicalTargetostion.x]->m_objectRect.w) / 2;
+    targetPosition.y = m_tiles[logicalTargetostion.y][logicalTargetostion.x]->m_objectRect.y + (m_tiles[logicalTargetostion.y][logicalTargetostion.x]->m_objectRect.h) / 2;
+    cout << targetPosition.x << " " << targetPosition.y << endl;
+
+    // Using this bool to determine if the function is done
+    bool finished = false;
+    // The angle used to calculate how we will travel to the target position
+    short int rotationAngle;
+    // We find the rotation angle by using the fnct in the Engine
+    coordinates direction;
+    direction.x = targetPosition.x - position.x;
+    direction.y = targetPosition.y - position.y;
+    rotationAngle = returnAngleByCoordinates(direction);
+    /// cout << rotationAngle << endl;
+    vector<Tile*> passing;
+
+    while(!finished)
     {
-        initMap("Map1.txt");
+        position.x += (sin(rotationAngle * PI / 180) * 6);
+        position.y -= (cos(rotationAngle * PI / 180) * 6);
+
+        for(short int r = 0; r < m_tiles.size(); r++)
+        {
+            for(short int c = 0; c < m_tiles[r].size(); c++)
+            {
+                if(isInsideAHexagon(m_tiles[r][c]->m_collisionPoints, LoadPoint(position)))
+                {
+                    passing.push_back(m_tiles[r][c]);
+                     cout << r << " " << c << endl;
+                    /// cout << logicalTargetostion.y << " " << logicalTargetostion.x << endl;
+                    if(c == logicalTargetostion.x && r == logicalTargetostion.y)
+                    {
+                        finished = true;
+                    }
+                }
+            }
+        }
     }
-    if (random_number == 1)
-    {
-        initMap("Map2.txt");
-    }
-    if(random_number == 2)
-    {
-        initMap("Map3.txt");
-    }
-     if (random_number == 3)
-    {
-        initMap("Map4.txt");
-    }
+    return true;
 }

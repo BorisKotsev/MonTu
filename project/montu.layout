@@ -2,14 +2,19 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="include\defines.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\World.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="509" topLine="28" />
+			<Cursor1 position="15475" topLine="468" />
 		</Cursor>
 	</File>
-	<File name="src\SoundManager.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\PickAndBan.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="256" topLine="8" />
+			<Cursor1 position="494" topLine="24" />
+		</Cursor>
+	</File>
+	<File name="include\ConfigManager.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="241" topLine="8" />
 		</Cursor>
 	</File>
 	<File name="src\Engine.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -22,9 +27,19 @@
 			<Cursor1 position="359" topLine="12" />
 		</Cursor>
 	</File>
-	<File name="src\ConfigManager.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\PickAndBan.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="363" topLine="4" />
+			<Cursor1 position="412" topLine="12" />
+		</Cursor>
+	</File>
+	<File name="include\defines.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="509" topLine="28" />
+		</Cursor>
+	</File>
+	<File name="src\SoundManager.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="256" topLine="8" />
 		</Cursor>
 	</File>
 	<File name="src\Tile.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
@@ -32,25 +47,14 @@
 			<Cursor1 position="647" topLine="13" />
 		</Cursor>
 	</File>
-	<File name="src\World.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="include\Squad.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1050" topLine="36" />
+			<Cursor1 position="450" topLine="6" />
 		</Cursor>
-		<Folding>
-			<Collapse line="120" />
-			<Collapse line="125" />
-			<Collapse line="133" />
-			<Collapse line="151" />
-			<Collapse line="160" />
-			<Collapse line="192" />
-			<Collapse line="291" />
-			<Collapse line="310" />
-			<Collapse line="334" />
-		</Folding>
 	</File>
-	<File name="src\Squad.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\ConfigManager.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="82" topLine="0" />
+			<Cursor1 position="363" topLine="4" />
 		</Cursor>
 	</File>
 	<File name="include\SoundManager.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -58,19 +62,9 @@
 			<Cursor1 position="367" topLine="8" />
 		</Cursor>
 	</File>
-	<File name="include\Squad.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\World.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="450" topLine="6" />
-		</Cursor>
-	</File>
-	<File name="include\ConfigManager.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="241" topLine="8" />
-		</Cursor>
-	</File>
-	<File name="include\PickAndBan.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="412" topLine="12" />
+			<Cursor1 position="1397" topLine="52" />
 		</Cursor>
 	</File>
 	<File name="include\Engine.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -78,19 +72,14 @@
 			<Cursor1 position="730" topLine="5" />
 		</Cursor>
 	</File>
-	<File name="src\PickAndBan.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+	<File name="src\Squad.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="494" topLine="24" />
+			<Cursor1 position="82" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="include\Tile.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="269" topLine="12" />
-		</Cursor>
-	</File>
-	<File name="include\World.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1397" topLine="52" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

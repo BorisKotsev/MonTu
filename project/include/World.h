@@ -50,6 +50,7 @@ class World
 
         char field[26][16];
 
+        // Those are the coordinates that we use for determining the neighbors of a tile
         coordinates directions[2][6];
 
         coordinates m_selected;
@@ -61,7 +62,7 @@ class World
         vector<SQUAD> m_banned;
 
         bool canTravel(coordinates position, coordinates desiredPosition, int movement);
-        bool canShoot(coordinates position, coordinates targetPosition);
+        bool canShoot(coordinates position, coordinates targetPosition, short int range);
         Tile* giveNeighbor(coordinates coor, int direction);
 
 

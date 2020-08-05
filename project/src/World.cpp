@@ -54,7 +54,7 @@ void World::initSDL(string configFile)
 
     initTiles("tileMap.txt");
 
-    /// m_soundManager.play_sound("General.mp3");
+    m_soundManager.play_sound("General.mp3");
 
     initDirection("directions.txt");
 
@@ -64,7 +64,7 @@ void World::initSDL(string configFile)
     buff1.y = 3;
     buff2.x = 0;
     buff2.y = 1;
-    cout << canShoot(buff1, buff2) << endl;
+    cout << canShoot(buff1, buff2, 300) << endl;
 
 }
 void World::initDirection(string configFile)
@@ -460,16 +460,28 @@ void World::Choose_Map()
     initMap("Map" + to_string(random_number) + ".txt");
 }
 
-bool World::canShoot(coordinates position, coordinates targetPosition)
+bool World::canShoot(coordinates position, coordinates targetPosition, short int range)
 {
+    // Converting the logical coordinates to real coordinates
     coordinates logicalPosition = position;
     position.x = m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.x + (m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.w) / 2;
     position.y = m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.y + (m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.h) / 2;
-    cout << position.x << " " << position.y << endl;
-    coordinates logicalTargetostion = targetPosition;
-    targetPosition.x = m_tiles[logicalTargetostion.y][logicalTargetostion.x]->m_objectRect.x + (m_tiles[logicalTargetostion.y][logicalTargetostion.x]->m_objectRect.w) / 2;
-    targetPosition.y = m_tiles[logicalTargetostion.y][logicalTargetostion.x]->m_objectRect.y + (m_tiles[logicalTargetostion.y][logicalTargetostion.x]->m_objectRect.h) / 2;
-    cout << targetPosition.x << " " << targetPosition.y << endl;
+    /// cout << position.x << " " << position.y << endl;
+    coordinates logicalTargetPosition = targetPosition;
+    targetPosition.x = m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.x + (m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.w) / 2;
+    targetPosition.y = m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.y + (m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.h) / 2;
+    /// cout << targetPosition.x << " " << targetPosition.y << endl;
+
+    // Using the pythagorean theorem, we can check if we have big enough range
+    short int a = abs(position.x - targetPosition.x);
+    short int b = abs(position.y - targetPosition.y);
+    short int c = sqrt(a^2 + b^2);
+
+    if(c > range)
+    {
+        // If we are out of range than we stop the function
+        return false;
+    }
 
     // Using this bool to determine if the function is done
     bool finished = false;
@@ -496,8 +508,8 @@ bool World::canShoot(coordinates position, coordinates targetPosition)
                 {
                     passing.push_back(m_tiles[r][c]);
                      cout << r << " " << c << endl;
-                    /// cout << logicalTargetostion.y << " " << logicalTargetostion.x << endl;
-                    if(c == logicalTargetostion.x && r == logicalTargetostion.y)
+                    /// cout << logicalTargetPosition.y << " " << logicalTargetPosition.x << endl;
+                    if(c == logicalTargetPosition.x && r == logicalTargetPosition.y)
                     {
                         finished = true;
                     }

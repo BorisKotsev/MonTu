@@ -9,6 +9,9 @@ World::World()
     m_quitScene = false;
     m_selected.x = 3;
     m_selected.y = 3;
+    m_cameraOffset.x = 0;
+    m_cameraOffset.y = 0;
+
 }
 
 World::~World()
@@ -58,14 +61,6 @@ void World::initSDL(string configFile)
 
     initDirection("directions.txt");
 
-    coordinates buff1;
-    coordinates buff2;
-    buff1.x = 4;
-    buff1.y = 3;
-    buff2.x = 0;
-    buff2.y = 1;
-    cout << canShoot(buff1, buff2, 300) << endl;
-
 }
 void World::initDirection(string configFile)
 {
@@ -87,6 +82,8 @@ void World::initDirection(string configFile)
 void World::update()
 {
     selectTile();
+
+    cameraShake();
 
     for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
     {
@@ -147,6 +144,22 @@ void World::input()
     }
     ///cout << m_mouse.x << " " << m_mouse.y << endl;
 }
+
+void World::cameraShake()
+{
+    if (m_startShake + m_cameraShakeDuration > time(NULL))
+    {
+        m_cameraOffset.x += (rand() % m_cameraShakeMagnitude) * (rand() % 2 == 0) ? 1 : -1;
+        m_cameraOffset.y += (rand() % m_cameraShakeMagnitude) * (rand() % 2 == 0) ? 1 : -1;
+        ///cout << m_cameraOffset.x << " " << m_cameraOffset.y << endl;
+    }
+    else
+    {
+        m_cameraOffset.x = 0;
+        m_cameraOffset.y = 0;
+    }
+}
+
 
 void World::initSession(GAME_STATE state)
 {
@@ -218,28 +231,28 @@ void World::initTiles(string configFile)
             switch(field[c][r])
             {
             case 'G':
-                tile = new Tile(*(m_configManager.modelTileGrass));
+                tile = new Tile(*(m_configManager.modelTileGrass), &m_cameraOffset);
                 break;
             case 'W':
-                tile = new Tile(*(m_configManager.modelTileWater));
+                tile = new Tile(*(m_configManager.modelTileWater), &m_cameraOffset);
                 break;
             case 'M':
-                tile = new Tile(*(m_configManager.modelTileMountain));
+                tile = new Tile(*(m_configManager.modelTileMountain), &m_cameraOffset);
                 break;
             case 'F':
-                tile = new Tile(*(m_configManager.modelTileForest));
+                tile = new Tile(*(m_configManager.modelTileForest), &m_cameraOffset);
                 break;
             case 'D':
-                tile = new Tile(*(m_configManager.modelTileDesert));
+                tile = new Tile(*(m_configManager.modelTileDesert), &m_cameraOffset);
                 break;
             case 'S':
-                tile = new Tile(*(m_configManager.modelTileStone));
+                tile = new Tile(*(m_configManager.modelTileStone), &m_cameraOffset);
                 break;
             case 'V':
-                tile = new Tile(*(m_configManager.modelTileVolcano));
+                tile = new Tile(*(m_configManager.modelTileVolcano), &m_cameraOffset);
                 break;
             case 'L':
-                tile = new Tile(*(m_configManager.modelTileLava));
+                tile = new Tile(*(m_configManager.modelTileLava), &m_cameraOffset);
                 break;
             }
             if(r % 2 == 0)

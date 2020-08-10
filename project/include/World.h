@@ -7,6 +7,7 @@
 #include <string>
 #include <ctime>
 #include <cstdlib>
+#include <time.h>
 #include <SDL2/SDL.h>
 
 #include "ConfigManager.h"
@@ -48,6 +49,12 @@ class World
         GAME_STATE m_gameState;
         bool m_quitScene;
 
+        coordinates m_cameraOffset;
+        short int m_cameraShakeDuration = 1;
+        short int m_cameraShakeMagnitude;
+        time_t m_startShake;
+        bool m_shake;
+
         char field[26][16];
 
         // Those are the coordinates that we use for determining the neighbors of a tile
@@ -75,6 +82,8 @@ class World
         void input();
 
         void initSession(GAME_STATE state);
+
+        void cameraShake();
 
         void menu();
 

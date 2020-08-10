@@ -3,6 +3,7 @@
 
 #include <string>
 #include <fstream>
+#include <iostream>
 
 #include "defines.h"
 #include "Engine.h"
@@ -13,11 +14,14 @@ class Tile
 {
     public:
         Tile();
-        Tile(const Tile& model);
+        Tile(const Tile& model, coordinates* cameraOffset);
         virtual ~Tile();
 
         SDL_Texture* m_objectTexture;
         SDL_Rect m_objectRect;
+        SDL_Rect m_presentRect;
+
+        coordinates* m_cameraOffset;
 
         OWNER m_owner;
         short int m_walkDifficulty;

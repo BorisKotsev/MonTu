@@ -33,6 +33,8 @@ int main(int argc, char* argv[])
         }
         if(world.m_gameState == GAME)
         {
+            world.m_startShake = time(NULL);
+
             while(!world.m_quitScene)
             {
                 world.input();

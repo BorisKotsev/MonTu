@@ -10,10 +10,12 @@ Tile::~Tile()
     //dtor
 }
 
-Tile::Tile(const Tile& model)
+Tile::Tile(const Tile& model, coordinates* cameraOffset)
 {
     m_walkDifficulty = model.m_walkDifficulty;
     m_objectTexture = model.m_objectTexture;
+
+    m_cameraOffset = cameraOffset;
 }
 
 void Tile::load(string configFile, SDL_Renderer* renderer)
@@ -33,5 +35,9 @@ void Tile::load(string configFile, SDL_Renderer* renderer)
 
 void Tile::draw(SDL_Renderer* renderer)
 {
-    SDL_RenderCopy(renderer, m_objectTexture, NULL, &m_objectRect);
+    m_presentRect.x = m_objectRect.x + m_cameraOffset->x;
+    m_presentRect.y = m_objectRect.y + m_cameraOffset->y;
+    m_presentRect.w = m_objectRect.w;
+    m_presentRect.h = m_objectRect.h;
+    SDL_RenderCopy(renderer, m_objectTexture, NULL, &m_presentRect);
 }

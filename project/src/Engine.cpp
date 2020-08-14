@@ -93,6 +93,19 @@ bool checkForPossibleMove(int distance, int &movement)
     return false;
 }
 
+bool checkIfInScreen(SDL_Rect rect, int SCREEN_WIDTH, int SCREEN_HEIGHT)
+{
+    if (rect.x + rect.w > SCREEN_WIDTH)
+        return false;
+    if (rect.x < 0)
+        return false;
+    if (rect.y + rect.h > SCREEN_HEIGHT)
+        return false;
+    if (rect.y < 0)
+        return false;
+    return true;
+}
+
 void write(string text, coordinates coor, SDL_Renderer* renderer, int FONT_SIZE)
 {
     SDL_Texture* texture;

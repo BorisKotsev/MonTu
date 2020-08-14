@@ -1214,7 +1214,7 @@
 	<SDL2/SDL.h>
 	<cmath>
 
-1596061012 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\engine.h
+1597414600 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\engine.h
 	<cmath>
 	<vector>
 	<string>
@@ -1222,7 +1222,7 @@
 	"SDL2/SDL_TTF.h"
 	"defines.h"
 
-1596060589 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\engine.cpp
+1597414600 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\engine.cpp
 	"Engine.h"
 
 1595626588 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\soundmanager.cpp
@@ -1259,7 +1259,7 @@
 	<SDL2/SDL.h>
 	"World.h"
 
-1597098031 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
+1597412343 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -1270,12 +1270,13 @@
 	<SDL2/SDL.h>
 	"ConfigManager.h"
 	"SoundManager.h"
+	"PopUpWriter.h"
 	"PickAndBan.h"
 	"Engine.h"
 	"Tile.h"
 	"Squad.h"
 
-1597097949 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
+1597416820 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
 	"World.h"
 
 1595626581 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_ttf.h
@@ -2176,4 +2177,19 @@
 
 1595626588 source:c:\users\konstantin\downloads\montu-master (1)\montu-master\project\src\tile.cpp
 	"Tile.h"
+
+1597416345 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\popupwriter.cpp
+	"PopUpWriter.h"
+
+1597416539 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\popupwriter.h
+	<iostream>
+	<fstream>
+	<vector>
+	<string>
+	<ctime>
+	<cstdlib>
+	<time.h>
+	<SDL2/SDL.h>
+	"defines.h"
+	"Engine.h"
 

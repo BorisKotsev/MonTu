@@ -12,6 +12,7 @@
 
 #include "ConfigManager.h"
 #include "SoundManager.h"
+#include "PopUpWriter.h"
 #include "PickAndBan.h"
 #include "Engine.h"
 
@@ -38,6 +39,7 @@ class World
         ConfigManager m_configManager;
         SoundManager m_soundManager;
         PickAndBan m_pickAndBan;
+        PopUpWriter m_popUpWriter;
 
         int m_SCREEN_WIDTH;
         int m_SCREEN_HEIGHT;

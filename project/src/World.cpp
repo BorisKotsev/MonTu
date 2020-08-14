@@ -49,6 +49,7 @@ void World::initSDL(string configFile)
     m_configManager.init("config_manager.txt", m_main_renderer);
     m_soundManager.init("SoundManager.txt");
     m_pickAndBan.init("pick_And_Ban.txt", m_main_renderer);
+    m_popUpWriter.init("PopUpWriter.txt", m_main_renderer);
 
     m_backgroundTexture = LoadTexture(backgroundImg, m_main_renderer);
     m_menuTexture = LoadTexture(menuImg, m_main_renderer);
@@ -110,6 +111,8 @@ void World::draw()
     {
         ///(*it) -> draw(m_main_renderer);
     }
+
+    m_popUpWriter.draw(m_tiles[m_selected.x][m_selected.y]->m_objectRect, m_popUpWriter.m_buildingListRect, m_popUpWriter.m_buildingListTexture);
 
     SDL_RenderPresent(m_main_renderer);
 }
@@ -311,6 +314,7 @@ void World::selectTile()
             {
                 if(isInsideAHexagon(m_tiles[i][j]->m_collisionPoints, LoadPoint(m_mouse)))
                 {
+                    m_popUpWriter.m_presentBuildingList = (m_popUpWriter.m_presentBuildingList == true) ? false : true;
                     cout << "selected " << i << " " << j << endl;
                     m_selected.x = i;
                     m_selected.y = j;

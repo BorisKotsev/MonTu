@@ -4,6 +4,26 @@ Background_Image: background.bmp
 
 Menu_Image: UI_Menu.bmp
 
-Play_Button_Rect: 514 305 322 75
+Play_Button_Rect: 483 302 400 80
 
 Colls_and_Rows: 26 16
+
+Map1: Map1.bmp	
+
+Map2: Map2.bmp
+
+Map3: Map3.bmp
+
+Map4: Map4.bmp
+
+Map_Background: BackgroundMap.bmp
+
+Map1_Pick: Map1Pick.bmp
+
+Map2_Pick: Map2Pick.bmp
+
+Map3_Pick: Map3Pick.bmp
+
+Map4_Pick: Map4Pick.bmp
+
+Cursor_Image: cursor.bmp

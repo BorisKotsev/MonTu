@@ -26,9 +26,29 @@ void PickAndBan::init(string configFile, SDL_Renderer* renderer)
     // Creating tmp
     string tmp;
 
+    m_Map1Button.x = 188;
+    m_Map1Button.y = 167;
+    m_Map1Button.w = 361;
+    m_Map1Button.h = 194;
+
+    m_Map2Button.x = 815;
+    m_Map2Button.y = 167;
+    m_Map2Button.w = 361;
+    m_Map2Button.h = 194;
+
+    m_Map3Button.x = 188;
+    m_Map3Button.y = 467;
+    m_Map3Button.w = 361;
+    m_Map3Button.h = 194;
+
+    m_Map4Button.x = 815;
+    m_Map4Button.y = 467;
+    m_Map4Button.w = 361;
+    m_Map4Button.h = 194;
+
     stream.open(configFile.c_str());
 
-    // Reading the number of squats
+    // Reading the number of squads
     stream >> tmp >> numberOfSquads;
     stream >> tmp >> iconWidth >> iconHight;
     stream >> tmp >> buff;

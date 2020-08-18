@@ -28,7 +28,17 @@ void World::initSDL(string configFile)
 
     string tmp;
     string backgroundImg;
+    string backgroundMap;
+    string Map1Img;
+    string Map2Img;
+    string Map3Img;
+    string Map4Img;
+    string Map1PickImg;
+    string Map2PickImg;
+    string Map3PickImg;
+    string Map4PickImg;
     string menuImg;
+    string cursorImg;
 
     stream.open(configFile.c_str());
     stream >> tmp >> m_SCREEN_WIDTH >> m_SCREEN_HEIGHT;
@@ -36,6 +46,16 @@ void World::initSDL(string configFile)
     stream >> tmp >> menuImg;
     stream >> tmp >> m_playButtonRect.x >> m_playButtonRect.y >> m_playButtonRect.w >> m_playButtonRect.h;
     stream >> tmp >> m_colls >> m_rows;
+    stream >> tmp >> Map1Img;
+    stream >> tmp >> Map2Img;
+    stream >> tmp >> Map3Img;
+    stream >> tmp >> Map4Img;
+    stream >> tmp >> backgroundMap;
+    stream >> tmp >> Map1PickImg;
+    stream >> tmp >> Map2PickImg;
+    stream >> tmp >> Map3PickImg;
+    stream >> tmp >> Map4PickImg;
+    stream >> tmp >> cursorImg;
     stream.close();
 
     SDL_Init(SDL_INIT_EVERYTHING);
@@ -46,6 +66,12 @@ void World::initSDL(string configFile)
 
     SDL_SetWindowFullscreen(m_main_window, SDL_WINDOW_FULLSCREEN);
 
+    cursorImg = "img\\" + cursorImg;
+
+    SDL_Surface* loadSurface = SDL_LoadBMP(cursorImg.c_str());
+    m_cursor = SDL_CreateColorCursor(loadSurface, 0, 0);
+    SDL_SetCursor(m_cursor);
+
     m_configManager.init("config_manager.txt", m_main_renderer);
     m_soundManager.init("SoundManager.txt");
     m_pickAndBan.init("pick_And_Ban.txt", m_main_renderer);
@@ -53,16 +79,24 @@ void World::initSDL(string configFile)
 
     m_backgroundTexture = LoadTexture(backgroundImg, m_main_renderer);
     m_menuTexture = LoadTexture(menuImg, m_main_renderer);
-
-    Choose_Map();
-
-    initTiles("tileMap.txt");
+    m_Map1Texture = LoadTexture(Map1Img, m_main_renderer);
+    m_Map2Texture = LoadTexture(Map2Img, m_main_renderer);
+    m_Map3Texture = LoadTexture(Map3Img, m_main_renderer);
+    m_Map4Texture = LoadTexture(Map4Img, m_main_renderer);
+    m_backgroundMapTexture = LoadTexture(backgroundMap, m_main_renderer);
+    m_Map1PickTexture = LoadTexture(Map1PickImg, m_main_renderer);
+    m_Map2PickTexture = LoadTexture(Map2PickImg, m_main_renderer);
+    m_Map3PickTexture = LoadTexture(Map3PickImg, m_main_renderer);
+    m_Map4PickTexture = LoadTexture(Map4PickImg, m_main_renderer);
 
     m_soundManager.play_sound("General.mp3");
 
     initDirection("directions.txt");
 
+    /// ShowWindow(GetConsoleWindow(), SW_HIDE);
+
 }
+
 void World::initDirection(string configFile)
 {
     // Declaring the value of the directions used for the giveNeighbor function
@@ -80,6 +114,7 @@ void World::initDirection(string configFile)
     }
     stream.close();
 }
+
 void World::update()
 {
     selectTile();
@@ -152,8 +187,8 @@ void World::cameraShake()
 {
     if (m_startShake + m_cameraShakeDuration > time(NULL))
     {
-        m_cameraOffset.x += (rand() % m_cameraShakeMagnitude) * (rand() % 2 == 0) ? 1 : -1;
-        m_cameraOffset.y += (rand() % m_cameraShakeMagnitude) * (rand() % 2 == 0) ? 1 : -1;
+        m_cameraOffset.x += (rand() % m_cameraShakeMagnitude) * (rand() % 2 == 0 ? 1 : -1);
+        m_cameraOffset.y += (rand() % m_cameraShakeMagnitude) * (rand() % 2 == 0 ? 1 : -1);
         ///cout << m_cameraOffset.x << " " << m_cameraOffset.y << endl;
     }
     else
@@ -178,18 +213,13 @@ void World::menu()
     //Draw the menu img
     SDL_RenderCopy(m_main_renderer, m_menuTexture, NULL, NULL);
 
-    coordinates buff;
-    buff.x = m_playButtonRect.x + 115;
-    buff.y = m_playButtonRect.y + 10;
-    write("PLAY", buff, m_main_renderer, 40);
-
     //Switch scenes if needed
     if(m_mouseIsPressed)
     {
         if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_playButtonRect))
         {
             m_quitScene = true;
-            m_gameState = GAME;
+            m_gameState = MAP_CHOOSING;
         }
     }
     //Print
@@ -314,7 +344,7 @@ void World::selectTile()
             {
                 if(isInsideAHexagon(m_tiles[i][j]->m_collisionPoints, LoadPoint(m_mouse)))
                 {
-                    m_popUpWriter.m_presentBuildingList = (m_popUpWriter.m_presentBuildingList == true) ? false : true;
+                    m_popUpWriter.m_presentBuildingList = (m_selected.x == i && m_selected.y == j) ? true : false;
                     cout << "selected " << i << " " << j << endl;
                     m_selected.x = i;
                     m_selected.y = j;
@@ -472,9 +502,55 @@ void World::initMap(string configFile)
 
 void World::Choose_Map()
 {
-    int random_number;
-    random_number = rand() % 4 + 1;
-    initMap("Map" + to_string(random_number) + ".txt");
+    SDL_RenderCopy(m_main_renderer, m_backgroundMapTexture, NULL, NULL);
+    SDL_RenderCopy(m_main_renderer, m_Map1Texture, NULL, &(m_pickAndBan.m_Map1Button));
+    SDL_RenderCopy(m_main_renderer, m_Map2Texture, NULL, &(m_pickAndBan.m_Map2Button));
+    SDL_RenderCopy(m_main_renderer, m_Map3Texture, NULL, &(m_pickAndBan.m_Map3Button));
+    SDL_RenderCopy(m_main_renderer, m_Map4Texture, NULL, &(m_pickAndBan.m_Map4Button));
+
+    if(m_mouseIsPressed)
+    {
+        if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map1Button))
+        {
+            initMap("Map1.txt");
+        }
+        if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map2Button))
+        {
+            initMap("Map2.txt");
+        }
+        if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map3Button))
+        {
+            initMap("Map3.txt");
+        }
+        if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map4Button))
+        {
+            initMap("Map4.txt");
+        }
+
+        initTiles("tileMap.txt");
+        m_quitScene = true;
+        m_gameState = GAME;
+    }
+
+    if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map1Button))
+    {
+        SDL_RenderCopy(m_main_renderer, m_Map1PickTexture, NULL, &(m_pickAndBan.m_Map1Button));
+    }
+    if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map2Button))
+    {
+        SDL_RenderCopy(m_main_renderer, m_Map2PickTexture, NULL, &(m_pickAndBan.m_Map2Button));
+    }
+    if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map3Button))
+    {
+        SDL_RenderCopy(m_main_renderer, m_Map3PickTexture, NULL, &(m_pickAndBan.m_Map3Button));
+    }
+    if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map4Button))
+    {
+        SDL_RenderCopy(m_main_renderer, m_Map4PickTexture, NULL, &(m_pickAndBan.m_Map4Button));
+    }
+
+    SDL_RenderPresent(m_main_renderer);
+
 }
 
 bool World::canShoot(coordinates position, coordinates targetPosition, short int range)

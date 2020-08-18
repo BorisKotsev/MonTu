@@ -23,6 +23,11 @@ class PickAndBan
 
         SDL_Texture* m_backgroundTexture;
 
+        SDL_Rect m_Map1Button;
+        SDL_Rect m_Map2Button;
+        SDL_Rect m_Map3Button;
+        SDL_Rect m_Map4Button;
+
         void init(string configFile, SDL_Renderer* renderer);
         void update();
         void draw();

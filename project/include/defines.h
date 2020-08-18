@@ -17,7 +17,8 @@ enum GAME_STATE
     MENU = 1,
     PICK_BAN = 2,
     GAME = 3,
-    STATS = 4
+    STATS = 4,
+    MAP_CHOOSING = 5
 };
 
 enum SQUAD

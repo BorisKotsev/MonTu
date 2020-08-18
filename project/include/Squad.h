@@ -14,6 +14,8 @@ class Squad
 
         SDL_Texture* m_objectTexture;
 
+        SDL_Rect m_objectRect;
+
         OWNER m_owner;
         short int m_maxHealth;
         short int m_health;

@@ -1,6 +1,8 @@
 #ifndef WORLD_H
 #define WORLD_H
 
+#define _WIN32_WINNT 0x0500
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -8,6 +10,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <time.h>
+#include <windows.h>
 #include <SDL2/SDL.h>
 
 #include "ConfigManager.h"
@@ -27,6 +30,7 @@ class World
         virtual ~World();
 
         SDL_Window* m_main_window;
+        SDL_Cursor* m_cursor;
         SDL_Renderer* m_main_renderer;
         SDL_Texture* m_backgroundTexture;
         SDL_Texture* m_menuTexture;
@@ -51,9 +55,21 @@ class World
         GAME_STATE m_gameState;
         bool m_quitScene;
 
+        SDL_Texture* m_backgroundMapTexture;
+
+        SDL_Texture* m_Map1Texture;
+        SDL_Texture* m_Map2Texture;
+        SDL_Texture* m_Map3Texture;
+        SDL_Texture* m_Map4Texture;
+
+        SDL_Texture* m_Map1PickTexture;
+        SDL_Texture* m_Map2PickTexture;
+        SDL_Texture* m_Map3PickTexture;
+        SDL_Texture* m_Map4PickTexture;
+
         coordinates m_cameraOffset;
         short int m_cameraShakeDuration = 1;
-        short int m_cameraShakeMagnitude;
+        short int m_cameraShakeMagnitude = 2;
         time_t m_startShake;
         bool m_shake;
 

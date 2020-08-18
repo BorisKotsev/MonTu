@@ -1210,7 +1210,7 @@
 	"defines.h"
 	"Engine.h"
 
-1595626585 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\defines.h
+1597793483 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\defines.h
 	<SDL2/SDL.h>
 	<cmath>
 
@@ -1247,7 +1247,7 @@
 1595626588 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\squad.cpp
 	"Squad.h"
 
-1595626585 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\squad.h
+1597712073 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\squad.h
 	<SDL2/SDL.h>
 	"defines.h"
 	"Engine.h"
@@ -1255,11 +1255,11 @@
 1597093496 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\tile.cpp
 	"Tile.h"
 
-1597095671 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\main.cpp
+1597793595 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\main.cpp
 	<SDL2/SDL.h>
 	"World.h"
 
-1597412343 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
+1597793724 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -1267,6 +1267,7 @@
 	<ctime>
 	<cstdlib>
 	<time.h>
+	<windows.h>
 	<SDL2/SDL.h>
 	"ConfigManager.h"
 	"SoundManager.h"
@@ -1276,7 +1277,7 @@
 	"Tile.h"
 	"Squad.h"
 
-1597416820 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
+1597793678 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
 	"World.h"
 
 1595626581 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_ttf.h
@@ -1284,10 +1285,10 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595626587 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\pickandban.cpp
+1597793433 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\pickandban.cpp
 	"PickAndBan.h"
 
-1595626585 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\pickandban.h
+1597793459 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\pickandban.h
 	<vector>
 	<fstream>
 	<iostream>
@@ -2178,10 +2179,10 @@
 1595626588 source:c:\users\konstantin\downloads\montu-master (1)\montu-master\project\src\tile.cpp
 	"Tile.h"
 
-1597416345 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\popupwriter.cpp
+1597704320 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\popupwriter.cpp
 	"PopUpWriter.h"
 
-1597416539 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\popupwriter.h
+1597793617 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\popupwriter.h
 	<iostream>
 	<fstream>
 	<vector>

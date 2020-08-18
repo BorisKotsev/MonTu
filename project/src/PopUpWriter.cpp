@@ -100,6 +100,8 @@ void PopUpWriter::init(string configFile, SDL_Renderer* renderer)
     m_buildingListRect.x = 0;
     m_buildingListRect.y = 0;
 
+    m_presentBuildingList = false;
+
     m_buildingListTexture = LoadTexture(strBuff, m_renderer);
 }
 

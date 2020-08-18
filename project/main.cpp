@@ -21,6 +21,15 @@ int main(int argc, char* argv[])
             }
             world.m_quitScene = false;
         }
+        if(world.m_gameState == MAP_CHOOSING)
+        {
+            while(!world.m_quitScene)
+            {
+                world.input();
+                world.Choose_Map();
+            }
+            world.m_quitScene = false;
+        }
         if(world.m_gameState == PICK_BAN)
         {
             while(!world.m_quitScene)

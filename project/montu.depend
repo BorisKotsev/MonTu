@@ -847,14 +847,15 @@
 1589818183 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\src\engine.cpp
 	"Engine.h"
 
-1595626947 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\configmanager.cpp
+1597838235 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\configmanager.cpp
 	"ConfigManager.h"
 	<fstream>
 
-1595626896 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\configmanager.h
+1597838252 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\configmanager.h
 	<SDL2/SDL.h>
 	<string>
 	"Tile.h"
+	"Squad.h"
 
 1595626574 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -1210,22 +1211,24 @@
 	"defines.h"
 	"Engine.h"
 
-1597793483 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\defines.h
-	<SDL2/SDL.h>
+1598346904 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\defines.h
 	<cmath>
+	<vector>
+	<SDL2/SDL.h>
 
-1597414600 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\engine.h
+1598269293 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\engine.h
 	<cmath>
 	<vector>
 	<string>
+	<iostream>
 	<SDL2/SDL.h>
 	"SDL2/SDL_TTF.h"
 	"defines.h"
 
-1597414600 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\engine.cpp
+1598346857 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\engine.cpp
 	"Engine.h"
 
-1595626588 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\soundmanager.cpp
+1597795087 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\soundmanager.cpp
 	"SoundManager.h"
 
 1595626585 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\soundmanager.h
@@ -1244,22 +1247,25 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595626588 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\squad.cpp
+1597965113 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\squad.cpp
 	"Squad.h"
 
-1597712073 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\squad.h
-	<SDL2/SDL.h>
+1598308548 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\squad.h
+	<string>
+	<fstream>
+	<iostream>
 	"defines.h"
 	"Engine.h"
+	"Tile.h"
 
 1597093496 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\tile.cpp
 	"Tile.h"
 
-1597793595 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\main.cpp
+1599311050 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\main.cpp
 	<SDL2/SDL.h>
 	"World.h"
 
-1597793724 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
+1599334056 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -1277,7 +1283,7 @@
 	"Tile.h"
 	"Squad.h"
 
-1597793678 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
+1599331577 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
 	"World.h"
 
 1595626581 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_ttf.h

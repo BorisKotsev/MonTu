@@ -51,5 +51,9 @@ void ConfigManager::init(string configFile, SDL_Renderer* renderer)
     modelTileLava = new Tile;
     modelTileLava->load(buff, renderer);
 
+    stream >> tmp >> buff;
+    modelSquadWarrior = new Squad;
+    modelSquadWarrior->load(buff, renderer);
+
     stream.close();
 }

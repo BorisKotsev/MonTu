@@ -1,4 +1,4 @@
-walkingDiff: 10
+walkingDiff: 4
 
 img: Mountain.bmp
 

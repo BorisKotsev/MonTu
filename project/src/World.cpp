@@ -7,11 +7,12 @@ World::World()
     m_backgroundTexture = NULL;
     m_gameState = NOSCENE;
     m_quitScene = false;
-    m_selected.x = 3;
-    m_selected.y = 3;
+    m_selected.x = 0;
+    m_selected.y = 0;
     m_cameraOffset.x = 0;
     m_cameraOffset.y = 0;
-
+    m_selectedSquad = NULL;
+    m_playerTurn = PLAYER1;
 }
 
 World::~World()
@@ -37,6 +38,7 @@ void World::initSDL(string configFile)
     string Map2PickImg;
     string Map3PickImg;
     string Map4PickImg;
+    string selectedImg;
     string menuImg;
     string cursorImg;
 
@@ -55,6 +57,7 @@ void World::initSDL(string configFile)
     stream >> tmp >> Map2PickImg;
     stream >> tmp >> Map3PickImg;
     stream >> tmp >> Map4PickImg;
+    stream >> tmp >> selectedImg;
     stream >> tmp >> cursorImg;
     stream.close();
 
@@ -66,16 +69,16 @@ void World::initSDL(string configFile)
 
     SDL_SetWindowFullscreen(m_main_window, SDL_WINDOW_FULLSCREEN);
 
-    cursorImg = "img\\" + cursorImg;
-
-    SDL_Surface* loadSurface = SDL_LoadBMP(cursorImg.c_str());
-    m_cursor = SDL_CreateColorCursor(loadSurface, 0, 0);
-    SDL_SetCursor(m_cursor);
-
     m_configManager.init("config_manager.txt", m_main_renderer);
     m_soundManager.init("SoundManager.txt");
     m_pickAndBan.init("pick_And_Ban.txt", m_main_renderer);
     m_popUpWriter.init("PopUpWriter.txt", m_main_renderer);
+
+
+    cursorImg = "img\\" + cursorImg;
+    SDL_Surface* loadSurface = SDL_LoadBMP(cursorImg.c_str());
+    m_cursor = SDL_CreateColorCursor(loadSurface, 10, 5);
+    SDL_SetCursor(m_cursor);
 
     m_backgroundTexture = LoadTexture(backgroundImg, m_main_renderer);
     m_menuTexture = LoadTexture(menuImg, m_main_renderer);
@@ -88,8 +91,9 @@ void World::initSDL(string configFile)
     m_Map2PickTexture = LoadTexture(Map2PickImg, m_main_renderer);
     m_Map3PickTexture = LoadTexture(Map3PickImg, m_main_renderer);
     m_Map4PickTexture = LoadTexture(Map4PickImg, m_main_renderer);
+    m_selectedTileUI.objTexture = LoadTexture(selectedImg, m_main_renderer);
 
-    m_soundManager.play_sound("General.mp3");
+    /// m_soundManager.play_sound("General.mp3");
 
     initDirection("directions.txt");
 
@@ -117,23 +121,65 @@ void World::initDirection(string configFile)
 
 void World::update()
 {
+    cameraShake();
+
     selectTile();
 
-    cameraShake();
+    m_selectedTileUI.objRect = m_tiles[m_selected.y][m_selected.x]->m_objectRect;
+
+    if(m_mouseIsPressed)
+    {
+        if (m_selectedSquad != NULL)
+        {
+            bool seletedASquad = false;
+            for(int i = 0; i < m_squads.size(); i++)
+            {
+                if (m_squads[i]->m_mapCoor == m_selected)
+                {
+                    m_selectedSquad = m_squads[i];
+                    seletedASquad = true;
+                }
+            }
+            if(!seletedASquad)
+            {
+                if (canTravel(m_selectedSquad, m_tiles[m_selected.y][m_selected.x]->m_mapCoordinates))
+                {
+                    m_selectedSquad->m_tileTaken = m_tiles[m_selected.y][m_selected.x];
+                }
+                m_availableTiles.clear();
+                m_selectedSquad = NULL;
+            }
+        }
+        else
+        {
+            bool seletedASquad = false;
+            for(int i = 0; i < m_squads.size(); i++)
+            {
+                if (m_squads[i]->m_mapCoor == m_selected)
+                {
+                    m_selectedSquad = m_squads[i];
+                    seletedASquad = true;
+                }
+            }
+            if(seletedASquad)
+            {
+                m_availableTiles = showAvailableTiles(m_selectedSquad);
+            }
+        }
+    }
 
     for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
     {
-        ///(*it) -> update(m_main_renderer);
+        (*it) -> update();
     }
 
     cleaner();
+
 }
 
 void World::draw()
 {
     SDL_RenderClear(m_main_renderer);
-
-    ///SDL_RenderCopy(m_main_renderer, m_backgroundTexture, NULL, NULL);
 
     for(vector<vector <Tile*> > :: iterator vit = m_tiles.begin(); vit != m_tiles.end(); vit++)
     {
@@ -142,12 +188,20 @@ void World::draw()
             (*it) -> draw(m_main_renderer);
         }
     }
+
+    SDL_RenderCopy(m_main_renderer, m_selectedTileUI.objTexture, NULL, &(m_selectedTileUI.objRect));
+
     for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
     {
-        ///(*it) -> draw(m_main_renderer);
+        (*it) -> draw();
     }
 
-    m_popUpWriter.draw(m_tiles[m_selected.x][m_selected.y]->m_objectRect, m_popUpWriter.m_buildingListRect, m_popUpWriter.m_buildingListTexture);
+    for(vector <Tile*> :: iterator it = m_availableTiles.begin(); it != m_availableTiles.end(); it++)
+    {
+        SDL_RenderCopy(m_main_renderer, m_selectedTileUI.objTexture, NULL, &((*it) -> m_objectRect));
+    }
+
+    m_popUpWriter.draw(m_tiles[m_selected.y][m_selected.x]->m_objectRect, m_popUpWriter.m_buildingListRect, m_popUpWriter.m_buildingListTexture);
 
     SDL_RenderPresent(m_main_renderer);
 }
@@ -187,6 +241,8 @@ void World::cameraShake()
 {
     if (m_startShake + m_cameraShakeDuration > time(NULL))
     {
+        // We pick a number random for the magnitude and than we decide if we add, or if we subtract
+        // this number from the cameraOffset
         m_cameraOffset.x += (rand() % m_cameraShakeMagnitude) * (rand() % 2 == 0 ? 1 : -1);
         m_cameraOffset.y += (rand() % m_cameraShakeMagnitude) * (rand() % 2 == 0 ? 1 : -1);
         ///cout << m_cameraOffset.x << " " << m_cameraOffset.y << endl;
@@ -336,18 +392,19 @@ void World::initTiles(string configFile)
 
 void World::selectTile()
 {
-    for(short int i = 0; i < m_tiles.size(); i++)
+    for(short int r = 0; r < m_tiles.size(); r++)
     {
-        for(short int j = 0; j < m_tiles[i].size(); j++)
+        for(short int c = 0; c < m_tiles[r].size(); c++)
         {
             if(m_mouseIsPressed)
             {
-                if(isInsideAHexagon(m_tiles[i][j]->m_collisionPoints, LoadPoint(m_mouse)))
+                if(isInsideAHexagon(m_tiles[r][c]->m_collisionPoints, LoadPoint(m_mouse)))
                 {
-                    m_popUpWriter.m_presentBuildingList = (m_selected.x == i && m_selected.y == j) ? true : false;
-                    cout << "selected " << i << " " << j << endl;
-                    m_selected.x = i;
-                    m_selected.y = j;
+                    m_popUpWriter.m_presentBuildingList = (m_selected.x == c && m_selected.y == r) ? true : false;
+                    cout << "selected " << c << " " << r << endl;
+
+                    m_selected.x = c;
+                    m_selected.y = r;
                 }
             }
         }
@@ -378,8 +435,116 @@ Tile* World::giveNeighbor(coordinates coor, int direction)
     return m_tiles[coor.y + addedCoor.y][coor.x + addedCoor.x];
 }
 
-bool World::canTravel(coordinates position, coordinates desiredPosition, int movement)
+bool World::canTravel(Squad* squad, coordinates desiredPosition)
 {
+    int movementMap[m_rows][m_colls];
+    // Takes the position and speed of the Squad
+    coordinates position = squad->m_mapCoor;
+    int movement = squad->m_startSpeed;
+    // Makes all tiles uncrossable (giving impossible values)
+    for (short int r = 0; r < m_rows; r ++)
+    {
+        for (short int c = 0; c < m_colls; c ++)
+        {
+            movementMap[r][c] = -1;
+        }
+    }
+    // We need 0 movement for traveling to our own position
+    movementMap[position.y][position.x] = 0;
+
+    // Used to find the neighbor with smallest walkingDifficulty
+    int minimum;
+    int indexBuff;
+    coordinates buff;
+    bool valueFound = false;
+
+    while(!valueFound)
+    {
+        valueFound = true;
+        for (short int r = 0; r < m_rows; r ++)
+        {
+            for (short int c = 0; c < m_colls; c ++)
+            {
+                buff.x = c;
+                buff.y = r;
+
+                // If we have found a cell that has assigned value than we continue the algorithm
+                if (movementMap[r][c] != -1)
+                {
+                    for (int i = 0; i < 6; i++)
+                    {
+                        if(giveNeighbor(buff, i) != NULL)
+                        {
+                            if(movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] != -1)
+                            {
+                                if(movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] > movementMap[r][c] + giveNeighbor(buff, i)->m_walkDifficulty)
+                                {
+                                    valueFound = false;
+                                    movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] = movementMap[r][c] + giveNeighbor(buff, i)->m_walkDifficulty;
+                                }
+                            }
+                            else
+                            {
+                                valueFound = false;
+                                movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] = movementMap[r][c] + giveNeighbor(buff, i)->m_walkDifficulty;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (movementMap[desiredPosition.y][desiredPosition.x] <= movement)
+    {
+        // We want to find the road tile by tile
+        valueFound = false;
+        // Here we store the path
+        vector<coordinates> path;
+        buff.x = desiredPosition.x;
+        buff.y = desiredPosition.y;
+        while(!valueFound)
+        {
+            short int minimumIndex = 0;
+            short int minimumValue = 1000;
+            for (int i = 0; i < 6; i++)
+            {
+                if (giveNeighbor(buff, i) != NULL)
+                {
+                    if(movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] <
+                    minimumValue )
+                    {
+                        minimumValue = movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x];
+                        minimumIndex = i;
+                    }
+                }
+            }
+            // We store the road
+            path.push_back(buff);
+            // Then we move to the next tile
+            buff = giveNeighbor(buff, minimumIndex)->m_mapCoordinates;
+            if(movementMap[buff.y][buff.x] == 0)
+            {
+                valueFound = true;
+            }
+        }
+        /// cout << "INFO: Moving is possible " << movementMap[buff.y][buff.x] << " " << movement << endl;
+        squad->m_path = path;
+        return true;
+    }
+    else
+    {
+        /// cout << "INFO: Moving is not possible " << movementMap[buff.y][buff.x] << " " << movement << endl;
+        return false;
+    }
+}
+
+vector<Tile*> World::showAvailableTiles(Squad* squad)
+{
+    // take the position and the speed
+    coordinates position = squad->m_mapCoor;
+    int movement = squad->m_startSpeed;
+    // The vector, that we return
+    vector<Tile*> returnVector;
     int movementMap[m_rows][m_colls];
     // Makes all tiles uncrossable (giving impossible values)
     for (short int r = 0; r < m_rows; r ++)
@@ -400,10 +565,13 @@ bool World::canTravel(coordinates position, coordinates desiredPosition, int mov
 
     while(!valueFound)
     {
+        valueFound = true;
         for (short int r = 0; r < m_rows; r ++)
         {
             for (short int c = 0; c < m_colls; c ++)
             {
+                // We set the value to true as default, because if we don't change any values in
+                // the movementMap than we have found the value of all cells
                 buff.x = c;
                 buff.y = r;
 
@@ -414,69 +582,40 @@ bool World::canTravel(coordinates position, coordinates desiredPosition, int mov
                     {
                         if(giveNeighbor(buff, i) != NULL)
                         {
-                            /// cout << " Neighbor value: " << movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] << " ";
                             if(movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] != -1)
                             {
                                 if(movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] > movementMap[r][c] + giveNeighbor(buff, i)->m_walkDifficulty)
                                 {
+                                    valueFound = false;
                                     movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] = movementMap[r][c] + giveNeighbor(buff, i)->m_walkDifficulty;
                                 }
                             }
                             else
                             {
+                                valueFound = false;
                                 movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] = movementMap[r][c] + giveNeighbor(buff, i)->m_walkDifficulty;
                             }
                         }
                     }
                 }
-                /// cout << r << " " << c << " " << movementMap[r][c] << endl;
-                if(c == desiredPosition.x && r == desiredPosition.y && movementMap[r][c] != -1)
-                {
-                    valueFound = true;
-                    if (movementMap[r][c] <= movement)
-                    {
-                        // We want to find the road tile by tile
-                        valueFound = false;
-                        // Here we store the path
-                        vector<coordinates> path;
-                        buff.x = c;
-                        buff.y = r;
-                        while(!valueFound)
-                        {
-                            short int minimumIndex = 0;
-                            short int minimumValue = movementMap[giveNeighbor(buff, minimumIndex)->m_mapCoordinates.y][giveNeighbor(buff, minimumIndex)->m_mapCoordinates.x];
-                            for (int i = 0; i < 6; i++)
-                            {
-                                if(movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] <
-                                   minimumValue)
-                                {
-                                    minimumValue = movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x];
-                                    minimumIndex = i;
-                                }
-                            }
-                            // We store the road
-                            path.push_back(buff);
-                            // Then we move to the next tile
-                            buff = giveNeighbor(buff, minimumIndex)->m_mapCoordinates;
-                            if(movementMap[buff.y][buff.x] == 0)
-                            {
-                                valueFound = true;
-                            }
-                        }
-                        for(int i = 0; i < path.size(); i++)
-                        {
-                            cout << path[i].x << " " << path[i].y << endl;
-                        }
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
+
+                ///cout << r << " " << c << " " << movementMap[r][c] << endl;
+            }
+        }
+
+    }
+    for (short int r = 0; r < m_rows; r ++)
+    {
+        for (short int c = 0; c < m_colls; c ++)
+        {
+            if(movementMap[r][c] <= movement && !(r == position.y && c == position.x))
+            {
+                returnVector.push_back(m_tiles[r][c]);
             }
         }
     }
+    return returnVector;
+    cout << "INFO: THE VALUES OF m_availableTiles have been set \n";
 }
 
 void World::initMap(string configFile)
@@ -600,7 +739,6 @@ bool World::canShoot(coordinates position, coordinates targetPosition, short int
                 if(isInsideAHexagon(m_tiles[r][c]->m_collisionPoints, LoadPoint(position)))
                 {
                     passing.push_back(m_tiles[r][c]);
-                     cout << r << " " << c << endl;
                     /// cout << logicalTargetPosition.y << " " << logicalTargetPosition.x << endl;
                     if(c == logicalTargetPosition.x && r == logicalTargetPosition.y)
                     {
@@ -611,4 +749,23 @@ bool World::canShoot(coordinates position, coordinates targetPosition, short int
         }
     }
     return true;
+}
+
+void World::initSquad(SQUAD type, coordinates mapCoor, OWNER owner)
+{
+    Squad* squad;
+    Tile* tile = m_tiles[mapCoor.y][mapCoor.x];
+    switch(type)
+    {
+        case WARRIOR:
+            squad = new Squad(*(m_configManager.modelSquadWarrior), &m_cameraOffset, tile, owner);
+            break;
+        default:
+            squad = NULL;
+            break;
+    }
+    if(tile != NULL)
+    {
+        m_squads.push_back(squad);
+    }
 }

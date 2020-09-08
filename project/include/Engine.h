@@ -6,6 +6,7 @@
 #include <cmath>
 #include <vector>
 #include <string>
+#include <iostream>
 
 #include <SDL2/SDL.h>
 #include "SDL2/SDL_TTF.h"

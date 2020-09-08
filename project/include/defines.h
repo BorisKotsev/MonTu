@@ -1,8 +1,11 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-#include <SDL2/SDL.h>
 #include <cmath>
+#include <vector>
+#include <SDL2/SDL.h>
+
+using namespace std;
 
 enum OWNER
 {
@@ -53,5 +56,37 @@ struct coordinates
         x = rect.x;
         y = rect.y;
     }
+
+    void operator=(coordinates coor)
+    {
+        x = coor.x;
+        y = coor.y;
+    }
+
+    bool operator==(coordinates coor)
+    {
+        if(x == coor.x && y == coor.y)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    bool operator!=(coordinates coor)
+    {
+        if(x != coor.x && y != coor.y)
+        {
+            return true;
+        }
+        return false;
+    }
+};
+
+struct UI_object
+{
+    SDL_Texture* objTexture = NULL;
+    vector<SDL_Texture*> objAnimation;
+    SDL_Rect objRect;
+
 };
 #endif // DEFINES_H

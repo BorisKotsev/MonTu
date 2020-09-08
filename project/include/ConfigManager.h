@@ -5,6 +5,7 @@
 #include <string>
 
 #include "Tile.h"
+#include "Squad.h"
 
 using namespace std;
 
@@ -22,6 +23,8 @@ public:
     Tile* modelTileStone = NULL;
     Tile* modelTileVolcano = NULL;
     Tile* modelTileLava = NULL;
+
+    Squad* modelSquadWarrior = NULL;
 
     void init(string configFile, SDL_Renderer* renderer);
 

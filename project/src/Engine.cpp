@@ -58,11 +58,11 @@ bool isInsideATriangle(SDL_Point* triangle1, SDL_Point* triangle2, SDL_Point* tr
 
 bool isInsideAHexagon(vector<SDL_Point*> points, SDL_Point* mousePoint)
 {
-    for(int i = 0; i < points.size(); i++)
+    for(unsigned int i = 0; i < points.size(); i++)
     {
-        for(int j = i + 1; j < points.size(); j++)
+        for(unsigned int j = i + 1; j < points.size(); j++)
         {
-            for(int m = j + 1; m < points.size(); m++)
+            for(unsigned int m = j + 1; m < points.size(); m++)
             {
                 if(isInsideATriangle(points[i], points[j], points[m], mousePoint) == true)
                 {

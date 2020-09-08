@@ -14,3 +14,4 @@ Tile_Volcano: Tiles\\tileVolcano.txt
 
 Tile_Lava: Tiles\\tileLava.txt
 
+Squad_Warrior: Squads\\warrior.txt

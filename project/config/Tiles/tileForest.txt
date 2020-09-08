@@ -1,4 +1,4 @@
-walkingDiff: 7
+walkingDiff: 3
 
 img: Forest.bmp
 

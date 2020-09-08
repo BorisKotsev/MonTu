@@ -54,6 +54,7 @@ class World
         SDL_Event m_event;
         GAME_STATE m_gameState;
         bool m_quitScene;
+        OWNER m_playerTurn;
 
         SDL_Texture* m_backgroundMapTexture;
 
@@ -67,6 +68,8 @@ class World
         SDL_Texture* m_Map3PickTexture;
         SDL_Texture* m_Map4PickTexture;
 
+        UI_object m_selectedTileUI;
+
         coordinates m_cameraOffset;
         short int m_cameraShakeDuration = 1;
         short int m_cameraShakeMagnitude = 2;
@@ -79,14 +82,19 @@ class World
         coordinates directions[2][6];
 
         coordinates m_selected;
+        Squad* m_selectedSquad;
+        Tile* m_selectedTile;
 
         vector<vector<Tile*> > m_tiles;
         vector<Squad*> m_squads;
 
+        vector<Tile*> m_availableTiles;
+
         vector<SQUAD> m_available;
         vector<SQUAD> m_banned;
 
-        bool canTravel(coordinates position, coordinates desiredPosition, int movement);
+        bool canTravel(Squad* squad, coordinates desiredPosition);
+        vector<Tile*> showAvailableTiles(Squad* squad);
         bool canShoot(coordinates position, coordinates targetPosition, short int range);
         Tile* giveNeighbor(coordinates coor, int direction);
 
@@ -113,6 +121,8 @@ class World
         void initMap(string configFile);
         void Choose_Map();
 
+        void initSquad(SQUAD type, coordinates mapCoor, OWNER owner);
+        void initSquads(string configFile);
 
     protected:
 

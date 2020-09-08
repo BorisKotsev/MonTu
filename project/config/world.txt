@@ -26,4 +26,6 @@ Map3_Pick: Map3Pick.bmp
 
 Map4_Pick: Map4Pick.bmp
 
-Cursor_Image: cursor.bmp
+Selected_Img: selected.bmp
+
+Cursor_Img: cursor.bmp

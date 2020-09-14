@@ -47,6 +47,9 @@ int main(int argc, char* argv[])
             buff.x = 23;
             buff.y = 5;
             world.initSquad(WARRIOR, buff, PLAYER1);
+            buff.x = 21;
+            buff.y = 5;
+            world.initSquad(WARRIOR, buff, PLAYER2);
             while(!world.m_quitScene)
             {
                 world.input();

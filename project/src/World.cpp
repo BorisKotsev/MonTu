@@ -142,12 +142,14 @@ void World::update()
             }
             if(!seletedASquad)
             {
-                if (canTravel(m_selectedSquad, m_tiles[m_selected.y][m_selected.x]->m_mapCoordinates))
-                {
-                    m_selectedSquad->m_tileTaken = m_tiles[m_selected.y][m_selected.x];
+                if (m_selectedSquad->m_owner == m_playerTurn){
+                    if (canTravel(m_selectedSquad, m_tiles[m_selected.y][m_selected.x]->m_mapCoordinates))
+                    {
+                        m_selectedSquad->m_tileTaken = m_tiles[m_selected.y][m_selected.x];
+                    }
+                    m_availableTiles.clear();
+                    m_selectedSquad = NULL;
                 }
-                m_availableTiles.clear();
-                m_selectedSquad = NULL;
             }
         }
         else
@@ -155,13 +157,13 @@ void World::update()
             bool seletedASquad = false;
             for(int i = 0; i < m_squads.size(); i++)
             {
-                if (m_squads[i]->m_mapCoor == m_selected)
+                if (m_squads[i]->m_mapCoor == m_selected && m_squads[i]->m_owner == m_playerTurn)
                 {
                     m_selectedSquad = m_squads[i];
                     seletedASquad = true;
                 }
             }
-            if(seletedASquad)
+            if(seletedASquad && !(m_selectedSquad->m_moved) && m_selectedSquad->m_owner == m_playerTurn)
             {
                 m_availableTiles = showAvailableTiles(m_selectedSquad);
             }
@@ -172,6 +174,8 @@ void World::update()
     {
         (*it) -> update();
     }
+
+    switchTurn();
 
     cleaner();
 
@@ -253,7 +257,6 @@ void World::cameraShake()
         m_cameraOffset.y = 0;
     }
 }
-
 
 void World::initSession(GAME_STATE state)
 {
@@ -440,7 +443,7 @@ bool World::canTravel(Squad* squad, coordinates desiredPosition)
     int movementMap[m_rows][m_colls];
     // Takes the position and speed of the Squad
     coordinates position = squad->m_mapCoor;
-    int movement = squad->m_startSpeed;
+    int movement = squad->m_speed;
     // Makes all tiles uncrossable (giving impossible values)
     for (short int r = 0; r < m_rows; r ++)
     {
@@ -496,10 +499,21 @@ bool World::canTravel(Squad* squad, coordinates desiredPosition)
     }
     if (movementMap[desiredPosition.y][desiredPosition.x] <= movement)
     {
+        movement -= movementMap[desiredPosition.y][desiredPosition.x];
+        squad->m_speed = movement;
+        if (movement == 0)
+        {
+            squad->m_moved = true;
+        }
+        else
+        {
+            cout << "INFO: The squad has " << squad->m_speed << "left \n";
+        }
+
         // We want to find the road tile by tile
         valueFound = false;
         // Here we store the path
-        vector<coordinates> path;
+        stack<Tile*> path;
         buff.x = desiredPosition.x;
         buff.y = desiredPosition.y;
         while(!valueFound)
@@ -519,7 +533,8 @@ bool World::canTravel(Squad* squad, coordinates desiredPosition)
                 }
             }
             // We store the road
-            path.push_back(buff);
+            path.push(m_tiles[buff.y][buff.x]);
+            /// cout << "INFO: Added tile " << buff.y << " " << buff.x << "to the queue \n";
             // Then we move to the next tile
             buff = giveNeighbor(buff, minimumIndex)->m_mapCoordinates;
             if(movementMap[buff.y][buff.x] == 0)
@@ -542,7 +557,7 @@ vector<Tile*> World::showAvailableTiles(Squad* squad)
 {
     // take the position and the speed
     coordinates position = squad->m_mapCoor;
-    int movement = squad->m_startSpeed;
+    int movement = squad->m_speed;
     // The vector, that we return
     vector<Tile*> returnVector;
     int movementMap[m_rows][m_colls];
@@ -767,5 +782,45 @@ void World::initSquad(SQUAD type, coordinates mapCoor, OWNER owner)
     if(tile != NULL)
     {
         m_squads.push_back(squad);
+    }
+}
+
+void World::switchTurn()
+{
+    bool switchTurn = true;
+    for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
+    {
+        if((*it)->m_owner == m_playerTurn)
+        {
+            if(!((*it)->m_moved))
+            {
+                switchTurn = false;
+            }
+        }
+    }
+    if (switchTurn)
+    {
+        for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
+        {
+            if((*it)->m_owner != m_playerTurn)
+            {
+                (*it)->m_moved = false;
+                (*it)->m_speed = (*it)->m_startSpeed;
+
+            }
+            else
+            {
+                (*it)->m_moved = true;
+            }
+        }
+
+        if (m_playerTurn == PLAYER1)
+        {
+            m_playerTurn = PLAYER2;
+        }
+        else if(m_playerTurn == PLAYER2)
+        {
+            m_playerTurn = PLAYER1;
+        }
     }
 }

@@ -1247,13 +1247,14 @@
 	"begin_code.h"
 	"close_code.h"
 
-1597965113 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\squad.cpp
+1600071395 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\squad.cpp
 	"Squad.h"
 
-1598308548 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\squad.h
+1599635839 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\squad.h
 	<string>
 	<fstream>
 	<iostream>
+	<stack>
 	"defines.h"
 	"Engine.h"
 	"Tile.h"
@@ -1261,11 +1262,11 @@
 1597093496 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\tile.cpp
 	"Tile.h"
 
-1599311050 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\main.cpp
+1600072478 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\main.cpp
 	<SDL2/SDL.h>
 	"World.h"
 
-1599334056 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
+1599940935 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -1283,7 +1284,7 @@
 	"Tile.h"
 	"Squad.h"
 
-1599331577 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
+1600072882 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
 	"World.h"
 
 1595626581 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_ttf.h

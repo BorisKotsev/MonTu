@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <stack>
 
 #include "defines.h"
 #include "Engine.h"
@@ -42,7 +43,10 @@ class Squad
 
         Tile* m_tileTaken;
 
-        vector<coordinates> m_path;
+        stack<Tile*> m_path;
+
+        int m_maxFramesPerStep = 100;
+        int m_framesPerStep = 0;
 
         virtual void load(string configFile, SDL_Renderer* renderer);
         virtual void update();

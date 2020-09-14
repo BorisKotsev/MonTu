@@ -29,6 +29,12 @@ Squad::Squad(const Squad& model, coordinates* cameraOffset, Tile* tile, OWNER ow
     m_objectRect.w = model.m_objectRect.w;
     m_objectRect.h = model.m_objectRect.h;
 
+    m_health = m_startHealth;
+    m_attackDamage = m_startAttackDamage;
+    m_speed = m_startSpeed;
+    m_attackRange = m_startAttackRange;
+    m_faith = m_startFaith;
+
     m_objectTexture = model.m_objectTexture;
 
     m_renderer = model.m_renderer;
@@ -62,10 +68,25 @@ void Squad::load(string configFile, SDL_Renderer* renderer)
 
 void Squad::update()
 {
-    m_objectRect.x = m_tileTaken->m_drawCoordinates.x;
-    m_objectRect.y = m_tileTaken->m_drawCoordinates.y;
 
-    m_mapCoor = m_tileTaken->m_mapCoordinates;
+    if (!(m_path.empty()) && m_framesPerStep >= m_maxFramesPerStep)
+    {
+        /// cout << "INFO: The size of the queue is " << m_path.size() << endl;
+        m_objectRect.x = m_path.top()->m_drawCoordinates.x;
+        m_objectRect.y = m_path.top()->m_drawCoordinates.y;
+
+        m_tileTaken = m_path.top();
+
+        m_path.pop();
+
+        m_mapCoor = m_tileTaken->m_mapCoordinates;
+
+        m_framesPerStep = 0;
+    }
+    else if (!(m_path.empty()))
+    {
+        m_framesPerStep ++;
+    }
 }
 
 void Squad::draw()

@@ -124,6 +124,8 @@ class World
         void initSquad(SQUAD type, coordinates mapCoor, OWNER owner);
         void initSquads(string configFile);
 
+        void switchTurn();
+
     protected:
 
     private:

@@ -38,7 +38,7 @@ void World::initSDL(string configFile)
     string Map2PickImg;
     string Map3PickImg;
     string Map4PickImg;
-    string selectedImg;
+    string selectedImg, attackTileImg;
     string menuImg;
     string cursorImg;
 
@@ -58,6 +58,7 @@ void World::initSDL(string configFile)
     stream >> tmp >> Map3PickImg;
     stream >> tmp >> Map4PickImg;
     stream >> tmp >> selectedImg;
+    stream >> tmp >> attackTileImg;
     stream >> tmp >> cursorImg;
     stream.close();
 
@@ -92,6 +93,7 @@ void World::initSDL(string configFile)
     m_Map3PickTexture = LoadTexture(Map3PickImg, m_main_renderer);
     m_Map4PickTexture = LoadTexture(Map4PickImg, m_main_renderer);
     m_selectedTileUI.objTexture = LoadTexture(selectedImg, m_main_renderer);
+    m_attackTileUI.objTexture = LoadTexture(attackTileImg, m_main_renderer);
 
     /// m_soundManager.play_sound("General.mp3");
 
@@ -504,10 +506,11 @@ bool World::canTravel(Squad* squad, coordinates desiredPosition)
         if (movement == 0)
         {
             squad->m_moved = true;
+            /// cout << "INFO: The squad has " << squad->m_speed << "left \n";
         }
         else
         {
-            cout << "INFO: The squad has " << squad->m_speed << "left \n";
+            /// cout << "INFO: The squad has " << squad->m_speed << "left \n";
         }
 
         // We want to find the road tile by tile
@@ -544,6 +547,27 @@ bool World::canTravel(Squad* squad, coordinates desiredPosition)
         }
         /// cout << "INFO: Moving is possible " << movementMap[buff.y][buff.x] << " " << movement << endl;
         squad->m_path = path;
+
+        // Check if the squad is surrounded with impossible to walk-through tiles, but has speed
+        if(movement != 0)
+        {
+            bool hasPossibleMove = false;
+            for (int i = 0; i < 6; i++)
+            {
+                if (giveNeighbor(buff, i) != NULL)
+                {
+                    if(movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x]
+                    < squad->m_speed)
+                    {
+                        hasPossibleMove = true;
+                    }
+                }
+            }
+            if (!hasPossibleMove)
+            {
+                squad->m_moved = true;
+            }
+        }
         return true;
     }
     else
@@ -707,10 +731,11 @@ void World::Choose_Map()
 
 }
 
-bool World::canShoot(coordinates position, coordinates targetPosition, short int range)
+bool World::canShoot(Squad* squad, coordinates targetPosition)
 {
     // Converting the logical coordinates to real coordinates
-    coordinates logicalPosition = position;
+    coordinates logicalPosition = squad->m_mapCoor;
+    coordinates position;
     position.x = m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.x + (m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.w) / 2;
     position.y = m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.y + (m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.h) / 2;
     /// cout << position.x << " " << position.y << endl;
@@ -766,6 +791,26 @@ bool World::canShoot(coordinates position, coordinates targetPosition, short int
     return true;
 }
 
+vector<Tile*> World:showAvailableShootTiles(Squad* squad)
+{
+    // the vector that we return
+    vector<Tile*> returnVector;
+    // buff variable used to pass the coordinates, to the canShoot function
+    coordinates buffCoor;
+    for (short int r = 0; r < m_rows; r ++)
+    {
+        for (short int c = 0; c < m_colls; c ++)
+        {
+            buffCoor.x = c;
+            buffCoor.y = r;
+            if (canShoot(squad, buffCoor))
+            {
+                returnVector.push_back(m_tiles[r][c]);
+            }
+        }
+    }
+    return buffCoor;
+}
 void World::initSquad(SQUAD type, coordinates mapCoor, OWNER owner)
 {
     Squad* squad;

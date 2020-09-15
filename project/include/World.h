@@ -69,6 +69,7 @@ class World
         SDL_Texture* m_Map4PickTexture;
 
         UI_object m_selectedTileUI;
+        UI_object m_attackTileUI;
 
         coordinates m_cameraOffset;
         short int m_cameraShakeDuration = 1;
@@ -94,8 +95,9 @@ class World
         vector<SQUAD> m_banned;
 
         bool canTravel(Squad* squad, coordinates desiredPosition);
-        vector<Tile*> showAvailableTiles(Squad* squad);
-        bool canShoot(coordinates position, coordinates targetPosition, short int range);
+        vector<Tile*> showAvailableWalTiles(Squad* squad);
+        vector<Tile*> showAvailableShootTiles(Squad* squad);
+        bool canShoot(Squad* squad, coordinates targetPosition);
         Tile* giveNeighbor(coordinates coor, int direction);
 
 
@@ -125,6 +127,7 @@ class World
         void initSquads(string configFile);
 
         void switchTurn();
+        void shoot(Squad* attackingSquad, Squad* defendingSquad);
 
     protected:
 

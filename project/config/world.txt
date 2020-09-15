@@ -28,4 +28,6 @@ Map4_Pick: Map4Pick.bmp
 
 Selected_Img: selected.bmp
 
+AttackTile_img: red_frame.bmp
+
 Cursor_Img: cursor.bmp

@@ -95,10 +95,11 @@ class World
         vector<SQUAD> m_banned;
 
         bool canTravel(Squad* squad, coordinates desiredPosition);
-        vector<Tile*> showAvailableWalTiles(Squad* squad);
+        vector<Tile*> showAvailableWalkTiles(Squad* squad);
         vector<Tile*> showAvailableShootTiles(Squad* squad);
         bool canShoot(Squad* squad, coordinates targetPosition);
         Tile* giveNeighbor(coordinates coor, int direction);
+        Squad* findSquadByCoor (coordinates coor);
 
 
         void initSDL(string configFile);

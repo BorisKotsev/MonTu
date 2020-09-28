@@ -144,13 +144,26 @@ void World::update()
             }
             if(!seletedASquad)
             {
-                if (m_selectedSquad->m_owner == m_playerTurn){
-                    if (canTravel(m_selectedSquad, m_tiles[m_selected.y][m_selected.x]->m_mapCoordinates))
+                if (m_selectedSquad->m_owner == m_playerTurn)
+                {
+                    if (m_selectedSquad->m_moved == false)
                     {
-                        m_selectedSquad->m_tileTaken = m_tiles[m_selected.y][m_selected.x];
+                        if (canTravel(m_selectedSquad, m_tiles[m_selected.y][m_selected.x]->m_mapCoordinates))
+                        {
+                            m_selectedSquad->m_tileTaken = m_tiles[m_selected.y][m_selected.x];
+                        }
+                        m_availableTiles.clear();
+                        m_selectedSquad = NULL;
                     }
-                    m_availableTiles.clear();
-                    m_selectedSquad = NULL;
+                    else if(m_selectedSquad->m_shooted == false)
+                    {
+                        if (canShoot(m_selectedSquad, m_tiles[m_selected.y][m_selected.x]->m_mapCoordinates))
+                        {
+                            // shoot
+                        }
+                        m_availableTiles.clear();
+                        m_selectedSquad = NULL;
+                    }
                 }
             }
         }
@@ -165,9 +178,16 @@ void World::update()
                     seletedASquad = true;
                 }
             }
-            if(seletedASquad && !(m_selectedSquad->m_moved) && m_selectedSquad->m_owner == m_playerTurn)
+            if(seletedASquad && m_selectedSquad->m_owner == m_playerTurn)
             {
-                m_availableTiles = showAvailableTiles(m_selectedSquad);
+                if(!(m_selectedSquad->m_moved))
+                {
+                    m_availableTiles = showAvailableWalkTiles(m_selectedSquad);
+                }
+                else if(!(m_selectedSquad->m_shooted))
+                {
+                    m_availableTiles = showAvailableShootTiles(m_selectedSquad);
+                }
             }
         }
     }
@@ -423,7 +443,7 @@ Tile* World::giveNeighbor(coordinates coor, int direction)
     *short version* - starts from right and goes backwards
     0 - right
     1 - top right
-    2 - left right
+    2 - top left
     3 - left
     4 - down left
     5 - down right
@@ -577,7 +597,7 @@ bool World::canTravel(Squad* squad, coordinates desiredPosition)
     }
 }
 
-vector<Tile*> World::showAvailableTiles(Squad* squad)
+vector<Tile*> World::showAvailableWalkTiles(Squad* squad)
 {
     // take the position and the speed
     coordinates position = squad->m_mapCoor;
@@ -733,6 +753,7 @@ void World::Choose_Map()
 
 bool World::canShoot(Squad* squad, coordinates targetPosition)
 {
+    int range = squad->m_attackRange;
     // Converting the logical coordinates to real coordinates
     coordinates logicalPosition = squad->m_mapCoor;
     coordinates position;
@@ -749,7 +770,7 @@ bool World::canShoot(Squad* squad, coordinates targetPosition)
     short int b = abs(position.y - targetPosition.y);
     short int c = sqrt(a^2 + b^2);
 
-    if(c > range)
+    if(c > range || findSquadByCoor(targetPosition) == NULL)
     {
         // If we are out of range than we stop the function
         return false;
@@ -788,10 +809,11 @@ bool World::canShoot(Squad* squad, coordinates targetPosition)
             }
         }
     }
+    squad->m_shooted = true;
     return true;
 }
 
-vector<Tile*> World:showAvailableShootTiles(Squad* squad)
+vector<Tile*> World::showAvailableShootTiles(Squad* squad)
 {
     // the vector that we return
     vector<Tile*> returnVector;
@@ -803,14 +825,33 @@ vector<Tile*> World:showAvailableShootTiles(Squad* squad)
         {
             buffCoor.x = c;
             buffCoor.y = r;
-            if (canShoot(squad, buffCoor))
+
+            int range = squad->m_attackRange;
+            // Converting the logical coordinates to real coordinates
+            coordinates logicalPosition = squad->m_mapCoor;
+            coordinates position;
+            position.x = m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.x + (m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.w) / 2;
+            position.y = m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.y + (m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.h) / 2;
+
+            coordinates logicalTargetPosition = buffCoor;
+            coordinates targetPosition;
+            targetPosition.x = m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.x + (m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.w) / 2;
+            targetPosition.y = m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.y + (m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.h) / 2;
+
+            // Using the pythagorean theorem, we can check if we have big enough range
+            short int a = abs(position.x - targetPosition.x);
+            short int b = abs(position.y - targetPosition.y);
+            short int distance = sqrt(a*a + b*b);
+
+            if (distance < range)
             {
                 returnVector.push_back(m_tiles[r][c]);
             }
         }
     }
-    return buffCoor;
+    return returnVector;
 }
+
 void World::initSquad(SQUAD type, coordinates mapCoor, OWNER owner)
 {
     Squad* squad;
@@ -837,7 +878,7 @@ void World::switchTurn()
     {
         if((*it)->m_owner == m_playerTurn)
         {
-            if(!((*it)->m_moved))
+            if(!((*it)->m_moved) || !((*it)->m_shooted))
             {
                 switchTurn = false;
             }
@@ -850,11 +891,13 @@ void World::switchTurn()
             if((*it)->m_owner != m_playerTurn)
             {
                 (*it)->m_moved = false;
+                (*it)->m_shooted = false;
                 (*it)->m_speed = (*it)->m_startSpeed;
 
             }
             else
             {
+                (*it)->m_shooted = true;
                 (*it)->m_moved = true;
             }
         }
@@ -868,4 +911,16 @@ void World::switchTurn()
             m_playerTurn = PLAYER1;
         }
     }
+}
+
+Squad* World::findSquadByCoor(coordinates coor)
+{
+    for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
+    {
+        if((*it)->m_mapCoor == coor)
+        {
+            return (*it);
+        }
+    }
+    return NULL;
 }

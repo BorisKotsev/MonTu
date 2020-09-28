@@ -40,6 +40,7 @@ class Squad
 
         bool m_traveling;
         bool m_moved;
+        bool m_shooted;
 
         Tile* m_tileTaken;
 

@@ -40,6 +40,9 @@ Squad::Squad(const Squad& model, coordinates* cameraOffset, Tile* tile, OWNER ow
     m_renderer = model.m_renderer;
 
     m_owner = owner;
+
+    m_moved = false;
+    m_shooted = false;
 }
 
 

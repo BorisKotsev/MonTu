@@ -9,6 +9,7 @@
 #include "defines.h"
 #include "Engine.h"
 #include "Tile.h"
+#include "HealthManager.h"
 
 class Squad
 {
@@ -22,7 +23,10 @@ class Squad
 
         SDL_Rect m_objectRect;
         SDL_Rect m_presentRect;
+        SDL_Rect m_healthBarRect;
         coordinates m_mapCoor;
+
+        HealthManager* m_hm;
 
         coordinates* m_cameraOffset;
 
@@ -49,7 +53,7 @@ class Squad
         int m_maxFramesPerStep = 100;
         int m_framesPerStep = 0;
 
-        virtual void load(string configFile, SDL_Renderer* renderer);
+        virtual void load(string configFile, SDL_Renderer* renderer, HealthManager* hm);
         virtual void update();
         virtual void draw();
 

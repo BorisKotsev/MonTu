@@ -847,15 +847,16 @@
 1589818183 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\src\engine.cpp
 	"Engine.h"
 
-1597838235 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\configmanager.cpp
+1601817014 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\configmanager.cpp
 	"ConfigManager.h"
 	<fstream>
 
-1597838252 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\configmanager.h
+1601817014 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\configmanager.h
 	<SDL2/SDL.h>
 	<string>
 	"Tile.h"
 	"Squad.h"
+	"HealthManager.h"
 
 1595626574 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -1216,7 +1217,7 @@
 	<vector>
 	<SDL2/SDL.h>
 
-1598269293 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\engine.h
+1601626114 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\engine.h
 	<cmath>
 	<vector>
 	<string>
@@ -1225,7 +1226,7 @@
 	"SDL2/SDL_TTF.h"
 	"defines.h"
 
-1598346857 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\engine.cpp
+1601626453 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\engine.cpp
 	"Engine.h"
 
 1597795087 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\soundmanager.cpp
@@ -1247,10 +1248,10 @@
 	"begin_code.h"
 	"close_code.h"
 
-1601071347 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\squad.cpp
+1601813337 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\squad.cpp
 	"Squad.h"
 
-1601071347 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\squad.h
+1601813003 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\squad.h
 	<string>
 	<fstream>
 	<iostream>
@@ -1258,15 +1259,16 @@
 	"defines.h"
 	"Engine.h"
 	"Tile.h"
+	"HealthManager.h"
 
 1597093496 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\tile.cpp
 	"Tile.h"
 
-1600072478 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\main.cpp
+1601817108 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\main.cpp
 	<SDL2/SDL.h>
 	"World.h"
 
-1601159430 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
+1601821185 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -1276,6 +1278,7 @@
 	<time.h>
 	<windows.h>
 	<SDL2/SDL.h>
+	"HealthManager.h"
 	"ConfigManager.h"
 	"SoundManager.h"
 	"PopUpWriter.h"
@@ -1284,7 +1287,7 @@
 	"Tile.h"
 	"Squad.h"
 
-1601325487 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
+1601821186 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
 	"World.h"
 
 1595626581 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_ttf.h
@@ -2200,4 +2203,20 @@
 	<SDL2/SDL.h>
 	"defines.h"
 	"Engine.h"
+
+1601816340 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\healthmanager.cpp
+	"HealthManager.h"
+
+1601816174 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\healthmanager.h
+	<iostream>
+	<fstream>
+	<vector>
+	<string>
+	<ctime>
+	<cstdlib>
+	<time.h>
+	<windows.h>
+	<SDL2/SDL.h>
+	"Engine.h"
+	"defines.h"
 

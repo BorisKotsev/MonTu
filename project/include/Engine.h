@@ -25,6 +25,7 @@ bool isInsideAHexagon (vector<SDL_Point*> points, SDL_Point* mousePoint);
 bool checkForMouseCollision(int mouseX, int mouseY, SDL_Rect object);
 bool checkForPossibleMove(int distance, int &movement);
 bool checkIfInScreen(SDL_Rect rect, int SCREEN_WIDTH, int SCREEN_HEIGHT);
+bool checkForCollisionBetweenRects(SDL_Rect rect1, SDL_Rect rect2);
 
 void write(string text, coordinates coor, SDL_Renderer* renderer, int FONT_SIZE);
 void CoordinatesToRect(coordinates coor, SDL_Rect& rect);

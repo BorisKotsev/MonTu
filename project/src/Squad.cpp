@@ -41,12 +41,14 @@ Squad::Squad(const Squad& model, coordinates* cameraOffset, Tile* tile, OWNER ow
 
     m_owner = owner;
 
+    m_hm = model.m_hm;
+
     m_moved = false;
     m_shooted = false;
 }
 
 
-void Squad::load(string configFile, SDL_Renderer* renderer)
+void Squad::load(string configFile, SDL_Renderer* renderer, HealthManager* hm)
 {
     configFile = "config\\" + configFile;
     ifstream stream;
@@ -67,6 +69,8 @@ void Squad::load(string configFile, SDL_Renderer* renderer)
     m_objectTexture = LoadTexture(buff, renderer);
 
     m_renderer = renderer;
+
+    m_hm = hm;
 }
 
 void Squad::update()
@@ -99,4 +103,5 @@ void Squad::draw()
     m_presentRect.w = m_objectRect.w;
     m_presentRect.h = m_objectRect.h;
     SDL_RenderCopy(m_renderer, m_objectTexture, NULL, &m_presentRect);
+    m_hm->drawHealthbar(m_renderer, m_presentRect, m_health, m_startHealth);
 }

@@ -13,6 +13,8 @@ World::World()
     m_cameraOffset.y = 0;
     m_selectedSquad = NULL;
     m_playerTurn = PLAYER1;
+    m_showFillBtn = true;
+    m_showAttackTiles = false;
 }
 
 World::~World()
@@ -41,6 +43,8 @@ void World::initSDL(string configFile)
     string selectedImg, attackTileImg;
     string menuImg;
     string cursorImg;
+    string skipBtnFillImg;
+    string skipBtnTransImg;
 
     stream.open(configFile.c_str());
     stream >> tmp >> m_SCREEN_WIDTH >> m_SCREEN_HEIGHT;
@@ -60,6 +64,9 @@ void World::initSDL(string configFile)
     stream >> tmp >> selectedImg;
     stream >> tmp >> attackTileImg;
     stream >> tmp >> cursorImg;
+    stream >> tmp >> skipBtnFillImg;
+    stream >> tmp >> skipBtnTransImg;
+    stream >> tmp >> m_skipTurnFillBtn.objRect.x >> m_skipTurnFillBtn.objRect.y >> m_skipTurnFillBtn.objRect.w >> m_skipTurnFillBtn.objRect.h;
     stream.close();
 
     SDL_Init(SDL_INIT_EVERYTHING);
@@ -70,11 +77,11 @@ void World::initSDL(string configFile)
 
     SDL_SetWindowFullscreen(m_main_window, SDL_WINDOW_FULLSCREEN);
 
-    m_configManager.init("config_manager.txt", m_main_renderer);
+    m_healthManager.init("health_manager.txt", m_main_renderer);
+    m_configManager.init("config_manager.txt", m_main_renderer, &m_healthManager);
     m_soundManager.init("SoundManager.txt");
     m_pickAndBan.init("pick_And_Ban.txt", m_main_renderer);
     m_popUpWriter.init("PopUpWriter.txt", m_main_renderer);
-
 
     cursorImg = "img\\" + cursorImg;
     SDL_Surface* loadSurface = SDL_LoadBMP(cursorImg.c_str());
@@ -94,6 +101,10 @@ void World::initSDL(string configFile)
     m_Map4PickTexture = LoadTexture(Map4PickImg, m_main_renderer);
     m_selectedTileUI.objTexture = LoadTexture(selectedImg, m_main_renderer);
     m_attackTileUI.objTexture = LoadTexture(attackTileImg, m_main_renderer);
+    m_skipTurnFillBtn.objTexture = LoadTexture(skipBtnFillImg, m_main_renderer);
+    m_skipTurnTransBtn.objTexture = LoadTexture(skipBtnTransImg, m_main_renderer);
+
+    m_skipTurnTransBtn.objRect = m_skipTurnFillBtn.objRect;
 
     /// m_soundManager.play_sound("General.mp3");
 
@@ -134,6 +145,7 @@ void World::update()
         if (m_selectedSquad != NULL)
         {
             bool seletedASquad = false;
+            Squad* oldSquad = m_selectedSquad;
             for(int i = 0; i < m_squads.size(); i++)
             {
                 if (m_squads[i]->m_mapCoor == m_selected)
@@ -144,26 +156,41 @@ void World::update()
             }
             if(!seletedASquad)
             {
+                m_showFillBtn = true;
                 if (m_selectedSquad->m_owner == m_playerTurn)
                 {
                     if (m_selectedSquad->m_moved == false)
                     {
-                        if (canTravel(m_selectedSquad, m_tiles[m_selected.y][m_selected.x]->m_mapCoordinates))
+                        // Have we clicked on an empty tile or on a squad
+                        if (m_selectedSquad == oldSquad)
                         {
-                            m_selectedSquad->m_tileTaken = m_tiles[m_selected.y][m_selected.x];
+                            if (canTravel(m_selectedSquad, m_tiles[m_selected.y][m_selected.x]->m_mapCoordinates))
+                            {
+                                m_selectedSquad->m_tileTaken = m_tiles[m_selected.y][m_selected.x];
+                            }
+                            m_availableWalkTiles.clear();
+                            m_availableShootTiles.clear();
+                            m_selectedSquad = NULL;
                         }
-                        m_availableTiles.clear();
-                        m_selectedSquad = NULL;
                     }
                     else if(m_selectedSquad->m_shooted == false)
                     {
-                        if (canShoot(m_selectedSquad, m_tiles[m_selected.y][m_selected.x]->m_mapCoordinates))
-                        {
-                            // shoot
-                        }
-                        m_availableTiles.clear();
+                        m_availableShootTiles.clear();
                         m_selectedSquad = NULL;
                     }
+                }
+            }
+            else
+            {
+                if(oldSquad != m_selectedSquad && !(oldSquad->m_shooted) && canShoot(oldSquad, m_selectedSquad->m_mapCoor))
+                {
+                    takeDamage(oldSquad, m_selectedSquad);
+                    m_startShake = time(NULL);
+                    oldSquad->m_shooted = true;
+                    oldSquad->m_moved = true;
+                    m_availableShootTiles.clear();
+                    m_availableWalkTiles.clear();
+                    m_selectedSquad = NULL;
                 }
             }
         }
@@ -182,22 +209,50 @@ void World::update()
             {
                 if(!(m_selectedSquad->m_moved))
                 {
-                    m_availableTiles = showAvailableWalkTiles(m_selectedSquad);
+                    m_showFillBtn = false;
+                    m_showAttackTiles = false;
+                    m_availableWalkTiles = showAvailableWalkTiles(m_selectedSquad);
                 }
                 else if(!(m_selectedSquad->m_shooted))
                 {
-                    m_availableTiles = showAvailableShootTiles(m_selectedSquad);
+                    m_showFillBtn = false;
+                    m_showAttackTiles = true;
+                    m_availableShootTiles = showAvailableShootTiles(m_selectedSquad);
                 }
+            }
+            else if (!seletedASquad)
+            {
+                m_selectedSquad = NULL;
             }
         }
     }
 
+    // Hide the skip_turn_btn if there is a squad behind it
     for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
     {
         (*it) -> update();
+        if (checkForCollisionBetweenRects(m_skipTurnFillBtn.objRect, (*it)->m_objectRect))
+        {
+            m_showFillBtn = false;
+        }
+        if(m_selectedSquad != NULL)
+        {
+            if(canShoot(m_selectedSquad, (*it)->m_mapCoor) && m_selectedSquad != (*it) && m_availableWalkTiles.size() != 0)
+            {
+                m_availableShootTiles.push_back(m_tiles[(*it)->m_mapCoor.y][(*it)->m_mapCoor.x]);
+            }
+        }
     }
 
-    switchTurn();
+    if(m_mouseIsPressed)
+    {
+        if(m_showFillBtn && checkForMouseCollision(m_mouse.x, m_mouse.y, m_skipTurnFillBtn.objRect))
+        {
+            switchTurn();
+        }
+    }
+
+    checkForTurnSwitch();
 
     cleaner();
 
@@ -217,17 +272,27 @@ void World::draw()
 
     SDL_RenderCopy(m_main_renderer, m_selectedTileUI.objTexture, NULL, &(m_selectedTileUI.objRect));
 
+    for(vector <Tile*> :: iterator it = m_availableWalkTiles.begin(); it != m_availableWalkTiles.end(); it++)
+    {
+        SDL_RenderCopy(m_main_renderer, m_selectedTileUI.objTexture, NULL, &((*it) -> m_objectRect));
+    }
+
+    for(vector <Tile*> :: iterator it = m_availableShootTiles.begin(); it != m_availableShootTiles.end(); it++)
+    {
+        SDL_RenderCopy(m_main_renderer, m_attackTileUI.objTexture, NULL, &((*it) -> m_objectRect));
+    }
+
     for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
     {
         (*it) -> draw();
     }
 
-    for(vector <Tile*> :: iterator it = m_availableTiles.begin(); it != m_availableTiles.end(); it++)
-    {
-        SDL_RenderCopy(m_main_renderer, m_selectedTileUI.objTexture, NULL, &((*it) -> m_objectRect));
-    }
-
     m_popUpWriter.draw(m_tiles[m_selected.y][m_selected.x]->m_objectRect, m_popUpWriter.m_buildingListRect, m_popUpWriter.m_buildingListTexture);
+
+    if (m_showFillBtn)
+    {
+        SDL_RenderCopy(m_main_renderer, m_skipTurnFillBtn.objTexture, NULL, &(m_skipTurnFillBtn.objRect));
+    }
 
     SDL_RenderPresent(m_main_renderer);
 }
@@ -754,25 +819,35 @@ void World::Choose_Map()
 bool World::canShoot(Squad* squad, coordinates targetPosition)
 {
     int range = squad->m_attackRange;
+
     // Converting the logical coordinates to real coordinates
     coordinates logicalPosition = squad->m_mapCoor;
     coordinates position;
-    position.x = m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.x + (m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.w) / 2;
-    position.y = m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.y + (m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.h) / 2;
+    position.x = m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.x
+                    + (m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.w) / 2;
+    position.y = m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.y
+                    + (m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.h) / 2;
     /// cout << position.x << " " << position.y << endl;
+
     coordinates logicalTargetPosition = targetPosition;
-    targetPosition.x = m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.x + (m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.w) / 2;
-    targetPosition.y = m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.y + (m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.h) / 2;
+    targetPosition.x = m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.x
+                        + (m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.w) / 2;
+    targetPosition.y = m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.y
+                        + (m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.h) / 2;
     /// cout << targetPosition.x << " " << targetPosition.y << endl;
 
     // Using the pythagorean theorem, we can check if we have big enough range
     short int a = abs(position.x - targetPosition.x);
     short int b = abs(position.y - targetPosition.y);
-    short int c = sqrt(a^2 + b^2);
+    short int c = sqrt(a*a + b*b);
 
-    if(c > range || findSquadByCoor(targetPosition) == NULL)
+    if(c > range)
     {
-        // If we are out of range than we stop the function
+        // If we are out of range or if there isn't a squad on this coor than we stop the function
+        return false;
+    }
+    if(findSquadByCoor(logicalPosition) == NULL)
+    {
         return false;
     }
 
@@ -809,7 +884,6 @@ bool World::canShoot(Squad* squad, coordinates targetPosition)
             }
         }
     }
-    squad->m_shooted = true;
     return true;
 }
 
@@ -861,6 +935,9 @@ void World::initSquad(SQUAD type, coordinates mapCoor, OWNER owner)
         case WARRIOR:
             squad = new Squad(*(m_configManager.modelSquadWarrior), &m_cameraOffset, tile, owner);
             break;
+        case ARCHER:
+            squad = new Squad(*(m_configManager.modelSquadArcher), &m_cameraOffset, tile, owner);
+            break;
         default:
             squad = NULL;
             break;
@@ -873,43 +950,48 @@ void World::initSquad(SQUAD type, coordinates mapCoor, OWNER owner)
 
 void World::switchTurn()
 {
-    bool switchTurn = true;
+    for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
+    {
+        if((*it)->m_owner != m_playerTurn)
+        {
+            (*it)->m_moved = false;
+            (*it)->m_shooted = false;
+            (*it)->m_speed = (*it)->m_startSpeed;
+
+        }
+        else
+        {
+            (*it)->m_shooted = true;
+            (*it)->m_moved = true;
+        }
+    }
+
+    if (m_playerTurn == PLAYER1)
+    {
+        m_playerTurn = PLAYER2;
+    }
+    else if(m_playerTurn == PLAYER2)
+    {
+        m_playerTurn = PLAYER1;
+    }
+}
+
+void World::checkForTurnSwitch()
+{
+    bool checkForSwitch = true;
     for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
     {
         if((*it)->m_owner == m_playerTurn)
         {
             if(!((*it)->m_moved) || !((*it)->m_shooted))
             {
-                switchTurn = false;
+                checkForSwitch = false;
             }
         }
     }
-    if (switchTurn)
+    if (checkForSwitch)
     {
-        for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
-        {
-            if((*it)->m_owner != m_playerTurn)
-            {
-                (*it)->m_moved = false;
-                (*it)->m_shooted = false;
-                (*it)->m_speed = (*it)->m_startSpeed;
-
-            }
-            else
-            {
-                (*it)->m_shooted = true;
-                (*it)->m_moved = true;
-            }
-        }
-
-        if (m_playerTurn == PLAYER1)
-        {
-            m_playerTurn = PLAYER2;
-        }
-        else if(m_playerTurn == PLAYER2)
-        {
-            m_playerTurn = PLAYER1;
-        }
+        switchTurn();
     }
 }
 
@@ -923,4 +1005,9 @@ Squad* World::findSquadByCoor(coordinates coor)
         }
     }
     return NULL;
+}
+
+void World::takeDamage(Squad* attacker, Squad* defender)
+{
+    defender->m_health -= attacker->m_attackDamage;
 }

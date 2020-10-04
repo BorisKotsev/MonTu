@@ -11,7 +11,7 @@ ConfigManager::~ConfigManager()
     //dtor
 }
 
-void ConfigManager::init(string configFile, SDL_Renderer* renderer)
+void ConfigManager::init(string configFile, SDL_Renderer* renderer, HealthManager* hm)
 {
     configFile = "config\\" + configFile;
 
@@ -53,7 +53,11 @@ void ConfigManager::init(string configFile, SDL_Renderer* renderer)
 
     stream >> tmp >> buff;
     modelSquadWarrior = new Squad;
-    modelSquadWarrior->load(buff, renderer);
+    modelSquadWarrior->load(buff, renderer, hm);
+
+    stream >> tmp >> buff;
+    modelSquadArcher = new Squad;
+    modelSquadArcher->load(buff, renderer, hm);
 
     stream.close();
 }

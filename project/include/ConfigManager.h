@@ -6,6 +6,7 @@
 
 #include "Tile.h"
 #include "Squad.h"
+#include "HealthManager.h"
 
 using namespace std;
 
@@ -25,8 +26,9 @@ public:
     Tile* modelTileLava = NULL;
 
     Squad* modelSquadWarrior = NULL;
+    Squad* modelSquadArcher = NULL;
 
-    void init(string configFile, SDL_Renderer* renderer);
+    void init(string configFile, SDL_Renderer* renderer, HealthManager* hm);
 
 protected:
 

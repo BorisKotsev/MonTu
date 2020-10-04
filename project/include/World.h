@@ -13,6 +13,7 @@
 #include <windows.h>
 #include <SDL2/SDL.h>
 
+#include "HealthManager.h"
 #include "ConfigManager.h"
 #include "SoundManager.h"
 #include "PopUpWriter.h"
@@ -40,6 +41,7 @@ class World
 
         TTF_Font* m_font;
 
+        HealthManager m_healthManager;
         ConfigManager m_configManager;
         SoundManager m_soundManager;
         PickAndBan m_pickAndBan;
@@ -70,6 +72,11 @@ class World
 
         UI_object m_selectedTileUI;
         UI_object m_attackTileUI;
+        UI_object m_skipTurnFillBtn;
+        UI_object m_skipTurnTransBtn;
+
+        bool m_showFillBtn;
+        bool m_showAttackTiles;
 
         coordinates m_cameraOffset;
         short int m_cameraShakeDuration = 1;
@@ -89,7 +96,8 @@ class World
         vector<vector<Tile*> > m_tiles;
         vector<Squad*> m_squads;
 
-        vector<Tile*> m_availableTiles;
+        vector<Tile*> m_availableWalkTiles;
+        vector<Tile*> m_availableShootTiles;
 
         vector<SQUAD> m_available;
         vector<SQUAD> m_banned;
@@ -127,8 +135,10 @@ class World
         void initSquad(SQUAD type, coordinates mapCoor, OWNER owner);
         void initSquads(string configFile);
 
+        void checkForTurnSwitch();
         void switchTurn();
         void shoot(Squad* attackingSquad, Squad* defendingSquad);
+        void takeDamage(Squad* attacker, Squad* defender);
 
     protected:
 

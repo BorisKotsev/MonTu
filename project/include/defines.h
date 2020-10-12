@@ -21,7 +21,8 @@ enum GAME_STATE
     PICK_BAN = 2,
     GAME = 3,
     STATS = 4,
-    MAP_CHOOSING = 5
+    MAP_CHOOSING = 5,
+    EXIT = 6
 };
 
 enum SQUAD

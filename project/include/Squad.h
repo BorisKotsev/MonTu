@@ -42,6 +42,10 @@ class Squad
         short int m_startFaith;
         short int m_faith;
 
+        short int m_idleAnimationRange = 5;
+        short int m_idleAnimationCounter = 0;
+        bool m_moveUp = true;
+
         bool m_traveling;
         bool m_moved;
         bool m_shooted;
@@ -56,6 +60,7 @@ class Squad
         virtual void load(string configFile, SDL_Renderer* renderer, HealthManager* hm);
         virtual void update();
         virtual void draw();
+        void idleAnimation();
 
     protected:
 

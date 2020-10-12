@@ -42,14 +42,7 @@ int main(int argc, char* argv[])
         }
         if(world.m_gameState == GAME)
         {
-            world.m_startShake = time(NULL);
-            coordinates buff;
-            buff.x = 23;
-            buff.y = 5;
-            world.initSquad(WARRIOR, buff, PLAYER1);
-            buff.x = 21;
-            buff.y = 5;
-            world.initSquad(ARCHER, buff, PLAYER2);
+            world.initGameSession();
             while(!world.m_quitScene)
             {
                 world.input();
@@ -57,6 +50,10 @@ int main(int argc, char* argv[])
                 world.draw();
             }
             world.m_quitScene = false;
+        }
+        if(world.m_gameState == EXIT)
+        {
+            world.destroySDL();
         }
 
         SDL_Delay(25);

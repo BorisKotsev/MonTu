@@ -45,6 +45,10 @@ void World::initSDL(string configFile)
     string cursorImg;
     string skipBtnFillImg;
     string skipBtnTransImg;
+    string PlayButtonImg;
+    string ExitButtonImg;
+    string OptionsButtonImg;
+    string BackButtonImg;
 
     stream.open(configFile.c_str());
     stream >> tmp >> m_SCREEN_WIDTH >> m_SCREEN_HEIGHT;
@@ -52,15 +56,26 @@ void World::initSDL(string configFile)
     stream >> tmp >> menuImg;
     stream >> tmp >> m_playButtonRect.x >> m_playButtonRect.y >> m_playButtonRect.w >> m_playButtonRect.h;
     stream >> tmp >> m_colls >> m_rows;
+    stream >> tmp >> backgroundMap;
+    stream >> tmp >> m_ExitButtonRect.x >> m_ExitButtonRect.y >> m_ExitButtonRect.w >> m_ExitButtonRect.h;
+    stream >> tmp >> PlayButtonImg;
+    stream >> tmp >> ExitButtonImg;
+    stream >> tmp >> OptionsButtonImg;
+    stream >> tmp >> BackButtonImg;
+    stream >> tmp >> m_BackButtonRect.x >> m_BackButtonRect.y >> m_BackButtonRect.w >> m_BackButtonRect.h;
+    stream >> tmp >> m_OptionsButtonRect.x >> m_OptionsButtonRect.y >> m_OptionsButtonRect.w >> m_OptionsButtonRect.h;
     stream >> tmp >> Map1Img;
     stream >> tmp >> Map2Img;
     stream >> tmp >> Map3Img;
     stream >> tmp >> Map4Img;
-    stream >> tmp >> backgroundMap;
     stream >> tmp >> Map1PickImg;
     stream >> tmp >> Map2PickImg;
     stream >> tmp >> Map3PickImg;
     stream >> tmp >> Map4PickImg;
+    stream >> tmp >> m_Map1Button.x >> m_Map1Button.y >> m_Map1Button.w >> m_Map1Button.h;
+    stream >> tmp >> m_Map2Button.x >> m_Map2Button.y >> m_Map2Button.w >> m_Map2Button.h;
+    stream >> tmp >> m_Map3Button.x >> m_Map3Button.y >> m_Map3Button.w >> m_Map3Button.h;
+    stream >> tmp >> m_Map4Button.x >> m_Map4Button.y >> m_Map4Button.w >> m_Map4Button.h;
     stream >> tmp >> selectedImg;
     stream >> tmp >> attackTileImg;
     stream >> tmp >> cursorImg;
@@ -103,6 +118,10 @@ void World::initSDL(string configFile)
     m_attackTileUI.objTexture = LoadTexture(attackTileImg, m_main_renderer);
     m_skipTurnFillBtn.objTexture = LoadTexture(skipBtnFillImg, m_main_renderer);
     m_skipTurnTransBtn.objTexture = LoadTexture(skipBtnTransImg, m_main_renderer);
+    m_PlayButtonTexture = LoadTexture(PlayButtonImg, m_main_renderer);
+    m_OptionsButtonTexture = LoadTexture(OptionsButtonImg, m_main_renderer);
+    m_ExitButtonTexture = LoadTexture(ExitButtonImg, m_main_renderer);
+    m_BackButtonTexture = LoadTexture(BackButtonImg, m_main_renderer);
 
     m_skipTurnTransBtn.objRect = m_skipTurnFillBtn.objRect;
 
@@ -130,6 +149,18 @@ void World::initDirection(string configFile)
         }
     }
     stream.close();
+}
+
+void World::initGameSession()
+{
+    m_startShake = time(NULL);
+    coordinates buff;
+    buff.x = 23;
+    buff.y = 5;
+    initSquad(WARRIOR, buff, PLAYER1);
+    buff.x = 21;
+    buff.y = 5;
+    initSquad(WARRIOR, buff, PLAYER2);
 }
 
 void World::update()
@@ -367,10 +398,67 @@ void World::menu()
             m_quitScene = true;
             m_gameState = MAP_CHOOSING;
         }
+        if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_ExitButtonRect))
+        {
+            m_quitScene = true;
+            m_gameState = EXIT;
+        }
     }
+
+    if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_playButtonRect))
+    {
+        if(m_playButtonRect.w <= 410)
+        {
+            m_playButtonRect.w += 20;
+            m_playButtonRect.h += 20;
+            m_playButtonRect.x -= 10;
+            m_playButtonRect.y -= 10;
+        }
+    }else{
+        m_playButtonRect.w = 400;
+        m_playButtonRect.h = 80;
+        m_playButtonRect.x = 483;
+        m_playButtonRect.y = 302;
+    }
+    if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_OptionsButtonRect)){
+        if(m_OptionsButtonRect.w <= 410)
+        {
+            m_OptionsButtonRect.w += 20;
+            m_OptionsButtonRect.h += 20;
+            m_OptionsButtonRect.x -= 10;
+            m_OptionsButtonRect.y -= 10;
+        }
+    }else{
+        m_OptionsButtonRect.x = 483;
+        m_OptionsButtonRect.y = 451;
+        m_OptionsButtonRect.w = 400;
+        m_OptionsButtonRect.h = 80;
+    }
+    if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_ExitButtonRect))
+    {
+        if(m_ExitButtonRect.w <= 57)
+        {
+            m_ExitButtonRect.w += 20;
+            m_ExitButtonRect.h += 20;
+            m_ExitButtonRect.x -= 10;
+            m_ExitButtonRect.y -= 10;
+        }
+    }else{
+        m_ExitButtonRect.x = 1283;
+        m_ExitButtonRect.y = 40;
+        m_ExitButtonRect.w = 47;
+        m_ExitButtonRect.h = 47;
+    }
+
+    SDL_RenderCopy(m_main_renderer, m_PlayButtonTexture, NULL, &(m_playButtonRect));
+
+    SDL_RenderCopy(m_main_renderer, m_OptionsButtonTexture, NULL, &(m_OptionsButtonRect));
+
+    SDL_RenderCopy(m_main_renderer, m_ExitButtonTexture, NULL, &(m_ExitButtonRect));
     //Print
     SDL_RenderPresent(m_main_renderer);
 }
+
 
 void World::pickAndBan()
 {
@@ -486,6 +574,7 @@ void World::selectTile()
     {
         for(short int c = 0; c < m_tiles[r].size(); c++)
         {
+            // TODO optimize mouse checking
             if(m_mouseIsPressed)
             {
                 if(isInsideAHexagon(m_tiles[r][c]->m_collisionPoints, LoadPoint(m_mouse)))
@@ -776,23 +865,36 @@ void World::Choose_Map()
         if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map1Button))
         {
             initMap("Map1.txt");
+            initTiles("tileMap.txt");
+            m_quitScene = true;
+            m_gameState = GAME;
         }
         if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map2Button))
         {
             initMap("Map2.txt");
+            initTiles("tileMap.txt");
+            m_quitScene = true;
+            m_gameState = GAME;
         }
         if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map3Button))
         {
             initMap("Map3.txt");
+            initTiles("tileMap.txt");
+            m_quitScene = true;
+            m_gameState = GAME;
         }
         if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map4Button))
         {
             initMap("Map4.txt");
+            initTiles("tileMap.txt");
+            m_quitScene = true;
+            m_gameState = GAME;
         }
-
-        initTiles("tileMap.txt");
-        m_quitScene = true;
-        m_gameState = GAME;
+        if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_BackButtonRect))
+        {
+            m_quitScene = true;
+            m_gameState = MENU;
+        }
     }
 
     if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map1Button))

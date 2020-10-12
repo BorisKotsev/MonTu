@@ -94,6 +94,7 @@ void Squad::update()
     {
         m_framesPerStep ++;
     }
+    //idleAnimation();
 }
 
 void Squad::draw()
@@ -104,4 +105,35 @@ void Squad::draw()
     m_presentRect.h = m_objectRect.h;
     SDL_RenderCopy(m_renderer, m_objectTexture, NULL, &m_presentRect);
     m_hm->drawHealthbar(m_renderer, m_presentRect, m_health, m_startHealth);
+}
+
+void Squad::idleAnimation()
+{
+    if(!m_moved || !m_shooted)
+    {
+        if(m_moveUp)
+        {
+            if(m_idleAnimationCounter >= m_idleAnimationRange)
+            {
+                m_moveUp = false;
+            }
+            else
+            {
+                m_objectRect.y += 1;
+                m_idleAnimationCounter += 1;
+            }
+        }
+        else
+        {
+            if(m_idleAnimationCounter <= -m_idleAnimationRange)
+            {
+                m_moveUp = true;
+            }
+            else
+            {
+                m_objectRect.y -= 1;
+                m_idleAnimationCounter -= 1;
+            }
+        }
+    }
 }

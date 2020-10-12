@@ -37,7 +37,14 @@ class World
         SDL_Texture* m_menuTexture;
 
         SDL_Rect m_playButtonRect;
-        SDL_Rect m_exitButtonRect;
+        SDL_Rect m_ExitButtonRect;
+        SDL_Rect m_BackButtonRect;
+        SDL_Rect m_OptionsButtonRect;
+
+        SDL_Rect m_Map1Button;
+        SDL_Rect m_Map2Button;
+        SDL_Rect m_Map3Button;
+        SDL_Rect m_Map4Button;
 
         TTF_Font* m_font;
 
@@ -69,6 +76,11 @@ class World
         SDL_Texture* m_Map2PickTexture;
         SDL_Texture* m_Map3PickTexture;
         SDL_Texture* m_Map4PickTexture;
+
+        SDL_Texture* m_PlayButtonTexture;
+        SDL_Texture* m_OptionsButtonTexture;
+        SDL_Texture* m_ExitButtonTexture;
+        SDL_Texture* m_BackButtonTexture;
 
         UI_object m_selectedTileUI;
         UI_object m_attackTileUI;
@@ -112,6 +124,7 @@ class World
 
         void initSDL(string configFile);
         void initDirection(string configFile);
+        void initGameSession();
         void draw();
         void update();
         void cleaner();

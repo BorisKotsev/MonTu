@@ -38,6 +38,7 @@
 			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_ttf" />
 			<Add directory="dep_sdl/lib" />
 		</Linker>
+		<Unit filename="include/Building.h" />
 		<Unit filename="include/ConfigManager.h" />
 		<Unit filename="include/Engine.h" />
 		<Unit filename="include/HealthManager.h" />
@@ -49,6 +50,7 @@
 		<Unit filename="include/World.h" />
 		<Unit filename="include/defines.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Building.cpp" />
 		<Unit filename="src/ConfigManager.cpp" />
 		<Unit filename="src/Engine.cpp" />
 		<Unit filename="src/HealthManager.cpp" />

@@ -1,7 +1,7 @@
-walkingDiff: 5
+walkingDif: 5
 img: Castle.bmp
 BuildingAreaApproval: 0
-Ground: Hexagon.bmp
+Ground: Grass.bmp
 OwnerIndicatorP1_WhenGettingStateRegular: OwnerIndicatorP1_Castle.bmp
 OwnerIndicatorP2_WhenGettingStateRegular: OwnerIndicatorP2_Castle.bmp
 BuildIndicator_WhenGettingStateRegular: BuildIndicator_Castle.bmp

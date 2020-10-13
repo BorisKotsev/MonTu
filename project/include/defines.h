@@ -90,4 +90,11 @@ struct UI_object
     SDL_Rect objRect;
 
 };
+
+struct color
+{
+    short int r;
+    short int g;
+    short int b;
+};
 #endif // DEFINES_H

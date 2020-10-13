@@ -59,5 +59,9 @@ void ConfigManager::init(string configFile, SDL_Renderer* renderer, HealthManage
     modelSquadArcher = new Squad;
     modelSquadArcher->load(buff, renderer, hm);
 
+    stream >> tmp >> buff;
+    modelCastle = new Building;
+    modelCastle->load(buff, renderer);
+
     stream.close();
 }

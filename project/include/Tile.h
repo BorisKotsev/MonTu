@@ -27,11 +27,14 @@ class Tile
         short int m_walkDifficulty;
         vector<SDL_Point*> m_collisionPoints;
 
+        string m_img;
+
         coordinates m_drawCoordinates;
         coordinates m_mapCoordinates;
 
         void init(Tile* model);
         void load(string configFile, SDL_Renderer* renderer);
+        void load(ifstream& stream);
         void draw(SDL_Renderer* renderer);
 
     protected:

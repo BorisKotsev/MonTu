@@ -2,10 +2,10 @@
 
 #include "World.h"
 
+World world;
+
 int main(int argc, char* argv[])
 {
-    World world;
-
     world.initSDL("world.txt");
 
     world.m_gameState = MENU;

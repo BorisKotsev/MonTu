@@ -82,6 +82,8 @@ void World::initSDL(string configFile)
     stream >> tmp >> skipBtnFillImg;
     stream >> tmp >> skipBtnTransImg;
     stream >> tmp >> m_skipTurnFillBtn.objRect.x >> m_skipTurnFillBtn.objRect.y >> m_skipTurnFillBtn.objRect.w >> m_skipTurnFillBtn.objRect.h;
+    stream >> tmp >> m_CP1.r >> m_CP1.g >> m_CP1.b;
+    stream >> tmp >> m_CP2.r >> m_CP2.g >> m_CP2.b;
     stream.close();
 
     SDL_Init(SDL_INIT_EVERYTHING);
@@ -129,6 +131,7 @@ void World::initSDL(string configFile)
 
     initDirection("directions.txt");
 
+
     /// ShowWindow(GetConsoleWindow(), SW_HIDE);
 
 }
@@ -168,6 +171,11 @@ void World::update()
     cameraShake();
 
     selectTile();
+
+    for(vector <Building*> :: iterator it = m_buildings.begin(); it != m_buildings.end(); it++)
+    {
+        (*it) -> update();
+    }
 
     m_selectedTileUI.objRect = m_tiles[m_selected.y][m_selected.x]->m_objectRect;
 
@@ -301,6 +309,12 @@ void World::draw()
         }
     }
 
+    for(vector <Building*> :: iterator it = m_buildings.begin(); it != m_buildings.end(); it++)
+    {
+        (*it) -> draw(m_main_renderer);
+        ///A second iteration is needed so bridges and wall sprites (because they will probably be bigger) are not under the ground sprites
+        ///Or we could add bridges and walls to a different vector and then iterate it
+    }
     SDL_RenderCopy(m_main_renderer, m_selectedTileUI.objTexture, NULL, &(m_selectedTileUI.objRect));
 
     for(vector <Tile*> :: iterator it = m_availableWalkTiles.begin(); it != m_availableWalkTiles.end(); it++)
@@ -330,7 +344,14 @@ void World::draw()
 
 void World::cleaner()
 {
-
+    for(vector<Building*>::iterator it = m_buildings.begin(); it != m_buildings.end(); it++)
+    {
+        if((*it) -> m_health <= 0)
+        {
+            it = m_buildings.erase(it);
+            it--;
+        }
+    }
 }
 
 void World::destroySDL()
@@ -455,7 +476,7 @@ void World::menu()
     SDL_RenderCopy(m_main_renderer, m_OptionsButtonTexture, NULL, &(m_OptionsButtonRect));
 
     SDL_RenderCopy(m_main_renderer, m_ExitButtonTexture, NULL, &(m_ExitButtonRect));
-    //Print
+
     SDL_RenderPresent(m_main_renderer);
 }
 
@@ -476,18 +497,18 @@ void World::initTiles(string configFile)
 
     string tmp;
 
-    short int hexagonWidth, hexagonHeight;
     short int sizeOfHexagon;
 
     stream.open(configFile.c_str());
     stream >> tmp >> sizeOfHexagon;
     stream.close();
 
-    hexagonWidth = sqrt(3) * sizeOfHexagon;
-    hexagonHeight = 2 * sizeOfHexagon;
+    m_hexagonWidth = sqrt(3) * sizeOfHexagon;
+    m_hexagonHeight = 2 * sizeOfHexagon;
 
 
     Tile* tile = NULL;
+    Building* building = NULL;
     SDL_Point* buffPoint = NULL;
 
     for (short int r = 0; r < m_rows; r ++)
@@ -522,48 +543,63 @@ void World::initTiles(string configFile)
                 tile = new Tile(*(m_configManager.modelTileLava), &m_cameraOffset);
                 break;
             }
+            m_tiles[r].push_back(tile);
+            /*if ((r == m_rows / 2 && c == m_colls - 1) || (r == m_rows / 2 && c == 3))
+            {
+                building = new Building(*(m_configManager.modelCastle));
+                tile = building;
+                if (c == 3)
+                {
+                    tile->m_owner = PLAYER1;
+                }
+                else
+                {
+                    tile->m_owner = PLAYER2;
+                }
+                m_buildings.push_back(building);
+            }
+            */
             if(r % 2 == 0)
             {
-                tile->m_drawCoordinates.x = c * hexagonWidth;
+                tile->m_drawCoordinates.x = c * m_hexagonWidth;
             }
             else
             {
-                tile->m_drawCoordinates.x = hexagonWidth / 2 + c * hexagonWidth;
+                tile->m_drawCoordinates.x = m_hexagonWidth / 2 + c * m_hexagonWidth;
             }
-            tile->m_drawCoordinates.y = r * hexagonHeight * 3 / 4;
+
+            tile->m_drawCoordinates.y = r * m_hexagonHeight * 3 / 4;
             tile->m_mapCoordinates.x = c;
             tile->m_mapCoordinates.y = r;
 
             CoordinatesToRect(tile->m_drawCoordinates, tile->m_objectRect);
-            tile->m_objectRect.w = hexagonWidth;
-            tile->m_objectRect.h = hexagonHeight;
+            tile->m_objectRect.w = m_hexagonWidth;
+            tile->m_objectRect.h = m_hexagonHeight;
 
             buffPoint = new SDL_Point;
-            buffPoint->x = tile->m_drawCoordinates.x + hexagonWidth / 2;
+            buffPoint->x = tile->m_drawCoordinates.x + m_hexagonWidth / 2;
             buffPoint->y = tile->m_drawCoordinates.y + 0;
             tile->m_collisionPoints.push_back(buffPoint);
             buffPoint = new SDL_Point;
             buffPoint->x = tile->m_drawCoordinates.x + 0;
-            buffPoint->y = tile->m_drawCoordinates.y + hexagonHeight / 4;
+            buffPoint->y = tile->m_drawCoordinates.y + m_hexagonHeight / 4;
             tile->m_collisionPoints.push_back(buffPoint);
             buffPoint = new SDL_Point;
             buffPoint->x = tile->m_drawCoordinates.x + 0;
-            buffPoint->y = tile->m_drawCoordinates.y + hexagonHeight / 4 * 3;
+            buffPoint->y = tile->m_drawCoordinates.y + m_hexagonHeight / 4 * 3;
             tile->m_collisionPoints.push_back(buffPoint);
             buffPoint = new SDL_Point;
-            buffPoint->x = tile->m_drawCoordinates.x + hexagonWidth / 2;
-            buffPoint->y = tile->m_drawCoordinates.y + hexagonHeight;
+            buffPoint->x = tile->m_drawCoordinates.x + m_hexagonWidth / 2;
+            buffPoint->y = tile->m_drawCoordinates.y + m_hexagonHeight;
             tile->m_collisionPoints.push_back(buffPoint);
             buffPoint = new SDL_Point;
-            buffPoint->x = tile->m_drawCoordinates.x + hexagonWidth;
-            buffPoint->y = tile->m_drawCoordinates.y + hexagonHeight / 4 * 3;
+            buffPoint->x = tile->m_drawCoordinates.x + m_hexagonWidth;
+            buffPoint->y = tile->m_drawCoordinates.y + m_hexagonHeight / 4 * 3;
             tile->m_collisionPoints.push_back(buffPoint);
             buffPoint = new SDL_Point;
-            buffPoint->x = tile->m_drawCoordinates.x + hexagonWidth;
-            buffPoint->y = tile->m_drawCoordinates.y + hexagonHeight / 4;
+            buffPoint->x = tile->m_drawCoordinates.x + m_hexagonWidth;
+            buffPoint->y = tile->m_drawCoordinates.y + m_hexagonHeight / 4;
             tile->m_collisionPoints.push_back(buffPoint);
-
-            m_tiles[r].push_back(tile);
         }
     }
 }
@@ -913,6 +949,23 @@ void World::Choose_Map()
     {
         SDL_RenderCopy(m_main_renderer, m_Map4PickTexture, NULL, &(m_pickAndBan.m_Map4Button));
     }
+    if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_BackButtonRect))
+    {
+        if(m_BackButtonRect.w <= 39)
+        {
+            m_BackButtonRect.w += 20;
+            m_BackButtonRect.h += 20;
+            m_BackButtonRect.x -= 10;
+            m_BackButtonRect.y -= 10;
+        }
+    }else{
+        m_BackButtonRect.w = 39;
+        m_BackButtonRect.h = 47;
+        m_BackButtonRect.x = 31;
+        m_BackButtonRect.y = 40;
+    }
+
+    SDL_RenderCopy(m_main_renderer, m_BackButtonTexture, NULL, &(m_BackButtonRect));
 
     SDL_RenderPresent(m_main_renderer);
 

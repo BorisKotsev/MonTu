@@ -5,8 +5,10 @@
 #include <string>
 
 #include "Tile.h"
+#include "Building.h"
 #include "Squad.h"
 #include "HealthManager.h"
+
 
 using namespace std;
 
@@ -27,6 +29,8 @@ public:
 
     Squad* modelSquadWarrior = NULL;
     Squad* modelSquadArcher = NULL;
+
+    Building* modelCastle = NULL;
 
     void init(string configFile, SDL_Renderer* renderer, HealthManager* hm);
 

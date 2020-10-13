@@ -162,7 +162,7 @@ void Building::initializeGround()
     {
         m_groundRect = m_objectRect;
         m_groundRect.y -= m_adjustment;
-        m_groundRect.h = world.m_hexagonHeight;
+        m_groundRect.h = 60;
         m_initializeGround = false;
     }
 }

@@ -4,7 +4,7 @@ Background_Image: background.bmp
 
 Menu_Image: UI_Menu.bmp
 
-Play_Button_Rect: 483 302 400 	
+Play_Button_Rect: 483 302 400 80
 
 Colls_and_Rows: 26 16
 
@@ -59,3 +59,7 @@ Skip_Turn_Fill_Img: skip_btn_fill.bmp
 Skip_Turn_Trans_Img: skip_btn_trans.bmp
 
 Skip_Turn_Rect: 1150 550 200 200
+
+Color1: 255 0 0
+
+Color2: 0 0 255

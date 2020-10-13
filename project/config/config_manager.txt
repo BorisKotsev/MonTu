@@ -17,3 +17,5 @@ Tile_Lava: Tiles\\tileLava.txt
 Squad_Warrior: Squads\\warrior.txt
 
 Squad_Archer: Squads\\archer.txt
+
+CastleModel: castle.txt

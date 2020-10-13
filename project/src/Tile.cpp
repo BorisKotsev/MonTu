@@ -33,6 +33,14 @@ void Tile::load(string configFile, SDL_Renderer* renderer)
     m_objectTexture = LoadTexture(buff, renderer);
 }
 
+void Tile::load(ifstream& stream){
+    string tmp;
+    bool mrazqJivotaSi;
+    stream >> tmp >> m_walkDifficulty;
+    stream >> tmp >> m_img;
+    stream >> tmp >> mrazqJivotaSi;
+}
+
 void Tile::draw(SDL_Renderer* renderer)
 {
     m_presentRect.x = m_objectRect.x + m_cameraOffset->x;

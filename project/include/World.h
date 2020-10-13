@@ -22,6 +22,7 @@
 
 #include "Tile.h"
 #include "Squad.h"
+#include "Building.h"
 
 
 class World
@@ -64,6 +65,8 @@ class World
         GAME_STATE m_gameState;
         bool m_quitScene;
         OWNER m_playerTurn;
+        int m_hexagonWidth;
+        int m_hexagonHeight;
 
         SDL_Texture* m_backgroundMapTexture;
 
@@ -96,6 +99,9 @@ class World
         time_t m_startShake;
         bool m_shake;
 
+        color m_CP1;
+        color m_CP2;
+
         char field[26][16];
 
         // Those are the coordinates that we use for determining the neighbors of a tile
@@ -113,6 +119,8 @@ class World
 
         vector<SQUAD> m_available;
         vector<SQUAD> m_banned;
+
+        vector<Building*> m_buildings;
 
         bool canTravel(Squad* squad, coordinates desiredPosition);
         vector<Tile*> showAvailableWalkTiles(Squad* squad);

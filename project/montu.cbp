@@ -40,6 +40,7 @@
 		</Linker>
 		<Unit filename="include/Building.h" />
 		<Unit filename="include/ConfigManager.h" />
+		<Unit filename="include/EnemyAI.h" />
 		<Unit filename="include/Engine.h" />
 		<Unit filename="include/HealthManager.h" />
 		<Unit filename="include/PickAndBan.h" />
@@ -52,6 +53,7 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Building.cpp" />
 		<Unit filename="src/ConfigManager.cpp" />
+		<Unit filename="src/EnemyAI.cpp" />
 		<Unit filename="src/Engine.cpp" />
 		<Unit filename="src/HealthManager.cpp" />
 		<Unit filename="src/PickAndBan.cpp" />

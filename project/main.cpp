@@ -8,6 +8,11 @@ int main(int argc, char* argv[])
 {
     world.initSDL("world.txt");
 
+    world.m_playerStatsManager.readAllValues();
+    world.m_playerStatsManager.changeValues(MONEY, 1111);
+    world.m_playerStatsManager.writeAllValues();
+
+
     world.m_gameState = MENU;
 
     while(true)
@@ -35,14 +40,16 @@ int main(int argc, char* argv[])
             while(!world.m_quitScene)
             {
                 world.input();
-                world.m_pickAndBan.update();
-                world.m_pickAndBan.draw();
+                ///world.m_pickAndBan.update();
+                ///world.m_pickAndBan.draw();
             }
             world.m_quitScene = false;
         }
         if(world.m_gameState == GAME)
         {
             world.initGameSession();
+            world.m_enemyAI.takeBattlefield();
+            world.m_enemyAI.returnBattlefield();
             while(!world.m_quitScene)
             {
                 world.input();

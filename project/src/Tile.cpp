@@ -2,7 +2,7 @@
 
 Tile::Tile()
 {
-    m_owner = NONE;
+    m_owner = NOOWNER;
 }
 
 Tile::~Tile()

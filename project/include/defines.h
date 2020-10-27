@@ -9,7 +9,7 @@ using namespace std;
 
 enum OWNER
 {
-    NONE = 0,
+    NOOWNER = 0,
     PLAYER1 = 1,
     PLAYER2 = 2
 };
@@ -37,6 +37,13 @@ enum ICON_STATE
     AVAILABLE = 0,
     BANNED = 1,
     PICKED = 2
+};
+
+enum PLAYER_STAT
+{
+    NOSTAT = 0,
+    MONEY = 1,
+    FOOD = 2
 };
 
 struct icon

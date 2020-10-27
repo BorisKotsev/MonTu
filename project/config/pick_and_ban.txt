@@ -3,16 +3,16 @@ iconSize: 125 125
 background: pickAndBanBackground.bmp
 
 coordinates: 328 60
-img: 
+img: none.bmp
 
 coordinates: 518 60
-img: 
+img: none.bmp
 
 coordinates: 708 60
-img:
+img: none.bmp
 
 coordinates: 898 60
-img:
+img: none.bmp
 
 coordinates: 1088 60
 img:

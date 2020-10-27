@@ -79,14 +79,14 @@ void Squad::update()
     if (!(m_path.empty()) && m_framesPerStep >= m_maxFramesPerStep)
     {
         /// cout << "INFO: The size of the queue is " << m_path.size() << endl;
-        m_objectRect.x = m_path.top()->m_drawCoordinates.x;
-        m_objectRect.y = m_path.top()->m_drawCoordinates.y;
-
         m_tileTaken = m_path.top();
 
-        m_path.pop();
-
         m_mapCoor = m_tileTaken->m_mapCoordinates;
+
+        m_objectRect.x = m_tileTaken->m_drawCoordinates.x;
+        m_objectRect.y = m_tileTaken->m_drawCoordinates.y;
+
+        m_path.pop();
 
         m_framesPerStep = 0;
     }
@@ -136,4 +136,8 @@ void Squad::idleAnimation()
             }
         }
     }
+}
+
+void Squad::syncCoor()
+{
 }

@@ -45,7 +45,7 @@ void PickAndBan::init(string configFile, SDL_Renderer* renderer)
     m_Map4Button.y = 467;
     m_Map4Button.w = 361;
     m_Map4Button.h = 194;
-
+/*
     stream.open(configFile.c_str());
 
     // Reading the number of squads
@@ -77,10 +77,9 @@ void PickAndBan::init(string configFile, SDL_Renderer* renderer)
         //pushing back the model to the vector
         m_icons.push_back(model);
     }
-
     // Closing the input stream
     stream.close();
-
+*/
 }
 
 // Updates per frame

@@ -60,6 +60,7 @@ class Squad
         virtual void load(string configFile, SDL_Renderer* renderer, HealthManager* hm);
         virtual void update();
         virtual void draw();
+        void syncCoor();
         void idleAnimation();
 
     protected:

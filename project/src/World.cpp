@@ -30,6 +30,7 @@ void World::initSDL(string configFile)
     fstream stream;
 
     string tmp;
+
     string backgroundImg;
     string backgroundMap;
     string Map1Img;
@@ -99,6 +100,7 @@ void World::initSDL(string configFile)
     m_soundManager.init("SoundManager.txt");
     m_pickAndBan.init("pick_And_Ban.txt", m_main_renderer);
     m_popUpWriter.init("PopUpWriter.txt", m_main_renderer);
+    m_playerStatsManager.init("mainStats.txt");
 
     cursorImg = "img\\" + cursorImg;
     SDL_Surface* loadSurface = SDL_LoadBMP(cursorImg.c_str());
@@ -160,14 +162,15 @@ void World::initGameSession()
     coordinates buff;
     buff.x = 23;
     buff.y = 5;
-    initSquad(WARRIOR, buff, PLAYER1);
+    initSquad(WARRIOR, buff, PLAYER2);
     buff.x = 21;
     buff.y = 5;
-    initSquad(WARRIOR, buff, PLAYER2);
+    initSquad(WARRIOR, buff, PLAYER1);
 }
 
 void World::update()
 {
+
     cameraShake();
 
     selectTile();
@@ -179,109 +182,7 @@ void World::update()
 
     m_selectedTileUI.objRect = m_tiles[m_selected.y][m_selected.x]->m_objectRect;
 
-    if(m_mouseIsPressed)
-    {
-        if (m_selectedSquad != NULL)
-        {
-            bool seletedASquad = false;
-            Squad* oldSquad = m_selectedSquad;
-            for(int i = 0; i < m_squads.size(); i++)
-            {
-                if (m_squads[i]->m_mapCoor == m_selected)
-                {
-                    m_selectedSquad = m_squads[i];
-                    seletedASquad = true;
-                }
-            }
-            if(!seletedASquad)
-            {
-                m_showFillBtn = true;
-                if (m_selectedSquad->m_owner == m_playerTurn)
-                {
-                    if (m_selectedSquad->m_moved == false)
-                    {
-                        // Have we clicked on an empty tile or on a squad
-                        if (m_selectedSquad == oldSquad)
-                        {
-                            if (canTravel(m_selectedSquad, m_tiles[m_selected.y][m_selected.x]->m_mapCoordinates))
-                            {
-                                m_selectedSquad->m_tileTaken = m_tiles[m_selected.y][m_selected.x];
-                            }
-                            m_availableWalkTiles.clear();
-                            m_availableShootTiles.clear();
-                            m_selectedSquad = NULL;
-                        }
-                    }
-                    else if(m_selectedSquad->m_shooted == false)
-                    {
-                        m_availableShootTiles.clear();
-                        m_selectedSquad = NULL;
-                    }
-                }
-            }
-            else
-            {
-                if(oldSquad != m_selectedSquad && !(oldSquad->m_shooted) && canShoot(oldSquad, m_selectedSquad->m_mapCoor))
-                {
-                    takeDamage(oldSquad, m_selectedSquad);
-                    m_startShake = time(NULL);
-                    oldSquad->m_shooted = true;
-                    oldSquad->m_moved = true;
-                    m_availableShootTiles.clear();
-                    m_availableWalkTiles.clear();
-                    m_selectedSquad = NULL;
-                }
-            }
-        }
-        else
-        {
-            bool seletedASquad = false;
-            for(int i = 0; i < m_squads.size(); i++)
-            {
-                if (m_squads[i]->m_mapCoor == m_selected && m_squads[i]->m_owner == m_playerTurn)
-                {
-                    m_selectedSquad = m_squads[i];
-                    seletedASquad = true;
-                }
-            }
-            if(seletedASquad && m_selectedSquad->m_owner == m_playerTurn)
-            {
-                if(!(m_selectedSquad->m_moved))
-                {
-                    m_showFillBtn = false;
-                    m_showAttackTiles = false;
-                    m_availableWalkTiles = showAvailableWalkTiles(m_selectedSquad);
-                }
-                else if(!(m_selectedSquad->m_shooted))
-                {
-                    m_showFillBtn = false;
-                    m_showAttackTiles = true;
-                    m_availableShootTiles = showAvailableShootTiles(m_selectedSquad);
-                }
-            }
-            else if (!seletedASquad)
-            {
-                m_selectedSquad = NULL;
-            }
-        }
-    }
-
-    // Hide the skip_turn_btn if there is a squad behind it
-    for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
-    {
-        (*it) -> update();
-        if (checkForCollisionBetweenRects(m_skipTurnFillBtn.objRect, (*it)->m_objectRect))
-        {
-            m_showFillBtn = false;
-        }
-        if(m_selectedSquad != NULL)
-        {
-            if(canShoot(m_selectedSquad, (*it)->m_mapCoor) && m_selectedSquad != (*it) && m_availableWalkTiles.size() != 0)
-            {
-                m_availableShootTiles.push_back(m_tiles[(*it)->m_mapCoor.y][(*it)->m_mapCoor.x]);
-            }
-        }
-    }
+    squadActionsCheck();
 
     if(m_mouseIsPressed)
     {
@@ -654,7 +555,7 @@ bool World::canTravel(Squad* squad, coordinates desiredPosition)
 {
     int movementMap[m_rows][m_colls];
     // Takes the position and speed of the Squad
-    coordinates position = squad->m_mapCoor;
+    coordinates position = squad->m_tileTaken->m_mapCoordinates;
     int movement = squad->m_speed;
     // Makes all tiles uncrossable (giving impossible values)
     for (short int r = 0; r < m_rows; r ++)
@@ -857,14 +758,16 @@ vector<Tile*> World::showAvailableWalkTiles(Squad* squad)
     {
         for (short int c = 0; c < m_colls; c ++)
         {
-            if(movementMap[r][c] <= movement && !(r == position.y && c == position.x))
+            coordinates buff;
+            buff.y = r;
+            buff.x = c;
+            if(movementMap[r][c] <= movement && !(r == position.y && c == position.x) && findSquadByCoor(buff) == NULL)
             {
                 returnVector.push_back(m_tiles[r][c]);
             }
         }
     }
     return returnVector;
-    cout << "INFO: THE VALUES OF m_availableTiles have been set \n";
 }
 
 void World::initMap(string configFile)
@@ -1124,6 +1027,17 @@ void World::switchTurn()
     if (m_playerTurn == PLAYER1)
     {
         m_playerTurn = PLAYER2;
+        m_enemyAI.takeBattlefield();
+        cout << "1 \n";
+        m_enemyAI.makeTurn();
+        cout << "2 \n";
+        m_enemyAI.returnBattlefield();
+        cout << "3 \n";
+        for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
+        {
+            cout << "!" << (*it)->m_tileTaken->m_mapCoordinates.x << " " << (*it)->m_tileTaken->m_mapCoordinates.y << endl;
+        }
+        switchTurn();
     }
     else if(m_playerTurn == PLAYER2)
     {
@@ -1165,4 +1079,111 @@ Squad* World::findSquadByCoor(coordinates coor)
 void World::takeDamage(Squad* attacker, Squad* defender)
 {
     defender->m_health -= attacker->m_attackDamage;
+}
+
+void World::squadActionsCheck()
+{
+    if(m_mouseIsPressed)
+    {
+        if (m_selectedSquad != NULL)
+        {
+            bool seletedASquad = false;
+            Squad* oldSquad = m_selectedSquad;
+            for(int i = 0; i < m_squads.size(); i++)
+            {
+                if (m_squads[i]->m_mapCoor == m_selected)
+                {
+                    m_selectedSquad = m_squads[i];
+                    seletedASquad = true;
+                }
+            }
+            if(!seletedASquad)
+            {
+                m_showFillBtn = true;
+                if (m_selectedSquad->m_owner == m_playerTurn)
+                {
+                    if (m_selectedSquad->m_moved == false)
+                    {
+                        // Have we clicked on an empty tile or on a squad
+                        if (m_selectedSquad == oldSquad)
+                        {
+                            if (canTravel(m_selectedSquad, m_tiles[m_selected.y][m_selected.x]->m_mapCoordinates))
+                            {
+                                m_selectedSquad->m_tileTaken = m_tiles[m_selected.y][m_selected.x];
+                            }
+                            m_availableWalkTiles.clear();
+                            m_availableShootTiles.clear();
+                            m_selectedSquad = NULL;
+                        }
+                    }
+                    else if(m_selectedSquad->m_shooted == false)
+                    {
+                        m_availableShootTiles.clear();
+                        m_selectedSquad = NULL;
+                    }
+                }
+            }
+            else
+            {
+                if(oldSquad != m_selectedSquad && !(oldSquad->m_shooted) && canShoot(oldSquad, m_selectedSquad->m_mapCoor))
+                {
+                    takeDamage(oldSquad, m_selectedSquad);
+                    m_startShake = time(NULL);
+                    oldSquad->m_shooted = true;
+                    oldSquad->m_moved = true;
+                    m_availableShootTiles.clear();
+                    m_availableWalkTiles.clear();
+                    m_selectedSquad = NULL;
+                }
+            }
+        }
+        else
+        {
+            bool seletedASquad = false;
+            for(int i = 0; i < m_squads.size(); i++)
+            {
+                if (m_squads[i]->m_mapCoor == m_selected && m_squads[i]->m_owner == m_playerTurn)
+                {
+                    m_selectedSquad = m_squads[i];
+                    seletedASquad = true;
+                }
+            }
+            if(seletedASquad && m_selectedSquad->m_owner == m_playerTurn)
+            {
+                if(!(m_selectedSquad->m_moved))
+                {
+                    m_showFillBtn = false;
+                    m_showAttackTiles = false;
+                    m_availableWalkTiles = showAvailableWalkTiles(m_selectedSquad);
+                }
+                else if(!(m_selectedSquad->m_shooted))
+                {
+                    m_showFillBtn = false;
+                    m_showAttackTiles = true;
+                    m_availableShootTiles = showAvailableShootTiles(m_selectedSquad);
+                }
+            }
+            else if (!seletedASquad)
+            {
+                m_selectedSquad = NULL;
+            }
+        }
+    }
+
+    // Hide the skip_turn_btn if there is a squad behind it
+    for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
+    {
+        (*it) -> update();
+        if (checkForCollisionBetweenRects(m_skipTurnFillBtn.objRect, (*it)->m_objectRect))
+        {
+            m_showFillBtn = false;
+        }
+        if(m_selectedSquad != NULL)
+        {
+            if(canShoot(m_selectedSquad, (*it)->m_mapCoor) && m_selectedSquad != (*it) && m_availableWalkTiles.size() != 0)
+            {
+                m_availableShootTiles.push_back(m_tiles[(*it)->m_mapCoor.y][(*it)->m_mapCoor.x]);
+            }
+        }
+    }
 }

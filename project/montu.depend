@@ -847,11 +847,11 @@
 1589818183 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\src\engine.cpp
 	"Engine.h"
 
-1602618991 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\configmanager.cpp
+1602615391 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\configmanager.cpp
 	"ConfigManager.h"
 	<fstream>
 
-1602618496 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\configmanager.h
+1602614896 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\configmanager.h
 	<SDL2/SDL.h>
 	<string>
 	"Tile.h"
@@ -859,7 +859,7 @@
 	"Squad.h"
 	"HealthManager.h"
 
-1595626574 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl.h
+1595622974 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl.h
 	"SDL_main.h"
 	"SDL_stdinc.h"
 	"SDL_assert.h"
@@ -892,12 +892,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595626577 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_main.h
+1595622977 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_main.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595626579 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_stdinc.h
+1595622979 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_stdinc.h
 	"SDL_config.h"
 	<sys/types.h>
 	<stdio.h>
@@ -926,27 +926,27 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595626575 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_config.h
+1595622975 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_config.h
 	"SDL_platform.h"
 
-1595626579 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_platform.h
+1595622979 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_platform.h
 	"AvailabilityMacros.h"
 	"TargetConditionals.h"
 	<winapifamily.h>
 	"begin_code.h"
 	"close_code.h"
 
-1595626582 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\begin_code.h
+1595622982 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\begin_code.h
 
-1595626582 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\close_code.h
+1595622982 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\close_code.h
 
-1595626574 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_assert.h
+1595622974 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_assert.h
 	"SDL_config.h"
 	"begin_code.h"
 	<signal.h>
 	"close_code.h"
 
-1595626574 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_atomic.h
+1595622974 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_atomic.h
 	"SDL_stdinc.h"
 	"SDL_platform.h"
 	"begin_code.h"
@@ -954,7 +954,7 @@
 	<mbarrier.h>
 	"close_code.h"
 
-1595626574 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_audio.h
+1595622974 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_audio.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_endian.h"
@@ -964,24 +964,24 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595626575 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_error.h
+1595622975 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_error.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595626575 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_endian.h
+1595622975 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_endian.h
 	"SDL_stdinc.h"
 	<endian.h>
 	"begin_code.h"
 	"close_code.h"
 
-1595626577 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_mutex.h
+1595622977 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_mutex.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595626581 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_thread.h
+1595622981 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_thread.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_atomic.h"
@@ -992,18 +992,18 @@
 	<stdlib.h>
 	"close_code.h"
 
-1595626579 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_rwops.h
+1595622979 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_rwops.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595626574 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_clipboard.h
+1595622974 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_clipboard.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595626575 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_cpuinfo.h
+1595622975 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_cpuinfo.h
 	"SDL_stdinc.h"
 	<intrin.h>
 	<intrin.h>
@@ -1022,7 +1022,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595626576 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_events.h
+1595622976 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_events.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -1036,7 +1036,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595626581 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_video.h
+1595622981 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_video.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -1044,13 +1044,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595626579 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_pixels.h
+1595622979 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_pixels.h
 	"SDL_stdinc.h"
 	"SDL_endian.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595626579 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_rect.h
+1595622979 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_rect.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_pixels.h"
@@ -1058,7 +1058,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595626580 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_surface.h
+1595622980 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_surface.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -1067,11 +1067,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595626574 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_blendmode.h
+1595622974 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_blendmode.h
 	"begin_code.h"
 	"close_code.h"
 
-1595626577 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_keyboard.h
+1595622977 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_keyboard.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_keycode.h"
@@ -1079,27 +1079,27 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595626577 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_keycode.h
+1595622977 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_keycode.h
 	"SDL_stdinc.h"
 	"SDL_scancode.h"
 
-1595626579 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_scancode.h
+1595622979 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_scancode.h
 	"SDL_stdinc.h"
 
-1595626577 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_mouse.h
+1595622977 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_mouse.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595626577 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_joystick.h
+1595622977 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_joystick.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595626576 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_gamecontroller.h
+1595622976 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_gamecontroller.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_rwops.h"
@@ -1107,11 +1107,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595626579 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_quit.h
+1595622979 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_quit.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 
-1595626576 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_gesture.h
+1595622976 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_gesture.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -1119,66 +1119,66 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595626581 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_touch.h
+1595622981 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_touch.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595626576 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_filesystem.h
+1595622976 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_filesystem.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595626576 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_haptic.h
+1595622976 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_haptic.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_joystick.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595626576 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_hints.h
+1595622976 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_hints.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595626577 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_loadso.h
+1595622977 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_loadso.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595626577 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_log.h
+1595622977 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_log.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595626577 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_messagebox.h
+1595622977 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_messagebox.h
 	"SDL_stdinc.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595626579 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_power.h
+1595622979 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_power.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595626579 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_render.h
+1595622979 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_render.h
 	"SDL_stdinc.h"
 	"SDL_rect.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595626579 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_sensor.h
+1595622979 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_sensor.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595626579 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_shape.h
+1595622979 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_shape.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -1187,7 +1187,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595626580 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_system.h
+1595622980 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_system.h
 	"SDL_stdinc.h"
 	"SDL_keyboard.h"
 	"SDL_render.h"
@@ -1195,30 +1195,30 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595626581 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_timer.h
+1595622981 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_timer.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595626581 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_version.h
+1595622981 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_version.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1602618953 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\tile.h
+1602615353 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\tile.h
 	<string>
 	<fstream>
 	<iostream>
 	"defines.h"
 	"Engine.h"
 
-1602618589 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\defines.h
+1603745087 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\defines.h
 	<cmath>
 	<vector>
 	<SDL2/SDL.h>
 
-1601626114 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\engine.h
+1601622514 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\engine.h
 	<cmath>
 	<vector>
 	<string>
@@ -1227,20 +1227,20 @@
 	"SDL2/SDL_TTF.h"
 	"defines.h"
 
-1601626453 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\engine.cpp
+1603744236 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\engine.cpp
 	"Engine.h"
 
-1597795087 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\soundmanager.cpp
+1597791487 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\soundmanager.cpp
 	"SoundManager.h"
 
-1595626585 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\soundmanager.h
+1595622985 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\soundmanager.h
 	<SDL2/SDL_mixer.h>
 	<SDL2/SDL.h>
 	<fstream>
 	<string>
 	<iostream>
 
-1595626577 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_mixer.h
+1595622977 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_mixer.h
 	"SDL_stdinc.h"
 	"SDL_rwops.h"
 	"SDL_audio.h"
@@ -1249,10 +1249,10 @@
 	"begin_code.h"
 	"close_code.h"
 
-1602353543 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\squad.cpp
+1603638055 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\squad.cpp
 	"Squad.h"
 
-1602234253 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\squad.h
+1603636942 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\squad.h
 	<string>
 	<fstream>
 	<iostream>
@@ -1262,14 +1262,14 @@
 	"Tile.h"
 	"HealthManager.h"
 
-1602620470 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\tile.cpp
+1603745106 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\tile.cpp
 	"Tile.h"
 
-1602620981 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\main.cpp
+1603746529 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\main.cpp
 	<SDL2/SDL.h>
 	"World.h"
 
-1602619387 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
+1603746335 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -1284,23 +1284,25 @@
 	"SoundManager.h"
 	"PopUpWriter.h"
 	"PickAndBan.h"
+	"EnemyAI.h"
+	"PlayerStatsManager.h"
 	"Engine.h"
 	"Tile.h"
 	"Squad.h"
 	"Building.h"
 
-1602621508 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
+1603746379 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
 	"World.h"
 
-1595626581 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_ttf.h
+1595622981 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_ttf.h
 	"SDL.h"
 	"begin_code.h"
 	"close_code.h"
 
-1597793433 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\pickandban.cpp
+1603395369 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\pickandban.cpp
 	"PickAndBan.h"
 
-1597793459 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\pickandban.h
+1597789859 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\pickandban.h
 	<vector>
 	<fstream>
 	<iostream>
@@ -2191,10 +2193,10 @@
 1595626588 source:c:\users\konstantin\downloads\montu-master (1)\montu-master\project\src\tile.cpp
 	"Tile.h"
 
-1597704320 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\popupwriter.cpp
+1597700720 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\popupwriter.cpp
 	"PopUpWriter.h"
 
-1597793617 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\popupwriter.h
+1597790017 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\popupwriter.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -2206,10 +2208,10 @@
 	"defines.h"
 	"Engine.h"
 
-1601816340 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\healthmanager.cpp
+1601812740 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\healthmanager.cpp
 	"HealthManager.h"
 
-1601816174 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\healthmanager.h
+1601812574 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\healthmanager.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -2222,11 +2224,29 @@
 	"Engine.h"
 	"defines.h"
 
-1602617696 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\building.h
+1602614096 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\building.h
 	<chrono>
 	<Tile.h>
 
-1602620575 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\building.cpp
+1602616975 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\building.cpp
 	"Building.h"
 	"World.h"
+
+1603741501 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\enemyai.h
+	<vector>
+	<Tile.h>
+	<Squad.h>
+
+1603638493 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\enemyai.cpp
+	"EnemyAI.h"
+	"World.h"
+
+1603746285 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\playerstatsmanager.cpp
+	"PlayerStatsManager.h"
+
+1603746222 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\playerstatsmanager.h
+	<iostream>
+	<fstream>
+	<queue>
+	"defines.h"
 

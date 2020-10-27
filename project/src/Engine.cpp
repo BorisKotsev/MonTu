@@ -3,12 +3,22 @@
 SDL_Texture* LoadTexture(string file, SDL_Renderer* renderer)
 {
     SDL_Texture* objectTexture;
-    file = "img\\" + file;
+    try
+    {
+        file = "img\\" + file;
 
-    SDL_Surface* loadingSurface = SDL_LoadBMP(file.c_str());
-    objectTexture = SDL_CreateTextureFromSurface(renderer, loadingSurface);
-    SDL_FreeSurface(loadingSurface);
+        SDL_Surface* loadingSurface = SDL_LoadBMP(file.c_str());
+        objectTexture = SDL_CreateTextureFromSurface(renderer, loadingSurface);
+        SDL_FreeSurface(loadingSurface);
 
+        if (objectTexture == NULL)
+        {
+            throw(1001);
+        }
+    }catch (int i)
+    {
+        cout << "NO TEXTURE LOADED " << file << "\n";
+    }
     return objectTexture;
 }
 
@@ -39,7 +49,6 @@ float triangleArea(SDL_Point* point1, SDL_Point* point2, SDL_Point* point3)
 
 float returnAngleByCoordinates(coordinates direction)
 {
-
     return atan2(direction.x, -1*direction.y) * 180 / PI;
 }
 

@@ -18,6 +18,8 @@
 #include "SoundManager.h"
 #include "PopUpWriter.h"
 #include "PickAndBan.h"
+#include "EnemyAI.h"
+#include "PlayerStatsManager.h"
 #include "Engine.h"
 
 #include "Tile.h"
@@ -54,6 +56,8 @@ class World
         SoundManager m_soundManager;
         PickAndBan m_pickAndBan;
         PopUpWriter m_popUpWriter;
+        PlayerStatsManager m_playerStatsManager;
+        EnemyAI m_enemyAI;
 
         int m_SCREEN_WIDTH;
         int m_SCREEN_HEIGHT;
@@ -138,6 +142,7 @@ class World
         void cleaner();
         void destroySDL();
         void input();
+        void squadActionsCheck();
 
         void initSession(GAME_STATE state);
 

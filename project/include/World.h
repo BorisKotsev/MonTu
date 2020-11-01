@@ -20,6 +20,7 @@
 #include "PickAndBan.h"
 #include "EnemyAI.h"
 #include "PlayerStatsManager.h"
+#include "ArmyManager.h"
 #include "Engine.h"
 
 #include "Tile.h"
@@ -57,6 +58,7 @@ class World
         PickAndBan m_pickAndBan;
         PopUpWriter m_popUpWriter;
         PlayerStatsManager m_playerStatsManager;
+        ArmyManager m_armyManager;
         EnemyAI m_enemyAI;
 
         int m_SCREEN_WIDTH;

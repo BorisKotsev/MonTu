@@ -1213,7 +1213,7 @@
 	"defines.h"
 	"Engine.h"
 
-1603745087 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\defines.h
+1603922307 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\defines.h
 	<cmath>
 	<vector>
 	<SDL2/SDL.h>
@@ -1269,7 +1269,7 @@
 	<SDL2/SDL.h>
 	"World.h"
 
-1603746335 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
+1604072234 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -1286,12 +1286,13 @@
 	"PickAndBan.h"
 	"EnemyAI.h"
 	"PlayerStatsManager.h"
+	"ArmyManager.h"
 	"Engine.h"
 	"Tile.h"
 	"Squad.h"
 	"Building.h"
 
-1603746379 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
+1604074059 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
 	"World.h"
 
 1595622981 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_ttf.h
@@ -2241,7 +2242,7 @@
 	"EnemyAI.h"
 	"World.h"
 
-1603746285 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\playerstatsmanager.cpp
+1603746561 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\playerstatsmanager.cpp
 	"PlayerStatsManager.h"
 
 1603746222 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\playerstatsmanager.h
@@ -2249,4 +2250,13 @@
 	<fstream>
 	<queue>
 	"defines.h"
+
+1604073821 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\armymanager.h
+	<iostream>
+	<fstream>
+	"defines.h"
+
+1604073799 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\armymanager.cpp
+	"ArmyManager.h"
+	"World.h"
 

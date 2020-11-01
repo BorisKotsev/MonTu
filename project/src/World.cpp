@@ -100,6 +100,7 @@ void World::initSDL(string configFile)
     m_soundManager.init("SoundManager.txt");
     m_pickAndBan.init("pick_And_Ban.txt", m_main_renderer);
     m_popUpWriter.init("PopUpWriter.txt", m_main_renderer);
+    m_armyManager.init("armyManager.txt");
     m_playerStatsManager.init("mainStats.txt");
 
     cursorImg = "img\\" + cursorImg;
@@ -136,6 +137,8 @@ void World::initSDL(string configFile)
 
     /// ShowWindow(GetConsoleWindow(), SW_HIDE);
 
+
+
 }
 
 void World::initDirection(string configFile)
@@ -162,10 +165,8 @@ void World::initGameSession()
     coordinates buff;
     buff.x = 23;
     buff.y = 5;
-    initSquad(WARRIOR, buff, PLAYER2);
-    buff.x = 21;
-    buff.y = 5;
     initSquad(WARRIOR, buff, PLAYER1);
+    m_armyManager.deployArmy(PLAYER1);
 }
 
 void World::update()
@@ -904,7 +905,7 @@ bool World::canShoot(Squad* squad, coordinates targetPosition)
         // If we are out of range or if there isn't a squad on this coor than we stop the function
         return false;
     }
-    if(findSquadByCoor(logicalPosition) == NULL)
+    if(findSquadByCoor(logicalPosition) == NULL || findSquadByCoor(logicalPosition)->m_owner == squad->m_owner)
     {
         return false;
     }
@@ -1028,15 +1029,8 @@ void World::switchTurn()
     {
         m_playerTurn = PLAYER2;
         m_enemyAI.takeBattlefield();
-        cout << "1 \n";
         m_enemyAI.makeTurn();
-        cout << "2 \n";
         m_enemyAI.returnBattlefield();
-        cout << "3 \n";
-        for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
-        {
-            cout << "!" << (*it)->m_tileTaken->m_mapCoordinates.x << " " << (*it)->m_tileTaken->m_mapCoordinates.y << endl;
-        }
         switchTurn();
     }
     else if(m_playerTurn == PLAYER2)

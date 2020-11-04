@@ -18,4 +18,10 @@ Squad_Warrior: Squads\\warrior.txt
 
 Squad_Archer: Squads\\archer.txt
 
+Squad_Spearmen: Squads\\spearmen.txt
+
+Squad_Crossbow: Squads\\crossbow.txt
+
+Squad_Knights: Squads\\knights.txt
+
 CastleModel: castle.txt

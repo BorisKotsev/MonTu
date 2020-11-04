@@ -60,6 +60,18 @@ void ConfigManager::init(string configFile, SDL_Renderer* renderer, HealthManage
     modelSquadArcher->load(buff, renderer, hm);
 
     stream >> tmp >> buff;
+    modelSquadSpearmen = new Squad;
+    modelSquadSpearmen->load(buff, renderer, hm);
+
+    stream >> tmp >> buff;
+    modelSquadCrossbowmen = new Squad;
+    modelSquadCrossbowmen->load(buff, renderer, hm);
+
+    stream >> tmp >> buff;
+    modelSquadKnights = new Squad;
+    modelSquadKnights->load(buff, renderer, hm);
+
+    stream >> tmp >> buff;
     modelCastle = new Building;
     modelCastle->load(buff, renderer);
 

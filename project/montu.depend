@@ -847,11 +847,11 @@
 1589818183 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\src\engine.cpp
 	"Engine.h"
 
-1602615391 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\configmanager.cpp
+1604518392 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\configmanager.cpp
 	"ConfigManager.h"
 	<fstream>
 
-1602614896 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\configmanager.h
+1604518197 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\configmanager.h
 	<SDL2/SDL.h>
 	<string>
 	"Tile.h"
@@ -1213,7 +1213,7 @@
 	"defines.h"
 	"Engine.h"
 
-1603922307 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\defines.h
+1604519068 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\defines.h
 	<cmath>
 	<vector>
 	<SDL2/SDL.h>
@@ -1292,7 +1292,7 @@
 	"Squad.h"
 	"Building.h"
 
-1604074059 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
+1604519239 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
 	"World.h"
 
 1595622981 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_ttf.h

@@ -29,6 +29,9 @@ public:
 
     Squad* modelSquadWarrior = NULL;
     Squad* modelSquadArcher = NULL;
+    Squad* modelSquadSpearmen = NULL;
+    Squad* modelSquadCrossbowmen = NULL;
+    Squad* modelSquadKnights = NULL;
 
     Building* modelCastle = NULL;
 

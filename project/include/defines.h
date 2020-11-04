@@ -30,9 +30,9 @@ enum SQUAD
     NOSQUAD = 0,
     ARCHER = 1,
     WARRIOR = 2,
-    KNIGHT = 3,
-    MAGE = 4,
-    CROSSBOWMAN = 5
+    SPEARMEN = 3,
+    CROSSBOWMEN = 4,
+    KNIGHTS = 5
 };
 
 enum ICON_STATE

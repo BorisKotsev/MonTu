@@ -508,12 +508,11 @@ void World::initTiles(string configFile)
 
 void World::selectTile()
 {
-    for(short int r = 0; r < m_tiles.size(); r++)
+    if(m_mouseIsPressed)
     {
-        for(short int c = 0; c < m_tiles[r].size(); c++)
+        for(short int r = 0; r < m_tiles.size(); r++)
         {
-            // TODO optimize mouse checking
-            if(m_mouseIsPressed)
+            for(short int c = 0; c < m_tiles[r].size(); c++)
             {
                 if(isInsideAHexagon(m_tiles[r][c]->m_collisionPoints, LoadPoint(m_mouse)))
                 {
@@ -996,6 +995,15 @@ void World::initSquad(SQUAD type, coordinates mapCoor, OWNER owner)
             break;
         case ARCHER:
             squad = new Squad(*(m_configManager.modelSquadArcher), &m_cameraOffset, tile, owner);
+            break;
+        case SPEARMEN:
+            squad = new Squad(*(m_configManager.modelSquadSpearmen), &m_cameraOffset, tile, owner);
+            break;
+        case CROSSBOWMEN:
+            squad = new Squad(*(m_configManager.modelSquadCrossbowmen), &m_cameraOffset, tile, owner);
+            break;
+        case KNIGHTS:
+            squad = new Squad(*(m_configManager.modelSquadKnights), &m_cameraOffset, tile, owner);
             break;
         default:
             squad = NULL;

@@ -52,7 +52,7 @@ void ConfigManager::init(string configFile, SDL_Renderer* renderer, HealthManage
     modelTileLava->load(buff, renderer);
 
     stream >> tmp >> buff;
-    modelSquadWarrior = new Squad;
+    modelSquadWarrior = new SpearSquad;
     modelSquadWarrior->load(buff, renderer, hm);
 
     stream >> tmp >> buff;

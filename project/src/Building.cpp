@@ -1,4 +1,5 @@
 #include "Building.h"
+#include "Battle.h"
 #include "World.h"
 
 extern World world;
@@ -194,11 +195,11 @@ void Building::getStateRegular()
     {
         m_currState = m_health / m_healthPerState;
         m_drawState.y = (m_maxState - m_currState) * (m_height / (m_maxState + 1));
-        m_objectRect.h = (world.m_hexagonHeight / (m_maxState + 1)) * (m_currState + 1);
+        m_objectRect.h = (world.m_battle.m_hexagonHeight / (m_maxState + 1)) * (m_currState + 1);
         m_objectRect.y -= m_adjustment;
         if (m_rotationAngle == 0 || m_rotationAngle == 360)
         {
-            m_adjustment = world.m_hexagonHeight - (world.m_hexagonHeight / (m_maxState + 1)) * (m_currState + 1);
+            m_adjustment = world.m_battle.m_hexagonHeight - (world.m_battle.m_hexagonHeight / (m_maxState + 1)) * (m_currState + 1);
         }
         m_objectRect.y += m_adjustment;
     }
@@ -206,11 +207,11 @@ void Building::getStateRegular()
     {
         m_currState = (m_maxHealth - m_health) / m_healthPerState + m_maxState;
         m_drawState.y = (m_currState - m_maxState) * (m_height / (m_states - m_maxState + 1));
-        m_objectRect.h = (world.m_hexagonHeight / (m_states - m_maxState)) * (m_states - m_currState);
+        m_objectRect.h = (world.m_battle.m_hexagonHeight / (m_states - m_maxState)) * (m_states - m_currState);
         m_objectRect.y -= m_adjustment;
         if (m_rotationAngle == 0 || m_rotationAngle == 360)
         {
-            m_adjustment = - world.m_hexagonHeight + (world.m_hexagonHeight / (m_maxState + 1)) * (m_currState + 1);
+            m_adjustment = - world.m_battle.m_hexagonHeight + (world.m_battle.m_hexagonHeight / (m_maxState + 1)) * (m_currState + 1);
         }
         m_objectRect.y += m_adjustment;
     }
@@ -238,7 +239,7 @@ void Building::getState()
 
 void Building::impactEntities()
 {
-    for (vector<Squad*>::iterator it = world.m_squads.begin(); it != world.m_squads.end(); it++)
+    for (vector<Squad*>::iterator it = world.m_battle.m_squads.begin(); it != world.m_battle.m_squads.end(); it++)
     {
         /*
         (*it)->

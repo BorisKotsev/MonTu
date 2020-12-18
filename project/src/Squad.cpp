@@ -138,6 +138,14 @@ void Squad::idleAnimation()
     }
 }
 
+void Squad::attack(Squad* defender)
+{
+    defender->m_health -= m_attackDamage;
+    m_shooted = true;
+    m_moved = true;
+}
+
+
 void Squad::syncCoor()
 {
 }

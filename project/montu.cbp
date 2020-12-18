@@ -39,6 +39,7 @@
 			<Add directory="dep_sdl/lib" />
 		</Linker>
 		<Unit filename="include/ArmyManager.h" />
+		<Unit filename="include/Battle.h" />
 		<Unit filename="include/Building.h" />
 		<Unit filename="include/ConfigManager.h" />
 		<Unit filename="include/EnemyAI.h" />
@@ -48,12 +49,14 @@
 		<Unit filename="include/PlayerStatsManager.h" />
 		<Unit filename="include/PopUpWriter.h" />
 		<Unit filename="include/SoundManager.h" />
+		<Unit filename="include/SpearSquad.h" />
 		<Unit filename="include/Squad.h" />
 		<Unit filename="include/Tile.h" />
 		<Unit filename="include/World.h" />
 		<Unit filename="include/defines.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/ArmyManager.cpp" />
+		<Unit filename="src/Battle.cpp" />
 		<Unit filename="src/Building.cpp" />
 		<Unit filename="src/ConfigManager.cpp" />
 		<Unit filename="src/EnemyAI.cpp" />
@@ -63,6 +66,7 @@
 		<Unit filename="src/PlayerStatsManager.cpp" />
 		<Unit filename="src/PopUpWriter.cpp" />
 		<Unit filename="src/SoundManager.cpp" />
+		<Unit filename="src/SpearSquad.cpp" />
 		<Unit filename="src/Squad.cpp" />
 		<Unit filename="src/Tile.cpp" />
 		<Unit filename="src/World.cpp" />

@@ -23,8 +23,8 @@ void EnemyAI::clearAI()
 void EnemyAI::takeBattlefield()
 {
     clearAI();
-    m_battlefield = world.m_tiles;
-    for (vector<Squad*> :: iterator it = world.m_squads.begin(); it != world.m_squads.end(); it++)
+    m_battlefield = world.m_battle.m_tiles;
+    for (vector<Squad*> :: iterator it = world.m_battle.m_squads.begin(); it != world.m_battle.m_squads.end(); it++)
     {
         if ((*it)->m_owner == PLAYER1)
         {
@@ -40,22 +40,25 @@ void EnemyAI::takeBattlefield()
 void EnemyAI::chooseBestActionForUnit(Squad* squad)
 {
     Tile* startPosition = squad->m_tileTaken;
-    vector<Tile*> availableToWalkTiles = world.showAvailableWalkTiles(squad);
+    vector<Tile*> availableToWalkTiles = world.m_battle.showAvailableWalkTiles(squad);
     int bestScore = 0;
     Tile* bestPosition;
     Squad* bestVictim;
     int score;
+    /// Go trough all available to walk tiles and choose the best move
     for (vector <Tile*> :: iterator it = availableToWalkTiles.begin(); it != availableToWalkTiles.end(); it ++)
     {
+        /// Move the squad
         squad->m_mapCoor = (*it)->m_mapCoordinates;
         squad->m_tileTaken = (*it);
         for(vector <Squad*> :: iterator squadIt = m_playerSquads.begin(); squadIt != m_playerSquads.end(); squadIt ++ )
         {
+            /// calculate the score for this move
             score = 0;
-            if (world.canShoot(squad, (*squadIt)->m_mapCoor))
+            if (world.m_battle.canShoot(squad, (*squadIt)->m_mapCoor))
             {
                 score = squad->m_attackDamage;
-                if (world.canShoot((*squadIt), squad->m_mapCoor))
+                if (world.m_battle.canShoot((*squadIt), squad->m_mapCoor))
                 {
                     score -= (*squadIt)->m_attackDamage / 2;
                 }
@@ -69,10 +72,14 @@ void EnemyAI::chooseBestActionForUnit(Squad* squad)
         }
     }
     squad->m_tileTaken = startPosition;
-    world.canTravel(squad, bestPosition->m_mapCoordinates);
-    if (bestVictim != NULL)
+    squad->m_mapCoor = squad->m_tileTaken->m_mapCoordinates;
+    if(bestScore > 0)
     {
-        world.takeDamage(squad, bestVictim);
+        world.m_battle.canTravel(squad, bestPosition->m_mapCoordinates);
+        if (bestVictim != NULL)
+        {
+            squad->attack(bestVictim);
+        }
     }
 }
 
@@ -86,13 +93,13 @@ void EnemyAI::makeTurn()
 
 void EnemyAI::returnBattlefield()
 {
-    world.m_squads.clear();
+    world.m_battle.m_squads.clear();
     for (vector<Squad*> :: iterator it = m_aiSquads.begin(); it != m_aiSquads.end(); it ++)
     {
-        world.m_squads.push_back((*it));
+        world.m_battle.m_squads.push_back((*it));
     }
     for (vector<Squad*> :: iterator it = m_playerSquads.begin(); it != m_playerSquads.end(); it ++)
     {
-        world.m_squads.push_back((*it));
+        world.m_battle.m_squads.push_back((*it));
     }
 }

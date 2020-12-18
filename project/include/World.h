@@ -13,19 +13,16 @@
 #include <windows.h>
 #include <SDL2/SDL.h>
 
-#include "HealthManager.h"
 #include "ConfigManager.h"
 #include "SoundManager.h"
+#include "HealthManager.h"
 #include "PopUpWriter.h"
 #include "PickAndBan.h"
-#include "EnemyAI.h"
 #include "PlayerStatsManager.h"
-#include "ArmyManager.h"
+#include "Battle.h"
+#include "Menu.h"
 #include "Engine.h"
 
-#include "Tile.h"
-#include "Squad.h"
-#include "Building.h"
 
 
 class World
@@ -52,27 +49,21 @@ class World
 
         TTF_Font* m_font;
 
-        HealthManager m_healthManager;
         ConfigManager m_configManager;
         SoundManager m_soundManager;
         PickAndBan m_pickAndBan;
-        PopUpWriter m_popUpWriter;
+        HealthManager m_healthManager;
         PlayerStatsManager m_playerStatsManager;
-        ArmyManager m_armyManager;
-        EnemyAI m_enemyAI;
+        Battle m_battle;
+        Menu m_menu;
 
         int m_SCREEN_WIDTH;
         int m_SCREEN_HEIGHT;
-        short int m_colls;
-        short int m_rows;
         coordinates m_mouse;
         bool m_mouseIsPressed;
         SDL_Event m_event;
         GAME_STATE m_gameState;
         bool m_quitScene;
-        OWNER m_playerTurn;
-        int m_hexagonWidth;
-        int m_hexagonHeight;
 
         SDL_Texture* m_backgroundMapTexture;
 
@@ -91,14 +82,6 @@ class World
         SDL_Texture* m_ExitButtonTexture;
         SDL_Texture* m_BackButtonTexture;
 
-        UI_object m_selectedTileUI;
-        UI_object m_attackTileUI;
-        UI_object m_skipTurnFillBtn;
-        UI_object m_skipTurnTransBtn;
-
-        bool m_showFillBtn;
-        bool m_showAttackTiles;
-
         coordinates m_cameraOffset;
         short int m_cameraShakeDuration = 1;
         short int m_cameraShakeMagnitude = 2;
@@ -110,63 +93,27 @@ class World
 
         char field[26][16];
 
-        // Those are the coordinates that we use for determining the neighbors of a tile
-        coordinates directions[2][6];
-
-        coordinates m_selected;
-        Squad* m_selectedSquad;
-        Tile* m_selectedTile;
-
-        vector<vector<Tile*> > m_tiles;
-        vector<Squad*> m_squads;
-
-        vector<Tile*> m_availableWalkTiles;
-        vector<Tile*> m_availableShootTiles;
-
         vector<SQUAD> m_available;
         vector<SQUAD> m_banned;
 
         vector<Building*> m_buildings;
 
-        bool canTravel(Squad* squad, coordinates desiredPosition);
-        vector<Tile*> showAvailableWalkTiles(Squad* squad);
-        vector<Tile*> showAvailableShootTiles(Squad* squad);
-        bool canShoot(Squad* squad, coordinates targetPosition);
-        Tile* giveNeighbor(coordinates coor, int direction);
-        Squad* findSquadByCoor (coordinates coor);
-
-
         void initSDL(string configFile);
-        void initDirection(string configFile);
-        void initGameSession();
         void draw();
         void update();
         void cleaner();
         void destroySDL();
         void input();
-        void squadActionsCheck();
 
         void initSession(GAME_STATE state);
 
         void cameraShake();
 
-        void menu();
-
         void pickAndBan();
-
-        void initTiles(string configFile);
-        void selectTile();
 
         void initMap(string configFile);
         void Choose_Map();
 
-        void initSquad(SQUAD type, coordinates mapCoor, OWNER owner);
-        void initSquads(string configFile);
-
-        void checkForTurnSwitch();
-        void switchTurn();
-        void shoot(Squad* attackingSquad, Squad* defendingSquad);
-        void takeDamage(Squad* attacker, Squad* defender);
 
     protected:
 

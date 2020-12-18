@@ -1,7 +1,3 @@
-Screen_Size: 1366 768
-
-Background_Image: background.bmp
-
 Menu_Image: UI_Menu.bmp
 
 Play_Button_Rect: 483 302 400 80
@@ -45,9 +41,3 @@ Map2_Rect: 815 167 361 194
 Map3_Rect: 188 467 361 194
 
 Map4_Rect: 815 467 361 194
-
-Color1: 255 0 0
-
-Color2: 0 0 255
-
-Cursor: cursor.bmp

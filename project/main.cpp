@@ -22,7 +22,8 @@ int main(int argc, char* argv[])
             while(!world.m_quitScene)
             {
                 world.input();
-                world.menu();
+                world.m_menu.update();
+                world.m_menu.draw();
             }
             world.m_quitScene = false;
         }
@@ -47,14 +48,14 @@ int main(int argc, char* argv[])
         }
         if(world.m_gameState == GAME)
         {
-            world.initGameSession();
-            world.m_enemyAI.takeBattlefield();
-            world.m_enemyAI.returnBattlefield();
+            world.m_battle.initGameSession();
+            world.m_battle.m_enemyAI.takeBattlefield();
+            world.m_battle.m_enemyAI.returnBattlefield();
             while(!world.m_quitScene)
             {
                 world.input();
-                world.update();
-                world.draw();
+                world.m_battle.update();
+                world.m_battle.draw();
             }
             world.m_quitScene = false;
         }

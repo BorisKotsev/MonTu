@@ -74,6 +74,18 @@ struct coordinates
         y = coor.y;
     }
 
+    void operator-(coordinates coor)
+    {
+        x -= coor.x;
+        y -= coor.y;
+    }
+
+    void operator+(coordinates coor)
+    {
+        x += coor.x;
+        y += coor.y;
+    }
+
     bool operator==(coordinates coor)
     {
         if(x == coor.x && y == coor.y)

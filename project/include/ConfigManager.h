@@ -7,6 +7,7 @@
 #include "Tile.h"
 #include "Building.h"
 #include "Squad.h"
+#include "SpearSquad.h"
 #include "HealthManager.h"
 
 
@@ -27,7 +28,7 @@ public:
     Tile* modelTileVolcano = NULL;
     Tile* modelTileLava = NULL;
 
-    Squad* modelSquadWarrior = NULL;
+    SpearSquad* modelSquadWarrior = NULL;
     Squad* modelSquadArcher = NULL;
     Squad* modelSquadSpearmen = NULL;
     Squad* modelSquadCrossbowmen = NULL;

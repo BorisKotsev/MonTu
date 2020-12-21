@@ -23,8 +23,6 @@
 #include "Menu.h"
 #include "Engine.h"
 
-
-
 class World
 {
     public:
@@ -34,18 +32,6 @@ class World
         SDL_Window* m_main_window;
         SDL_Cursor* m_cursor;
         SDL_Renderer* m_main_renderer;
-        SDL_Texture* m_backgroundTexture;
-        SDL_Texture* m_menuTexture;
-
-        SDL_Rect m_playButtonRect;
-        SDL_Rect m_ExitButtonRect;
-        SDL_Rect m_BackButtonRect;
-        SDL_Rect m_OptionsButtonRect;
-
-        SDL_Rect m_Map1Button;
-        SDL_Rect m_Map2Button;
-        SDL_Rect m_Map3Button;
-        SDL_Rect m_Map4Button;
 
         TTF_Font* m_font;
 
@@ -56,6 +42,7 @@ class World
         PlayerStatsManager m_playerStatsManager;
         Battle m_battle;
         Menu m_menu;
+        WorldMap m_worldMap;
 
         int m_SCREEN_WIDTH;
         int m_SCREEN_HEIGHT;
@@ -64,23 +51,6 @@ class World
         SDL_Event m_event;
         GAME_STATE m_gameState;
         bool m_quitScene;
-
-        SDL_Texture* m_backgroundMapTexture;
-
-        SDL_Texture* m_Map1Texture;
-        SDL_Texture* m_Map2Texture;
-        SDL_Texture* m_Map3Texture;
-        SDL_Texture* m_Map4Texture;
-
-        SDL_Texture* m_Map1PickTexture;
-        SDL_Texture* m_Map2PickTexture;
-        SDL_Texture* m_Map3PickTexture;
-        SDL_Texture* m_Map4PickTexture;
-
-        SDL_Texture* m_PlayButtonTexture;
-        SDL_Texture* m_OptionsButtonTexture;
-        SDL_Texture* m_ExitButtonTexture;
-        SDL_Texture* m_BackButtonTexture;
 
         coordinates m_cameraOffset;
         short int m_cameraShakeDuration = 1;
@@ -112,8 +82,6 @@ class World
         void pickAndBan();
 
         void initMap(string configFile);
-        void Choose_Map();
-
 
     protected:
 

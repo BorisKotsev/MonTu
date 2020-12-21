@@ -4,7 +4,6 @@ World::World()
 {
     m_main_window = NULL;
     m_main_renderer = NULL;
-    m_backgroundTexture = NULL;
     m_gameState = NOSCENE;
     m_quitScene = false;
     m_cameraOffset.x = 0;
@@ -26,48 +25,10 @@ void World::initSDL(string configFile)
 
     string tmp;
 
-    string backgroundImg;
-    string backgroundMap;
-    string Map1Img;
-    string Map2Img;
-    string Map3Img;
-    string Map4Img;
-    string Map1PickImg;
-    string Map2PickImg;
-    string Map3PickImg;
-    string Map4PickImg;
-    string menuImg;
     string cursorImg;
-    string PlayButtonImg;
-    string ExitButtonImg;
-    string OptionsButtonImg;
-    string BackButtonImg;
 
     stream.open(configFile.c_str());
     stream >> tmp >> m_SCREEN_WIDTH >> m_SCREEN_HEIGHT;
-    stream >> tmp >> backgroundImg;
-    stream >> tmp >> menuImg;
-    stream >> tmp >> m_playButtonRect.x >> m_playButtonRect.y >> m_playButtonRect.w >> m_playButtonRect.h;
-    stream >> tmp >> backgroundMap;
-    stream >> tmp >> m_ExitButtonRect.x >> m_ExitButtonRect.y >> m_ExitButtonRect.w >> m_ExitButtonRect.h;
-    stream >> tmp >> PlayButtonImg;
-    stream >> tmp >> ExitButtonImg;
-    stream >> tmp >> OptionsButtonImg;
-    stream >> tmp >> BackButtonImg;
-    stream >> tmp >> m_BackButtonRect.x >> m_BackButtonRect.y >> m_BackButtonRect.w >> m_BackButtonRect.h;
-    stream >> tmp >> m_OptionsButtonRect.x >> m_OptionsButtonRect.y >> m_OptionsButtonRect.w >> m_OptionsButtonRect.h;
-    stream >> tmp >> Map1Img;
-    stream >> tmp >> Map2Img;
-    stream >> tmp >> Map3Img;
-    stream >> tmp >> Map4Img;
-    stream >> tmp >> Map1PickImg;
-    stream >> tmp >> Map2PickImg;
-    stream >> tmp >> Map3PickImg;
-    stream >> tmp >> Map4PickImg;
-    stream >> tmp >> m_Map1Button.x >> m_Map1Button.y >> m_Map1Button.w >> m_Map1Button.h;
-    stream >> tmp >> m_Map2Button.x >> m_Map2Button.y >> m_Map2Button.w >> m_Map2Button.h;
-    stream >> tmp >> m_Map3Button.x >> m_Map3Button.y >> m_Map3Button.w >> m_Map3Button.h;
-    stream >> tmp >> m_Map4Button.x >> m_Map4Button.y >> m_Map4Button.w >> m_Map4Button.h;
     stream >> tmp >> m_CP1.r >> m_CP1.g >> m_CP1.b;
     stream >> tmp >> m_CP2.r >> m_CP2.g >> m_CP2.b;
     stream >> tmp >> cursorImg;
@@ -89,28 +50,13 @@ void World::initSDL(string configFile)
     m_playerStatsManager.init("mainStats.txt");
     m_battle.initBattle("battle_manager.txt");
     m_menu.init("menu.txt");
+    m_worldMap.init(m_main_renderer, "worldMap.txt");
+
 
     cursorImg = "img\\" + cursorImg;
     SDL_Surface* loadSurface = SDL_LoadBMP(cursorImg.c_str());
     m_cursor = SDL_CreateColorCursor(loadSurface, 10, 5);
     SDL_SetCursor(m_cursor);
-
-    m_backgroundTexture = LoadTexture(backgroundImg, m_main_renderer);
-    m_menuTexture = LoadTexture(menuImg, m_main_renderer);
-    m_Map1Texture = LoadTexture(Map1Img, m_main_renderer);
-    m_Map2Texture = LoadTexture(Map2Img, m_main_renderer);
-    m_Map3Texture = LoadTexture(Map3Img, m_main_renderer);
-    m_Map4Texture = LoadTexture(Map4Img, m_main_renderer);
-    m_backgroundMapTexture = LoadTexture(backgroundMap, m_main_renderer);
-    m_Map1PickTexture = LoadTexture(Map1PickImg, m_main_renderer);
-    m_Map2PickTexture = LoadTexture(Map2PickImg, m_main_renderer);
-    m_Map3PickTexture = LoadTexture(Map3PickImg, m_main_renderer);
-    m_Map4PickTexture = LoadTexture(Map4PickImg, m_main_renderer);
-    m_PlayButtonTexture = LoadTexture(PlayButtonImg, m_main_renderer);
-    m_OptionsButtonTexture = LoadTexture(OptionsButtonImg, m_main_renderer);
-    m_ExitButtonTexture = LoadTexture(ExitButtonImg, m_main_renderer);
-    m_BackButtonTexture = LoadTexture(BackButtonImg, m_main_renderer);
-
 
     /// m_soundManager.play_sound("General.mp3");
 
@@ -119,11 +65,9 @@ void World::initSDL(string configFile)
 
 }
 
-
 void World::destroySDL()
 {
     m_gameState = NOSCENE;
-    SDL_DestroyTexture(m_backgroundTexture);
     SDL_DestroyRenderer(m_main_renderer);
     SDL_DestroyWindow(m_main_window);
 }
@@ -200,87 +144,3 @@ void World::initMap(string configFile)
 
     in_file.close();
 }
-
-void World::Choose_Map()
-{
-    SDL_RenderCopy(m_main_renderer, m_backgroundMapTexture, NULL, NULL);
-    SDL_RenderCopy(m_main_renderer, m_Map1Texture, NULL, &(m_pickAndBan.m_Map1Button));
-    SDL_RenderCopy(m_main_renderer, m_Map2Texture, NULL, &(m_pickAndBan.m_Map2Button));
-    SDL_RenderCopy(m_main_renderer, m_Map3Texture, NULL, &(m_pickAndBan.m_Map3Button));
-    SDL_RenderCopy(m_main_renderer, m_Map4Texture, NULL, &(m_pickAndBan.m_Map4Button));
-
-    if(m_mouseIsPressed)
-    {
-        if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map1Button))
-        {
-            initMap("Map1.txt");
-            m_battle.initTiles("tileMap.txt");
-            m_quitScene = true;
-            m_gameState = GAME;
-        }
-        if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map2Button))
-        {
-            initMap("Map2.txt");
-            m_battle.initTiles("tileMap.txt");
-            m_quitScene = true;
-            m_gameState = GAME;
-        }
-        if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map3Button))
-        {
-            initMap("Map3.txt");
-            m_battle.initTiles("tileMap.txt");
-            m_quitScene = true;
-            m_gameState = GAME;
-        }
-        if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map4Button))
-        {
-            initMap("Map4.txt");
-            m_battle.initTiles("tileMap.txt");
-            m_quitScene = true;
-            m_gameState = GAME;
-        }
-        if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_BackButtonRect))
-        {
-            m_quitScene = true;
-            m_gameState = MENU;
-        }
-    }
-
-    if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map1Button))
-    {
-        SDL_RenderCopy(m_main_renderer, m_Map1PickTexture, NULL, &(m_pickAndBan.m_Map1Button));
-    }
-    if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map2Button))
-    {
-        SDL_RenderCopy(m_main_renderer, m_Map2PickTexture, NULL, &(m_pickAndBan.m_Map2Button));
-    }
-    if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map3Button))
-    {
-        SDL_RenderCopy(m_main_renderer, m_Map3PickTexture, NULL, &(m_pickAndBan.m_Map3Button));
-    }
-    if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_pickAndBan.m_Map4Button))
-    {
-        SDL_RenderCopy(m_main_renderer, m_Map4PickTexture, NULL, &(m_pickAndBan.m_Map4Button));
-    }
-    if(checkForMouseCollision(m_mouse.x, m_mouse.y, m_BackButtonRect))
-    {
-        if(m_BackButtonRect.w <= 39)
-        {
-            m_BackButtonRect.w += 20;
-            m_BackButtonRect.h += 20;
-            m_BackButtonRect.x -= 10;
-            m_BackButtonRect.y -= 10;
-        }
-    }else{
-        m_BackButtonRect.w = 39;
-        m_BackButtonRect.h = 47;
-        m_BackButtonRect.x = 31;
-        m_BackButtonRect.y = 40;
-    }
-
-    SDL_RenderCopy(m_main_renderer, m_BackButtonTexture, NULL, &(m_BackButtonRect));
-
-    SDL_RenderPresent(m_main_renderer);
-
-}
-

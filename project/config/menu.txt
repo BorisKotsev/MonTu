@@ -41,3 +41,5 @@ Map2_Rect: 815 167 361 194
 Map3_Rect: 188 467 361 194
 
 Map4_Rect: 815 467 361 194
+
+Width_Height_Change: 32 18

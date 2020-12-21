@@ -1214,7 +1214,7 @@
 	"defines.h"
 	"Engine.h"
 
-1606494889 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\defines.h
+1608581644 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\defines.h
 	<cmath>
 	<vector>
 	<SDL2/SDL.h>
@@ -1250,7 +1250,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1605188768 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\squad.cpp
+1608416693 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\squad.cpp
 	"Squad.h"
 
 1606493726 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\squad.h
@@ -1266,11 +1266,11 @@
 1603745106 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\tile.cpp
 	"Tile.h"
 
-1608332610 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\main.cpp
+1608581477 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\main.cpp
 	<SDL2/SDL.h>
 	"World.h"
 
-1608331924 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
+1608580815 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\world.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -1290,7 +1290,7 @@
 	"Menu.h"
 	"Engine.h"
 
-1608332233 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
+1608582072 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\world.cpp
 	"World.h"
 
 1595622981 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\dep_sdl\include\sdl2\sdl_ttf.h
@@ -2259,11 +2259,11 @@
 	"ArmyManager.h"
 	"World.h"
 
-1608326517 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\spearsquad.cpp
+1608417926 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\spearsquad.cpp
 	"SpearSquad.h"
 	"World.h"
 
-1606852515 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\spearsquad.h
+1608406895 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\spearsquad.h
 	"Squad.h"
 
 1608326015 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\battle.h
@@ -2284,11 +2284,11 @@
 	"SpearSquad.h"
 	"Building.h"
 
-1608327911 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\battle.cpp
+1608416405 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\battle.cpp
 	"Battle.h"
 	"World.h"
 
-1608332133 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\menu.h
+1608580831 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\include\menu.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -2298,8 +2298,9 @@
 	<time.h>
 	<windows.h>
 	<SDL2/SDL.h>
+	"defines.h"
 
-1608332871 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\menu.cpp
+1608582243 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\montu\montu\project\src\menu.cpp
 	"Menu.h"
 	"World.h"
 

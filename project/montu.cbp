@@ -45,6 +45,7 @@
 		<Unit filename="include/EnemyAI.h" />
 		<Unit filename="include/Engine.h" />
 		<Unit filename="include/HealthManager.h" />
+		<Unit filename="include/Menu.h" />
 		<Unit filename="include/PickAndBan.h" />
 		<Unit filename="include/PlayerStatsManager.h" />
 		<Unit filename="include/PopUpWriter.h" />
@@ -62,6 +63,7 @@
 		<Unit filename="src/EnemyAI.cpp" />
 		<Unit filename="src/Engine.cpp" />
 		<Unit filename="src/HealthManager.cpp" />
+		<Unit filename="src/Menu.cpp" />
 		<Unit filename="src/PickAndBan.cpp" />
 		<Unit filename="src/PlayerStatsManager.cpp" />
 		<Unit filename="src/PopUpWriter.cpp" />

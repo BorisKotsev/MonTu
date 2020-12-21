@@ -1,51 +1,5 @@
 Screen_Size: 1366 768
 
-Background_Image: background.bmp
-
-Menu_Image: UI_Menu.bmp
-
-Play_Button_Rect: 483 302 400 80
-
-Map_Background: BackgroundMap.bmp
-
-Exit_Button_Rect: 1283 40 47 47
-
-Play_Button_Img: Play_Button.bmp
-
-Exit_Button_Img: Exit_Button.bmp
-
-Options_Button_Img: Options_Button.bmp
-
-Back_Button_Img: Back_Button.bmp
-
-Back_Button_Rect: 39 47 31 40
-
-Options_Button_Rect: 483 451 400 80
-
-Map1: Map1.bmp	
-
-Map2: Map2.bmp
-
-Map3: Map3.bmp
-
-Map4: Map4.bmp
-
-Map1_Pick: Map1Pick.bmp
-
-Map2_Pick: Map2Pick.bmp
-
-Map3_Pick: Map3Pick.bmp
-
-Map4_Pick: Map4Pick.bmp
-
-Map1_Rect: 188 167 361 194
-
-Map2_Rect: 815 167 361 194
-
-Map3_Rect: 188 467 361 194
-
-Map4_Rect: 815 467 361 194
-
 Color1: 255 0 0
 
 Color2: 0 0 255

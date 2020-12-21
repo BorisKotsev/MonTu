@@ -22,7 +22,8 @@ enum GAME_STATE
     GAME = 3,
     STATS = 4,
     MAP_CHOOSING = 5,
-    EXIT = 6
+    WORLD_MAP = 6,
+    EXIT = 7
 };
 
 enum SQUAD
@@ -41,7 +42,20 @@ enum ICON_STATE
     BANNED = 1,
     PICKED = 2
 };
+struct Button
+{
+    SDL_Rect startRect;
+    SDL_Rect objectRect;
 
+    SDL_Texture* objTexture;
+
+    double currentBonusW = 0;
+    double currentBonusH = 0;
+
+    double bonusW = 0;
+    double bonusH = 0;
+
+};
 enum PLAYER_STAT
 {
     NOSTAT = 0,

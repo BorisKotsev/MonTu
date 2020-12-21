@@ -1,0 +1,11 @@
+Map: WorldMap.bmp WorldMap2.bmp WorldMap3.bmp WorldMap4.bmp
+
+Next_Button: NextButton.bmp
+
+Next_Button_Rect: 683 384 40 40
+
+zoom: 5
+
+Max_Zoom: 1920 1080
+
+Min_Zoom: 1360 765

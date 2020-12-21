@@ -11,6 +11,8 @@
 #include <windows.h>
 #include <SDL2/SDL.h>
 
+#include "defines.h"
+
 using namespace std;
 
 class Menu
@@ -20,10 +22,10 @@ class Menu
         virtual ~Menu();
         SDL_Renderer* renderer;
 
-        SDL_Rect m_playButtonRect;
-        SDL_Rect m_ExitButtonRect;
-        SDL_Rect m_BackButtonRect;
-        SDL_Rect m_OptionsButtonRect;
+        Button playButton;
+        Button optionsButton;
+        Button exitButton;
+        Button backButton;
 
         SDL_Rect m_Map1Button;
         SDL_Rect m_Map2Button;
@@ -43,16 +45,15 @@ class Menu
         SDL_Texture* m_Map3PickTexture;
         SDL_Texture* m_Map4PickTexture;
 
-        SDL_Texture* m_PlayButtonTexture;
-        SDL_Texture* m_OptionsButtonTexture;
-        SDL_Texture* m_ExitButtonTexture;
-        SDL_Texture* m_BackButtonTexture;
+        int widthChange, heightChange;
 
         void menu();
         void Choose_Map();
         void init(string configFile);
         void draw();
         void update();
+        void buttonHover(Button* button);
+
     protected:
 
     private:

@@ -64,35 +64,36 @@ void SpearSquad::attack(Squad* defender)
     defenderCoor - attackerCoor;
 
     double angle = returnAngleByCoordinates(defenderCoor);
+
+    Tile* neighbor = NULL;
+
     if (angle > 0 && angle < 60)
     {
-        defender->m_path.push(world.m_battle.giveNeighbor(defender->m_mapCoor, 1));
-        cout << __LINE__ << endl;
+        neighbor = world.m_battle.giveNeighbor(defender->m_mapCoor, 1);
     }
     if (angle > 60 && angle < 120)
     {
-        defender->m_path.push(world.m_battle.giveNeighbor(defender->m_mapCoor, 0));
-        cout << __LINE__ << endl;
+        neighbor = world.m_battle.giveNeighbor(defender->m_mapCoor, 0);
     }
     if (angle > 120 && angle < 180)
     {
-        defender->m_path.push(world.m_battle.giveNeighbor(defender->m_mapCoor, 5));
-        cout << __LINE__ << endl;
+        neighbor = world.m_battle.giveNeighbor(defender->m_mapCoor, 5);
     }
     if (angle < 0 && angle > -60)
     {
-        defender->m_path.push(world.m_battle.giveNeighbor(defender->m_mapCoor, 2));
-        cout << __LINE__ << endl;
+        neighbor = world.m_battle.giveNeighbor(defender->m_mapCoor, 2);
     }
     if (angle < -60 && angle > -120)
     {
-        defender->m_path.push(world.m_battle.giveNeighbor(defender->m_mapCoor, 3));
-        cout << __LINE__ << endl;
+        neighbor = world.m_battle.giveNeighbor(defender->m_mapCoor, 3);
     }
     if (angle < -120 && angle > -180)
     {
-        defender->m_path.push(world.m_battle.giveNeighbor(defender->m_mapCoor, 4));
-        cout << __LINE__ << endl;
+        neighbor = world.m_battle.giveNeighbor(defender->m_mapCoor, 4);
     }
 
+    if(neighbor != NULL)
+    {
+        defender->m_path.push(neighbor);
+    }
 }

@@ -94,7 +94,6 @@ void Battle::update()
     m_selectedTileUI.objRect = m_tiles[m_selected.y][m_selected.x]->m_objectRect;
 
     squadActionsCheck();
-
     if(world.m_mouseIsPressed)
     {
         if(m_showFillBtn && checkForMouseCollision(world.m_mouse.x, world.m_mouse.y, m_skipTurnFillBtn.objRect))
@@ -102,7 +101,6 @@ void Battle::update()
             switchTurn();
         }
     }
-
     checkForTurnSwitch();
 }
 
@@ -675,6 +673,7 @@ Squad* Battle::findSquadByCoor(coordinates coor)
     }
     return NULL;
 }
+
 void Battle::switchTurn()
 {
     for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
@@ -799,11 +798,11 @@ void Battle::squadActionsCheck()
             }
         }
     }
-
     // Hide the skip_turn_btn if there is a squad behind it
     for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
     {
         (*it) -> update();
+
         if (checkForCollisionBetweenRects(m_skipTurnFillBtn.objRect, (*it)->m_objectRect))
         {
             m_showFillBtn = false;

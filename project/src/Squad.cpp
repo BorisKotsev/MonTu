@@ -75,18 +75,18 @@ void Squad::load(string configFile, SDL_Renderer* renderer, HealthManager* hm)
 
 void Squad::update()
 {
-
+    cout << "!!! " << m_path.size() << endl;
     if (!(m_path.empty()) && m_framesPerStep >= m_maxFramesPerStep)
     {
-        /// cout << "INFO: The size of the queue is " << m_path.size() << endl;
+         cout << "INFO: The size of the queue is " << m_path.size() << endl;
         m_tileTaken = m_path.top();
+
+        m_path.pop();
 
         m_mapCoor = m_tileTaken->m_mapCoordinates;
 
         m_objectRect.x = m_tileTaken->m_drawCoordinates.x;
         m_objectRect.y = m_tileTaken->m_drawCoordinates.y;
-
-        m_path.pop();
 
         m_framesPerStep = 0;
     }

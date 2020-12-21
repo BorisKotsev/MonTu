@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
             while(!world.m_quitScene)
             {
                 world.input();
-                world.Choose_Map();
+                world.m_menu.Choose_Map();
             }
             world.m_quitScene = false;
         }
@@ -58,6 +58,12 @@ int main(int argc, char* argv[])
                 world.m_battle.draw();
             }
             world.m_quitScene = false;
+        }
+        if(world.m_gameState == WORLD_MAP)
+        {
+            world.input();
+            world.m_worldMap.update();
+            world.m_worldMap.draw();
         }
         if(world.m_gameState == EXIT)
         {

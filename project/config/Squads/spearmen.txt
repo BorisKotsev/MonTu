@@ -1,4 +1,4 @@
-Img: spearmen.bmp
+Img: spearmen.bmp spearmen.bmp
 Width_Height: 50 50
 
 Health: 100

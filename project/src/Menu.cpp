@@ -5,7 +5,7 @@ extern World world;
 
 Menu::Menu()
 {
-
+    m_menuTexture = nullptr;
 }
 
 Menu::~Menu()
@@ -175,6 +175,7 @@ void Menu::Choose_Map()
     {
         if(checkForMouseCollision(world.m_mouse.x, world.m_mouse.x, m_Map1Button))
         {
+            cout << "HERE ";
             world.initMap("Map1.txt");
             world.m_battle.initTiles("tileMap.txt");
             world.m_quitScene = true;

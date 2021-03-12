@@ -23,6 +23,7 @@ float returnAngleByCoordinates(coordinates direction);
 bool isInsideATriangle (SDL_Point* triangle1, SDL_Point* triangle2, SDL_Point* triangle3, SDL_Point* mousePoint);
 bool isInsideAHexagon (vector<SDL_Point*> points, SDL_Point* mousePoint);
 bool checkForMouseCollision(int mouseX, int mouseY, SDL_Rect object);
+bool checkForMouseCollision(int mouseX, int mouseY, coordinates objectCoor, int objectSize);
 bool checkForPossibleMove(int distance, int &movement);
 bool checkIfInScreen(SDL_Rect rect, int SCREEN_WIDTH, int SCREEN_HEIGHT);
 bool checkForCollisionBetweenRects(SDL_Rect rect1, SDL_Rect rect2);

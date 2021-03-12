@@ -18,6 +18,7 @@ SDL_Texture* LoadTexture(string file, SDL_Renderer* renderer)
     }catch (int i)
     {
         cout << "NO TEXTURE LOADED " << file << "\n";
+        return NULL;
     }
     return objectTexture;
 }
@@ -86,6 +87,15 @@ bool isInsideAHexagon(vector<SDL_Point*> points, SDL_Point* mousePoint)
 bool checkForMouseCollision(int mouseX, int mouseY, SDL_Rect object)
 {
     if(mouseX > object.x && mouseX < object.x + object.w && mouseY > object.y && mouseY < object.y + object.h)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool checkForMouseCollision(int mouseX, int mouseY, coordinates objectCoor, int objectSize)
+{
+    if(mouseX > objectCoor.x && mouseX < objectCoor.x + objectSize && mouseY > objectCoor.y && mouseY < objectCoor.y + objectSize)
     {
         return true;
     }

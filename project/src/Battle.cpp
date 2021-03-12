@@ -139,7 +139,7 @@ void Battle::draw()
         SDL_RenderCopy(m_renderer, m_skipTurnFillBtn.objTexture, NULL, &(m_skipTurnFillBtn.objRect));
     }
 
-    SDL_RenderPresent(m_renderer);
+    //SDL_RenderPresent(m_renderer);
 
 }
 
@@ -197,21 +197,7 @@ void Battle::initTiles(string configFile)
                 break;
             }
             m_tiles[r].push_back(tile);
-            /*if ((r == m_rows / 2 && c == m_colls - 1) || (r == m_rows / 2 && c == 3))
-            {
-                building = new Building(*(m_configManager.modelCastle));
-                tile = building;
-                if (c == 3)
-                {
-                    tile->m_owner = PLAYER1;
-                }
-                else
-                {
-                    tile->m_owner = PLAYER2;
-                }
-                m_buildings.push_back(building);
-            }
-            */
+
             if(r % 2 == 0)
             {
                 tile->m_drawCoordinates.x = c * m_hexagonWidth;
@@ -638,7 +624,7 @@ void Battle::initSquad(SQUAD type, coordinates mapCoor, OWNER owner)
     switch(type)
     {
         case WARRIOR:
-            squad = new SpearSquad(*(world.m_configManager.modelSquadWarrior), (&world.m_cameraOffset), tile, owner);
+            squad = new HookSquad(*(world.m_configManager.modelSquadWarrior), (&world.m_cameraOffset), tile, owner);
             break;
         case ARCHER:
             squad = new Squad(*(world.m_configManager.modelSquadArcher), (&world.m_cameraOffset), tile, owner);
@@ -716,6 +702,7 @@ void Battle::squadActionsCheck()
     {
         if (m_selectedSquad != NULL)
         {
+            /// Check if this is the squad that we have selected before
             bool seletedASquad = false;
             Squad* oldSquad = m_selectedSquad;
             for(int i = 0; i < m_squads.size(); i++)
@@ -728,18 +715,17 @@ void Battle::squadActionsCheck()
             }
             if(!seletedASquad)
             {
-                m_showFillBtn = true;
+                /// Is it selected by the player in turn
                 if (m_selectedSquad->m_owner == m_playerTurn)
                 {
+                    /// Have we moved the squad
                     if (m_selectedSquad->m_moved == false)
                     {
-                        // Have we clicked on an empty tile or on a squad
+                        /// Have we clicked on an empty tile or on a squad
                         if (m_selectedSquad == oldSquad)
                         {
-                            if (canTravel(m_selectedSquad, m_tiles[m_selected.y][m_selected.x]->m_mapCoordinates))
-                            {
-                                m_selectedSquad->m_tileTaken = m_tiles[m_selected.y][m_selected.x];
-                            }
+                            /// Can we travel to the selected tile
+                            canTravel(m_selectedSquad, m_tiles[m_selected.y][m_selected.x]->m_mapCoordinates);
                             m_availableWalkTiles.clear();
                             m_availableShootTiles.clear();
                             m_selectedSquad = NULL;
@@ -747,6 +733,8 @@ void Battle::squadActionsCheck()
                     }
                     else if(m_selectedSquad->m_shooted == false)
                     {
+                        /// If we haven't shot, than we can shoot
+                        canShoot(m_selectedSquad, m_selected);
                         m_availableShootTiles.clear();
                         m_selectedSquad = NULL;
                     }
@@ -754,9 +742,11 @@ void Battle::squadActionsCheck()
             }
             else
             {
-                if(oldSquad != m_selectedSquad && !(oldSquad->m_shooted) && canShoot(oldSquad, m_selectedSquad->m_mapCoor))
+                /// We have selected a Squad
+                if(oldSquad != m_selectedSquad && !(oldSquad->m_shooted) && canShoot(oldSquad, m_selectedSquad->m_mapCoor) && m_selectedSquad->m_owner != oldSquad ->m_owner)
                 {
-                    takeDamage(oldSquad, m_selectedSquad);
+                    /// We can shoot it
+                    oldSquad->attack(m_selectedSquad);
                     world.m_startShake = time(NULL);
                     oldSquad->m_shooted = true;
                     oldSquad->m_moved = true;
@@ -777,6 +767,7 @@ void Battle::squadActionsCheck()
                     seletedASquad = true;
                 }
             }
+            /// We have selected
             if(seletedASquad && m_selectedSquad->m_owner == m_playerTurn)
             {
                 if(!(m_selectedSquad->m_moved))

@@ -20,6 +20,8 @@ class Squad
 
         SDL_Renderer* m_renderer;
         SDL_Texture* m_objectTexture;
+        SDL_Texture* m_playerTexture;
+        SDL_Texture* m_enemyTexture;
 
         SDL_Rect m_objectRect;
         SDL_Rect m_presentRect;
@@ -30,20 +32,22 @@ class Squad
 
         coordinates* m_cameraOffset;
 
-        OWNER m_owner;
-        short int m_startHealth;
-        short int m_health;
-        short int m_startSpeed;
-        short int m_speed;
-        short int m_startAttackRange;
-        short int m_attackRange;
-        short int m_startAttackDamage;
-        short int m_attackDamage;
-        short int m_startFaith;
-        short int m_faith;
+        SQUAD m_type;
 
-        short int m_idleAnimationRange = 5;
-        short int m_idleAnimationCounter = 0;
+        OWNER m_owner;
+        double m_startHealth;
+        double m_health;
+        double m_startSpeed;
+        double m_speed;
+        double m_startAttackRange;
+        double m_attackRange;
+        double m_startAttackDamage;
+        double m_attackDamage;
+        double m_startFaith;
+        double m_faith;
+
+        unsigned short m_idleAnimationRange = 5;
+        unsigned short m_idleAnimationCounter = 0;
         bool m_moveUp = true;
 
         bool m_traveling;

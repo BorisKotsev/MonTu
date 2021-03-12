@@ -1,4 +1,4 @@
-Img: knights.bmp
+Img: knights.bmp knights.bmp
 Width_Height: 50 50
 
 Health: 100

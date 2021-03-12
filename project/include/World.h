@@ -1,7 +1,9 @@
 #ifndef WORLD_H
 #define WORLD_H
 
+#ifndef _WIN32_WINNT
 #define _WIN32_WINNT 0x0500
+#endif // _WIN32_WINNT
 
 #include <iostream>
 #include <fstream>
@@ -22,6 +24,9 @@
 #include "Battle.h"
 #include "Menu.h"
 #include "Engine.h"
+#include "squad_manager.h"
+#include "castleUI.h"
+#include "WorldMap.h"
 
 class World
 {
@@ -42,15 +47,22 @@ class World
         PlayerStatsManager m_playerStatsManager;
         Battle m_battle;
         Menu m_menu;
+        squad_manager m_squadManager;
+        castleUI m_castleUI;
         WorldMap m_worldMap;
 
         int m_SCREEN_WIDTH;
         int m_SCREEN_HEIGHT;
         coordinates m_mouse;
+        double m_MOUSE_MULTIPLIER_X;
+        double m_MOUSE_MULTIPLIER_Y;
         bool m_mouseIsPressed;
+        bool m_mouseIsReleased;
+        bool m_mouseIsDoubleClicked;
         SDL_Event m_event;
         GAME_STATE m_gameState;
         bool m_quitScene;
+        bool m_drag;
 
         coordinates m_cameraOffset;
         short int m_cameraShakeDuration = 1;
@@ -69,6 +81,7 @@ class World
         vector<Building*> m_buildings;
 
         void initSDL(string configFile);
+        void improveRenderer();
         void draw();
         void update();
         void cleaner();

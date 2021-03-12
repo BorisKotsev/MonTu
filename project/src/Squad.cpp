@@ -35,7 +35,14 @@ Squad::Squad(const Squad& model, coordinates* cameraOffset, Tile* tile, OWNER ow
     m_attackRange = m_startAttackRange;
     m_faith = m_startFaith;
 
-    m_objectTexture = model.m_objectTexture;
+    if(owner == PLAYER1)
+    {
+        m_objectTexture = model.m_playerTexture;
+    }
+    else
+    {
+        m_objectTexture = model.m_enemyTexture;
+    }
 
     m_renderer = model.m_renderer;
 
@@ -52,10 +59,10 @@ void Squad::load(string configFile, SDL_Renderer* renderer, HealthManager* hm)
 {
     configFile = "config\\" + configFile;
     ifstream stream;
-    string tmp, buff;
+    string tmp, imgPlayer, imgEnemy;
     stream.open(configFile.c_str());
 
-    stream >> tmp >> buff;
+    stream >> tmp >> imgPlayer >> imgEnemy;
     stream >> tmp >> m_objectRect.w >> m_objectRect.h;
 
     stream >> tmp >> m_startHealth;
@@ -66,7 +73,8 @@ void Squad::load(string configFile, SDL_Renderer* renderer, HealthManager* hm)
 
     stream.close();
 
-    m_objectTexture = LoadTexture(buff, renderer);
+    m_playerTexture = LoadTexture(imgPlayer, renderer);
+    m_enemyTexture = LoadTexture(imgEnemy, renderer);
 
     m_renderer = renderer;
 
@@ -75,7 +83,6 @@ void Squad::load(string configFile, SDL_Renderer* renderer, HealthManager* hm)
 
 void Squad::update()
 {
-    cout << "!!! " << m_path.size() << endl;
     if (!(m_path.empty()) && m_framesPerStep >= m_maxFramesPerStep)
     {
          cout << "INFO: The size of the queue is " << m_path.size() << endl;
@@ -104,7 +111,7 @@ void Squad::draw()
     m_presentRect.w = m_objectRect.w;
     m_presentRect.h = m_objectRect.h;
     SDL_RenderCopy(m_renderer, m_objectTexture, NULL, &m_presentRect);
-    m_hm->drawHealthbar(m_renderer, m_presentRect, m_health, m_startHealth);
+    //m_hm->drawHealthbar(m_renderer, m_presentRect, m_health, m_startHealth);
 }
 
 void Squad::idleAnimation()
@@ -140,6 +147,7 @@ void Squad::idleAnimation()
 
 void Squad::attack(Squad* defender)
 {
+    cout << "HERE" << endl;
     defender->m_health -= m_attackDamage;
     m_shooted = true;
     m_moved = true;

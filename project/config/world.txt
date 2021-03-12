@@ -1,4 +1,4 @@
-Screen_Size: 1366 768
+Screen_Size: 1920 1080
 
 Color1: 255 0 0
 

@@ -7,6 +7,7 @@
 #include <ctime>
 #include <vector>
 #include <time.h>
+#include <cmath>
 
 #include "Engine.h"
 #include "defines.h"
@@ -22,10 +23,13 @@ class WorldMap
         SDL_Texture* WorldMapTexture;
         SDL_Texture* NextButtonTexture;
 
+        mapObject army;
+
         SDL_Rect nextButtonRect;
         SDL_Rect maxZoom;
         SDL_Rect minZoom;
         SDL_Rect cameraRect;
+        SDL_Rect chunkCameraRect;
 
         SDL_Rect cameraDstRect1;
         SDL_Rect cameraDstRect2;
@@ -37,16 +41,14 @@ class WorldMap
         SDL_Rect cameraSrcRect3;
         SDL_Rect cameraSrcRect4;
 
-        SDL_Event event;
-
-        SDL_Scancode moveUp;
-        SDL_Scancode moveDown;
-        SDL_Scancode moveLeft;
-        SDL_Scancode moveRight;
-
-        coordinates mouse;
         coordinates cameraCenter;
         coordinates direction;
+        coordinates currentPos;
+        coordinates mouseDragDistance;
+        coordinates cameraPosBeforeDrag;
+        coordinates armyDirection;
+
+        UI_object m_selectedArmy;
 
         vector <SDL_Texture*> mapPieces;
 
@@ -54,20 +56,27 @@ class WorldMap
         int mapWidth;
         int mapHeight;
         int oldX, oldY;
+        int currentChunk;
+        int allImages;
+        int imagesPerChunk;
 
-        float directionAngle;
+        bool borderActive;
 
-        bool* quitScene;
-        bool mouseIsPressed;
+        float zoom_lvl = 1;
+        double moveRatio;
+        double speed;
 
-        vector <SDL_Texture*> drawMap(SDL_Renderer* renderer);
-
-        void init(SDL_Renderer* renderer, string configFile);
+        void drawMap();
+        void init(string configFile);
         void update();
-        void draw(SDL_Renderer* renderer);
-        void input();
+        void draw();
         void framer();
         void zoom();
+        void moveWithMouse();
+        void loadMap(string configFile);
+        void openCity(SDL_Rect cityRect);
+        void drawArmy(mapObject* army);
+        void updateArmy(mapObject* army);
 
     protected:
 

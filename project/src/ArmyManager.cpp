@@ -47,7 +47,6 @@ void ArmyManager::deployArmy(OWNER owner)
     stream.close();
 
     coordinates buff;
-    Squad* squad;
     for (int r = 0; r < world.m_battle.m_rows; r ++)
     {
         for (int c = 0; c < 3; c++)

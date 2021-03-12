@@ -18,7 +18,7 @@
 #include "Tile.h"
 #include "Squad.h"
 #include "SpearSquad.h"
-#include "Building.h"
+#include "HookSquad.h"
 
 class Battle
 {

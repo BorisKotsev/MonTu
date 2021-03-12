@@ -3,9 +3,16 @@
 
 #include <cmath>
 #include <vector>
+#include <map>
 #include <SDL2/SDL.h>
 
+#define MIN_FRAMETIME 5
+#define D(x) cerr << #x << " = " << (x) << " | " << "LINE: " << __LINE__  << " in: " << __FILE__ << endl;
+
+#include<vector>
+#include<string>
 using namespace std;
+using usi = unsigned short int;
 
 enum OWNER
 {
@@ -47,7 +54,7 @@ struct Button
     SDL_Rect startRect;
     SDL_Rect objectRect;
 
-    SDL_Texture* objTexture;
+    SDL_Texture* objTexture = nullptr;
 
     double currentBonusW = 0;
     double currentBonusH = 0;
@@ -55,6 +62,8 @@ struct Button
     double bonusW = 0;
     double bonusH = 0;
 
+    double maxWidth = 0;
+    double maxHeigth = 0;
 };
 enum PLAYER_STAT
 {
@@ -124,7 +133,6 @@ struct UI_object
     SDL_Texture* objTexture = NULL;
     vector<SDL_Texture*> objAnimation;
     SDL_Rect objRect;
-
 };
 
 struct color
@@ -133,4 +141,85 @@ struct color
     short int g;
     short int b;
 };
+struct soldier{
+    SQUAD type;
+    int health;
+    coordinates coord;
+    unsigned int numberOfSoldiers;
+};
+
+struct squad_data{
+    ///0 - city
+    ///1 - map
+    int state;
+    string city;
+    coordinates coords;
+    string soldierFile;
+    vector <soldier> soldiers;
+};
+
+struct soldier_data{
+    vector <soldier> soldiers;
+};
+
+struct fcoordinates
+{
+    double x;
+    double y;
+
+    void operator=(const SDL_Rect& rect)
+    {
+        x = rect.x;
+        y = rect.y;
+    }
+
+    void operator=(fcoordinates coor)
+    {
+        x = coor.x;
+        y = coor.y;
+    }
+
+    void operator-(fcoordinates coor)
+    {
+        x -= coor.x;
+        y -= coor.y;
+    }
+
+    void operator+(fcoordinates coor)
+    {
+        x += coor.x;
+        y += coor.y;
+    }
+
+    bool operator==(fcoordinates coor)
+    {
+        if(x == coor.x && y == coor.y)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    bool operator!=(fcoordinates coor)
+    {
+        if(x != coor.x && y != coor.y)
+        {
+            return true;
+        }
+        return false;
+    }
+};
+
+struct mapObject
+{
+    SDL_Rect objRect;
+    SDL_Rect dstRect;
+
+    SDL_Texture* objTexture;
+
+    bool mooving = false;
+
+    fcoordinates coor;
+};
+
 #endif // DEFINES_H

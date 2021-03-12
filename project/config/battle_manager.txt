@@ -8,4 +8,4 @@ Skip_Turn_Fill_Img: skip_btn_fill.bmp
 
 Skip_Turn_Trans_Img: skip_btn_trans.bmp
 
-Skip_Turn_Rect: 1150 550 200 200
+Skip_Turn_Rect: 1616 773 280 280

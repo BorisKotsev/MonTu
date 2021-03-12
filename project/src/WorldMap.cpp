@@ -13,7 +13,50 @@ WorldMap::~WorldMap()
     //dtor
 }
 
-void WorldMap::init(SDL_Renderer* renderer, string configFile)
+void WorldMap::init(string configFile)
+{
+    srand(time(NULL));
+
+    configFile = "config\\" + configFile;
+    fstream stream;
+
+    string tmp;
+    string nextButtonImg;
+    string armyTestImg;
+    string borderImg;
+
+    stream.open(configFile.c_str());
+
+    stream >> tmp >> nextButtonImg;
+    stream >> tmp >> nextButtonRect.x >> nextButtonRect.y >> nextButtonRect.w >> nextButtonRect.h;
+    stream >> tmp >> zoomMulti;
+    stream >> tmp >> maxZoom.w >> maxZoom.h;
+    stream >> tmp >> minZoom.w >> minZoom.h;
+    stream >> tmp >> allImages;
+    stream >> tmp >> imagesPerChunk;
+    stream >> tmp >> armyTestImg;
+    stream >> tmp >> army.objRect.x >> army.objRect.y >> army.objRect.w >> army.objRect.h;
+    stream >> tmp >> borderImg;
+    stream >> tmp >> speed;
+
+    stream.close();
+
+    NextButtonTexture = LoadTexture(nextButtonImg, world.m_main_renderer);
+    army.objTexture = LoadTexture(armyTestImg, world.m_main_renderer);
+    m_selectedArmy.objTexture = LoadTexture(borderImg, world.m_main_renderer);
+
+    cameraRect.x = 0;
+    cameraRect.y = 0;
+    cameraRect.w = world.m_SCREEN_WIDTH;
+    cameraRect.h = world.m_SCREEN_HEIGHT;
+
+    cameraPosBeforeDrag = world.m_mouse;
+
+    army.dstRect = army.objRect;
+    army.coor = army.objRect;
+}
+
+void WorldMap::loadMap(string configFile)
 {
     srand(time(NULL));
 
@@ -23,7 +66,6 @@ void WorldMap::init(SDL_Renderer* renderer, string configFile)
     string tmp;
 
     vector <string> MapImg;
-    string nextButtonImg;
     string buff;
 
     stream.open(configFile.c_str());
@@ -36,30 +78,37 @@ void WorldMap::init(SDL_Renderer* renderer, string configFile)
     MapImg.push_back(buff);
     stream >> buff;
     MapImg.push_back(buff);
-
-    stream >> tmp >> nextButtonImg;
-    stream >> tmp >> nextButtonRect.x >> nextButtonRect.y >> nextButtonRect.w >> nextButtonRect.h;
-    stream >> tmp >> zoomMulti;
-    stream >> tmp >> maxZoom.w >> maxZoom.h;
-    stream >> tmp >> minZoom.w >> minZoom.h;
+    stream >> buff;
+    MapImg.push_back(buff);
+    stream >> buff;
+    MapImg.push_back(buff);
+    stream >> buff;
+    MapImg.push_back(buff);
+    stream >> buff;
+    MapImg.push_back(buff);
+    stream >> buff;
+    MapImg.push_back(buff);
+    stream >> buff;
+    MapImg.push_back(buff);
+    stream >> buff;
+    MapImg.push_back(buff);
+    stream >> buff;
+    MapImg.push_back(buff);
+    stream >> buff;
+    MapImg.push_back(buff);
+    stream >> buff;
+    MapImg.push_back(buff);
+    stream >> buff;
+    MapImg.push_back(buff);
+    stream >> buff;
+    MapImg.push_back(buff);
 
     stream.close();
 
-    mapPieces.push_back(LoadTexture(MapImg[0], renderer));
-    mapPieces.push_back(LoadTexture(MapImg[1], renderer));
-    mapPieces.push_back(LoadTexture(MapImg[2], renderer));
-    mapPieces.push_back(LoadTexture(MapImg[3], renderer));
-    NextButtonTexture = LoadTexture(nextButtonImg, renderer);
-
-    moveUp = SDL_SCANCODE_W;
-    moveDown = SDL_SCANCODE_S;
-    moveLeft = SDL_SCANCODE_A;
-    moveRight = SDL_SCANCODE_D;
-
-    cameraRect.x = 0;
-    cameraRect.y = 0;
-    cameraRect.w = world.m_SCREEN_WIDTH;
-    cameraRect.h = world.m_SCREEN_HEIGHT;
+    for(int i = 0; i < 16; i ++)
+    {
+        mapPieces.push_back(LoadTexture("WorldMap\\" + MapImg[i], world.m_main_renderer));
+    }
 }
 
 void WorldMap::update()
@@ -67,32 +116,11 @@ void WorldMap::update()
     oldX = cameraRect.x;
     oldY = cameraRect.y;
 
-    const Uint8 *state = SDL_GetKeyboardState(NULL);
-
-    SDL_PollEvent(&event);
-
-    if (state[moveUp])
-    {
-        cameraRect.y -= 3;
-    }
-    if (state[moveDown])
-    {
-        cameraRect.y += 3;
-    }
-    if (state[moveLeft])
-    {
-        cameraRect.x -= 3;
-    }
-    if (state[moveRight])
-    {
-        cameraRect.x += 3;
-    }
-
     zoom();
 
-    if(mouseIsPressed)
+    if(world.m_mouseIsPressed)
     {
-        if(checkForMouseCollision(mouse.x, mouse.y, nextButtonRect))
+        if(checkForMouseCollision(world.m_mouse.x, world.m_mouse.y, nextButtonRect))
         {
             world.m_quitScene = true;
             world.m_gameState = MAP_CHOOSING;
@@ -100,34 +128,30 @@ void WorldMap::update()
     }
 
     framer();
+
+    moveWithMouse();
+
+    ///openCity(army.objRect);
+
+    updateArmy(&army);
 }
 
-void WorldMap::draw(SDL_Renderer* renderer)
+void WorldMap::draw()
 {
-    SDL_RenderClear(renderer);
+    SDL_RenderClear(world.m_main_renderer);
 
-    drawMap(renderer);
+    drawMap();
 
-    SDL_RenderCopy(renderer, NextButtonTexture, NULL, &(nextButtonRect));
+    SDL_RenderCopy(world.m_main_renderer, NextButtonTexture, NULL, &(nextButtonRect));
 
-    SDL_RenderPresent(renderer);
-}
+    drawArmy(&army);
 
-void WorldMap::input()
-{
-    event.type = SDLK_UNKNOWN;
-    mouseIsPressed = false;
-
-    SDL_PollEvent(&event);
-
-    if (event.type == SDL_MOUSEMOTION)
+    if(borderActive == true && !world.m_drag)
     {
-        SDL_GetGlobalMouseState(&(mouse.x), &(mouse.y));
+        SDL_RenderCopy(world.m_main_renderer, m_selectedArmy.objTexture, NULL, &(m_selectedArmy.objRect));
     }
-    if (event.type == SDL_MOUSEBUTTONDOWN)
-    {
-        mouseIsPressed = true;
-    }
+
+    SDL_RenderPresent(world.m_main_renderer);
 }
 
 void WorldMap::framer()
@@ -146,17 +170,17 @@ void WorldMap::framer()
         cameraRect.w = maxZoom.w;
         cameraRect.h = maxZoom.h;
     }
-    if(cameraRect.x + cameraRect.w > 3840)
+    if(cameraRect.x + cameraRect.w > 7680)
     {
-        cameraRect.x = 3840 - cameraRect.w;
+        cameraRect.x = 7680 - cameraRect.w;
     }
     if(cameraRect.x < 0)
     {
         cameraRect.x = 0;
     }
-    if(cameraRect.y + cameraRect.h > 2160)
+    if(cameraRect.y + cameraRect.h > 4320)
     {
-        cameraRect.y = 2160 - cameraRect.h;
+        cameraRect.y = 4320 - cameraRect.h;
     }
     if(cameraRect.y < 0)
     {
@@ -166,78 +190,166 @@ void WorldMap::framer()
 
 void WorldMap::zoom()
 {
-    if(event.type == SDL_MOUSEWHEEL)
+    if(world.m_event.type == SDL_MOUSEWHEEL)
     {
-        cameraRect.w -= zoomMulti * event.wheel.y * 16.0;
-        cameraRect.h -= zoomMulti * event.wheel.y * 9.0;
+        float w_old = cameraRect.w;
+        float h_old = cameraRect.h;
 
-        cameraRect.x += zoomMulti * event.wheel.y * 8.0;
-        cameraRect.y += zoomMulti * event.wheel.y * 4.5;
+        cameraRect.w -= zoomMulti * world.m_event.wheel.y * 16.0;
+        cameraRect.h -= zoomMulti * world.m_event.wheel.y * 9.0;
 
-        cameraCenter.x = cameraRect.x + cameraRect.w / 2;
-        cameraCenter.y = cameraRect.y + cameraRect.h / 2;
-
-        direction.x = mouse.x - cameraCenter.x;
-        direction.y = mouse.y - cameraCenter.y;
-
-        directionAngle = returnAngleByCoordinates(direction);
-
-        //cameraRect.x += sin(directionAngle * PI / 180) * 32.0;
-        //cameraRect.y -= cos(directionAngle * PI / 180) * 18.0;
+        cameraRect.x += (w_old - cameraRect.w) * (world.m_mouse.x / (1.0 * world.m_SCREEN_WIDTH));
+        cameraRect.y += (h_old - cameraRect.h) * (world.m_mouse.y / (1.0 * world.m_SCREEN_HEIGHT));
     }
 }
 
-vector <SDL_Texture*> WorldMap::drawMap(SDL_Renderer* renderer)
+void WorldMap::drawMap()
 {
-    cameraDstRect1.x = 0;
-    cameraDstRect1.y = 0;
-    cameraDstRect1.w = 1920 - cameraRect.x;
-    cameraDstRect1.h = 1080 - cameraRect.y;
+    SDL_Rect src = {0, 0, 1920, 1080};
 
-    cameraSrcRect1.x = cameraRect.x;
-    cameraSrcRect1.y = cameraRect.y;
-    cameraSrcRect1.w = cameraDstRect1.w;
-    cameraSrcRect1.h = cameraDstRect1.h;
+    for (int i = 0; i < allImages; i++)
+    {
+        SDL_Rect world_space  = {1920 * (i % imagesPerChunk), 1080 * (i / imagesPerChunk), 1920, 1080};
 
-    cameraDstRect2.x = cameraDstRect1.w;
-    cameraDstRect2.y = 0;
-    cameraDstRect2.w = cameraRect.w - cameraDstRect1.w;
-    cameraDstRect2.h = cameraDstRect1.h;
+        SDL_Rect screen_space =
+        {
+            zoom_lvl * (world_space.x - cameraRect.x),
+            zoom_lvl * (world_space.y - cameraRect.y),
+            zoom_lvl * world_space.w,
+            zoom_lvl * world_space.h
+        };
 
-    cameraSrcRect2.x = 0;
-    cameraSrcRect2.y = cameraRect.y;
-    cameraSrcRect2.w = cameraDstRect2.w;
-    cameraSrcRect2.h = cameraDstRect2.h;
+        SDL_RenderCopy(world.m_main_renderer, mapPieces[i], &src, &screen_space);
+    }
+}
 
-    cameraDstRect3.x = 0;
-    cameraDstRect3.y = cameraDstRect1.h;
-    cameraDstRect3.w = cameraDstRect1.w;
-    cameraDstRect3.h = cameraRect.h - cameraDstRect1.h;
+void WorldMap::moveWithMouse()
+{
+    if(world.m_drag)
+    {
+        mouseDragDistance.x = world.m_mouse.x - currentPos.x;
+        mouseDragDistance.y = world.m_mouse.y - currentPos.y;
 
-    cameraSrcRect3.x = cameraRect.x;
-    cameraSrcRect3.y = 0;
-    cameraSrcRect3.w = cameraDstRect3.w ;
-    cameraSrcRect3.h = cameraDstRect3.h;
+        cameraRect.x = cameraPosBeforeDrag.x - mouseDragDistance.x;
+        cameraRect.y = cameraPosBeforeDrag.y - mouseDragDistance.y;
+    }
+    else if(!world.m_drag)
+    {
+        currentPos.x = world.m_mouse.x;
+        currentPos.y = world.m_mouse.y;
 
-    cameraDstRect4.x = cameraDstRect2.x;
-    cameraDstRect4.y = cameraDstRect3.y;
-    cameraDstRect4.w = cameraDstRect2.w;
-    cameraDstRect4.h = cameraDstRect3.h;
+        cameraPosBeforeDrag.x = cameraRect.x;
+        cameraPosBeforeDrag.y = cameraRect.y;
+    }
+}
 
-    cameraSrcRect4.x = 0;
-    cameraSrcRect4.y = 0;
-    cameraSrcRect4.w = cameraDstRect4.w;
-    cameraSrcRect4.h = cameraDstRect4.h;
+void WorldMap::openCity(SDL_Rect cityRect)
+{
+    SDL_Rect cityScreenRect;
 
-    //Calculating the src rect
+    cityScreenRect = cityRect;
 
+    cityScreenRect.x = cityRect.x - cameraRect.x;
+    cityScreenRect.y = cityRect.y - cameraRect.y;
 
-    //cout << cameraSrcRect1.x << " " << cameraSrcRect1.y << " " << cameraSrcRect1.w << " " << cameraSrcRect1.h << endl;
-    //cout << cameraDstRect1.x << " " << cameraDstRect1.y << " " << cameraDstRect1.w << " " << cameraDstRect1.h << endl;
-    //cout << cameraSrcRect2.x << " " << cameraSrcRect2.y << " " << cameraSrcRect2.w << " " << cameraSrcRect2.h << endl << endl;
+    if(world.m_mouseIsPressed)
+    {
+        if(checkForMouseCollision(world.m_mouse.x, world.m_mouse.y, cityScreenRect))
+        {
+            cout << "Clicked: " << world.m_mouse.x << " " << world.m_mouse.y << endl;
+        }
+    }
+}
 
-    SDL_RenderCopy(renderer, mapPieces[3], &cameraSrcRect1, &cameraDstRect1);
-    SDL_RenderCopy(renderer, mapPieces[1], &cameraSrcRect2, &cameraDstRect2);
-    SDL_RenderCopy(renderer, mapPieces[1], &cameraSrcRect3, &cameraDstRect3);
-    SDL_RenderCopy(renderer, mapPieces[3], &cameraSrcRect4, &cameraDstRect4);
+void WorldMap::drawArmy(mapObject* army)
+{
+    SDL_Rect screen_space =
+    {
+        zoom_lvl * (army -> objRect.x - cameraRect.x),
+        zoom_lvl * (army -> objRect.y - cameraRect.y),
+        zoom_lvl * army -> objRect.w,
+        zoom_lvl * army -> objRect.h
+    };
+
+    if(world.m_mouseIsDoubleClicked && checkForMouseCollision(world.m_mouse.x, world.m_mouse.y, screen_space))
+    {
+        m_selectedArmy.objRect.x = (screen_space.x - 5);
+        m_selectedArmy.objRect.y = (screen_space.y - 5);
+        m_selectedArmy.objRect.w = (screen_space.w + 10);
+        m_selectedArmy.objRect.h = (screen_space.h + 10);
+
+        borderActive = true;
+    }
+    if(zoom_lvl < 0.6)
+    {
+        SDL_RenderCopy(world.m_main_renderer, NextButtonTexture, NULL, &(screen_space));
+    }
+    else if(zoom_lvl > 1)
+    {
+        SDL_RenderCopy(world.m_main_renderer, m_selectedArmy.objTexture, NULL, &(screen_space));
+    }
+    else
+    {
+        SDL_RenderCopy(world.m_main_renderer, army -> objTexture, NULL, &(screen_space));
+    }
+}
+
+void WorldMap::updateArmy(mapObject* army)
+{
+    zoom_lvl = world.m_SCREEN_WIDTH / (0.0 + cameraRect.w);
+
+    SDL_Rect armyScreenRect;
+
+    armyScreenRect = army -> objRect;
+
+    armyScreenRect.x = (army -> objRect.x - cameraRect.x);
+    armyScreenRect.y = (army -> objRect.y - cameraRect.y);
+
+    if(world.m_mouseIsPressed && borderActive)
+    {
+        if(!checkForMouseCollision(world.m_mouse.x, world.m_mouse.y, armyScreenRect))
+        {
+            army -> dstRect.x = (world.m_mouse.x - army -> objRect.w / 2) / zoom_lvl + cameraRect.x;
+            army -> dstRect.y = (world.m_mouse.y - army -> objRect.h / 2) / zoom_lvl + cameraRect.y;
+
+            borderActive = false;
+
+            army -> mooving = true;
+        }
+    }
+
+    if(army -> mooving)
+    {
+        armyDirection.x = army -> dstRect.x - army -> objRect.x;
+        armyDirection.y = army -> dstRect.y - army -> objRect.y;
+
+        moveRatio = (double)armyDirection.x / (double)armyDirection.y;
+
+        if(armyDirection.x < 0)
+        {
+            army -> coor.x += speed * fabs(moveRatio) * -1.0;
+        }
+        else
+        {
+           army -> coor.x += speed * fabs(moveRatio);
+        }
+
+        if(armyDirection.y < 0)
+        {
+            army -> coor.y += speed * -1.0 / fabs(moveRatio);
+        }
+        else
+        {
+           army -> coor.y += speed / fabs(moveRatio);
+        }
+
+        army -> objRect.x = army -> coor.x;
+        army -> objRect.y = army -> coor.y;
+
+        if(abs(army -> dstRect.x - army -> objRect.x) < 5)
+        {
+            army -> mooving = false;
+        }
+    }
+   /// D(zoom_lvl);
 }

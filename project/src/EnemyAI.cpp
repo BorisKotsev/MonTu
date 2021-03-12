@@ -1,6 +1,8 @@
 #include "EnemyAI.h"
 #include "World.h"
 
+#include "defines.h"
+
 extern World world;
 
 EnemyAI::EnemyAI()
@@ -39,12 +41,12 @@ void EnemyAI::takeBattlefield()
 
 void EnemyAI::chooseBestActionForUnit(Squad* squad)
 {
-    Tile* startPosition = squad->m_tileTaken;
-    vector<Tile*> availableToWalkTiles = world.m_battle.showAvailableWalkTiles(squad);
-    int bestScore = 0;
-    Tile* bestPosition;
-    Squad* bestVictim;
-    int score;
+    startPosition = squad->m_tileTaken;
+    availableToWalkTiles = world.m_battle.showAvailableWalkTiles(squad);
+    bestPosition = nullptr;
+    bestVictim = nullptr;
+    bestScore = 0;
+    bool willAttack = false;
     /// Go trough all available to walk tiles and choose the best move
     for (vector <Tile*> :: iterator it = availableToWalkTiles.begin(); it != availableToWalkTiles.end(); it ++)
     {
@@ -57,11 +59,14 @@ void EnemyAI::chooseBestActionForUnit(Squad* squad)
             score = 0;
             if (world.m_battle.canShoot(squad, (*squadIt)->m_mapCoor))
             {
-                score = squad->m_attackDamage;
+                /// f( currentHealth / maxHealth * peaceValue / count )
+                /// TO-DO add count
+                score = (*squadIt) -> m_health / (*squadIt) -> m_startHealth * valueSquadMap[(*squadIt) -> m_type];
                 if (world.m_battle.canShoot((*squadIt), squad->m_mapCoor))
                 {
-                    score -= (*squadIt)->m_attackDamage / 2;
+                    score -= (*squadIt)->m_attackDamage * valueSquadMap[squad -> m_type];
                 }
+                D(score);
             }
             if (score > bestScore)
             {
@@ -80,6 +85,8 @@ void EnemyAI::chooseBestActionForUnit(Squad* squad)
         {
             squad->attack(bestVictim);
         }
+    }else{
+
     }
 }
 

@@ -1,4 +1,4 @@
-Img: crossbowmen.bmp
+Img: crossbowmen.bmp crossbowmen.bmp
 Width_Height: 50 50
 
 Health: 100

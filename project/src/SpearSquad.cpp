@@ -33,7 +33,14 @@ SpearSquad::SpearSquad(const SpearSquad& model, coordinates* cameraOffset, Tile*
     m_attackRange = m_startAttackRange;
     m_faith = m_startFaith;
 
-    m_objectTexture = model.m_objectTexture;
+    if(owner == PLAYER1)
+    {
+        m_objectTexture = model.m_playerTexture;
+    }
+    else
+    {
+        m_objectTexture = model.m_enemyTexture;
+    }
 
     m_renderer = model.m_renderer;
 
@@ -53,6 +60,7 @@ SpearSquad::~SpearSquad()
 
 void SpearSquad::attack(Squad* defender)
 {
+    cout << __LINE__ << endl;
     coordinates defenderCoor;
     defenderCoor.x = defender->m_objectRect.x;
     defenderCoor.y = defender->m_objectRect.y;
@@ -92,8 +100,10 @@ void SpearSquad::attack(Squad* defender)
         neighbor = world.m_battle.giveNeighbor(defender->m_mapCoor, 4);
     }
 
+    cout << __LINE__ << endl;
     if(neighbor != NULL)
     {
+        cout << __LINE__ << endl;
         defender->m_path.push(neighbor);
     }
 }

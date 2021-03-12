@@ -16,6 +16,21 @@ class EnemyAI
         vector<Squad*> m_aiSquads;
         vector<Squad*> m_playerSquads;
 
+        Tile* startPosition;
+        vector<Tile*> availableToWalkTiles;
+        double score;
+        double bestScore;
+        Tile* bestPosition;
+        Squad* bestVictim;
+
+        map<SQUAD, unsigned short> valueSquadMap{
+            {ARCHER, 4},
+            {WARRIOR, 1},
+            {SPEARMEN, 2},
+            {CROSSBOWMEN, 5},
+            {KNIGHTS, 7}
+        };
+
         void takeBattlefield();
         void makeTurn();
         void returnBattlefield();
@@ -27,5 +42,6 @@ class EnemyAI
         void chooseBestActionForUnit(Squad* squad);
 
 };
+
 
 #endif // ENEMYAI_H

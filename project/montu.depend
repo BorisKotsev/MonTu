@@ -2371,3 +2371,588 @@
 	"World.h"
 	"squad_manager.h"
 
+1608326394 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\building.cpp
+	"Building.h"
+	"Battle.h"
+	"World.h"
+
+1602614096 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\building.h
+	<chrono>
+	<Tile.h>
+
+1602615353 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\tile.h
+	<string>
+	<fstream>
+	<iostream>
+	"defines.h"
+	"Engine.h"
+
+1615538256 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\defines.h
+	<cmath>
+	<vector>
+	<map>
+	<SDL2/SDL.h>
+	<vector>
+	<string>
+
+1595622974 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_assert.h"
+	"SDL_atomic.h"
+	"SDL_audio.h"
+	"SDL_clipboard.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_filesystem.h"
+	"SDL_gamecontroller.h"
+	"SDL_haptic.h"
+	"SDL_hints.h"
+	"SDL_joystick.h"
+	"SDL_loadso.h"
+	"SDL_log.h"
+	"SDL_messagebox.h"
+	"SDL_mutex.h"
+	"SDL_power.h"
+	"SDL_render.h"
+	"SDL_rwops.h"
+	"SDL_sensor.h"
+	"SDL_shape.h"
+	"SDL_system.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_version.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<wchar.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<math.h>
+	<float.h>
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	<sal.h>
+	"begin_code.h"
+	"close_code.h"
+
+1595622975 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_config.h
+	"SDL_platform.h"
+
+1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_platform.h
+	"AvailabilityMacros.h"
+	"TargetConditionals.h"
+	<winapifamily.h>
+	"begin_code.h"
+	"close_code.h"
+
+1595622982 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\begin_code.h
+
+1595622982 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\close_code.h
+
+1595622974 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_assert.h
+	"SDL_config.h"
+	"begin_code.h"
+	<signal.h>
+	"close_code.h"
+
+1595622974 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_atomic.h
+	"SDL_stdinc.h"
+	"SDL_platform.h"
+	"begin_code.h"
+	<sys/cpuinline.h>
+	<mbarrier.h>
+	"close_code.h"
+
+1595622974 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622975 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622975 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622981 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_atomic.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	<process.h>
+	<stdlib.h>
+	"close_code.h"
+
+1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622974 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_clipboard.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622975 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	<intrin.h>
+	<intrin.h>
+	<altivec.h>
+	<arm_neon.h>
+	<armintr.h>
+	<arm_neon.h>
+	<armintr.h>
+	<arm_neon.h>
+	<mm3dnow.h>
+	<immintrin.h>
+	<mmintrin.h>
+	<xmmintrin.h>
+	<emmintrin.h>
+	<pmmintrin.h>
+	"begin_code.h"
+	"close_code.h"
+
+1595622976 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_quit.h"
+	"SDL_gesture.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622981 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_pixels.h
+	"SDL_stdinc.h"
+	"SDL_endian.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_rect.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_pixels.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622980 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_surface.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_blendmode.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622974 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_blendmode.h
+	"begin_code.h"
+	"close_code.h"
+
+1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keycode.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_keycode.h
+	"SDL_stdinc.h"
+	"SDL_scancode.h"
+
+1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_scancode.h
+	"SDL_stdinc.h"
+
+1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622976 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_gamecontroller.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1595622976 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_gesture.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622981 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_touch.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622976 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_filesystem.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622976 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_haptic.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622976 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_hints.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_log.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_messagebox.h
+	"SDL_stdinc.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_power.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_render.h
+	"SDL_stdinc.h"
+	"SDL_rect.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_sensor.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_shape.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622980 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_system.h
+	"SDL_stdinc.h"
+	"SDL_keyboard.h"
+	"SDL_render.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622981 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1595622981 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1615538256 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\engine.h
+	<cmath>
+	<vector>
+	<string>
+	<iostream>
+	<SDL2/SDL.h>
+	"SDL2/SDL_TTF.h"
+	"defines.h"
+
+1595622981 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_ttf.h
+	"SDL.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608759126 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle.h
+	<iostream>
+	<fstream>
+	<vector>
+	<string>
+	<ctime>
+	<cstdlib>
+	<time.h>
+	<windows.h>
+	<SDL2/SDL.h>
+	"EnemyAI.h"
+	"ArmyManager.h"
+	"PopUpWriter.h"
+	"Tile.h"
+	"Squad.h"
+	"SpearSquad.h"
+	"HookSquad.h"
+
+1613597338 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\enemyai.h
+	<vector>
+	<Tile.h>
+	<Squad.h>
+
+1615538256 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\squad.h
+	<string>
+	<fstream>
+	<iostream>
+	<stack>
+	"defines.h"
+	"Engine.h"
+	"Tile.h"
+	"HealthManager.h"
+
+1601812574 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\healthmanager.h
+	<iostream>
+	<fstream>
+	<vector>
+	<string>
+	<ctime>
+	<cstdlib>
+	<time.h>
+	<windows.h>
+	<SDL2/SDL.h>
+	"Engine.h"
+	"defines.h"
+
+1604073821 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\armymanager.h
+	<iostream>
+	<fstream>
+	"defines.h"
+
+1597790017 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\popupwriter.h
+	<iostream>
+	<fstream>
+	<vector>
+	<string>
+	<ctime>
+	<cstdlib>
+	<time.h>
+	<SDL2/SDL.h>
+	"defines.h"
+	"Engine.h"
+
+1608406895 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\spearsquad.h
+	"Squad.h"
+
+1608754549 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\hooksquad.h
+	"Squad.h"
+
+1615538256 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\world.h
+	<iostream>
+	<fstream>
+	<vector>
+	<string>
+	<ctime>
+	<cstdlib>
+	<time.h>
+	<windows.h>
+	<SDL2/SDL.h>
+	"ConfigManager.h"
+	"SoundManager.h"
+	"HealthManager.h"
+	"PopUpWriter.h"
+	"PickAndBan.h"
+	"PlayerStatsManager.h"
+	"Battle.h"
+	"Menu.h"
+	"Engine.h"
+	"squad_manager.h"
+	"castleUI.h"
+	"WorldMap.h"
+
+1608759240 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\configmanager.h
+	<SDL2/SDL.h>
+	<string>
+	"Tile.h"
+	"Building.h"
+	"HealthManager.h"
+	"SpearSquad.h"
+	"HookSquad.h"
+
+1595622985 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\soundmanager.h
+	<SDL2/SDL_mixer.h>
+	<SDL2/SDL.h>
+	<fstream>
+	<string>
+	<iostream>
+
+1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1597789859 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\pickandban.h
+	<vector>
+	<fstream>
+	<iostream>
+	"defines.h"
+	"Engine.h"
+
+1603746222 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\playerstatsmanager.h
+	<iostream>
+	<fstream>
+	<queue>
+	"defines.h"
+
+1608580831 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\menu.h
+	<iostream>
+	<fstream>
+	<vector>
+	<string>
+	<ctime>
+	<cstdlib>
+	<time.h>
+	<windows.h>
+	<SDL2/SDL.h>
+	"defines.h"
+
+1615538257 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\squad_manager.h
+	"defines.h"
+	<cstring>
+	<cstdio>
+
+1615540705 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\castleui.h
+	<SDL2/SDL.h>
+	"Engine.h"
+	"defines.h"
+
+1615538256 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\worldmap.h
+	<iostream>
+	<fstream>
+	<SDL2/SDL.h>
+	<ctime>
+	<vector>
+	<time.h>
+	<cmath>
+	"Engine.h"
+	"defines.h"
+
+1608759254 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\configmanager.cpp
+	"ConfigManager.h"
+	<fstream>
+
+1613597234 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\enemyai.cpp
+	"EnemyAI.h"
+	"World.h"
+	"defines.h"
+
+1611239836 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\fpsmanager.cpp
+	"FPSManager.h"
+	<SDL2/SDL.h>
+
+1611239540 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\fpsmanager.h
+
+1601812740 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\healthmanager.cpp
+	"HealthManager.h"
+
+1613245536 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\menu.cpp
+	"Menu.h"
+	"World.h"
+
+1603395369 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\pickandban.cpp
+	"PickAndBan.h"
+
+1603746561 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\playerstatsmanager.cpp
+	"PlayerStatsManager.h"
+
+1597700720 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\popupwriter.cpp
+	"PopUpWriter.h"
+
+1597791487 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\soundmanager.cpp
+	"SoundManager.h"
+
+1603745106 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\tile.cpp
+	"Tile.h"
+

@@ -15,8 +15,8 @@ struct createSquadElement {
     string m_typeName;
     unsigned short m_numberOfSoldiers;
     SQUAD m_type;
-    coordinates m_upBtnCoor;
-    coordinates m_downBtnCoor;
+    SDL_Rect m_upBtnRect;
+    SDL_Rect m_downBtnRect;
 
 };
 
@@ -31,6 +31,9 @@ class castleUI
 
         SDL_Rect m_tabButtons[3];
         SDL_Renderer* m_renderer;
+
+        coordinates m_startOfCreateSquad;
+        unsigned short m_createSquadMargin;
 
         /// city squad
         Button m_hoveredSlot;

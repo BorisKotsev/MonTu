@@ -27,6 +27,7 @@ void castleUI::init(string configFile, string cityName, SDL_Renderer* renderer)
     string tmp;
     string mainWindow[3];
     string slotTexture;
+    string arrowTextureLocation;
 
     USHORT margin;
     USHORT slotSize;
@@ -51,13 +52,15 @@ void castleUI::init(string configFile, string cityName, SDL_Renderer* renderer)
     /// Create Squad
     stream >> tmp >> m_startOfCreateSquad.x >> m_startOfCreateSquad.y;
     stream >> tmp >> m_createSquadMargin;
-    stream >> tmp >> m_arrowTextureLocation;
+    stream >> tmp >> arrowTextureLocation;
 
     stream.close();
 
     m_mainWindow[0].objTexture = LoadTexture(mainWindow[0], m_renderer);
     m_mainWindow[1].objTexture = LoadTexture(mainWindow[1], m_renderer);
     m_mainWindow[2].objTexture = LoadTexture(mainWindow[2], m_renderer);
+
+    m_arrowTexture = LoadTexture(arrowTextureLocation, m_renderer);
 
     /// Save the data needed for the hover animation of every slot, when hovered
     m_hoveredSlot.startRect.w = slotSize;
@@ -270,7 +273,7 @@ void castleUI::loadData(string configFile)
         dataBuff = new soldier;
         squadBuff = new squadSlot;
         stream >> tmp >> squadBuff->data.health >> tmp >> squadBuff->data.coord.y >> squadBuff->data.coord.x;
-        dataBuff->type = type;
+        dataBuff->type = (SQUAD)type;
         dataBuff->health = squadBuff->data.health;
         squadBuff->data.type = (SQUAD)type;
         squadBuff->bonusW = m_hoveredSlot.bonusW;
@@ -351,10 +354,10 @@ void castleUI::updateCreateSquad()
         /// Update the main ones
         for (unsigned short i = 0; i < m_createSquadEl.size(); i ++)
         {
-            if(checkForMouseCollision(world.m_mouse.x, world.m_mouse.y, m_createSquadEl[i].m_upBtnCoor, m_arrowSize))
+            if(checkForMouseCollision(world.m_mouse.x, world.m_mouse.y, m_createSquadEl[i].m_upBtnRect))
             {
                 cout << "The up btn for the " << i << " element is pressed \n";
-            }else if (checkForMouseCollision(world.m_mouse.x, world.m_mouse.y, m_createSquadEl[i].m_downBtnCoor, m_arrowSize))
+            }else if (checkForMouseCollision(world.m_mouse.x, world.m_mouse.y, m_createSquadEl[i].m_downBtnRect))
             {
                 cout << "The down btn for the " << i << " element is pressed \n";
             }

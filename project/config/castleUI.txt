@@ -9,3 +9,15 @@ margin: 50
 slotSize: 100
 bonusSlotSize: 15
 texture: slot.bmp
+
+startOfCreateSquad: 465 288
+margin: 15
+arrowTexture: arrow.bmp
+startOfArrow: 356
+createSquadWindow: createSquadWindow.bmp 1101 295 354 507
+squadElWidth: 100
+arrowSize: 30
+startOfNewSquadWindow: 1135 335
+newSquadMargin: 25
+newSquadWidth: 60
+newSquadArrowWidth: 20

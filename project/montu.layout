@@ -2,9 +2,134 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
+	<File name="src\SpearSquad.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1084" topLine="85" />
+		</Cursor>
+	</File>
+	<File name="src\WorldMap.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="38" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\PlayerStatsManager.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="590" topLine="11" />
+		</Cursor>
+	</File>
+	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1507" topLine="41" />
+		</Cursor>
+	</File>
+	<File name="src\Engine.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4546" topLine="156" />
+		</Cursor>
+	</File>
+	<File name="include\World.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="599" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="144" topLine="8" />
+		</Cursor>
+	</File>
+	<File name="include\ArmyManager.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="135" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Menu.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6265" topLine="186" />
+		</Cursor>
+	</File>
+	<File name="src\SoundManager.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="719" topLine="27" />
+		</Cursor>
+	</File>
+	<File name="src\Squad.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="651" topLine="24" />
+		</Cursor>
+	</File>
+	<File name="src\PickAndBan.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="983" topLine="40" />
+		</Cursor>
+	</File>
+	<File name="src\Tile.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="145" topLine="6" />
+		</Cursor>
+	</File>
+	<File name="include\castleUI.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1365" topLine="57" />
+		</Cursor>
+	</File>
+	<File name="include\SoundManager.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="367" topLine="8" />
+		</Cursor>
+	</File>
+	<File name="include\Battle.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1697" topLine="44" />
+		</Cursor>
+	</File>
 	<File name="include\Tile.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="592" topLine="17" />
+		</Cursor>
+	</File>
+	<File name="include\defines.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="650" topLine="29" />
+		</Cursor>
+	</File>
+	<File name="include\Building.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="139" topLine="4" />
+		</Cursor>
+	</File>
+	<File name="src\ArmyManager.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="992" topLine="38" />
+		</Cursor>
+	</File>
+	<File name="include\Squad.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="506" topLine="12" />
+		</Cursor>
+	</File>
+	<File name="include\WorldMap.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="405" topLine="52" />
+		</Cursor>
+	</File>
+	<File name="src\Battle.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="24735" topLine="692" />
+		</Cursor>
+	</File>
+	<File name="include\PopUpWriter.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="465" topLine="18" />
+		</Cursor>
+	</File>
+	<File name="src\Building.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7759" topLine="229" />
+		</Cursor>
+	</File>
+	<File name="include\PickAndBan.h" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="361" topLine="13" />
+		</Cursor>
+	</File>
+	<File name="include\SpearSquad.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="361" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="include\HealthManager.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -12,14 +137,34 @@
 			<Cursor1 position="499" topLine="13" />
 		</Cursor>
 	</File>
+	<File name="src\ConfigManager.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="474" topLine="15" />
+		</Cursor>
+	</File>
+	<File name="src\EnemyAI.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="982" topLine="71" />
+		</Cursor>
+	</File>
+	<File name="include\Engine.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1149" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Healer.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1060" topLine="34" />
+		</Cursor>
+	</File>
+	<File name="include\ConfigManager.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="22" />
+		</Cursor>
+	</File>
 	<File name="src\HealthManager.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="340" topLine="16" />
-		</Cursor>
-	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2165" topLine="1" />
 		</Cursor>
 	</File>
 	<File name="include\EnemyAI.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -32,50 +177,26 @@
 			<Cursor1 position="1264" topLine="20" />
 		</Cursor>
 	</File>
-	<File name="include\Squad.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\Menu.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="506" topLine="12" />
+			<Cursor1 position="1018" topLine="38" />
 		</Cursor>
 	</File>
-	<File name="include\Battle.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\squad_manager.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1697" topLine="44" />
+			<Cursor1 position="644" topLine="11" />
 		</Cursor>
 	</File>
-	<File name="src\Healer.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\castleUI.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1060" topLine="34" />
-		</Cursor>
-	</File>
-	<File name="src\ArmyManager.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="992" topLine="38" />
-		</Cursor>
-	</File>
-	<File name="src\castleUI.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5741" topLine="78" />
+			<Cursor1 position="15072" topLine="373" />
 		</Cursor>
 		<Folding>
-			<Collapse line="86" />
-			<Collapse line="304" />
-			<Collapse line="334" />
+			<Collapse line="258" />
+			<Collapse line="350" />
+			<Collapse line="366" />
+			<Collapse line="394" />
 		</Folding>
-	</File>
-	<File name="include\ArmyManager.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="284" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\ConfigManager.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="474" topLine="15" />
-		</Cursor>
-	</File>
-	<File name="src\Battle.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="24735" topLine="692" />
-		</Cursor>
 	</File>
 	<File name="src\PopUpWriter.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
@@ -85,137 +206,17 @@
 			<Collapse line="13" />
 		</Folding>
 	</File>
-	<File name="include\Building.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\World.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="139" topLine="4" />
+			<Cursor1 position="4176" topLine="164" />
 		</Cursor>
 	</File>
-	<File name="src\EnemyAI.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+	<File name="src\squad_manager.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="982" topLine="71" />
-		</Cursor>
-	</File>
-	<File name="include\ConfigManager.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="22" />
-		</Cursor>
-	</File>
-	<File name="src\Engine.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2218" topLine="84" />
-		</Cursor>
-	</File>
-	<File name="include\Engine.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="846" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\squad_manager.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3296" topLine="77" />
+			<Cursor1 position="3296" topLine="99" />
 		</Cursor>
 		<Folding>
 			<Collapse line="50" />
 		</Folding>
-	</File>
-	<File name="include\PickAndBan.h" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="361" topLine="13" />
-		</Cursor>
-	</File>
-	<File name="include\PlayerStatsManager.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="590" topLine="11" />
-		</Cursor>
-	</File>
-	<File name="include\SoundManager.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="367" topLine="8" />
-		</Cursor>
-	</File>
-	<File name="src\SoundManager.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="719" topLine="27" />
-		</Cursor>
-	</File>
-	<File name="include\SpearSquad.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="361" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\PickAndBan.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="983" topLine="40" />
-		</Cursor>
-	</File>
-	<File name="include\WorldMap.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="405" topLine="28" />
-		</Cursor>
-	</File>
-	<File name="src\Squad.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="651" topLine="24" />
-		</Cursor>
-	</File>
-	<File name="include\castleUI.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="366" topLine="16" />
-		</Cursor>
-	</File>
-	<File name="src\WorldMap.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="38" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\Tile.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="145" topLine="6" />
-		</Cursor>
-	</File>
-	<File name="include\defines.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1306" topLine="78" />
-		</Cursor>
-	</File>
-	<File name="src\Menu.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="6265" topLine="186" />
-		</Cursor>
-	</File>
-	<File name="include\Menu.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1018" topLine="38" />
-		</Cursor>
-	</File>
-	<File name="include\World.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="599" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="144" topLine="8" />
-		</Cursor>
-	</File>
-	<File name="src\World.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1689" topLine="41" />
-		</Cursor>
-	</File>
-	<File name="include\squad_manager.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="644" topLine="11" />
-		</Cursor>
-	</File>
-	<File name="src\SpearSquad.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1084" topLine="85" />
-		</Cursor>
-	</File>
-	<File name="include\PopUpWriter.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="465" topLine="18" />
-		</Cursor>
-	</File>
-	<File name="src\Building.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="7759" topLine="229" />
-		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

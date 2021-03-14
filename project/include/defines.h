@@ -143,9 +143,8 @@ struct color
 };
 struct soldier{
     SQUAD type;
-    int health;
     coordinates coord;
-    unsigned int numberOfSoldiers;
+    unsigned short numberOfSoldiers;
 };
 
 struct squad_data{

@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
     world.m_playerStatsManager.writeAllValues();
 
 
-    world.m_gameState = WORLD_MAP;
+    world.m_gameState = MENU;
 
     while(true)
     {

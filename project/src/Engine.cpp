@@ -133,7 +133,8 @@ void write(string text, coordinates coor, SDL_Renderer* renderer, int FONT_SIZE)
     SDL_Color fcolor;
     TTF_Font* font;
 
-    string str = "ttf/Roboto-Regular.ttf";
+    string str = "ttf/Perpetua-Titling-MT.ttf";
+    // Basically translates to pixel size
     font = TTF_OpenFont(str.c_str(), FONT_SIZE);
 
     if (font == NULL)
@@ -143,8 +144,8 @@ void write(string text, coordinates coor, SDL_Renderer* renderer, int FONT_SIZE)
     }
 
     fcolor.r = 255;
-    fcolor.g = 255;
-    fcolor.b = 255;
+    fcolor.g = 164;
+    fcolor.b = 92;
     const char* t = text.c_str();
     surface = TTF_RenderText_Solid(font, t, fcolor);
     texture = SDL_CreateTextureFromSurface(renderer, surface);
@@ -166,4 +167,9 @@ bool checkForCollisionBetweenRects(SDL_Rect rect1, SDL_Rect rect2)
         return true;
     }
     return false;
+}
+
+unsigned short alignCenter(unsigned short fullSpace, unsigned short objWidth)
+{
+    return (fullSpace - objWidth) / 2;
 }

@@ -2995,20 +2995,20 @@
 	<fstream>
 	<iostream>
 
-1616061818 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\world.cpp
+1616173904 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\world.cpp
 	"World.h"
 
 1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\worldmap.cpp
 	"WorldMap.h"
 	"World.h"
 
-1616173506 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\main.cpp
+1616175335 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\main.cpp
 	<SDL2/SDL.h>
 	"World.h"
 	"FPSManager.h"
 	"WorldBuilding.h"
 
-1616067775 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\castleui.cpp
+1616175124 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\castleui.cpp
 	"castleUI.h"
 	"World.h"
 	"squad_manager.h"
@@ -3123,4 +3123,353 @@
 1616173821 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\worldbuilding.cpp
 	"WorldBuilding.h"
 	"World.h"
+
+1616176191 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\castleui.cpp
+	"castleUI.h"
+	"World.h"
+	"squad_manager.h"
+
+1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\armymanager.cpp
+	"ArmyManager.h"
+	"World.h"
+
+1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\battle.cpp
+	"Battle.h"
+	"World.h"
+
+1613597234 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\enemyai.cpp
+	"EnemyAI.h"
+	"World.h"
+	"defines.h"
+
+1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\healer.cpp
+	"Healer.h"
+	"World.h"
+
+1601812740 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\healthmanager.cpp
+	"HealthManager.h"
+
+1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\hooksquad.cpp
+	"HookSquad.h"
+	"World.h"
+
+1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\spearsquad.cpp
+	"SpearSquad.h"
+	"World.h"
+
+1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\squad.cpp
+	"Squad.h"
+
+1616176256 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\squad_manager.cpp
+	"squad_manager.h"
+	<fstream>
+	<iostream>
+
+1616153705 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\archery.cpp
+	"Archery.h"
+
+1616153705 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\armycamp.cpp
+	"ArmyCamp.h"
+	"WorldBuilding.h"
+
+1616153706 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\bridge.cpp
+	"Bridge.h"
+	"WorldBuilding.h"
+
+1616153840 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\building.cpp
+	"Building.h"
+	"WorldBuilding.h"
+
+1616153706 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\buildingui.cpp
+	"BuildingUI.h"
+
+1616153706 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\buttons.cpp
+	"Buttons.h"
+
+1616153706 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\castle.cpp
+	"Castle.h"
+	"WorldBuilding.h"
+
+1616153705 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\shop.cpp
+	"Shop.h"
+
+1616153705 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\street.cpp
+	"Street.h"
+
+1616153705 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\tile.cpp
+	"Tile.h"
+
+1616173346 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\ui.cpp
+	<vector>
+	"Ui.h"
+
+1616155264 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\uiselectable.cpp
+	"UISelectable.h"
+	"World.h"
+
+1616173821 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\worldbuilding.cpp
+	"WorldBuilding.h"
+	"World.h"
+
+1616153949 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\main\configmanager.cpp
+	"ConfigManager.h"
+	<fstream>
+
+1615757384 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\main\engine.cpp
+	"Engine.h"
+
+1611239836 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\main\fpsmanager.cpp
+	"FPSManager.h"
+	<SDL2/SDL.h>
+
+1597791487 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\main\soundmanager.cpp
+	"SoundManager.h"
+
+1616173904 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\main\world.cpp
+	"World.h"
+
+1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\map\worldmap.cpp
+	"WorldMap.h"
+	"World.h"
+
+1613245536 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\menu\menu.cpp
+	"Menu.h"
+	"World.h"
+
+1615538256 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\main\world.h
+	<iostream>
+	<fstream>
+	<vector>
+	<string>
+	<ctime>
+	<cstdlib>
+	<time.h>
+	<windows.h>
+	<SDL2/SDL.h>
+	"ConfigManager.h"
+	"SoundManager.h"
+	"HealthManager.h"
+	"PopUpWriter.h"
+	"PickAndBan.h"
+	"PlayerStatsManager.h"
+	"Battle.h"
+	"Menu.h"
+	"Engine.h"
+	"squad_manager.h"
+	"castleUI.h"
+	"WorldMap.h"
+
+1616153900 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\main\configmanager.h
+	<SDL2/SDL.h>
+	<string>
+	"Tile.h"
+	"Building.h"
+	"HealthManager.h"
+	"SpearSquad.h"
+	"HookSquad.h"
+	"UI.h"
+	"UISelectable.h"
+	"Buttons.h"
+	"Castle.h"
+	"ArmyCamp.h"
+	"Bridge.h"
+
+1616153708 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\tile.h
+	<string>
+	<fstream>
+	<iostream>
+	"defines.h"
+	"Engine.h"
+
+1616154210 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\main\defines.h
+	<cmath>
+	<vector>
+	<map>
+	<SDL2/SDL.h>
+	<vector>
+	<string>
+
+1616177247 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\map
+
+1615757478 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\main\engine.h
+	<cmath>
+	<vector>
+	<string>
+	<iostream>
+	<SDL2/SDL.h>
+	"SDL2/SDL_TTF.h"
+	"defines.h"
+
+1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\building.h
+	<chrono>
+	<Tile.h>
+
+1601812574 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\healthmanager.h
+	<iostream>
+	<fstream>
+	<vector>
+	<string>
+	<ctime>
+	<cstdlib>
+	<time.h>
+	<windows.h>
+	<SDL2/SDL.h>
+	"Engine.h"
+	"defines.h"
+
+1608406895 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\spearsquad.h
+	"Squad.h"
+
+1615538256 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\squad.h
+	<string>
+	<fstream>
+	<iostream>
+	<stack>
+	"defines.h"
+	"Engine.h"
+	"Tile.h"
+	"HealthManager.h"
+
+1608754549 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\hooksquad.h
+	"Squad.h"
+
+1616153708 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\ui.h
+	<string>
+	<fstream>
+	<iostream>
+	"defines.h"
+	"Engine.h"
+	"UISelectable.h"
+
+1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\uiselectable.h
+	<string>
+	<fstream>
+	<iostream>
+	"defines.h"
+	"Engine.h"
+
+1616153708 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\buttons.h
+	<string>
+	<fstream>
+	<iostream>
+	"defines.h"
+	"Engine.h"
+
+1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\castle.h
+	<Building.h>
+
+1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\armycamp.h
+	<Building.h>
+
+1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\bridge.h
+	<Building.h>
+
+1595622985 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\main\soundmanager.h
+	<SDL2/SDL_mixer.h>
+	<SDL2/SDL.h>
+	<fstream>
+	<string>
+	<iostream>
+
+1608759126 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\battle.h
+	<iostream>
+	<fstream>
+	<vector>
+	<string>
+	<ctime>
+	<cstdlib>
+	<time.h>
+	<windows.h>
+	<SDL2/SDL.h>
+	"EnemyAI.h"
+	"ArmyManager.h"
+	"PopUpWriter.h"
+	"Tile.h"
+	"Squad.h"
+	"SpearSquad.h"
+	"HookSquad.h"
+
+1613597338 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\enemyai.h
+	<vector>
+	<Tile.h>
+	<Squad.h>
+
+1604073821 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\armymanager.h
+	<iostream>
+	<fstream>
+	"defines.h"
+
+1608580831 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\menu\menu.h
+	<iostream>
+	<fstream>
+	<vector>
+	<string>
+	<ctime>
+	<cstdlib>
+	<time.h>
+	<windows.h>
+	<SDL2/SDL.h>
+	"defines.h"
+
+1616057477 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\squad_manager.h
+	"defines.h"
+	<cstring>
+	<cstdio>
+
+1616057020 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\castleui.h
+	<SDL2/SDL.h>
+	"Engine.h"
+	"defines.h"
+
+1615538256 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\map\worldmap.h
+	<iostream>
+	<fstream>
+	<SDL2/SDL.h>
+	<ctime>
+	<vector>
+	<time.h>
+	<cmath>
+	"Engine.h"
+	"defines.h"
+
+1611239540 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\main\fpsmanager.h
+
+1616173716 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\worldbuilding.h
+	"Building.h"
+	"BuildingUI.h"
+	<iostream>
+	<fstream>
+	<vector>
+	<string>
+	<ctime>
+	<cstdlib>
+	<time.h>
+	<windows.h>
+	<SDL2/SDL.h>
+	<winuser.h>
+	"HealthManager.h"
+	"ConfigManager.h"
+	"SoundManager.h"
+	"PopUpWriter.h"
+	"PickAndBan.h"
+	"EnemyAI.h"
+	"PlayerStatsManager.h"
+	"ArmyManager.h"
+	"Engine.h"
+	"Tile.h"
+	"Squad.h"
+	"Building.h"
+	"Ui.h"
+	"Buttons.h"
+
+1616153708 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\buildingui.h
+
+1609022202 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\healer.h
+	"Squad.h"
+
+1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\archery.h
+
+1616153708 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\shop.h
+
+1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\street.h
 

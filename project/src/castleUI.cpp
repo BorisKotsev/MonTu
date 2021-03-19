@@ -31,6 +31,7 @@ void castleUI::init(string configFile, string cityName, SDL_Renderer* renderer)
     string slotTexture;
     string arrowTextureLocation;
     string createSquadWindowLocation;
+    string createSquadBtn;
 
     USHORT margin;
     USHORT slotSize;
@@ -65,6 +66,8 @@ void castleUI::init(string configFile, string cityName, SDL_Renderer* renderer)
     stream >> tmp >> m_newSquadMargin;
     stream >> tmp >> m_newSquadWidth;
     stream >> tmp >> m_newSquadArrowWidth;
+    stream >> tmp >> createSquadBtn;
+    stream >> tmp >> m_createSquadButton.startRect.x >> m_createSquadButton.startRect.y >> m_createSquadButton.startRect.w >> m_createSquadButton.startRect.h;
 
     stream.close();
 
@@ -74,6 +77,14 @@ void castleUI::init(string configFile, string cityName, SDL_Renderer* renderer)
 
     m_arrowTexture = LoadTexture(arrowTextureLocation, m_renderer);
     m_createSquadWindow.objTexture = LoadTexture(createSquadWindowLocation, m_renderer);
+
+    /// Initializing the createSquadButton
+    m_createSquadButton.objTexture = LoadTexture(createSquadBtn, m_renderer);
+    m_createSquadButton.maxWidth = 32;
+    m_createSquadButton.maxHeigth = 18;
+    m_createSquadButton.bonusW = 6.4;
+    m_createSquadButton.bonusH = 3.6;
+    m_createSquadButton.objectRect = m_createSquadButton.startRect;
 
     /// Save the data needed for the hover animation of every slot, when hovered
     m_hoveredSlot.startRect.w = slotSize;
@@ -96,6 +107,142 @@ void castleUI::init(string configFile, string cityName, SDL_Renderer* renderer)
             m_colliders[r][c].h = slotSize;
         }
     }
+}
+
+//}
+
+///LOAD
+//{
+void castleUI::loadData(string configFile)
+{
+    fstream stream;
+
+    configFile = "data//squads//soldier data//" + configFile;
+
+    stream.open(configFile);
+
+    USHORT type;
+
+    string tmp;
+
+    squadSlot* squadBuff;
+    soldier* dataBuff;
+    createSquadElement* squadElBuff;
+
+    for (short i = 0; i < 5; i ++)
+    {
+        squadElBuff = new createSquadElement;
+
+        squadElBuff->m_pic.objTexture = loadSquadTexture((SQUAD)(i + 1));
+
+        squadElBuff->m_pic.objRect.x = m_startOfCreateSquad.x;
+        squadElBuff->m_pic.objRect.w = m_squadElWidth - 5;
+        squadElBuff->m_pic.objRect.h = m_squadElWidth - 5;
+
+        squadElBuff->m_upBtnRect = {squadElBuff->m_pic.objRect.x + m_startOfArrows, squadElBuff->m_pic.objRect.y + (m_squadElWidth - 2 * m_arrowSize) / 3, m_arrowSize, m_arrowSize};
+        squadElBuff->m_downBtnRect = {squadElBuff->m_pic.objRect.x + m_startOfArrows, squadElBuff->m_pic.objRect.y + m_arrowSize + (m_squadElWidth - 2 * m_arrowSize) / 3 * 2, m_arrowSize, m_arrowSize};
+        squadElBuff->m_typeName = loadSquadName((SQUAD)(i + 1));
+
+        m_createSquadEl[i] = squadElBuff;
+    }
+
+    for(short i = 0; i < 5; i++)
+    {
+        m_newSquadData[i] = new newSquadData;
+        m_newSquadData[i]->m_numberOfSoldiers = 0;
+
+        m_newSquadData[i]->m_upBtnRect.x = m_startOfNewSquadWindow.x + 180;
+        m_newSquadData[i]->m_upBtnRect.w = m_newSquadArrowWidth;
+        m_newSquadData[i]->m_upBtnRect.h = m_newSquadArrowWidth;
+        m_newSquadData[i]->m_downBtnRect.x = m_startOfNewSquadWindow.x + 180;
+        m_newSquadData[i]->m_downBtnRect.w = m_newSquadArrowWidth;
+        m_newSquadData[i]->m_downBtnRect.h = m_newSquadArrowWidth;
+    }
+
+    while(stream >> type)
+    {
+        dataBuff = new soldier;
+        squadBuff = new squadSlot;
+        stream >> tmp >> dataBuff->numberOfSoldiers >> tmp >> dataBuff->coord.x >> dataBuff->coord.y;
+
+        dataBuff->type = (SQUAD)type;
+        squadBuff->data = dataBuff;
+        squadBuff->bonusW = m_hoveredSlot.bonusW;
+        squadBuff->bonusH = m_hoveredSlot.bonusH;
+        squadBuff->maxWidth = m_hoveredSlot.maxWidth;
+        squadBuff->maxHeigth = m_hoveredSlot.maxHeigth;
+        squadBuff->startRect = m_colliders[squadBuff->data->coord.y][squadBuff->data->coord.x];
+        squadBuff->objectRect = m_colliders[squadBuff->data->coord.y][squadBuff->data->coord.x];
+        squadBuff->objTexture = loadSquadTexture(squadBuff->data->type);
+
+        m_squads.push_back(squadBuff);
+        m_data.push_back(dataBuff);
+        m_createSquadEl[type - 1]->m_numberOfSoldiers += dataBuff->numberOfSoldiers;
+    }
+
+    stream.close();
+
+    updateCreateSquadElements();
+}
+
+SDL_Texture* castleUI::loadSquadTexture(SQUAD type)
+{
+    SDL_Texture* returnData = nullptr;
+
+    D(type);
+
+    switch(type)
+    {
+    case WARRIOR:
+        returnData = LoadTexture("warrior.bmp", m_renderer);
+        break;
+    case ARCHER:
+        returnData = LoadTexture("archer.bmp", m_renderer);
+        break;
+    case SPEARMEN:
+        returnData = LoadTexture("spearmen.bmp", m_renderer);
+        break;
+    case KNIGHTS:
+        returnData = LoadTexture("knights.bmp", m_renderer);
+        break;
+    case CROSSBOWMEN:
+        returnData = LoadTexture("crossbowmen.bmp", m_renderer);
+        break;
+    default:
+        returnData = NULL;
+        break;
+    }
+
+    return  returnData;
+}
+
+string castleUI::loadSquadName(SQUAD type)
+{
+    string returnData;
+
+    switch(type)
+    {
+    case WARRIOR:
+        returnData = "WARRIOR";
+        break;
+    case ARCHER:
+        returnData = "ARCHER";
+        break;
+    case SPEARMEN:
+        returnData = "SPEARMEN";
+        break;
+    case KNIGHTS:
+        returnData = "KNIGHTS";
+        break;
+    case CROSSBOWMEN:
+        returnData = "CROSSBOWMEN";
+        break;
+    default:
+        returnData = "NONE";
+        break;
+    }
+
+    return  returnData;
 }
 
 //}
@@ -258,6 +405,7 @@ void castleUI::updateCitySquad()
 void castleUI::drawCitySquad()
 {
     SDL_RenderCopy(m_renderer, m_hoveredSlot.objTexture, NULL, &(m_hoveredSlot.objectRect));
+
     for(unsigned short i = 0; i < m_squads.size(); i ++)
     {
         if(!world.m_drag)
@@ -272,79 +420,8 @@ void castleUI::drawCitySquad()
             }
         }
     }
+
     SDL_RenderCopy(m_renderer, m_draggedSlot.objTexture, NULL, &(m_draggedSlot.objRect));
-}
-
-void castleUI::loadData(string configFile)
-{
-    fstream stream;
-
-    configFile = "data//" + configFile;
-
-    stream.open(configFile);
-
-    USHORT type;
-
-    string tmp;
-
-    squadSlot* squadBuff;
-    soldier* dataBuff;
-    createSquadElement* squadElBuff;
-
-    for (short i = 0; i < 5; i ++)
-    {
-        squadElBuff = new createSquadElement;
-
-        squadElBuff->m_pic.objTexture = loadSquadTexture((SQUAD)(i + 1));
-
-        squadElBuff->m_pic.objRect.x = m_startOfCreateSquad.x;
-        squadElBuff->m_pic.objRect.w = m_squadElWidth - 5;
-        squadElBuff->m_pic.objRect.h = m_squadElWidth - 5;
-
-        squadElBuff->m_upBtnRect = {squadElBuff->m_pic.objRect.x + m_startOfArrows, squadElBuff->m_pic.objRect.y + (m_squadElWidth - 2 * m_arrowSize) / 3, m_arrowSize, m_arrowSize};
-        squadElBuff->m_downBtnRect = {squadElBuff->m_pic.objRect.x + m_startOfArrows, squadElBuff->m_pic.objRect.y + m_arrowSize + (m_squadElWidth - 2 * m_arrowSize) / 3 * 2, m_arrowSize, m_arrowSize};
-        squadElBuff->m_typeName = loadSquadName((SQUAD)(i + 1));
-
-        m_createSquadEl[i] = squadElBuff;
-    }
-
-    for(short i = 0; i < 5; i++)
-    {
-        m_newSquadData[i] = new newSquadData;
-        m_newSquadData[i]->m_numberOfSoldiers = 0;
-
-        m_newSquadData[i]->m_upBtnRect.x = m_startOfNewSquadWindow.x + 180;
-        m_newSquadData[i]->m_upBtnRect.w = m_newSquadArrowWidth;
-        m_newSquadData[i]->m_upBtnRect.h = m_newSquadArrowWidth;
-        m_newSquadData[i]->m_downBtnRect.x = m_startOfNewSquadWindow.x + 180;
-        m_newSquadData[i]->m_downBtnRect.w = m_newSquadArrowWidth;
-        m_newSquadData[i]->m_downBtnRect.h = m_newSquadArrowWidth;
-    }
-
-    while(stream >> type)
-    {
-        dataBuff = new soldier;
-        squadBuff = new squadSlot;
-        stream >> tmp >> dataBuff->numberOfSoldiers >> tmp >> dataBuff->coord.y >> dataBuff->coord.x;
-
-        dataBuff->type = (SQUAD)type;
-        squadBuff->data = dataBuff;
-        squadBuff->bonusW = m_hoveredSlot.bonusW;
-        squadBuff->bonusH = m_hoveredSlot.bonusH;
-        squadBuff->maxWidth = m_hoveredSlot.maxWidth;
-        squadBuff->maxHeigth = m_hoveredSlot.maxHeigth;
-        squadBuff->startRect = m_colliders[squadBuff->data->coord.x][squadBuff->data->coord.y];
-        squadBuff->objectRect = m_colliders[squadBuff->data->coord.x][squadBuff->data->coord.y];
-        squadBuff->objTexture = loadSquadTexture(squadBuff->data->type);
-
-        m_squads.push_back(squadBuff);
-        m_data.push_back(dataBuff);
-        m_createSquadEl[type - 1]->m_numberOfSoldiers += dataBuff->numberOfSoldiers;
-    }
-
-    stream.close();
-
-    updateCreateSquadElements();
 }
 
 void castleUI::saveData(string configFile)
@@ -363,66 +440,45 @@ void castleUI::saveData(string configFile)
     stream.close();
 }
 
-SDL_Texture* castleUI::loadSquadTexture(SQUAD type)
+void castleUI::removeUnits()
 {
-    SDL_Texture* returnData = nullptr;
-
-    switch(type)
+    for(int i = 0; i < 5; i ++)
     {
-    case WARRIOR:
-        returnData = LoadTexture("warrior.bmp", m_renderer);
-        break;
-    case ARCHER:
-        returnData = LoadTexture("archer.bmp", m_renderer);
-        break;
-    case SPEARMEN:
-        returnData = LoadTexture("spearmen.bmp", m_renderer);
-        break;
-    case KNIGHTS:
-        returnData = LoadTexture("knights.bmp", m_renderer);
-        break;
-    case CROSSBOWMEN:
-        returnData = LoadTexture("crossbowmen.bmp", m_renderer);
-        break;
-    default:
-        break;
+        while(m_newSquadData[i]->m_numberOfSoldiers != 0)
+        {
+            for(int j = 0; j < m_data.size(); j ++)
+            {
+                if(m_data[j]->type != i + 1)
+                {
+                    continue;
+                }
+                if(m_data[j]->numberOfSoldiers >= m_newSquadData[i]->m_numberOfSoldiers)
+                {
+                    D(m_data[j]->numberOfSoldiers);
+                    world.m_squadManager.changeUnits(0, m_data[j]->type, m_data[j]->coord.x, m_data[j]->coord.y, m_data[j]->numberOfSoldiers, -(m_newSquadData[i]->m_numberOfSoldiers));
+                    m_data[j]->numberOfSoldiers -= m_newSquadData[i]->m_numberOfSoldiers;
+                    m_newSquadData[i]->m_numberOfSoldiers = 0;
+                    continue;
+                }
+                if(m_data[j]->numberOfSoldiers != 0)
+                {
+                    world.m_squadManager.changeUnits(0, m_data[j]->type, m_data[j]->coord.x, m_data[j]->coord.y, m_data[j]->numberOfSoldiers, -(m_data[j]->numberOfSoldiers));
+                    m_newSquadData[i]->m_numberOfSoldiers -= m_data[j]->numberOfSoldiers;
+                    m_data[j]->numberOfSoldiers = 0;
+                    break;
+                }
+            }
+        }
     }
-
-    return  returnData;
-}
-
-string castleUI::loadSquadName(SQUAD type)
-{
-    string returnData;
-
-    switch(type)
-    {
-    case WARRIOR:
-        returnData = "WARRIOR";
-        break;
-    case ARCHER:
-        returnData = "ARCHER";
-        break;
-    case SPEARMEN:
-        returnData = "SPEARMEN";
-        break;
-    case KNIGHTS:
-        returnData = "KNIGHTS";
-        break;
-    case CROSSBOWMEN:
-        returnData = "CROSSBOWMEN";
-        break;
-    default:
-        returnData = "NONE";
-        break;
-    }
-
-    return  returnData;
+    ///world.m_squadManager.changeUnits(1, ARCHER, 2, 2, 35, -18);
 }
 
 void castleUI::createSquad()
 {
-    int squadIndex = world.m_squadManager.addSquad(m_cityName);
+    D(m_cityName)
+    int squadIndex = world.m_squadManager.addSquad("TSAREVO");
+
+    D(squadIndex);
 
     for (unsigned short i = 0; i < 5; i ++)
     {
@@ -431,13 +487,14 @@ void castleUI::createSquad()
             world.m_squadManager.addSoldier(squadIndex, m_newSquadData[i]->m_numberOfSoldiers, (SQUAD)i, i % 8, i / 8);
         }
     }
+
+    removeUnits();
 }
 
 void castleUI::updateCreateSquad()
 {
-    if (world.m_mouseIsPressed)
+    if (world.m_mouseIsPressed || world.m_mouseIsDoubleClicked)
     {
-        cout << "MOUSE I PRESSED \n";
         /// Update the main ones
         for (unsigned short i = 0; i < 5; i ++)
         {
@@ -454,9 +511,6 @@ void castleUI::updateCreateSquad()
                 {
                     m_createSquadEl[i]->m_numberOfSoldiers ++;
                     m_newSquadData[i]->m_numberOfSoldiers --;
-                    if(m_createSquadEl[i]->m_numberOfSoldiers <= 0)
-                    {
-                    }
                     updateCreateSquadElements();
                     break;
                 }
@@ -484,13 +538,12 @@ void castleUI::updateCreateSquad()
         }
 
         /// Update the ones in the side menu
+        if(checkForMouseCollision(world.m_mouse.x, world.m_mouse.y, m_createSquadButton.objectRect))
+        {
+            createSquad();
+        }
     }
-    cout << "----------------- \n";
-    for (int i = 0; i < 5; i++)
-    {
-        cout << m_newSquadData[i]->m_numberOfSoldiers << endl;
-    }
-    cout << "----------------- \n";
+    createSquadHover();
 }
 
 void castleUI::updateCreateSquadElements()
@@ -524,7 +577,6 @@ void castleUI::updateCreateSquadElements()
             m_newSquadData[i]->m_upBtnRect.y = m_newSquadData[i]->m_pic.y + (m_newSquadWidth - 2 * m_newSquadArrowWidth) / 3;
             m_newSquadData[i]->m_downBtnRect.y = m_newSquadData[i]->m_pic.y + m_newSquadArrowWidth + (m_newSquadWidth - 2 * m_newSquadArrowWidth) / 3 * 2;
 
-
             drawedUnits ++;
         }
         else
@@ -536,8 +588,6 @@ void castleUI::updateCreateSquadElements()
 
 void castleUI::drawCreateSquad()
 {
-    /// TODO(konstantin#1#) finishCreateSquad
-
     for (unsigned short i = 0; i < 5; i ++)
     {
         if (m_createSquadEl[i]->m_numberOfSoldiers > 0)
@@ -577,5 +627,30 @@ void castleUI::drawCreateSquad()
             write("X " + to_string(m_newSquadData[i]->m_numberOfSoldiers), buff, m_renderer, 36);
         }
     }
+
+    SDL_RenderCopy(m_renderer, m_createSquadButton.objTexture, NULL, &(m_createSquadButton.objectRect));
 }
 
+void castleUI::createSquadHover()
+{
+    if(checkForMouseCollision(world.m_mouse.x, world.m_mouse.y, m_createSquadButton.objectRect))
+    {
+        if(m_createSquadButton.objectRect.w < m_createSquadButton.startRect.w + m_createSquadButton.maxWidth)
+        {
+            m_createSquadButton.currentBonusW += m_createSquadButton.bonusW;
+            m_createSquadButton.currentBonusH += m_createSquadButton.bonusH;
+
+            m_createSquadButton.objectRect.w = m_createSquadButton.startRect.w + m_createSquadButton.currentBonusW;
+            m_createSquadButton.objectRect.h = m_createSquadButton.startRect.h + m_createSquadButton.currentBonusH;
+            m_createSquadButton.objectRect.x = m_createSquadButton.startRect.x - m_createSquadButton.currentBonusW / 2;
+            m_createSquadButton.objectRect.y = m_createSquadButton.startRect.y - m_createSquadButton.currentBonusH / 2;
+        }
+    }
+    else
+    {
+        m_createSquadButton.objectRect = m_createSquadButton.startRect;
+
+        m_createSquadButton.currentBonusW = 0;
+        m_createSquadButton.currentBonusH = 0;
+    }
+}

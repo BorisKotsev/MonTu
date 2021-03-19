@@ -1,0 +1,10 @@
+Img: UISelectable.bmp
+MinSize: 60 60
+MaxSize: 70 70
+Margins: 0
+DrawBegin: 322
+Street: Street_Selectable.bmp 
+Shop: Shop_Selectable.bmp 
+Archery: Archery_Selectable.bmp 
+Castle: Castle_Selectable.bmp
+Sizing: 2 2

@@ -118,17 +118,20 @@ void squad_manager::addSoldier(int squad, int numberOfSoldiers, SQUAD type, int 
     streamf.close();
 }
 
-void squad_manager::addSoldierHealth(int squad, int coordX, int coordY, int currHealth, int value){
+void squad_manager::changeUnits(int squadIndex, SQUAD unitType, int coordX, int coordY, int currUnits, int value){
     ofstream stream;
-    string filename = "soldier_data_" + to_string(squad) + ".txt";
-    string str_search = "HEALTH: " + to_string(currHealth) + ", COORDINATES: " + to_string(coordX) + " " + to_string(coordY);
+    string filename = "soldier_data_" + to_string(squadIndex) + ".txt";
+    string str_search = to_string((int)unitType) + " UNITS: " + to_string(currUnits) + " COORDINATES: " + to_string(coordX) + " " + to_string(coordY);
 
     ifstream infile { "data//squads//soldier data//" + filename };
     string file_contents { istreambuf_iterator<char>(infile), istreambuf_iterator<char>() };
 
-    int newHp = currHealth + value;
+    int newUnits = currUnits + value;
     int indF = file_contents.find(str_search);
-    file_contents.replace(indF, string(str_search).length(), "HEALTH: " + to_string(newHp) + ", COORDINATES: " + to_string(coordX) + " " + to_string(coordY));
+    D(filename);
+    D(str_search);
+    D(indF);
+    file_contents.replace(indF, string(str_search).length(), to_string((int)unitType) + " UNITS: " + to_string(newUnits) + " COORDINATES: " + to_string(coordX) + " " + to_string(coordY));
 
     stream.open("data//squads//soldier data//" + filename);
     stream << file_contents;

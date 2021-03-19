@@ -20,8 +20,26 @@ Squad_Archer: Squads\\archer.txt
 
 Squad_Spearmen: Squads\\spearmen.txt
 
-Squad_Crossbow: Squads\\crossbow.txt
+Squad_Crossbow: Squads\\crossbowmen.txt
 
 Squad_Knights: Squads\\knights.txt
 
-CastleModel: castle.txt
+ArcheryModel: Buildings\\archery.txt
+
+ShopModel: Buildings\\shop.txt
+
+StreetModel: Buildings\\street.txt
+
+CastleModel: Buildings\\castle.txt
+
+ArmyCampModel: Buildings\\army_camp.txt
+
+Bridge: Buildings\\bridge.txt
+
+UIModel: UI\\UI.txt
+
+UISelectableModel: UI\\UISelectable.txt
+
+UISelectableSelectedModel: UI\\UISelectable_selected.txt
+
+Buttons: Buttons\\buttons_building.txt

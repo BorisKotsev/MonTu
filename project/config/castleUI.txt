@@ -21,3 +21,5 @@ startOfNewSquadWindow: 1135 335
 newSquadMargin: 25
 newSquadWidth: 60
 newSquadArrowWidth: 20
+createSquadBtnTexture: createSquadButton.bmp
+creatSquadBtnRect: 1125 703 297 94

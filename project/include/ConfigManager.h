@@ -10,6 +10,12 @@
 
 #include "SpearSquad.h"
 #include "HookSquad.h"
+#include "UI.h"
+#include "UISelectable.h"
+#include "Buttons.h"
+#include "Castle.h"
+#include "ArmyCamp.h"
+#include "Bridge.h"
 
 using namespace std;
 
@@ -34,7 +40,19 @@ public:
     Squad* modelSquadCrossbowmen = NULL;
     Squad* modelSquadKnights = NULL;
 
-    Building* modelCastle = NULL;
+    Castle* modelCastle = NULL;
+    Building* modelArchery = NULL;
+    Building* modelShop = NULL;
+    Building* modelStreet = NULL;
+
+    ArmyCamp* modelArmyCamp = NULL;
+    Bridge* modelBridge = NULL;
+
+    UI* modelUI = NULL;
+    UISelectable* modelUISelectable = NULL;
+    UISelectable* modelUISelectableSelected = NULL;
+
+    Buttons* modelButtons = NULL;
 
     void init(string configFile, SDL_Renderer* renderer, HealthManager* hm);
 

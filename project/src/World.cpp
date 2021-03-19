@@ -133,7 +133,7 @@ void World::input()
         {
             m_mouseIsPressed = true;
         }
-        else if(m_event.button.clicks == 2)
+        else if(m_event.button.clicks >= 2)
         {
             m_mouseIsDoubleClicked = true;
         }

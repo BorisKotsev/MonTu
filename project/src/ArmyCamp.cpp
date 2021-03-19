@@ -1,19 +1,20 @@
-#include "Building.h"
+#include "ArmyCamp.h"
 #include "WorldBuilding.h"
+
 extern WorldBuilding cityView;
 
-Building::Building()
+ArmyCamp::ArmyCamp()
 {
     //ctor
 }
 
-Building::Building(const Building& model/*, Tile* tile, OWNER owner*/)//:Tile(model)
+ArmyCamp::ArmyCamp(const ArmyCamp& model)
 {
-    m_img = model.m_img;
+    m_walkDifficulty = model.m_walkDifficulty;
+    m_objectTexture = model.m_objectTexture;
     m_ownerTextureP1 = model.m_ownerTextureP1;
     m_ownerTextureP2 = model.m_ownerTextureP2;
     m_buildTexture = model.m_buildTexture;
-    m_objectTexture = model.m_objectTexture;
     m_damageTexture = model.m_damageTexture;
     m_height = model.m_height;
     m_width = model.m_width;
@@ -21,24 +22,30 @@ Building::Building(const Building& model/*, Tile* tile, OWNER owner*/)//:Tile(mo
     m_drawState = model.m_drawState;
     m_maxHealth = model.m_maxHealth;
     m_healthPerState = model.m_healthPerState;
+    m_capacity = model.m_capacity;
     m_states = model.m_states;
     m_maxState = model.m_maxState;
     m_duration = model.m_duration;
     m_getPosition = model.m_getPosition;
     m_currState = model.m_currState;
     m_health = model.m_health;
+    m_usedCapacity = model.m_usedCapacity;
     m_constructing = model.m_constructing;
     m_useObject = model.m_useObject;
     m_currTimePoint = steady_clock::now();
+    for (int i = 1; i < (int) COUNT; i++){
+        m_entity[i] = model.m_entity[i];
+        m_entityWaitDuration[i] = model.m_entityWaitDuration[i];
+    }
 
-    m_objectRect = model.m_objectRect;
-
-    m_type = model.m_type;
-
-   // D(m_type);
+    /*m_objectRect.x = tile->m_drawCoordinates.x;
+    m_objectRect.y = tile->m_drawCoordinates.y;
+    m_objectRect.h = cityView.m_hexagonHeight;
+    m_objectRect.w = cityView.m_hexagonWidth;
+    m_owner = owner;*/
 }
 
-Building::~Building()
+ArmyCamp::~ArmyCamp()
 {
     SDL_DestroyTexture(m_objectTexture);
     SDL_DestroyTexture(m_ownerTextureP1);
@@ -47,11 +54,9 @@ Building::~Building()
     SDL_DestroyTexture(m_damageTexture);
 }
 
-void Building::load(ifstream& stream)
+void ArmyCamp::load(ifstream& stream)
 {
     string tmp;
-    stream >> tmp >> m_walkDifficulty;
-    stream >> tmp >> m_img;
     stream >> tmp >> m_ownerImgP1;
     stream >> tmp >> m_ownerImgP2;
     stream >> tmp >> m_buildImg;
@@ -60,24 +65,27 @@ void Building::load(ifstream& stream)
     stream >> tmp >> m_width;
     stream >> tmp >> m_adjustment;
     stream >> tmp >> m_maxHealth;
+    stream >> tmp >> m_capacity;
     stream >> tmp >> m_states;
     stream >> tmp >> m_maxState;
     stream >> tmp >> m_duration;
     stream >> tmp >> m_getPosition;
     stream >> tmp >> m_currState;
     stream >> tmp >> m_health;
+    stream >> tmp >> m_usedCapacity;
     stream >> tmp >> m_constructing;
+    for (int i = 1; i < (int) COUNT; i++){
+        stream >> tmp >> m_entity[i] >> m_entityWaitDuration[i];
+    }
 }
 
-void Building::load(string configFile, SDL_Renderer* renderer)
+void ArmyCamp::load(string configFile, SDL_Renderer* renderer)
 {
-
-    m_type = configFile;
     configFile = "config\\" + configFile;
-
     ifstream stream;
     stream.open(configFile.c_str());
 
+    Tile::load(stream);
     load(stream);
 
     stream.close();
@@ -85,7 +93,9 @@ void Building::load(string configFile, SDL_Renderer* renderer)
     m_objectTexture = LoadTexture(m_img, renderer);
 
     m_ownerTextureP1 = LoadTexture(m_ownerImgP1, renderer);
+    SDL_SetTextureColorMod(m_ownerTextureP1, cityView.m_CP1.r, cityView.m_CP1.g, cityView.m_CP1.b);
     m_ownerTextureP2 = LoadTexture(m_ownerImgP2, renderer);
+    SDL_SetTextureColorMod(m_ownerTextureP2, cityView.m_CP2.r, cityView.m_CP2.g, cityView.m_CP2.b);
 
     m_buildTexture = LoadTexture(m_buildImg, renderer);
 
@@ -93,42 +103,36 @@ void Building::load(string configFile, SDL_Renderer* renderer)
 
     m_healthPerState = m_maxHealth / m_maxState;
 
+    m_useObject = true;
+
     m_drawState.h = m_height;
     m_drawState.w = m_width;
     m_drawState.x = 0;
-}
 
-void Building::setTextureDetails(SDL_Renderer* renderer)
-{
-    if (m_owner == PLAYER1)
-    {
-        SDL_RenderCopyEx(renderer, m_ownerTextureP1, &m_drawState, &m_objectRect, NULL, NULL, SDL_FLIP_NONE);
-    }
-    else if (m_owner == PLAYER2)
-    {
-        SDL_RenderCopyEx(renderer, m_ownerTextureP2, &m_drawState, &m_objectRect, NULL, NULL, SDL_FLIP_NONE);
-    }
-    if (m_constructing)
-    {
-        SDL_RenderCopyEx(renderer, m_buildTexture, &m_drawState, &m_objectRect, NULL, NULL, SDL_FLIP_NONE);
-    }
-    else if (m_health < m_maxHealth)
-    {
-        SDL_RenderCopyEx(renderer, m_damageTexture, &m_drawState, &m_objectRect, NULL, NULL, SDL_FLIP_NONE);
+    for (int i = 1; i < (int) COUNT; i++){
+        m_entityTimePoint[i] = steady_clock::now();
+        m_entityCount[i] = 0;
     }
 }
 
-void Building::limitHealth()
+void ArmyCamp::limitHealth()
 {
     if (m_health >= m_maxHealth)
     {
         m_health = m_maxHealth;
         m_healthPerState = m_maxHealth / (m_states - m_maxState);
+        if (m_constructing)
+        {
+            for (int i = 0; i < (int) COUNT; i++)
+            {
+                m_entityTimePoint[i] = steady_clock::now();
+            }
+        }
         m_constructing = false;
     }
 }
 
-void Building::select()
+void ArmyCamp::select()
 {
     if (cityView.m_selected.x == m_objectRect.x && cityView.m_selected.y == m_objectRect.y)
     {
@@ -153,9 +157,9 @@ void Building::select()
     }
 }
 
-void Building::getState()
+void ArmyCamp::getState()
 {
-   limitHealth();
+    limitHealth();
     if (m_constructing &&
             milliseconds(duration_cast<milliseconds>(steady_clock::now() - m_currTimePoint).count()) >= milliseconds(m_duration))
     {
@@ -183,7 +187,24 @@ void Building::getState()
     }
 }
 
-void Building::update()
+void ArmyCamp::createEntities()
+{
+    //TODO: interaction with user
+    if (m_health == m_maxHealth)
+    {
+        for (int i = 1; i < (int) COUNT; i++){
+            if (m_entity[i] &&
+                milliseconds(duration_cast<milliseconds>(steady_clock::now() - m_entityTimePoint[i]).count()) >= milliseconds(m_entityWaitDuration[i]))
+            {
+                m_entityCount[i]++;
+                cityView.m_entityCount[i]++;
+                m_entityTimePoint[i] = steady_clock::now();
+            }
+        }
+    }
+}
+
+void ArmyCamp::update()
 {
     select();
     if (!m_getPosition)
@@ -193,26 +214,6 @@ void Building::update()
     if (m_useObject && m_getPosition)
     {
         getState();
+        createEntities();
     }
-   // cout<<__LINE__<<endl;
-}
-
-void Building::draw(SDL_Renderer* renderer)
-{
-    //cout<<"DrawObjRect: "<<m_objectRect.x<<" "<<m_objectRect.y<<" "<<m_objectRect.w<<" "<<m_objectRect.h<<endl;
-    if (!m_getPosition)
-    {
-        //cout<<__LINE__<<endl;
-        SDL_RenderCopy(renderer, m_objectTexture, NULL, &m_objectRect);
-    }
-    else
-    {
-        //cout<<__LINE__<<endl;
-
-        SDL_RenderCopy(renderer, m_objectTexture, NULL, &m_objectRect);
-        setTextureDetails(renderer);
-    }
-
-
-    //cout<<"objRect"<<m_objectRect.x<<" "<<m_objectRect.y<<" "<<m_objectRect.w<<" "<<m_objectRect.h<<endl;
 }

@@ -2371,23 +2371,22 @@
 	"World.h"
 	"squad_manager.h"
 
-1608326394 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\building.cpp
+1616153840 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\building.cpp
 	"Building.h"
-	"Battle.h"
-	"World.h"
+	"WorldBuilding.h"
 
-1602614096 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\building.h
+1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\building.h
 	<chrono>
 	<Tile.h>
 
-1602615353 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\tile.h
+1616153708 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\tile.h
 	<string>
 	<fstream>
 	<iostream>
 	"defines.h"
 	"Engine.h"
 
-1615667059 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\defines.h
+1616154210 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\defines.h
 	<cmath>
 	<vector>
 	<map>
@@ -2848,7 +2847,7 @@
 	"castleUI.h"
 	"WorldMap.h"
 
-1608759240 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\configmanager.h
+1616153900 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\configmanager.h
 	<SDL2/SDL.h>
 	<string>
 	"Tile.h"
@@ -2856,6 +2855,12 @@
 	"HealthManager.h"
 	"SpearSquad.h"
 	"HookSquad.h"
+	"UI.h"
+	"UISelectable.h"
+	"Buttons.h"
+	"Castle.h"
+	"ArmyCamp.h"
+	"Bridge.h"
 
 1595622985 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\soundmanager.h
 	<SDL2/SDL_mixer.h>
@@ -2898,12 +2903,12 @@
 	<SDL2/SDL.h>
 	"defines.h"
 
-1615538257 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\squad_manager.h
+1616057477 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\squad_manager.h
 	"defines.h"
 	<cstring>
 	<cstdio>
 
-1615757712 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\castleui.h
+1616057020 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\castleui.h
 	<SDL2/SDL.h>
 	"Engine.h"
 	"defines.h"
@@ -2919,7 +2924,7 @@
 	"Engine.h"
 	"defines.h"
 
-1608759254 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\configmanager.cpp
+1616153949 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\configmanager.cpp
 	"ConfigManager.h"
 	<fstream>
 
@@ -2953,7 +2958,7 @@
 1597791487 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\soundmanager.cpp
 	"SoundManager.h"
 
-1603745106 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\tile.cpp
+1616153705 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\tile.cpp
 	"Tile.h"
 
 1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\armymanager.cpp
@@ -2985,25 +2990,129 @@
 1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\squad.cpp
 	"Squad.h"
 
-1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\squad_manager.cpp
+1616057754 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\squad_manager.cpp
 	"squad_manager.h"
 	<fstream>
 	<iostream>
 
-1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\world.cpp
+1616061818 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\world.cpp
 	"World.h"
 
 1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\worldmap.cpp
 	"WorldMap.h"
 	"World.h"
 
-1615679474 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\main.cpp
+1616152737 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\main.cpp
 	<SDL2/SDL.h>
 	"World.h"
 	"FPSManager.h"
+	"WorldBuilding.h"
 
-1615757432 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\castleui.cpp
+1616067775 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\castleui.cpp
 	"castleUI.h"
 	"World.h"
 	"squad_manager.h"
+
+1616153705 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\archery.cpp
+	"Archery.h"
+
+1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\archery.h
+
+1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\worldbuilding.h
+	"Building.h"
+	"BuildingUI.h"
+	<iostream>
+	<fstream>
+	<vector>
+	<string>
+	<ctime>
+	<cstdlib>
+	<time.h>
+	<windows.h>
+	<SDL2/SDL.h>
+	<winuser.h>
+	"HealthManager.h"
+	"ConfigManager.h"
+	"SoundManager.h"
+	"PopUpWriter.h"
+	"PickAndBan.h"
+	"EnemyAI.h"
+	"PlayerStatsManager.h"
+	"ArmyManager.h"
+	"Engine.h"
+	"Tile.h"
+	"Squad.h"
+	"Building.h"
+	"Ui.h"
+	"Buttons.h"
+
+1616153708 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\buildingui.h
+
+1616153708 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\ui.h
+	<string>
+	<fstream>
+	<iostream>
+	"defines.h"
+	"Engine.h"
+	"UISelectable.h"
+
+1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\uiselectable.h
+	<string>
+	<fstream>
+	<iostream>
+	"defines.h"
+	"Engine.h"
+
+1616153708 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\buttons.h
+	<string>
+	<fstream>
+	<iostream>
+	"defines.h"
+	"Engine.h"
+
+1616153705 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\armycamp.cpp
+	"ArmyCamp.h"
+	"WorldBuilding.h"
+
+1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\armycamp.h
+	<Building.h>
+
+1616153706 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\bridge.cpp
+	"Bridge.h"
+	"WorldBuilding.h"
+
+1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\bridge.h
+	<Building.h>
+
+1616153706 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\buildingui.cpp
+	"BuildingUI.h"
+
+1616153706 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\buttons.cpp
+	"Buttons.h"
+
+1616153706 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\castle.cpp
+	"Castle.h"
+	"WorldBuilding.h"
+
+1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\castle.h
+	<Building.h>
+
+1611863031 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\datamanager.cpp
+	"DataManager.h"
+
+1611863031 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\datamanager.h
+
+1616153705 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\shop.cpp
+	"Shop.h"
+
+1616153708 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\shop.h
+
+1616153705 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\street.cpp
+	"Street.h"
+
+1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\street.h
+
+1616153706 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\ui.cpp
+	<vector>
+	"Ui.h"
 

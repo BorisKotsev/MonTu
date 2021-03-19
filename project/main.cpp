@@ -2,9 +2,12 @@
 
 #include "World.h"
 #include "FPSManager.h"
+#include "WorldBuilding.h"
 
 World world;
 FPSManager frameManager;
+
+WorldBuilding cityView;
 
 int main(int argc, char* argv[])
 {
@@ -53,7 +56,7 @@ int main(int argc, char* argv[])
             world.m_battle.initGameSession();
             world.m_battle.m_enemyAI.takeBattlefield();
             world.m_battle.m_enemyAI.returnBattlefield();
-            world.m_castleUI.loadData("squad1.txt");
+            world.m_castleUI.loadData("soldier_data_0.txt");
             while(!world.m_quitScene)
             {
                 world.input();
@@ -77,6 +80,23 @@ int main(int argc, char* argv[])
             }
             world.m_quitScene = false;
         }
+
+        if(world.m_gameState == CITYBUILDING)
+        {
+            cityView.initCity("cityView.txt");
+            D(cityView.m_buildings.size());
+
+            while(!world.m_quitScene)
+            {
+                world.input();
+                cityView.updateBuilding();
+                cityView.drawBuilding();
+                //cityView.saveBuildings("buildingsSave.txt");
+            }
+
+            world.m_quitScene = false;
+        }
+
         if(world.m_gameState == EXIT)
         {
             world.destroySDL();

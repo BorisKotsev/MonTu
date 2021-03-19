@@ -30,7 +30,8 @@ enum GAME_STATE
     STATS = 4,
     MAP_CHOOSING = 5,
     WORLD_MAP = 6,
-    EXIT = 7
+    CITYBUILDING = 7,
+    EXIT = 8
 };
 
 enum SQUAD
@@ -40,7 +41,8 @@ enum SQUAD
     WARRIOR = 2,
     SPEARMEN = 3,
     CROSSBOWMEN = 4,
-    KNIGHTS = 5
+    KNIGHTS = 5,
+    COUNT = 6
 };
 
 enum ICON_STATE
@@ -49,10 +51,31 @@ enum ICON_STATE
     BANNED = 1,
     PICKED = 2
 };
+
+enum BUILDING
+{
+    NOBUILDING = 0,
+    CASTLE = 1,
+    ARMYCAMP = 2,
+    BRIDGE = 3
+};
+
+enum UI_ICON_TYPE
+{
+    NOBUILD = 0,
+    STREET = 1,
+    SQUARE = 2,
+    SHOP = 3,
+    ARCHERY = 4,
+    CASTLE_S = 5
+};
+
 struct Button
 {
     SDL_Rect startRect;
     SDL_Rect objectRect;
+    SDL_Rect minRect;
+    SDL_Rect maxRect;
 
     SDL_Texture* objTexture = nullptr;
 
@@ -65,6 +88,7 @@ struct Button
     double maxWidth = 0;
     double maxHeigth = 0;
 };
+
 enum PLAYER_STAT
 {
     NOSTAT = 0,

@@ -1,0 +1,2 @@
+squad0.txt
+squad1.txt

@@ -56,6 +56,7 @@ public:
 
     /// create squad
     SDL_Texture* m_arrowTexture;
+    Button m_createSquadButton;
     UI_object m_createSquadWindow;
     unsigned short m_arrowSize;
     unsigned short m_squadElWidth;
@@ -89,6 +90,8 @@ public:
     string loadSquadName(SQUAD type);
 
     void createSquad();
+    void createSquadHover();
+    void removeUnits();
 
     SDL_Texture* loadSquadTexture(SQUAD type);
 protected:

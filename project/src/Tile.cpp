@@ -35,10 +35,8 @@ void Tile::load(string configFile, SDL_Renderer* renderer)
 
 void Tile::load(ifstream& stream){
     string tmp;
-    bool mrazqJivotaSi;
     stream >> tmp >> m_walkDifficulty;
     stream >> tmp >> m_img;
-    stream >> tmp >> mrazqJivotaSi;
 }
 
 void Tile::draw(SDL_Renderer* renderer)

@@ -21,9 +21,8 @@ UI::UI(const UI& model){
 
 }
 
-void UI::load(string configFile, SDL_Renderer* renderer){
-
-
+void UI::load(string configFile, SDL_Renderer* renderer)
+{
     configFile = "config\\" + configFile;
     ifstream stream;
     string tmp, buff;
@@ -36,19 +35,17 @@ void UI::load(string configFile, SDL_Renderer* renderer){
     stream.close();
 
     m_objectTexture = LoadTexture(m_img, renderer);
+}
+
+void UI::update()
+{
 
 }
 
-void UI::update(){
-
-
-}
-
-void UI::draw(SDL_Renderer* renderer){
-
+void UI::draw(SDL_Renderer* renderer)
+{
     m_presentRect = m_objectRect;
     SDL_RenderCopy(renderer, m_objectTexture, NULL, &m_presentRect);
-
 }
 
 void UI::initSelectables()

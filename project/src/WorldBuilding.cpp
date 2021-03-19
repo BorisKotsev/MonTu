@@ -31,8 +31,6 @@ void WorldBuilding::initCity(string configFile)
     stream >> tmp >> m_CP1.r >> m_CP1.g >> m_CP1.b;
     stream >> tmp >> m_CP2.r >> m_CP2.g >> m_CP2.b;
 
-
-
     stream.close();
 
     m_selectedTileUI.objTexture = LoadTexture(selectTileTex,world.m_main_renderer);
@@ -81,7 +79,6 @@ void WorldBuilding::initBackground(string configFile)
 
     configFile = "config\\" + configFile;
 
-    cout<<configFile<<endl;
     fstream stream;
 
     string tmp;
@@ -90,17 +87,7 @@ void WorldBuilding::initBackground(string configFile)
     stream >> tmp >> backgroundImg;
     stream.close();
 
-    cout<<backgroundImg<<endl;
-
-    backgroundRect.x = 0;
-    backgroundRect.y = 0;
-    backgroundRect.w = 1920;
-    backgroundRect.h = 1080;
-
     backgroundTexture = LoadTexture(backgroundImg, world.m_main_renderer);
-
-
-
 }
 
 void WorldBuilding::saveBuildings(string configFile)
@@ -176,8 +163,6 @@ void WorldBuilding::loadBuildings(string configFile)
     }while(building -> m_type!=" ");
 
     in_file.close();
-
-
 }
 
 void WorldBuilding::initTiles(string configFile)
@@ -203,11 +188,7 @@ void WorldBuilding::initTiles(string configFile)
 
     for (short int r = 0; r < m_rows; r ++)
     {
-
         m_tiles.push_back(vector<Tile*>());
-
-
-
         for (short int c = 0; c < m_colls; c ++)
         {
             switch(field[c][r])
@@ -217,7 +198,6 @@ void WorldBuilding::initTiles(string configFile)
                 break;
             case 'S':
                 tile = new Tile(*(world.m_configManager.modelTileGrass), &(world.m_cameraOffset));
-                //tile = new Tile(*(world.m_configManager.modelStreet), &(world.m_cameraOffset));
                 break;
             case 'C':
                 castle = new Tile(*(world.m_configManager.modelTileGrass), &(world.m_cameraOffset));
@@ -304,8 +284,6 @@ void WorldBuilding::initTiles(string configFile)
             tile->m_collisionPoints.push_back(buffPoint);
         }
     }
-
-
 }
 
 void WorldBuilding::initButtons()
@@ -317,8 +295,6 @@ void WorldBuilding::initButtons()
 
 void WorldBuilding::selectTile()
 {
-
-
     const Uint8 *state = SDL_GetKeyboardState(NULL);
     SDL_PollEvent(&(world.m_event));
 
@@ -328,15 +304,11 @@ void WorldBuilding::selectTile()
         {
             if(isInsideAHexagon(m_tiles[r][c]->m_collisionPoints, LoadPoint(world.m_mouse)))
             {
-
                 m_selected.x = c;
                 m_selected.y = r;
-
             }
         }
     }
-
-
     /*if (world.m_event.type == SDL_MOUSEMOTION)
     {
         SDL_GetGlobalMouseState(&(world.m_mouse.x), &(world.m_mouse.y));
@@ -345,18 +317,12 @@ void WorldBuilding::selectTile()
     }*/
     showUI();
     building();
-
-
-
 }
 
 void WorldBuilding::building()
 {
-
-
     if(/*state[SDL_SCANCODE_B] && world.m_buttonDown*/world.m_mouseIsPressed)
     {
-
         if(m_uiBoard == NULL)
         {
             m_uiBoard = new UI(*(world.m_configManager.modelUI));
@@ -381,14 +347,9 @@ void WorldBuilding::building()
                     break;
                 }
             }
-
-
-
-
         }
         else
         {
-
             if(type!= NOBUILD)
             {
                 if(alreadyBuilt(m_selected.x,m_selected.y) == false)
@@ -397,25 +358,18 @@ void WorldBuilding::building()
                 }
 
             }
-
         }
-
-
     }
-
 }
 
 void WorldBuilding::showUI()
 {
-
     if(m_uiBoard != NULL)
     {
         if(checkForMouseCollision(world.m_mouse.x,world.m_mouse.y,m_uiBoard->m_objectRect))
         {
-
             for(int i=0; i<11; i++)
             {
-
                 if(checkForMouseCollision(world.m_mouse.x, world.m_mouse.y, m_selectables[i] -> button.objectRect))
                 {
                     if(m_selectables[i] -> button.objectRect.w <= m_selectables[i] -> button.maxRect.w)
@@ -441,19 +395,13 @@ void WorldBuilding::showUI()
 
                     m_selectables[i] -> button.objectRect = m_selectables[i] ->button.minRect;
                 }
-
-
             }
         }
-
     }
-
 }
 
 void WorldBuilding::build(int c,int r,UI_ICON_TYPE type)
 {
-
-
     Building* building = nullptr;
     switch(type)
     {
@@ -472,7 +420,6 @@ void WorldBuilding::build(int c,int r,UI_ICON_TYPE type)
 
     }
 
-
     if(building != nullptr)
     {
         building->m_mapCoordinates.x = c;
@@ -481,8 +428,6 @@ void WorldBuilding::build(int c,int r,UI_ICON_TYPE type)
         building->m_owner = PLAYER1;
         building->m_objectRect = m_tiles[r][c]->m_objectRect;
     }
-    //D(building->m_img);
-
 
     m_buildings.push_back(building);
 
@@ -492,7 +437,6 @@ void WorldBuilding::build(int c,int r,UI_ICON_TYPE type)
 void WorldBuilding::updateBuilding()
 {
     const Uint8 *state = SDL_GetKeyboardState(NULL);
-    SDL_PollEvent(&(world.m_event));
 
     selectTile();
 
@@ -502,7 +446,6 @@ void WorldBuilding::updateBuilding()
         if(m_buttons.size()==0)
         {
             initButtons();
-
         }
         if(m_userInterfaces.size()!=0)
         {
@@ -520,7 +463,6 @@ void WorldBuilding::updateBuilding()
     for(vector <UISelectable*> :: iterator it = m_selectables.begin(); it != m_selectables.end(); it++)
     {
         (*it) -> update();
-
     }
     for(vector <Buttons*> :: iterator it = m_buttons.begin(); it != m_buttons.end(); it++)
     {
@@ -542,7 +484,6 @@ void WorldBuilding::updateBuilding()
 
 void WorldBuilding::drawBuilding()
 {
-
     SDL_RenderClear(m_renderer);
 
     SDL_RenderCopy(world.m_main_renderer, backgroundTexture, NULL, NULL);
@@ -576,7 +517,6 @@ void WorldBuilding::drawBuilding()
     }
 
     SDL_RenderCopy(world.m_main_renderer, m_selectedTileUI.objTexture, NULL, &(m_selectedTileUI.objRect));
-
 
     SDL_RenderPresent(world.m_main_renderer);
 }

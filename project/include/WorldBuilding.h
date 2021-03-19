@@ -65,7 +65,6 @@ class WorldBuilding
         bool m_shake;
 
         string backgroundImg;
-        SDL_Rect backgroundRect;
         SDL_Texture* backgroundTexture;
 
         char field[19][10];

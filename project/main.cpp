@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
     world.m_playerStatsManager.writeAllValues();
 
 
-    world.m_gameState = MENU;
+    world.m_gameState = CITYBUILDING;
 
     while(true)
     {
@@ -84,8 +84,6 @@ int main(int argc, char* argv[])
         if(world.m_gameState == CITYBUILDING)
         {
             cityView.initCity("cityView.txt");
-            D(cityView.m_buildings.size());
-
             while(!world.m_quitScene)
             {
                 world.input();

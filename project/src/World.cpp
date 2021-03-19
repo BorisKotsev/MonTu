@@ -129,7 +129,7 @@ void World::input()
 
     if (m_event.type == SDL_MOUSEBUTTONDOWN)
     {
-        if(m_event.button.clicks == 1)
+        if(m_event.button.clicks >= 1)
         {
             m_mouseIsPressed = true;
         }

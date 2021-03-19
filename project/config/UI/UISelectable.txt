@@ -1,8 +1,8 @@
 Img: UISelectable.bmp
-MinSize: 60 60
-MaxSize: 70 70
+MinSize: 84 84
+MaxSize: 98 98
 Margins: 0
-DrawBegin: 322
+DrawBegin: 456
 Street: Street_Selectable.bmp 
 Shop: Shop_Selectable.bmp 
 Archery: Archery_Selectable.bmp 

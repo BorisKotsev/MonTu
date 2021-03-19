@@ -3002,7 +3002,7 @@
 	"WorldMap.h"
 	"World.h"
 
-1616152737 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\main.cpp
+1616173506 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\main.cpp
 	<SDL2/SDL.h>
 	"World.h"
 	"FPSManager.h"
@@ -3018,7 +3018,7 @@
 
 1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\archery.h
 
-1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\worldbuilding.h
+1616173716 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\worldbuilding.h
 	"Building.h"
 	"BuildingUI.h"
 	<iostream>
@@ -3112,7 +3112,15 @@
 
 1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\street.h
 
-1616153706 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\ui.cpp
+1616173346 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\ui.cpp
 	<vector>
 	"Ui.h"
+
+1616155264 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\uiselectable.cpp
+	"UISelectable.h"
+	"World.h"
+
+1616173821 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\worldbuilding.cpp
+	"WorldBuilding.h"
+	"World.h"
 

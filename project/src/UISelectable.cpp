@@ -77,7 +77,6 @@ void UISelectable::draw(SDL_Renderer* renderer)
     if(m_typeTexture!=NULL){
         SDL_RenderCopy(renderer, m_typeTexture, NULL, &m_presentRect);
     }
-
 }
 
 

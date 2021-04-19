@@ -6,7 +6,7 @@
 
 #include "defines.h"
 
-// TODO (kostakk#1#): finish army manager
+// TODO (konstantin#5#): finish army manager
 class ArmyManager
 {
     public:
@@ -17,6 +17,7 @@ class ArmyManager
 
         void init(string configFile);
         void deployArmy(OWNER owner);
+        void deployArmy(int index);
 
     protected:
 

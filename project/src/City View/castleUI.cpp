@@ -189,8 +189,6 @@ SDL_Texture* castleUI::loadSquadTexture(SQUAD type)
 {
     SDL_Texture* returnData = nullptr;
 
-    D(type);
-
     switch(type)
     {
     case WARRIOR:
@@ -452,9 +450,8 @@ void castleUI::removeUnits()
                 {
                     continue;
                 }
-                if(m_data[j]->numberOfSoldiers >= m_newSquadData[i]->m_numberOfSoldiers)
+                if(m_data[j]->numberOfSoldiers > m_newSquadData[i]->m_numberOfSoldiers)
                 {
-                    D(m_data[j]->numberOfSoldiers);
                     world.m_squadManager.changeUnits(0, m_data[j]->type, m_data[j]->coord.x, m_data[j]->coord.y, m_data[j]->numberOfSoldiers, -(m_newSquadData[i]->m_numberOfSoldiers));
                     m_data[j]->numberOfSoldiers -= m_newSquadData[i]->m_numberOfSoldiers;
                     m_newSquadData[i]->m_numberOfSoldiers = 0;
@@ -465,6 +462,7 @@ void castleUI::removeUnits()
                     world.m_squadManager.changeUnits(0, m_data[j]->type, m_data[j]->coord.x, m_data[j]->coord.y, m_data[j]->numberOfSoldiers, -(m_data[j]->numberOfSoldiers));
                     m_newSquadData[i]->m_numberOfSoldiers -= m_data[j]->numberOfSoldiers;
                     m_data[j]->numberOfSoldiers = 0;
+                    world.m_squadManager.killSoldier(0, (int)(m_data[j]->type), m_data[j]->coord.x, m_data[j]->coord.y);
                     break;
                 }
             }
@@ -475,16 +473,14 @@ void castleUI::removeUnits()
 
 void castleUI::createSquad()
 {
-    D(m_cityName)
     int squadIndex = world.m_squadManager.addSquad("TSAREVO");
-
-    D(squadIndex);
 
     for (unsigned short i = 0; i < 5; i ++)
     {
+        D(m_newSquadData[i]->m_numberOfSoldiers);
         if(m_newSquadData[i]->m_numberOfSoldiers > 0)
         {
-            world.m_squadManager.addSoldier(squadIndex, m_newSquadData[i]->m_numberOfSoldiers, (SQUAD)i, i % 8, i / 8);
+            world.m_squadManager.addSoldier(squadIndex, m_newSquadData[i]->m_numberOfSoldiers, (SQUAD)(i + 1), i % 8, i / 8);
         }
     }
 
@@ -509,9 +505,12 @@ void castleUI::updateCreateSquad()
                 }
                 else if (checkForMouseCollision(world.m_mouse.x, world.m_mouse.y, m_createSquadEl[i]->m_downBtnRect))
                 {
-                    m_createSquadEl[i]->m_numberOfSoldiers ++;
-                    m_newSquadData[i]->m_numberOfSoldiers --;
-                    updateCreateSquadElements();
+                    if(m_newSquadData[i]->m_numberOfSoldiers > 0)
+                    {
+                        m_createSquadEl[i]->m_numberOfSoldiers ++;
+                        m_newSquadData[i]->m_numberOfSoldiers --;
+                        updateCreateSquadElements();
+                    }
                     break;
                 }
             }

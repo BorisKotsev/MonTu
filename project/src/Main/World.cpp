@@ -75,7 +75,8 @@ void World::improveRenderer()
     m_MOUSE_MULTIPLIER_X = (double)m_SCREEN_WIDTH / (double)desktopWidth;
     m_MOUSE_MULTIPLIER_Y = (double)m_SCREEN_HEIGHT / (double)desktopHeight;
 
-    if (SDL_SetWindowFullscreen(m_main_window, SDL_WINDOW_FULLSCREEN_DESKTOP) < 0) {
+    if (SDL_SetWindowFullscreen(m_main_window, SDL_WINDOW_FULLSCREEN_DESKTOP) < 0)
+    {
         printf("SDL_Init failed: %s\n", SDL_GetError());
     }
 

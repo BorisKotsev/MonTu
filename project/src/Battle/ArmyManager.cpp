@@ -70,3 +70,47 @@ void ArmyManager::deployArmy(OWNER owner)
     }
 }
 
+void ArmyManager::deployArmy(int index)
+{
+    string location = "data\\Enemies\\enemy_army_" + to_string(index) + ".txt";
+
+    fstream stream;
+
+    char formation[world.m_battle.m_rows][6];
+
+    stream.open(location);
+    cout << "THE FORMATION IS: \n-------------------- \n";
+    for (int r = 0; r < world.m_battle.m_rows; r ++)
+    {
+        for (int c = 0; c < 6; c++)
+        {
+            stream >> formation[r][c];
+            cout << formation[r][c];
+        }
+        cout << endl;
+    }
+    cout << "-------------------- \n";
+    stream.close();
+
+    coordinates buff;
+    for (int r = 0; r < world.m_battle.m_rows; r ++)
+    {
+        for (int c = 0; c < 6; c++)
+        {
+            switch (formation[r][c])
+            {
+            case 'W':
+                buff.x = c + 15;
+                buff.y = r;
+                world.m_battle.initSquad(WARRIOR, buff, PLAYER2);
+                break;
+            case 'A':
+                buff.x = c + 15;
+                buff.y = r;
+                world.m_battle.initSquad(ARCHER, buff, PLAYER2);
+                break;
+            }
+        }
+    }
+}
+

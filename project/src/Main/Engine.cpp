@@ -173,3 +173,20 @@ unsigned short alignCenter(unsigned short fullSpace, unsigned short objWidth)
 {
     return (fullSpace - objWidth) / 2;
 }
+
+double distance(SDL_Rect first, SDL_Rect second)
+{
+    int a = abs(first.x - second.x);
+    int b = abs(first.y - second.y);
+    return sqrt(a * a + b * b);
+}
+
+bool equalCoordinates(SDL_Rect A, SDL_Rect B)
+{
+    if(A.x == B.x && A.y == B.y)
+    {
+        return true;
+    }
+    return false;
+}
+

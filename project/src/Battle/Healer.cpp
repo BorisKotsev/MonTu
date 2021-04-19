@@ -51,7 +51,7 @@ Healer::Healer(const Healer& model, coordinates* cameraOffset, Tile* tile, OWNER
     m_heal = model.m_heal;
 
     m_moved = false;
-    m_shooted = false;
+    m_attacked = false;
 }
 
 Healer::~Healer()

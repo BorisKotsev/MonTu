@@ -4,5 +4,5 @@ Width_Height: 60 50
 Health: 100
 AttackDmg: 20
 Speed: 10
-Range: 300
+Range: 4
 Faith: 50

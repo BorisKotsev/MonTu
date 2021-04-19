@@ -3,22 +3,29 @@
 #include "World.h"
 #include "FPSManager.h"
 #include "WorldBuilding.h"
+#include "Animator.h"
 
 World world;
 FPSManager frameManager;
 
 WorldBuilding cityView;
 
+Animator animator;
+
 int main(int argc, char* argv[])
 {
     world.initSDL("world.txt");
+
+    coordinates coor;
+    coor.x = 40;
+    coor.y = 0;
 
     world.m_playerStatsManager.readAllValues();
     world.m_playerStatsManager.changeValues(MONEY, 1111);
     world.m_playerStatsManager.writeAllValues();
 
 
-    world.m_gameState = CITYBUILDING;
+    world.m_gameState = MENU;
 
     while(true)
     {
@@ -54,16 +61,31 @@ int main(int argc, char* argv[])
         if(world.m_gameState == GAME)
         {
             world.m_battle.initGameSession();
-            world.m_battle.m_enemyAI.takeBattlefield();
-            world.m_battle.m_enemyAI.returnBattlefield();
-            world.m_castleUI.loadData("soldier_data_0.txt");
+            string file = "warriorMove.txt";
+            animator.initAnimation(file, &(world.m_battle.m_squads[0]->m_objectRect));
+
+            world.m_battle.m_enemyAI.init("enemyAI.txt");
+            ///world.m_castleUI.loadData("soldier_data_0.txt");
+            animator.start();
             while(!world.m_quitScene)
             {
+                const Uint8 *state = SDL_GetKeyboardState(NULL);
+                /*
+                if(animator.update())
+                {
+                    animator.draw();
+                }
+                */
                 world.input();
                 world.m_battle.update();
                 world.m_battle.draw();
-                world.m_castleUI.update();
-                world.m_castleUI.draw();
+                if(state[SDL_SCANCODE_B])
+                {
+                    world.m_battle.switchTurn();
+                    cout << "AI MAKING A TURN \n";
+                }
+                ///world.m_castleUI.update();
+                ///world.m_castleUI.draw();
             }
             world.m_quitScene = false;
         }

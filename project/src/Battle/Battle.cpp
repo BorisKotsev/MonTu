@@ -7,7 +7,7 @@ Battle::Battle()
 {
     m_selected.x = 0;
     m_selected.y = 0;
-    m_selectedSquad = NULL;
+    m_selectedSquad = nullptr;
     m_playerTurn = PLAYER1;
     m_showFillBtn = true;
     m_showAttackTiles = false;
@@ -17,7 +17,7 @@ Battle::~Battle()
 {
     //dtor
 }
-
+//{INIT
 void Battle::initBattle(string configFile)
 {
     m_renderer = world.m_main_renderer;
@@ -41,10 +41,8 @@ void Battle::initBattle(string configFile)
     stream >> tmp >> m_skipTurnFillBtn.objRect.x >> m_skipTurnFillBtn.objRect.y >> m_skipTurnFillBtn.objRect.w >> m_skipTurnFillBtn.objRect.h;
     stream.close();
 
-
     m_armyManager.init("armyManager.txt");
     m_popUpWriter.init("PopUpWriter.txt", m_renderer);
-
 
     m_selectedTileUI.objTexture = LoadTexture(selectedImg, m_renderer);
     m_attackTileUI.objTexture = LoadTexture(attackTileImg, m_renderer);
@@ -54,7 +52,6 @@ void Battle::initBattle(string configFile)
     m_skipTurnTransBtn.objRect = m_skipTurnFillBtn.objRect;
 
     initDirection("directions.txt");
-
 }
 
 void Battle::initDirection(string configFile)
@@ -77,70 +74,8 @@ void Battle::initDirection(string configFile)
 
 void Battle::initGameSession()
 {
-    coordinates buff;
-    buff.x = 3;
-    buff.y = 5;
-    initSquad(WARRIOR, buff, PLAYER2);
+    m_armyManager.deployArmy(1);
     m_armyManager.deployArmy(PLAYER1);
-
-}
-
-void Battle::update()
-{
-    world.cameraShake();
-
-    selectTile();
-
-    m_selectedTileUI.objRect = m_tiles[m_selected.y][m_selected.x]->m_objectRect;
-
-    squadActionsCheck();
-    if(world.m_mouseIsPressed)
-    {
-        if(m_showFillBtn && checkForMouseCollision(world.m_mouse.x, world.m_mouse.y, m_skipTurnFillBtn.objRect))
-        {
-            switchTurn();
-        }
-    }
-    checkForTurnSwitch();
-}
-
-void Battle::draw()
-{
-    SDL_RenderClear(m_renderer);
-
-    for(vector<vector <Tile*> > :: iterator vit = m_tiles.begin(); vit != m_tiles.end(); vit++)
-    {
-        for(vector<Tile*> :: iterator it = (*vit).begin(); it != (*vit).end(); it++)
-        {
-            (*it) -> draw(m_renderer);
-        }
-    }
-    SDL_RenderCopy(m_renderer, m_selectedTileUI.objTexture, NULL, &(m_selectedTileUI.objRect));
-
-    for(vector <Tile*> :: iterator it = m_availableWalkTiles.begin(); it != m_availableWalkTiles.end(); it++)
-    {
-        SDL_RenderCopy(m_renderer, m_selectedTileUI.objTexture, NULL, &((*it) -> m_objectRect));
-    }
-
-    for(vector <Tile*> :: iterator it = m_availableShootTiles.begin(); it != m_availableShootTiles.end(); it++)
-    {
-        SDL_RenderCopy(m_renderer, m_attackTileUI.objTexture, NULL, &((*it) -> m_objectRect));
-    }
-
-    for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
-    {
-        (*it) -> draw();
-    }
-
-    m_popUpWriter.draw(m_tiles[m_selected.y][m_selected.x]->m_objectRect, m_popUpWriter.m_buildingListRect, m_popUpWriter.m_buildingListTexture);
-
-    if (m_showFillBtn)
-    {
-        SDL_RenderCopy(m_renderer, m_skipTurnFillBtn.objTexture, NULL, &(m_skipTurnFillBtn.objRect));
-    }
-
-    //SDL_RenderPresent(m_renderer);
-
 }
 
 void Battle::initTiles(string configFile)
@@ -242,6 +177,83 @@ void Battle::initTiles(string configFile)
         }
     }
 }
+//}
+
+//{MAIN
+void Battle::update()
+{
+    world.cameraShake();
+
+    selectTile();
+
+    m_selectedTileUI.objRect = m_tiles[m_selected.y][m_selected.x]->m_objectRect;
+
+    squadActionsCheck();
+    if(world.m_mouseIsPressed)
+    {
+        if(m_showFillBtn && checkForMouseCollision(world.m_mouse.x, world.m_mouse.y, m_skipTurnFillBtn.objRect))
+        {
+            switchTurn();
+        }
+    }
+    checkForTurnSwitch();
+}
+
+void Battle::draw()
+{
+
+    SDL_RenderClear(m_renderer);
+
+    for(vector<vector <Tile*> > :: iterator vit = m_tiles.begin(); vit != m_tiles.end(); vit++)
+    {
+        for(vector<Tile*> :: iterator it = (*vit).begin(); it != (*vit).end(); it++)
+        {
+            (*it) -> draw(m_renderer);
+        }
+    }
+    SDL_RenderCopy(m_renderer, m_selectedTileUI.objTexture, NULL, &(m_selectedTileUI.objRect));
+
+    for(vector <Tile*> :: iterator it = m_availableWalkTiles.begin(); it != m_availableWalkTiles.end(); it++)
+    {
+        SDL_RenderCopy(m_renderer, m_selectedTileUI.objTexture, NULL, &((*it) -> m_objectRect));
+    }
+
+    for(vector <Tile*> :: iterator it = m_availableShootTiles.begin(); it != m_availableShootTiles.end(); it++)
+    {
+        SDL_RenderCopy(m_renderer, m_attackTileUI.objTexture, NULL, &((*it) -> m_objectRect));
+    }
+
+    for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
+    {
+        (*it) -> draw();
+    }
+
+    m_popUpWriter.draw(m_tiles[m_selected.y][m_selected.x]->m_objectRect, m_popUpWriter.m_buildingListRect, m_popUpWriter.m_buildingListTexture);
+
+    if (m_showFillBtn)
+    {
+        SDL_RenderCopy(m_renderer, m_skipTurnFillBtn.objTexture, NULL, &(m_skipTurnFillBtn.objRect));
+    }
+
+    SDL_RenderPresent(m_renderer);
+
+}
+
+void Battle::cleaner()
+{
+    for(int i = 0; i < m_squads.size(); i ++)
+    {
+        if(m_squads[i]->m_health <= 0)
+        {
+            //TODO(konstantin #3): add dead animation
+            delete m_squads[i];
+            m_squads[i] = nullptr;
+            i--;
+        }
+    }
+}
+//}
+
 
 void Battle::selectTile()
 {
@@ -264,11 +276,38 @@ void Battle::selectTile()
     }
 }
 
+//{ HELPERS
 Tile* Battle::giveNeighbor(coordinates coor, int direction)
 {
-    /*
+    /**
     the value of direction should be the following:
-    *short version* - starts from right and goes backwards
+    0 - right
+    1 - top right
+    2 - top left
+    3 - left
+    4 - down left
+    5 - down right
+    */
+
+    if(direction < 0 && direction > 5)
+    {
+        return nullptr;
+    }
+    int evenR = (coor.y % 2 == 0) ? 0 : 1;
+    //selects the coordinates that we add to the current position
+    coordinates addedCoor = directions[evenR][direction];
+
+    if(coor.y + addedCoor.y < 0 || coor.y + addedCoor.y >= m_rows || coor.x + addedCoor.x < 0 || coor.x + addedCoor.x >= m_colls)
+    {
+        return nullptr;
+    }
+    return m_tiles[coor.y + addedCoor.y][coor.x + addedCoor.x];
+}
+
+coordinates* Battle::giveNeighborCoor(coordinates coor, int direction)
+{
+    /**
+    the value of direction should be the following:
     0 - right
     1 - top right
     2 - top left
@@ -285,8 +324,108 @@ Tile* Battle::giveNeighbor(coordinates coor, int direction)
     {
         return NULL;
     }
-    return m_tiles[coor.y + addedCoor.y][coor.x + addedCoor.x];
+
+    coor.x += addedCoor.x;
+    coor.y += addedCoor.y;
+
+    return &coor;
 }
+
+Squad* Battle::giveNeighborSquad(coordinates coor, int direction)
+{
+    /**
+    the value of direction should be the following:
+    0 - right
+    1 - top right
+    2 - top left
+    3 - left
+    4 - down left
+    5 - down right
+    */
+
+    int evenR = (coor.y % 2 == 0) ? 0 : 1;
+    //selects the coordinates that we add to the current position
+    coordinates addedCoor = directions[evenR][direction];
+
+    if(coor.y + addedCoor.y < 0 || coor.y + addedCoor.y >= m_rows || coor.x + addedCoor.x < 0 || coor.x + addedCoor.x >= m_colls)
+    {
+        return NULL;
+    }
+
+    coor.x += addedCoor.x;
+    coor.y += addedCoor.y;
+
+    Squad* squad = findSquadByCoor(coor);
+    if(squad != nullptr)
+    return squad;
+}
+
+// Function used to determine the direction of a vector.
+// For example we want to find the direction of a vector
+// coming from hexagon A to hexagon B.
+// We use our formula for finding angle between two points.
+// This function will tell us the direction of this vector.
+// It is a number between 0 and 5 (because the hexagon has 6 sides)
+// You can check any of the giveNeighbor functions to see what is the
+// side according to the return value of the function
+short Battle::angleToDirection(short angle)
+{
+    if (angle > 0 && angle < 60)
+    {
+        return 1;
+    }
+    if (angle > 60 && angle < 120)
+    {
+        return 0;
+    }
+    if (angle > 120 && angle < 180)
+    {
+        return 5;
+    }
+    if (angle < 0 && angle > -60)
+    {
+        return 2;
+    }
+    if (angle < -60 && angle > -120)
+    {
+        return 3;
+    }
+    if (angle < -120 && angle > -180)
+    {
+        return 4;
+    }
+    return -1;
+}
+
+short Battle::angleToDirectionReverse(short angle)
+{
+    if (angle > 0 && angle < 60)
+    {
+        return 4;
+    }
+    if (angle > 60 && angle < 120)
+    {
+        return 3;
+    }
+    if (angle > 120 && angle < 180)
+    {
+        return 2;
+    }
+    if (angle < 0 && angle > -60)
+    {
+        return 5;
+    }
+    if (angle < -60 && angle > -120)
+    {
+        return 0;
+    }
+    if (angle < -120 && angle > -180)
+    {
+        return 1;
+    }
+    return -1;
+}
+
 
 bool Battle::canTravel(Squad* squad, coordinates desiredPosition)
 {
@@ -326,7 +465,7 @@ bool Battle::canTravel(Squad* squad, coordinates desiredPosition)
                 {
                     for (int i = 0; i < 6; i++)
                     {
-                        if(giveNeighbor(buff, i) != NULL)
+                        if(giveNeighbor(buff, i) != nullptr)
                         {
                             if(movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] != -1)
                             {
@@ -373,7 +512,7 @@ bool Battle::canTravel(Squad* squad, coordinates desiredPosition)
             short int minimumValue = 1000;
             for (int i = 0; i < 6; i++)
             {
-                if (giveNeighbor(buff, i) != NULL)
+                if (giveNeighbor(buff, i) != nullptr)
                 {
                     if(movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] <
                     minimumValue )
@@ -402,7 +541,7 @@ bool Battle::canTravel(Squad* squad, coordinates desiredPosition)
             bool hasPossibleMove = false;
             for (int i = 0; i < 6; i++)
             {
-                if (giveNeighbor(buff, i) != NULL)
+                if (giveNeighbor(buff, i) != nullptr)
                 {
                     if(movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x]
                     < squad->m_speed)
@@ -427,74 +566,112 @@ bool Battle::canTravel(Squad* squad, coordinates desiredPosition)
 
 bool Battle::canShoot(Squad* squad, coordinates targetPosition)
 {
-    int range = squad->m_attackRange;
+    vector <coordinates*> surrounding;
 
-    // Converting the logical coordinates to real coordinates
-    coordinates logicalPosition = squad->m_tileTaken->m_mapCoordinates;
-    coordinates position;
-    position.x = m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.x
-                    + (m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.w) / 2;
-    position.y = m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.y
-                    + (m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.h) / 2;
-    /// cout << position.x << " " << position.y << endl;
-
-    coordinates logicalTargetPosition = targetPosition;
-    targetPosition.x = m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.x
-                        + (m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.w) / 2;
-    targetPosition.y = m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.y
-                        + (m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.h) / 2;
-    /// cout << targetPosition.x << " " << targetPosition.y << endl;
-
-    // Using the pythagorean theorem, we can check if we have big enough range
-    short int a = abs(position.x - targetPosition.x);
-    short int b = abs(position.y - targetPosition.y);
-    short int c = sqrt(a*a + b*b);
-
-    if(c > range)
+    bool foundResult = false;
+    unsigned short step = 0;
+    surrounding.push_back(&(squad->m_tileTaken->m_mapCoordinates));
+    coordinates* buff;
+    while(step < squad->m_attackRange)
     {
-        // If we are out of range or if there isn't a squad on this coor than we stop the function
+        for(unsigned short i = 0; i < surrounding.size(); i ++)
+        {
+            for(unsigned short j = 0; j < 6; j ++)
+            {
+                buff = giveNeighborCoor((*surrounding[i]), j);
+                if(buff != nullptr)
+                {
+                    for (unsigned short k = 0; k < surrounding.size(); k ++)
+                    {
+                        if(buff == surrounding[k])
+                        {
+                            buff = nullptr;
+                            break;
+                        }
+                    }
+                    if(buff != nullptr)
+                    {
+                        if(buff->x == targetPosition.x && buff->y == targetPosition.y)
+                        {
+                            foundResult = true;
+                        }
+                        surrounding.push_back(buff);
+                    }
+                }
+            }
+        }
+        step++;
+    }
+
+    // If has the same owner
+    if(!foundResult || findSquadByCoor(targetPosition)->m_owner == squad->m_owner)
+    {
         return false;
     }
-    if(findSquadByCoor(logicalTargetPosition) == NULL || findSquadByCoor(logicalTargetPosition)->m_owner == squad->m_owner)
-    {
-        return false;
-    }
-
+    /* A part of code the is not used for now
+       it aims to give all the tiles between the attacker and defender
     // Using this bool to determine if the function is done
     bool finished = false;
     // The angle used to calculate how we will travel to the target position
-    short int rotationAngle;
+    short rotationAngle;
     // We find the rotation angle by using the fnct in the Engine
     coordinates direction;
-    direction.x = targetPosition.x - position.x;
-    direction.y = targetPosition.y - position.y;
+    coordinates drawTargetPos;
+    drawTargetPos.x = m_tiles[targetPosition.y][targetPosition.x]->m_objectRect.x
+                    + (m_tiles[targetPosition.y][targetPosition.x]->m_objectRect.w) / 2;
+    drawTargetPos.y = m_tiles[targetPosition.y][targetPosition.x]->m_objectRect.y
+                    + (m_tiles[targetPosition.y][targetPosition.x]->m_objectRect.h) / 2;
+
+    // Find the direction of the shot
+    direction.x = drawTargetPos.x - squad->m_objectRect.x;
+    direction.y = drawTargetPos.y - squad->m_objectRect.y;
+    // changing the target position to drawing coor
     rotationAngle = returnAngleByCoordinates(direction);
     /// cout << rotationAngle << endl;
-    vector<Tile*> passing;
+    stack<Tile*> passing;
 
+    // cast a ray in order to check for the passing tiles;
+    coordinates scanRay;
     while(!finished)
     {
         position.x += (sin(rotationAngle * PI / 180) * 6);
         position.y -= (cos(rotationAngle * PI / 180) * 6);
 
-        for(short int r = 0; r < m_tiles.size(); r++)
+        for(short r = 0; r < m_tiles.size(); r++)
         {
-            for(short int c = 0; c < m_tiles[r].size(); c++)
+            for(short c = 0; c < m_tiles[r].size(); c++)
             {
-                if(isInsideAHexagon(m_tiles[r][c]->m_collisionPoints, LoadPoint(position)))
+                if(m_tiles[r][c] != passing.top)
                 {
-                    passing.push_back(m_tiles[r][c]);
-                    /// cout << logicalTargetPosition.y << " " << logicalTargetPosition.x << endl;
-                    if(c == logicalTargetPosition.x && r == logicalTargetPosition.y)
+                    if(isInsideAHexagon(m_tiles[r][c]->m_collisionPoints, LoadPoint(position)))
                     {
-                        finished = true;
+                        passing.push_back(m_tiles[r][c]);
+                        /// cout << logicalTargetPosition.y << " " << logicalTargetPosition.x << endl;
+                        if(c == targetPosition.x && r == targetPosition.y)
+                        {
+                            finished = true;
+                        }
                     }
                 }
             }
         }
     }
+    */
     return true;
 }
+
+Squad* Battle::findSquadByCoor(coordinates coor)
+{
+    for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
+    {
+        if((*it)->m_mapCoor == coor)
+        {
+            return (*it);
+        }
+    }
+    return nullptr;
+}
+//}
 
 vector<Tile*> Battle::showAvailableWalkTiles(Squad* squad)
 {
@@ -538,7 +715,7 @@ vector<Tile*> Battle::showAvailableWalkTiles(Squad* squad)
                 {
                     for (int i = 0; i < 6; i++)
                     {
-                        if(giveNeighbor(buff, i) != NULL)
+                        if(giveNeighbor(buff, i) != nullptr)
                         {
                             if(movementMap[giveNeighbor(buff, i)->m_mapCoordinates.y][giveNeighbor(buff, i)->m_mapCoordinates.x] != -1)
                             {
@@ -560,7 +737,6 @@ vector<Tile*> Battle::showAvailableWalkTiles(Squad* squad)
                 ///cout << r << " " << c << " " << movementMap[r][c] << endl;
             }
         }
-
     }
     for (short int r = 0; r < m_rows; r ++)
     {
@@ -569,7 +745,7 @@ vector<Tile*> Battle::showAvailableWalkTiles(Squad* squad)
             coordinates buff;
             buff.y = r;
             buff.x = c;
-            if(movementMap[r][c] <= movement && !(r == position.y && c == position.x) && findSquadByCoor(buff) == NULL)
+            if(movementMap[r][c] <= movement && !(r == position.y && c == position.x) && findSquadByCoor(buff) == nullptr)
             {
                 returnVector.push_back(m_tiles[r][c]);
             }
@@ -582,38 +758,47 @@ vector<Tile*> Battle::showAvailableShootTiles(Squad* squad)
 {
     // the vector that we return
     vector<Tile*> returnVector;
-    // buff variable used to pass the coordinates, to the canShoot function
-    coordinates buffCoor;
-    for (short int r = 0; r < m_rows; r ++)
+
+    vector<Tile*>* thisStep;
+    vector<Tile*>* nextStep;
+
+    bool foundResult = false;
+    unsigned short step = 0;
+
+    Tile* buff = nullptr;
+    thisStep = new vector<Tile*>;
+    thisStep->push_back(squad->m_tileTaken);
+    D(squad->m_attackRange);
+    while(step < squad->m_attackRange)
     {
-        for (short int c = 0; c < m_colls; c ++)
+        nextStep = new vector<Tile*>;
+        for(unsigned short i = 0; i < thisStep->size(); i ++)
         {
-            buffCoor.x = c;
-            buffCoor.y = r;
-
-            int range = squad->m_attackRange;
-            // Converting the logical coordinates to real coordinates
-            coordinates logicalPosition = squad->m_mapCoor;
-            coordinates position;
-            position.x = m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.x + (m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.w) / 2;
-            position.y = m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.y + (m_tiles[logicalPosition.y][logicalPosition.x]->m_objectRect.h) / 2;
-
-            coordinates logicalTargetPosition = buffCoor;
-            coordinates targetPosition;
-            targetPosition.x = m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.x + (m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.w) / 2;
-            targetPosition.y = m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.y + (m_tiles[logicalTargetPosition.y][logicalTargetPosition.x]->m_objectRect.h) / 2;
-
-            // Using the pythagorean theorem, we can check if we have big enough range
-            short int a = abs(position.x - targetPosition.x);
-            short int b = abs(position.y - targetPosition.y);
-            short int distance = sqrt(a*a + b*b);
-
-            if (distance < range)
+            for(unsigned short j = 0; j < 6; j ++)
             {
-                returnVector.push_back(m_tiles[r][c]);
+                buff = giveNeighbor(((*thisStep)[i]->m_mapCoordinates), j);
+                if(buff != nullptr)
+                {
+                    for (unsigned short k = 0; k < returnVector.size(); k ++)
+                    {
+                        if(buff == returnVector[k])
+                        {
+                            buff = nullptr;
+                            break;
+                        }
+                    }
+                    if(buff != nullptr)
+                    {
+                        returnVector.push_back(buff);
+                        nextStep->push_back(buff);
+                    }
+                }
             }
         }
+        thisStep = nextStep;
+        step++;
     }
+    D(returnVector.size());
     return returnVector;
 }
 
@@ -624,40 +809,28 @@ void Battle::initSquad(SQUAD type, coordinates mapCoor, OWNER owner)
     switch(type)
     {
         case WARRIOR:
-            squad = new HookSquad(*(world.m_configManager.modelSquadWarrior), (&world.m_cameraOffset), tile, owner);
+            squad = new Squad(*(world.m_configManager.modelSquadWarrior), (&world.m_cameraOffset), tile, owner);
             break;
         case ARCHER:
             squad = new Squad(*(world.m_configManager.modelSquadArcher), (&world.m_cameraOffset), tile, owner);
             break;
         case SPEARMEN:
-            squad = new Squad(*(world.m_configManager.modelSquadSpearmen), (&world.m_cameraOffset), tile, owner);
+            squad = new SpearSquad(*(world.m_configManager.modelSquadSpearmen), (&world.m_cameraOffset), tile, owner);
             break;
         case CROSSBOWMEN:
-            squad = new Squad(*(world.m_configManager.modelSquadCrossbowmen), (&world.m_cameraOffset), tile, owner);
+            squad = new HookSquad(*(world.m_configManager.modelSquadCrossbowmen), (&world.m_cameraOffset), tile, owner);
             break;
         case KNIGHTS:
             squad = new Squad(*(world.m_configManager.modelSquadKnights), (&world.m_cameraOffset), tile, owner);
             break;
         default:
-            squad = NULL;
+            squad = nullptr;
             break;
     }
-    if(tile != NULL)
+    if(tile != nullptr)
     {
         m_squads.push_back(squad);
     }
-}
-
-Squad* Battle::findSquadByCoor(coordinates coor)
-{
-    for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
-    {
-        if((*it)->m_mapCoor == coor)
-        {
-            return (*it);
-        }
-    }
-    return NULL;
 }
 
 void Battle::switchTurn()
@@ -667,12 +840,12 @@ void Battle::switchTurn()
         if((*it)->m_owner != m_playerTurn)
         {
             (*it)->m_moved = false;
-            (*it)->m_shooted = false;
+            (*it)->m_attacked = false;
             (*it)->m_speed = (*it)->m_startSpeed;
         }
         else
         {
-            (*it)->m_shooted = true;
+            (*it)->m_attacked = true;
             (*it)->m_moved = true;
         }
     }
@@ -700,7 +873,7 @@ void Battle::squadActionsCheck()
 {
     if(world.m_mouseIsPressed)
     {
-        if (m_selectedSquad != NULL)
+        if (m_selectedSquad != nullptr)
         {
             /// Check if this is the squad that we have selected before
             bool seletedASquad = false;
@@ -725,34 +898,33 @@ void Battle::squadActionsCheck()
                         if (m_selectedSquad == oldSquad)
                         {
                             /// Can we travel to the selected tile
-                            canTravel(m_selectedSquad, m_tiles[m_selected.y][m_selected.x]->m_mapCoordinates);
-                            m_availableWalkTiles.clear();
+                            canTravel(m_selectedSquad, m_tiles[m_selected.y][m_selected.x]->m_mapCoordinates);                            m_availableWalkTiles.clear();
                             m_availableShootTiles.clear();
-                            m_selectedSquad = NULL;
+                            m_selectedSquad = nullptr;
                         }
                     }
-                    else if(m_selectedSquad->m_shooted == false)
+                    else if(m_selectedSquad->m_attacked == false)
                     {
                         /// If we haven't shot, than we can shoot
                         canShoot(m_selectedSquad, m_selected);
                         m_availableShootTiles.clear();
-                        m_selectedSquad = NULL;
+                        m_selectedSquad = nullptr;
                     }
                 }
             }
             else
             {
                 /// We have selected a Squad
-                if(oldSquad != m_selectedSquad && !(oldSquad->m_shooted) && canShoot(oldSquad, m_selectedSquad->m_mapCoor) && m_selectedSquad->m_owner != oldSquad ->m_owner)
+                if(oldSquad != m_selectedSquad && !(oldSquad->m_attacked) && canShoot(oldSquad, m_selectedSquad->m_mapCoor) && m_selectedSquad->m_owner != oldSquad ->m_owner)
                 {
                     /// We can shoot it
                     oldSquad->attack(m_selectedSquad);
-                    world.m_startShake = time(NULL);
-                    oldSquad->m_shooted = true;
+                    world.m_startShake = time(nullptr);
+                    oldSquad->m_attacked = true;
                     oldSquad->m_moved = true;
                     m_availableShootTiles.clear();
                     m_availableWalkTiles.clear();
-                    m_selectedSquad = NULL;
+                    m_selectedSquad = nullptr;
                 }
             }
         }
@@ -772,20 +944,20 @@ void Battle::squadActionsCheck()
             {
                 if(!(m_selectedSquad->m_moved))
                 {
-                    m_showFillBtn = false;
+                    m_showFillBtn = true;
                     m_showAttackTiles = false;
                     m_availableWalkTiles = showAvailableWalkTiles(m_selectedSquad);
                 }
-                else if(!(m_selectedSquad->m_shooted))
+                else if(!(m_selectedSquad->m_attacked))
                 {
-                    m_showFillBtn = false;
+                    m_showFillBtn = true;
                     m_showAttackTiles = true;
                     m_availableShootTiles = showAvailableShootTiles(m_selectedSquad);
                 }
             }
             else if (!seletedASquad)
             {
-                m_selectedSquad = NULL;
+                m_selectedSquad = nullptr;
             }
         }
     }
@@ -798,10 +970,13 @@ void Battle::squadActionsCheck()
         {
             m_showFillBtn = false;
         }
-        if(m_selectedSquad != NULL)
+        if(m_selectedSquad != nullptr)
         {
+            cout << "-----------------------------------------------------" << endl;
             if(canShoot(m_selectedSquad, (*it)->m_mapCoor) && m_selectedSquad != (*it) && m_availableWalkTiles.size() != 0)
             {
+                cout << "-----------------------------------------------------" << endl;
+
                 m_availableShootTiles.push_back(m_tiles[(*it)->m_mapCoor.y][(*it)->m_mapCoor.x]);
             }
         }
@@ -815,7 +990,7 @@ void Battle::checkForTurnSwitch()
     {
         if((*it)->m_owner == m_playerTurn)
         {
-            if(!((*it)->m_moved) || !((*it)->m_shooted))
+            if(!((*it)->m_moved) || !((*it)->m_attacked))
             {
                 checkForSwitch = false;
             }

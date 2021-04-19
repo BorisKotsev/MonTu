@@ -34,10 +34,10 @@ public:
     Tile* modelTileVolcano = NULL;
     Tile* modelTileLava = NULL;
 
-    HookSquad* modelSquadWarrior = NULL;
+    Squad* modelSquadWarrior = NULL;
     Squad* modelSquadArcher = NULL;
-    Squad* modelSquadSpearmen = NULL;
-    Squad* modelSquadCrossbowmen = NULL;
+    SpearSquad* modelSquadSpearmen = NULL;
+    HookSquad* modelSquadCrossbowmen = NULL;
     Squad* modelSquadKnights = NULL;
 
     Castle* modelCastle = NULL;

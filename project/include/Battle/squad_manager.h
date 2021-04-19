@@ -26,7 +26,7 @@ class squad_manager
         void addSoldier(int squad, int numberOfSoldiers, SQUAD type, int coordX, int coordY);///
         void changeUnits(int squad, SQUAD unitType, int currCordX, int currCordY, int currUnits, int value);///
         void changeSoldierCoords(int squad, int currCordX, int currCordY, int newCoordX, int newCoordY);///
-        void killSoldier(int squad, string type, int coordX, int coordY);///
+        void killSoldier(int squad, int type, int coordX, int coordY);///
 
     protected:
 

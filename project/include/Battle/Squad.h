@@ -28,6 +28,11 @@ class Squad
         SDL_Rect m_healthBarRect;
         coordinates m_mapCoor;
 
+        //{WALK
+        // parameters used ONLY in the walk function
+        fcoordinates m_walkCoor;
+        int m_directionAngle;
+        //}
         HealthManager* m_hm;
 
         coordinates* m_cameraOffset;
@@ -52,9 +57,14 @@ class Squad
 
         bool m_traveling;
         bool m_moved;
-        bool m_shooted;
+        bool m_attacked;
 
         Tile* m_tileTaken;
+        // A tile that is used in the walk function
+        // When we want to perform movement, goal tile is used to remember
+        // on which tile we want to step and perform a slow movement,
+        // instead of teleporting
+        Tile* m_goalTile;
 
         stack<Tile*> m_path;
 
@@ -67,6 +77,7 @@ class Squad
         virtual void attack(Squad* defender);
         void syncCoor();
         void idleAnimation();
+        void walk();
 
     protected:
 

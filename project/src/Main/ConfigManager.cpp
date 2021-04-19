@@ -52,7 +52,7 @@ void ConfigManager::init(string configFile, SDL_Renderer* renderer, HealthManage
     modelTileLava->load(buff, renderer);
 
     stream >> tmp >> buff;
-    modelSquadWarrior = new HookSquad;
+    modelSquadWarrior = new Squad;
     modelSquadWarrior->load(buff, renderer, hm);
 
     stream >> tmp >> buff;
@@ -60,11 +60,11 @@ void ConfigManager::init(string configFile, SDL_Renderer* renderer, HealthManage
     modelSquadArcher->load(buff, renderer, hm);
 
     stream >> tmp >> buff;
-    modelSquadSpearmen = new Squad;
+    modelSquadSpearmen = new SpearSquad;
     modelSquadSpearmen->load(buff, renderer, hm);
 
     stream >> tmp >> buff;
-    modelSquadCrossbowmen = new Squad;
+    modelSquadCrossbowmen = new HookSquad;
     modelSquadCrossbowmen->load(buff, renderer, hm);
 
     stream >> tmp >> buff;

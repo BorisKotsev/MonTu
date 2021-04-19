@@ -43,6 +43,7 @@
 			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_ttf" />
 			<Add directory="dep_sdl/lib" />
 		</Linker>
+		<Unit filename="include/Animator.h" />
 		<Unit filename="include/Battle/ArmyManager.h" />
 		<Unit filename="include/Battle/Battle.h" />
 		<Unit filename="include/Battle/EnemyAI.h" />
@@ -78,7 +79,9 @@
 		<Unit filename="include/PickAndBan.h" />
 		<Unit filename="include/PlayerStatsManager.h" />
 		<Unit filename="include/PopUpWriter.h" />
+		<Unit filename="include/RainOfArrows.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Animator.cpp" />
 		<Unit filename="src/Battle/ArmyManager.cpp" />
 		<Unit filename="src/Battle/Battle.cpp" />
 		<Unit filename="src/Battle/EnemyAI.cpp" />
@@ -112,6 +115,7 @@
 		<Unit filename="src/PickAndBan.cpp" />
 		<Unit filename="src/PlayerStatsManager.cpp" />
 		<Unit filename="src/PopUpWriter.cpp" />
+		<Unit filename="src/RainOfArrows.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

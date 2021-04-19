@@ -2394,7 +2394,7 @@
 	<vector>
 	<string>
 
-1595622974 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl.h
+1595626574 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl.h
 	"SDL_main.h"
 	"SDL_stdinc.h"
 	"SDL_assert.h"
@@ -2427,12 +2427,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_main.h
+1595626577 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_main.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_stdinc.h
+1595626579 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_stdinc.h
 	"SDL_config.h"
 	<sys/types.h>
 	<stdio.h>
@@ -2461,27 +2461,27 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595622975 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_config.h
+1595626575 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_config.h
 	"SDL_platform.h"
 
-1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_platform.h
+1595626579 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_platform.h
 	"AvailabilityMacros.h"
 	"TargetConditionals.h"
 	<winapifamily.h>
 	"begin_code.h"
 	"close_code.h"
 
-1595622982 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\begin_code.h
+1595626582 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\begin_code.h
 
-1595622982 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\close_code.h
+1595626582 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\close_code.h
 
-1595622974 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_assert.h
+1595626574 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_assert.h
 	"SDL_config.h"
 	"begin_code.h"
 	<signal.h>
 	"close_code.h"
 
-1595622974 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_atomic.h
+1595626574 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_atomic.h
 	"SDL_stdinc.h"
 	"SDL_platform.h"
 	"begin_code.h"
@@ -2489,7 +2489,7 @@
 	<mbarrier.h>
 	"close_code.h"
 
-1595622974 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_audio.h
+1595626574 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_audio.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_endian.h"
@@ -2499,24 +2499,24 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595622975 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_error.h
+1595626575 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_error.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595622975 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_endian.h
+1595626575 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_endian.h
 	"SDL_stdinc.h"
 	<endian.h>
 	"begin_code.h"
 	"close_code.h"
 
-1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_mutex.h
+1595626577 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_mutex.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595622981 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_thread.h
+1595626581 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_thread.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_atomic.h"
@@ -2527,18 +2527,18 @@
 	<stdlib.h>
 	"close_code.h"
 
-1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_rwops.h
+1595626579 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_rwops.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595622974 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_clipboard.h
+1595626574 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_clipboard.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595622975 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_cpuinfo.h
+1595626575 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_cpuinfo.h
 	"SDL_stdinc.h"
 	<intrin.h>
 	<intrin.h>
@@ -2557,7 +2557,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595622976 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_events.h
+1595626576 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_events.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -2571,7 +2571,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595622981 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_video.h
+1595626581 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_video.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -2579,13 +2579,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_pixels.h
+1595626579 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_pixels.h
 	"SDL_stdinc.h"
 	"SDL_endian.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_rect.h
+1595626579 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_rect.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_pixels.h"
@@ -2593,7 +2593,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595622980 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_surface.h
+1595626580 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_surface.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -2602,11 +2602,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595622974 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_blendmode.h
+1595626574 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_blendmode.h
 	"begin_code.h"
 	"close_code.h"
 
-1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_keyboard.h
+1595626577 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_keyboard.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_keycode.h"
@@ -2614,27 +2614,27 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_keycode.h
+1595626577 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_keycode.h
 	"SDL_stdinc.h"
 	"SDL_scancode.h"
 
-1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_scancode.h
+1595626579 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_scancode.h
 	"SDL_stdinc.h"
 
-1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_mouse.h
+1595626577 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_mouse.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_joystick.h
+1595626577 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_joystick.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595622976 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_gamecontroller.h
+1595626576 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_gamecontroller.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_rwops.h"
@@ -2642,11 +2642,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_quit.h
+1595626579 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_quit.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 
-1595622976 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_gesture.h
+1595626576 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_gesture.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -2654,66 +2654,66 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595622981 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_touch.h
+1595626581 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_touch.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595622976 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_filesystem.h
+1595626576 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_filesystem.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595622976 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_haptic.h
+1595626576 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_haptic.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_joystick.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595622976 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_hints.h
+1595626576 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_hints.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_loadso.h
+1595626577 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_loadso.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_log.h
+1595626577 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_log.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_messagebox.h
+1595626577 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_messagebox.h
 	"SDL_stdinc.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_power.h
+1595626579 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_power.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_render.h
+1595626579 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_render.h
 	"SDL_stdinc.h"
 	"SDL_rect.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_sensor.h
+1595626579 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_sensor.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595622979 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_shape.h
+1595626579 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_shape.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -2722,7 +2722,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595622980 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_system.h
+1595626580 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_system.h
 	"SDL_stdinc.h"
 	"SDL_keyboard.h"
 	"SDL_render.h"
@@ -2730,13 +2730,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1595622981 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_timer.h
+1595626581 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_timer.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1595622981 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_version.h
+1595626581 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_version.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
@@ -2750,7 +2750,7 @@
 	"SDL2/SDL_TTF.h"
 	"defines.h"
 
-1595622981 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_ttf.h
+1595626581 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_ttf.h
 	"SDL.h"
 	"begin_code.h"
 	"close_code.h"
@@ -2806,7 +2806,7 @@
 	<fstream>
 	"defines.h"
 
-1597790017 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\popupwriter.h
+1597793617 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\popupwriter.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -2869,7 +2869,7 @@
 	<string>
 	<iostream>
 
-1595622977 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_mixer.h
+1595626577 c:\users\konstantin\documents\c++ programing\nite\montu\project\dep_sdl\include\sdl2\sdl_mixer.h
 	"SDL_stdinc.h"
 	"SDL_rwops.h"
 	"SDL_audio.h"
@@ -2878,14 +2878,14 @@
 	"begin_code.h"
 	"close_code.h"
 
-1597789859 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\pickandban.h
+1597793459 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\pickandban.h
 	<vector>
 	<fstream>
 	<iostream>
 	"defines.h"
 	"Engine.h"
 
-1603746222 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\playerstatsmanager.h
+1603749822 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\playerstatsmanager.h
 	<iostream>
 	<fstream>
 	<queue>
@@ -2946,13 +2946,13 @@
 	"Menu.h"
 	"World.h"
 
-1603395369 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\pickandban.cpp
+1603398969 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\pickandban.cpp
 	"PickAndBan.h"
 
-1603746561 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\playerstatsmanager.cpp
+1603750161 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\playerstatsmanager.cpp
 	"PlayerStatsManager.h"
 
-1597700720 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\popupwriter.cpp
+1597704320 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\popupwriter.cpp
 	"PopUpWriter.h"
 
 1597791487 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\soundmanager.cpp
@@ -3002,11 +3002,12 @@
 	"WorldMap.h"
 	"World.h"
 
-1616175335 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\main.cpp
+1616801587 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\main.cpp
 	<SDL2/SDL.h>
 	"World.h"
 	"FPSManager.h"
 	"WorldBuilding.h"
+	"Animator.h"
 
 1616175124 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\castleui.cpp
 	"castleUI.h"
@@ -3129,114 +3130,114 @@
 	"World.h"
 	"squad_manager.h"
 
-1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\armymanager.cpp
+1618489665 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\armymanager.cpp
 	"ArmyManager.h"
 	"World.h"
 
-1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\battle.cpp
+1618489738 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\battle.cpp
 	"Battle.h"
 	"World.h"
 
-1613597234 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\enemyai.cpp
+1618767459 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\enemyai.cpp
 	"EnemyAI.h"
 	"World.h"
 	"defines.h"
 
-1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\healer.cpp
+1616799682 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\healer.cpp
 	"Healer.h"
 	"World.h"
 
-1601812740 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\healthmanager.cpp
+1601816340 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\healthmanager.cpp
 	"HealthManager.h"
 
-1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\hooksquad.cpp
+1618136270 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\hooksquad.cpp
 	"HookSquad.h"
 	"World.h"
 
-1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\spearsquad.cpp
+1618135056 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\spearsquad.cpp
 	"SpearSquad.h"
 	"World.h"
 
-1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\squad.cpp
+1618865201 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\squad.cpp
 	"Squad.h"
 
-1616176256 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\squad_manager.cpp
+1616194175 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\battle\squad_manager.cpp
 	"squad_manager.h"
 	<fstream>
 	<iostream>
 
-1616153705 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\archery.cpp
+1616157305 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\archery.cpp
 	"Archery.h"
 
-1616153705 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\armycamp.cpp
+1616157305 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\armycamp.cpp
 	"ArmyCamp.h"
 	"WorldBuilding.h"
 
-1616153706 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\bridge.cpp
+1616157306 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\bridge.cpp
 	"Bridge.h"
 	"WorldBuilding.h"
 
-1616153840 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\building.cpp
+1616157440 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\building.cpp
 	"Building.h"
 	"WorldBuilding.h"
 
-1616153706 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\buildingui.cpp
+1616157306 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\buildingui.cpp
 	"BuildingUI.h"
 
-1616153706 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\buttons.cpp
+1616157306 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\buttons.cpp
 	"Buttons.h"
 
-1616153706 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\castle.cpp
+1616157306 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\castle.cpp
 	"Castle.h"
 	"WorldBuilding.h"
 
-1616153705 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\shop.cpp
+1616157305 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\shop.cpp
 	"Shop.h"
 
-1616153705 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\street.cpp
+1616157305 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\street.cpp
 	"Street.h"
 
-1616153705 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\tile.cpp
+1616157305 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\tile.cpp
 	"Tile.h"
 
-1616173346 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\ui.cpp
+1616176946 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\ui.cpp
 	<vector>
 	"Ui.h"
 
-1616155264 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\uiselectable.cpp
+1616158864 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\uiselectable.cpp
 	"UISelectable.h"
 	"World.h"
 
-1616173821 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\worldbuilding.cpp
+1616799350 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\worldbuilding.cpp
 	"WorldBuilding.h"
 	"World.h"
 
-1616153949 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\main\configmanager.cpp
+1618489389 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\main\configmanager.cpp
 	"ConfigManager.h"
 	<fstream>
 
-1615757384 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\main\engine.cpp
+1618864674 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\main\engine.cpp
 	"Engine.h"
 
-1611239836 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\main\fpsmanager.cpp
+1611243436 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\main\fpsmanager.cpp
 	"FPSManager.h"
 	<SDL2/SDL.h>
 
-1597791487 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\main\soundmanager.cpp
+1597795087 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\main\soundmanager.cpp
 	"SoundManager.h"
 
-1616173904 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\main\world.cpp
+1616271101 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\main\world.cpp
 	"World.h"
 
-1615538257 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\map\worldmap.cpp
+1615541857 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\map\worldmap.cpp
 	"WorldMap.h"
 	"World.h"
 
-1613245536 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\menu\menu.cpp
+1613249136 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\menu\menu.cpp
 	"Menu.h"
 	"World.h"
 
-1615538256 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\main\world.h
+1615541856 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\main\world.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -3259,7 +3260,7 @@
 	"castleUI.h"
 	"WorldMap.h"
 
-1616153900 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\main\configmanager.h
+1616800154 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\main\configmanager.h
 	<SDL2/SDL.h>
 	<string>
 	"Tile.h"
@@ -3274,14 +3275,14 @@
 	"ArmyCamp.h"
 	"Bridge.h"
 
-1616153708 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\tile.h
+1616157308 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\tile.h
 	<string>
 	<fstream>
 	<iostream>
 	"defines.h"
 	"Engine.h"
 
-1616154210 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\main\defines.h
+1616157810 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\main\defines.h
 	<cmath>
 	<vector>
 	<map>
@@ -3289,9 +3290,9 @@
 	<vector>
 	<string>
 
-1616177247 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\map
+1616180847 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\map
 
-1615757478 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\main\engine.h
+1618864618 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\main\engine.h
 	<cmath>
 	<vector>
 	<string>
@@ -3300,11 +3301,11 @@
 	"SDL2/SDL_TTF.h"
 	"defines.h"
 
-1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\building.h
+1616157307 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\building.h
 	<chrono>
 	<Tile.h>
 
-1601812574 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\healthmanager.h
+1601816174 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\healthmanager.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -3317,10 +3318,10 @@
 	"Engine.h"
 	"defines.h"
 
-1608406895 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\spearsquad.h
+1608410495 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\spearsquad.h
 	"Squad.h"
 
-1615538256 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\squad.h
+1618863312 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\squad.h
 	<string>
 	<fstream>
 	<iostream>
@@ -3330,10 +3331,10 @@
 	"Tile.h"
 	"HealthManager.h"
 
-1608754549 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\hooksquad.h
+1608758149 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\hooksquad.h
 	"Squad.h"
 
-1616153708 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\ui.h
+1616157308 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\ui.h
 	<string>
 	<fstream>
 	<iostream>
@@ -3341,37 +3342,37 @@
 	"Engine.h"
 	"UISelectable.h"
 
-1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\uiselectable.h
+1616157307 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\uiselectable.h
 	<string>
 	<fstream>
 	<iostream>
 	"defines.h"
 	"Engine.h"
 
-1616153708 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\buttons.h
+1616157308 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\buttons.h
 	<string>
 	<fstream>
 	<iostream>
 	"defines.h"
 	"Engine.h"
 
-1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\castle.h
+1616157307 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\castle.h
 	<Building.h>
 
-1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\armycamp.h
+1616157307 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\armycamp.h
 	<Building.h>
 
-1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\bridge.h
+1616157307 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\bridge.h
 	<Building.h>
 
-1595622985 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\main\soundmanager.h
+1595626585 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\main\soundmanager.h
 	<SDL2/SDL_mixer.h>
 	<SDL2/SDL.h>
 	<fstream>
 	<string>
 	<iostream>
 
-1608759126 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\battle.h
+1618482000 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\battle.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -3389,17 +3390,17 @@
 	"SpearSquad.h"
 	"HookSquad.h"
 
-1613597338 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\enemyai.h
+1616798892 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\enemyai.h
 	<vector>
 	<Tile.h>
 	<Squad.h>
 
-1604073821 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\armymanager.h
+1618488932 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\armymanager.h
 	<iostream>
 	<fstream>
 	"defines.h"
 
-1608580831 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\menu\menu.h
+1608584431 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\menu\menu.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -3411,17 +3412,17 @@
 	<SDL2/SDL.h>
 	"defines.h"
 
-1616057477 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\squad_manager.h
+1616191767 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\squad_manager.h
 	"defines.h"
 	<cstring>
 	<cstdio>
 
-1616057020 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\castleui.h
+1616060620 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\castleui.h
 	<SDL2/SDL.h>
 	"Engine.h"
 	"defines.h"
 
-1615538256 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\map\worldmap.h
+1615541856 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\map\worldmap.h
 	<iostream>
 	<fstream>
 	<SDL2/SDL.h>
@@ -3432,9 +3433,9 @@
 	"Engine.h"
 	"defines.h"
 
-1611239540 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\main\fpsmanager.h
+1611243140 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\main\fpsmanager.h
 
-1616173716 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\worldbuilding.h
+1616177316 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\worldbuilding.h
 	"Building.h"
 	"BuildingUI.h"
 	<iostream>
@@ -3462,14 +3463,35 @@
 	"Ui.h"
 	"Buttons.h"
 
-1616153708 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\buildingui.h
+1616157308 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\buildingui.h
 
-1609022202 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\healer.h
+1609025802 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\battle\healer.h
 	"Squad.h"
 
-1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\archery.h
+1616157307 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\archery.h
 
-1616153708 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\shop.h
+1616157308 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\shop.h
 
-1616153707 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\street.h
+1616157307 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\city view\street.h
+
+1616194319 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\city view\castleui.cpp
+	"castleUI.h"
+	"World.h"
+	"squad_manager.h"
+
+1616783983 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\animator.cpp
+	"Animator.h"
+	"World.h"
+	<fstream>
+
+1616784030 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\animator.h
+	<chrono>
+	"Engine.h"
+
+1618483180 source:c:\users\konstantin\documents\c++ programing\nite\montu\project\src\rainofarrows.cpp
+	"RainOfArrows.h"
+	"World.h"
+
+1618134192 c:\users\konstantin\documents\c++ programing\nite\montu\project\include\rainofarrows.h
+	"Squad.h"
 

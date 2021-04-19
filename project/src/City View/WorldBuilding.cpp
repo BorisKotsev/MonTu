@@ -152,8 +152,6 @@ void WorldBuilding::loadBuildings(string configFile)
             building = new Building(*(world.m_configManager.modelShop));
         }
 
-
-
         in_file >> buff;
         building->m_mapCoordinates.x = val;
         in_file >> buff;
@@ -288,7 +286,6 @@ void WorldBuilding::initTiles(string configFile)
 
 void WorldBuilding::initButtons()
 {
-
     m_button = new Buttons(*(world.m_configManager.modelButtons));
     m_buttons.push_back(m_button);
 }
@@ -296,7 +293,6 @@ void WorldBuilding::initButtons()
 void WorldBuilding::selectTile()
 {
     const Uint8 *state = SDL_GetKeyboardState(NULL);
-    SDL_PollEvent(&(world.m_event));
 
     for(short int r = 0; r < m_tiles.size(); r++)
     {

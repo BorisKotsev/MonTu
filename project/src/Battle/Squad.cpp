@@ -2,7 +2,7 @@
 
 Squad::Squad()
 {
-    //ctor
+    m_goalTile = nullptr;
 }
 
 Squad::~Squad()
@@ -42,6 +42,7 @@ Squad::Squad(const Squad& model, coordinates* cameraOffset, Tile* tile, OWNER ow
     else
     {
         m_objectTexture = model.m_enemyTexture;
+        m_maxFramesPerStep /= 10;
     }
 
     m_renderer = model.m_renderer;
@@ -51,7 +52,7 @@ Squad::Squad(const Squad& model, coordinates* cameraOffset, Tile* tile, OWNER ow
     m_hm = model.m_hm;
 
     m_moved = false;
-    m_shooted = false;
+    m_attacked = false;
 }
 
 
@@ -83,25 +84,26 @@ void Squad::load(string configFile, SDL_Renderer* renderer, HealthManager* hm)
 
 void Squad::update()
 {
-    if (!(m_path.empty()) && m_framesPerStep >= m_maxFramesPerStep)
-    {
-         cout << "INFO: The size of the queue is " << m_path.size() << endl;
-        m_tileTaken = m_path.top();
-
-        m_path.pop();
-
-        m_mapCoor = m_tileTaken->m_mapCoordinates;
-
-        m_objectRect.x = m_tileTaken->m_drawCoordinates.x;
-        m_objectRect.y = m_tileTaken->m_drawCoordinates.y;
-
-        m_framesPerStep = 0;
-    }
-    else if (!(m_path.empty()))
-    {
-        m_framesPerStep ++;
-    }
+//    if (!(m_path.empty()) && m_framesPerStep >= m_maxFramesPerStep)
+//    {
+//         cout << "INFO: The size of the walk queue is " << m_path.size() << endl;
+//        m_tileTaken = m_path.top();
+//
+//        m_path.pop();
+//
+//        m_mapCoor = m_tileTaken->m_mapCoordinates;
+//
+//        m_objectRect.x = m_tileTaken->m_drawCoordinates.x;
+//        m_objectRect.y = m_tileTaken->m_drawCoordinates.y;
+//
+//        m_framesPerStep = 0;
+//    }
+//    else if (!(m_path.empty()))
+//    {
+//        m_framesPerStep ++;
+//    }
     //idleAnimation();
+    walk();
 }
 
 void Squad::draw()
@@ -116,7 +118,7 @@ void Squad::draw()
 
 void Squad::idleAnimation()
 {
-    if(!m_moved || !m_shooted)
+    if(!m_moved || !m_attacked)
     {
         if(m_moveUp)
         {
@@ -147,13 +149,68 @@ void Squad::idleAnimation()
 
 void Squad::attack(Squad* defender)
 {
-    cout << "HERE" << endl;
     defender->m_health -= m_attackDamage;
-    m_shooted = true;
+    m_attacked = true;
     m_moved = true;
 }
 
-
 void Squad::syncCoor()
 {
+}
+
+void Squad::walk()
+{
+    if(m_goalTile == nullptr)
+    {
+        if(!(m_path.empty()))
+        {
+            // Loading the goalTile in the begging of the walk
+            m_goalTile = m_path.top();
+            m_tileTaken = m_path.top();
+            m_path.pop();
+
+            coordinates direction;
+            direction.x = m_goalTile->m_objectRect.x - m_objectRect.x;
+            direction.y = m_goalTile->m_objectRect.y - m_objectRect.y;
+
+            m_directionAngle = returnAngleByCoordinates(direction);
+
+            m_walkCoor.x = m_objectRect.x;
+            m_walkCoor.y = m_objectRect.y;
+        }
+    }else{
+        m_walkCoor.x += sin(m_directionAngle * PI / 180);
+        m_walkCoor.y -= cos(m_directionAngle * PI / 180);
+
+        m_objectRect.x = m_walkCoor.x;
+        m_objectRect.y = m_walkCoor.y;
+
+        if(distance(m_objectRect, m_goalTile->m_objectRect) < 2)
+        {
+            // We are close enough to the target
+            m_objectRect.x = m_goalTile->m_objectRect.x;
+            m_objectRect.y = m_goalTile->m_objectRect.y;
+
+            // Load the next tile, if there is one
+            if(!(m_path.empty()))
+            {
+                m_goalTile = m_path.top();
+                m_tileTaken = m_path.top();
+                m_path.pop();
+
+                coordinates direction;
+                direction.x = m_goalTile->m_objectRect.x - m_objectRect.x;
+                direction.y = m_goalTile->m_objectRect.y - m_objectRect.y;
+
+                m_directionAngle = returnAngleByCoordinates(direction);
+
+                m_walkCoor.x = m_objectRect.x;
+                m_walkCoor.y = m_objectRect.y;
+
+                m_mapCoor = m_tileTaken->m_mapCoordinates;
+            }else{
+                m_goalTile = nullptr;
+            }
+        }
+    }
 }

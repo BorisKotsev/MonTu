@@ -14,6 +14,7 @@
 #include "Engine.h"
 #include "defines.h"
 
+//TODO (konstantin#1#): change the texture with the one in adobe xd, use health to determine how many soldiers will die
 class HealthManager
 {
     public:

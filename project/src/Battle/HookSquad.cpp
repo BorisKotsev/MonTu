@@ -50,7 +50,7 @@ HookSquad::HookSquad(const HookSquad& model, coordinates* cameraOffset, Tile* ti
     m_hm = model.m_hm;
 
     m_moved = false;
-    m_shooted = false;
+    m_attacked = false;
 }
 
 
@@ -75,30 +75,7 @@ void HookSquad::attack(Squad* defender)
 
     Tile* neighbor = NULL;
 
-    if (angle > 0 && angle < 60)
-    {
-        neighbor = world.m_battle.giveNeighbor(defender->m_mapCoor, 4);
-    }
-    if (angle > 60 && angle < 120)
-    {
-        neighbor = world.m_battle.giveNeighbor(defender->m_mapCoor, 3);
-    }
-    if (angle > 120 && angle < 180)
-    {
-        neighbor = world.m_battle.giveNeighbor(defender->m_mapCoor, 2);
-    }
-    if (angle < 0 && angle > -60)
-    {
-        neighbor = world.m_battle.giveNeighbor(defender->m_mapCoor, 5);
-    }
-    if (angle < -60 && angle > -120)
-    {
-        neighbor = world.m_battle.giveNeighbor(defender->m_mapCoor, 0);
-    }
-    if (angle < -120 && angle > -180)
-    {
-        neighbor = world.m_battle.giveNeighbor(defender->m_mapCoor, 1);
-    }
+    neighbor = world.m_battle.giveNeighbor(defender->m_mapCoor, world.m_battle.angleToDirectionReverse(angle));
 
     if(neighbor != NULL && world.m_battle.findSquadByCoor(neighbor->m_mapCoordinates) == NULL)
     {

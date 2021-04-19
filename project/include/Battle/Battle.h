@@ -60,14 +60,19 @@ class Battle
         vector<Tile*> m_availableShootTiles;
 
         bool canTravel(Squad* squad, coordinates desiredPosition);
+        bool canShoot(Squad* squad, coordinates targetPosition);
+        short angleToDirection(short angle);
+        short angleToDirectionReverse(short angle);
+        Tile* giveNeighbor(coordinates coor, int direction);
+        coordinates* giveNeighborCoor(coordinates coor, int direction);
+        Squad* giveNeighborSquad(coordinates coor, int directions);
+        Squad* findSquadByCoor (coordinates coor);
         vector<Tile*> showAvailableWalkTiles(Squad* squad);
         vector<Tile*> showAvailableShootTiles(Squad* squad);
-        bool canShoot(Squad* squad, coordinates targetPosition);
-        Tile* giveNeighbor(coordinates coor, int direction);
-        Squad* findSquadByCoor (coordinates coor);
 
         void update();
         void draw();
+        void cleaner();
 
         void initDirection(string configFile);
         void initBattle(string configFile);

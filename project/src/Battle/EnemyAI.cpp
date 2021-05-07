@@ -72,7 +72,6 @@ void EnemyAI::chooseBestActionForUnit(Squad* squad, unsigned short unitIndex)
             {
                 distanceScore += distance((*it)->m_objectRect, m_playerSquads[i]->m_objectRect);
             }
-            D(distanceScore);
             if (distanceScore < bestDistanceScore)
             {
                 bestDistanceScore = distanceScore;
@@ -97,7 +96,7 @@ void EnemyAI::chooseBestActionForUnit(Squad* squad, unsigned short unitIndex)
                     score += distance(squad->m_tileTaken->m_objectRect, m_aiSquads[i]->m_objectRect);
                 }
                 score *= m_teamwork;
-                score += ((double)(*squadIt) -> m_health) / ((double)(*squadIt) -> m_startHealth) * valueSquadMap[(*squadIt) -> m_type] * m_aggression;
+                score += ((double)(*squadIt) -> m_numberOfUnits) * valueSquadMap[(*squadIt) -> m_type] * m_aggression;
 
                 /// TODO: if the performance is good, check all possible player actions for attack on the ai
                 if (world.m_battle.canShoot((*squadIt), squad->m_mapCoor))

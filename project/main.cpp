@@ -61,12 +61,9 @@ int main(int argc, char* argv[])
         if(world.m_gameState == GAME)
         {
             world.m_battle.initGameSession();
-            string file = "warriorMove.txt";
-            animator.initAnimation(file, &(world.m_battle.m_squads[0]->m_objectRect));
 
             world.m_battle.m_enemyAI.init("enemyAI.txt");
             ///world.m_castleUI.loadData("soldier_data_0.txt");
-            animator.start();
             while(!world.m_quitScene)
             {
                 const Uint8 *state = SDL_GetKeyboardState(NULL);

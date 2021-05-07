@@ -43,11 +43,11 @@
 			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_ttf" />
 			<Add directory="dep_sdl/lib" />
 		</Linker>
+		<Unit filename="include/AiBotTrainer.h" />
 		<Unit filename="include/Animator.h" />
 		<Unit filename="include/Battle/ArmyManager.h" />
 		<Unit filename="include/Battle/Battle.h" />
 		<Unit filename="include/Battle/EnemyAI.h" />
-		<Unit filename="include/Battle/Healer.h" />
 		<Unit filename="include/Battle/HealthManager.h" />
 		<Unit filename="include/Battle/HookSquad.h" />
 		<Unit filename="include/Battle/SpearSquad.h" />
@@ -76,16 +76,17 @@
 		<Unit filename="include/Main/defines.h" />
 		<Unit filename="include/Map/WorldMap.h" />
 		<Unit filename="include/Menu/Menu.h" />
+		<Unit filename="include/Particle.h" />
 		<Unit filename="include/PickAndBan.h" />
 		<Unit filename="include/PlayerStatsManager.h" />
 		<Unit filename="include/PopUpWriter.h" />
 		<Unit filename="include/RainOfArrows.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/AiBotTrainer.cpp" />
 		<Unit filename="src/Animator.cpp" />
 		<Unit filename="src/Battle/ArmyManager.cpp" />
 		<Unit filename="src/Battle/Battle.cpp" />
 		<Unit filename="src/Battle/EnemyAI.cpp" />
-		<Unit filename="src/Battle/Healer.cpp" />
 		<Unit filename="src/Battle/HealthManager.cpp" />
 		<Unit filename="src/Battle/HookSquad.cpp" />
 		<Unit filename="src/Battle/SpearSquad.cpp" />
@@ -112,6 +113,7 @@
 		<Unit filename="src/Main/World.cpp" />
 		<Unit filename="src/Map/WorldMap.cpp" />
 		<Unit filename="src/Menu/Menu.cpp" />
+		<Unit filename="src/Particle.cpp" />
 		<Unit filename="src/PickAndBan.cpp" />
 		<Unit filename="src/PlayerStatsManager.cpp" />
 		<Unit filename="src/PopUpWriter.cpp" />

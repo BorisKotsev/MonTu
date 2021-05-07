@@ -16,6 +16,7 @@
 using namespace std;
 
 SDL_Texture* LoadTexture(string file, SDL_Renderer* renderer);
+SDL_Texture* stringToTexture(string input, int FONT_SIZE);
 SDL_Point* LoadPoint(coordinates coor);
 int hexDistance(coordinates a, coordinates b);
 float triangleArea (int x1, int y1, int x2, int y2, int x3, int y3);

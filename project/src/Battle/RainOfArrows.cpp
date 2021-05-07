@@ -28,10 +28,10 @@ void RainOfArrows::attack(Squad* defender)
         }
     }
 
-    defender->m_health -= m_attackDamage;
+    defender->m_hm.takeDamage(m_attackDamage);
 
     for(int i = 0; i < surrounding.size(); i ++)
     {
-        surrounding[i]->m_health -= m_attackDamage;
+        surrounding[i]->m_hm.takeDamage(m_attackDamage);
     }
 }

@@ -10,9 +10,10 @@ class Animator
 {
     public:
         Animator();
+        Animator(const Animator&, SDL_Rect objRect);
         virtual ~Animator();
 
-        SDL_Rect* m_objRect;
+        SDL_Rect m_objRect;
         SDL_Renderer* m_renderer;
 
         ///TO-DO make loop animation
@@ -22,14 +23,19 @@ class Animator
         unsigned short m_frames;
         double m_timePerFrame;
 
-        void initAnimation(string configFile, SDL_Rect* objRect);
+        bool isFinished();
+
+        void initAnimation(string configFile);
         void start();
-        bool update();
+        void update();
         void draw();
     protected:
 
     private:
+        bool m_animationEnded;
+
         chrono::time_point<chrono::steady_clock> m_lastFrameTime = chrono::steady_clock::now();
+        chrono::time_point<chrono::steady_clock> m_startFrame = chrono::steady_clock::now();
         chrono::duration<double> diff;
 };
 

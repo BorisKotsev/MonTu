@@ -1,5 +1,5 @@
 Img: warrior.bmp warrior.bmp
-Width_Height: 70 70
+Width_Height: 80 80
 
 Health: 100
 AttackDmg: 5

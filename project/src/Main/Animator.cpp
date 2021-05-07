@@ -8,15 +8,30 @@ extern World world;
 
 Animator::Animator()
 {
-    //ctor
+    m_animationEnded = false;
 }
 
 Animator::~Animator()
 {
-
+    delete m_sprites;
 }
 
-void Animator::initAnimation(string configFile, SDL_Rect* objRect)
+Animator::Animator(const Animator& model, SDL_Rect rect)
+{
+    m_duration = model.m_duration;
+    m_frames = model.m_frames;
+    m_srcRect = model.m_srcRect;
+
+    m_renderer = world.m_main_renderer;
+
+    m_sprites = model.m_sprites;
+
+    m_timePerFrame = model.m_timePerFrame;
+
+    m_objRect = rect;
+}
+
+void Animator::initAnimation(string configFile)
 {
     configFile = "config//Animations//" + configFile;
 
@@ -34,11 +49,12 @@ void Animator::initAnimation(string configFile, SDL_Rect* objRect)
 
     stream.close();
 
+    m_srcRect.x = 0;
+    m_srcRect.y = 0;
+
     m_renderer = world.m_main_renderer;
 
     m_sprites = LoadTexture(spritesLocation, m_renderer);
-
-    m_objRect = objRect;
 
     m_timePerFrame = (double) m_duration / (double)m_frames;
 }
@@ -46,9 +62,10 @@ void Animator::initAnimation(string configFile, SDL_Rect* objRect)
 void Animator::start()
 {
     m_lastFrameTime = chrono::steady_clock::now();
+    m_startFrame = chrono::steady_clock::now();
 }
 
-bool Animator::update()
+void Animator::update()
 {
     diff = chrono::steady_clock::now() - m_lastFrameTime;
 
@@ -57,16 +74,21 @@ bool Animator::update()
         m_srcRect.x += m_srcRect.w;
 
         m_lastFrameTime = chrono::steady_clock::now();
+
+        diff = chrono::steady_clock::now() - m_startFrame;
         if(diff.count() > m_duration)
         {
-            return false;
+            m_animationEnded = true;
         }
     }
-
-    return true;
 }
 
 void Animator::draw()
 {
-    SDL_RenderCopy(m_renderer, m_sprites, &m_srcRect, m_objRect);
+    SDL_RenderCopy(m_renderer, m_sprites, &m_srcRect, &m_objRect);
+}
+
+bool Animator::isFinished()
+{
+    return m_animationEnded;
 }

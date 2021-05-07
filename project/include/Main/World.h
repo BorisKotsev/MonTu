@@ -19,7 +19,6 @@
 #include "SoundManager.h"
 #include "HealthManager.h"
 #include "PopUpWriter.h"
-#include "PickAndBan.h"
 #include "PlayerStatsManager.h"
 #include "Battle.h"
 #include "Menu.h"
@@ -42,7 +41,6 @@ class World
 
         ConfigManager m_configManager;
         SoundManager m_soundManager;
-        PickAndBan m_pickAndBan;
         HealthManager m_healthManager;
         PlayerStatsManager m_playerStatsManager;
         Battle m_battle;

@@ -1,5 +1,5 @@
 Img: knights.bmp knights.bmp
-Width_Height: 50 50
+Width_Height: 72 60
 
 Health: 100
 AttackDmg: 5

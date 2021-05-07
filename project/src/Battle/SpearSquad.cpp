@@ -8,9 +8,9 @@ SpearSquad::SpearSquad()
     //ctor
 }
 
-SpearSquad::SpearSquad(const SpearSquad& model, coordinates* cameraOffset, Tile* tile, OWNER owner)
+SpearSquad::SpearSquad(const SpearSquad& model, coordinates* cameraOffset, Tile* tile, OWNER owner, HealthManager hm)
 {
-    m_startHealth = model.m_startHealth;
+    m_startNumberOfUnits = model.m_startNumberOfUnits;
     m_startAttackDamage = model.m_startAttackDamage;
     m_startSpeed = model.m_startSpeed;
     m_startAttackRange = model.m_startAttackRange;
@@ -27,7 +27,7 @@ SpearSquad::SpearSquad(const SpearSquad& model, coordinates* cameraOffset, Tile*
     m_objectRect.w = model.m_objectRect.w;
     m_objectRect.h = model.m_objectRect.h;
 
-    m_health = m_startHealth;
+    m_numberOfUnits = m_startNumberOfUnits;
     m_attackDamage = m_startAttackDamage;
     m_speed = m_startSpeed;
     m_attackRange = m_startAttackRange;
@@ -46,7 +46,9 @@ SpearSquad::SpearSquad(const SpearSquad& model, coordinates* cameraOffset, Tile*
 
     m_owner = owner;
 
-    m_hm = model.m_hm;
+    m_hm = hm;
+    m_hm.m_numberOfUnits = &m_numberOfUnits;
+    m_hm.updateUnitsNumber();
 
     m_moved = false;
     m_attacked = false;

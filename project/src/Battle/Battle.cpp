@@ -11,13 +11,15 @@ Battle::Battle()
     m_playerTurn = PLAYER1;
     m_showFillBtn = true;
     m_showAttackTiles = false;
+    m_squadIsWalking = false;
+    m_currentMovingSquad = nullptr;
 }
 
 Battle::~Battle()
 {
     //dtor
 }
-//{INIT
+//{ INIT
 void Battle::initBattle(string configFile)
 {
     m_renderer = world.m_main_renderer;
@@ -43,6 +45,14 @@ void Battle::initBattle(string configFile)
 
     m_armyManager.init("armyManager.txt");
     m_popUpWriter.init("PopUpWriter.txt", m_renderer);
+
+
+    m_unwalkableTiles = new bool*[m_rows];
+
+    for(short i = 0; i < m_rows; i ++)
+    {
+        m_unwalkableTiles[i] = new bool[m_colls]();
+    }
 
     m_selectedTileUI.objTexture = LoadTexture(selectedImg, m_renderer);
     m_attackTileUI.objTexture = LoadTexture(attackTileImg, m_renderer);
@@ -74,7 +84,7 @@ void Battle::initDirection(string configFile)
 
 void Battle::initGameSession()
 {
-    m_armyManager.deployArmy(1);
+    m_armyManager.deployArmy(3);
     m_armyManager.deployArmy(PLAYER1);
 }
 
@@ -179,7 +189,7 @@ void Battle::initTiles(string configFile)
 }
 //}
 
-//{MAIN
+//{ MAIN
 void Battle::update()
 {
     world.cameraShake();
@@ -187,7 +197,6 @@ void Battle::update()
     selectTile();
 
     m_selectedTileUI.objRect = m_tiles[m_selected.y][m_selected.x]->m_objectRect;
-
     squadActionsCheck();
     if(world.m_mouseIsPressed)
     {
@@ -197,6 +206,13 @@ void Battle::update()
         }
     }
     checkForTurnSwitch();
+
+    for(int i = 0; i < m_particles.size(); i ++)
+    {
+        m_particles[i]->update();
+    }
+
+    cleaner();
 }
 
 void Battle::draw()
@@ -228,6 +244,12 @@ void Battle::draw()
         (*it) -> draw();
     }
 
+    for(int i = 0; i < m_particles.size(); i ++)
+    {
+        m_particles[i]->draw();
+    }
+
+
     m_popUpWriter.draw(m_tiles[m_selected.y][m_selected.x]->m_objectRect, m_popUpWriter.m_buildingListRect, m_popUpWriter.m_buildingListTexture);
 
     if (m_showFillBtn)
@@ -243,11 +265,20 @@ void Battle::cleaner()
 {
     for(int i = 0; i < m_squads.size(); i ++)
     {
-        if(m_squads[i]->m_health <= 0)
+        if(m_squads[i]->m_numberOfUnits <= 0)
         {
             //TODO(konstantin #3): add dead animation
             delete m_squads[i];
-            m_squads[i] = nullptr;
+            m_squads.erase(m_squads.begin() + i);
+            i--;
+        }
+    }
+    for (int i = 0; i < m_particles.size(); i ++)
+    {
+        if(m_particles[i]->isFinished())
+        {
+            delete m_particles[i];
+            m_particles.erase(m_particles.begin() + i);
             i--;
         }
     }
@@ -328,7 +359,7 @@ coordinates* Battle::giveNeighborCoor(coordinates coor, int direction)
     coor.x += addedCoor.x;
     coor.y += addedCoor.y;
 
-    return &coor;
+    return &m_tiles[coor.y][coor.x]->m_mapCoordinates;
 }
 
 Squad* Battle::giveNeighborSquad(coordinates coor, int direction)
@@ -429,6 +460,10 @@ short Battle::angleToDirectionReverse(short angle)
 
 bool Battle::canTravel(Squad* squad, coordinates desiredPosition)
 {
+    if(m_unwalkableTiles[desiredPosition.y][desiredPosition.y])
+    {
+        return false;
+    }
     int movementMap[m_rows][m_colls];
     // Takes the position and speed of the Squad
     coordinates position = squad->m_tileTaken->m_mapCoordinates;
@@ -529,11 +564,13 @@ bool Battle::canTravel(Squad* squad, coordinates desiredPosition)
             buff = giveNeighbor(buff, minimumIndex)->m_mapCoordinates;
             if(movementMap[buff.y][buff.x] == 0)
             {
+                //m_walkableTiles[buff.y][buff.x] = false;
                 valueFound = true;
             }
         }
         /// cout << "INFO: Moving is possible " << movementMap[buff.y][buff.x] << " " << movement << endl;
         squad->m_path = path;
+        squad->m_mapCoor = desiredPosition;
 
         // Check if the squad is surrounded with impossible to walk-through tiles, but has speed
         if(movement != 0)
@@ -566,24 +603,32 @@ bool Battle::canTravel(Squad* squad, coordinates desiredPosition)
 
 bool Battle::canShoot(Squad* squad, coordinates targetPosition)
 {
-    vector <coordinates*> surrounding;
+
+    vector<coordinates*> returnVector;
+
+    vector<coordinates*>* thisStep;
+    vector<coordinates*>* nextStep;
 
     bool foundResult = false;
     unsigned short step = 0;
-    surrounding.push_back(&(squad->m_tileTaken->m_mapCoordinates));
-    coordinates* buff;
+
+    coordinates* buff = nullptr;
+    thisStep = new vector<coordinates*>;
+    thisStep->push_back(&squad->m_tileTaken->m_mapCoordinates);
+
     while(step < squad->m_attackRange)
     {
-        for(unsigned short i = 0; i < surrounding.size(); i ++)
+        nextStep = new vector<coordinates*>;
+        for(unsigned short i = 0; i < thisStep->size() && !foundResult; i ++)
         {
-            for(unsigned short j = 0; j < 6; j ++)
+            for(unsigned short j = 0; j < 6 && !foundResult; j ++)
             {
-                buff = giveNeighborCoor((*surrounding[i]), j);
+                buff = giveNeighborCoor(*(*thisStep)[i], j);
                 if(buff != nullptr)
                 {
-                    for (unsigned short k = 0; k < surrounding.size(); k ++)
+                    for (unsigned short k = 0; k < returnVector.size(); k ++)
                     {
-                        if(buff == surrounding[k])
+                        if(buff == returnVector[k])
                         {
                             buff = nullptr;
                             break;
@@ -595,17 +640,60 @@ bool Battle::canShoot(Squad* squad, coordinates targetPosition)
                         {
                             foundResult = true;
                         }
+                        returnVector.push_back(buff);
+                        nextStep->push_back(buff);
+                    }
+                }
+            }
+        }
+        thisStep = nextStep;
+        step++;
+    }
+    /*
+    while(step < squad->m_attackRange)
+    {
+
+
+        //cout << "HERE" << endl;
+
+        for(unsigned short i = 0; i < surrounding.size(); i ++)
+        {
+           /// cout << __LINE__ << endl;
+            for(unsigned short j = 0; j < 6; j ++)
+            {
+                buff = giveNeighborCoor((*surrounding[i]), j);
+                if(buff != nullptr)
+                {
+                    ///cout << __LINE__ << " " << i << " " << surrounding.size() << endl;
+                    for (unsigned short k = 0; k < surrounding.size(); k ++)
+                    {
+                        if(buff == surrounding[k])
+                        {
+                            ///cout << __LINE__ << endl;
+                            buff = nullptr;
+                            break;
+                        }
+                    }
+                    if(buff != nullptr)
+                    {
+                        if(buff->x == targetPosition.x && buff->y == targetPosition.y)
+                        {
+                            foundResult = true;
+                        }
+                        cout << "WE HAVE " << buff->x << " " << buff->y << endl;
                         surrounding.push_back(buff);
                     }
                 }
             }
         }
         step++;
-    }
 
+    }
+    */
     // If has the same owner
     if(!foundResult || findSquadByCoor(targetPosition)->m_owner == squad->m_owner)
     {
+        /// cout << "CAN'T SHOOT " << squad->m_tileTaken->m_mapCoordinates.x << " " << squad->m_tileTaken->m_mapCoordinates.y << " "  << targetPosition.x << " " << targetPosition.y <<  "\n";
         return false;
     }
     /* A part of code the is not used for now
@@ -768,7 +856,6 @@ vector<Tile*> Battle::showAvailableShootTiles(Squad* squad)
     Tile* buff = nullptr;
     thisStep = new vector<Tile*>;
     thisStep->push_back(squad->m_tileTaken);
-    D(squad->m_attackRange);
     while(step < squad->m_attackRange)
     {
         nextStep = new vector<Tile*>;
@@ -798,7 +885,6 @@ vector<Tile*> Battle::showAvailableShootTiles(Squad* squad)
         thisStep = nextStep;
         step++;
     }
-    D(returnVector.size());
     return returnVector;
 }
 
@@ -809,19 +895,19 @@ void Battle::initSquad(SQUAD type, coordinates mapCoor, OWNER owner)
     switch(type)
     {
         case WARRIOR:
-            squad = new Squad(*(world.m_configManager.modelSquadWarrior), (&world.m_cameraOffset), tile, owner);
+            squad = new Squad(*(world.m_configManager.modelSquadWarrior), (&world.m_cameraOffset), tile, owner, *world.m_configManager.modelHealthManager);
             break;
         case ARCHER:
-            squad = new Squad(*(world.m_configManager.modelSquadArcher), (&world.m_cameraOffset), tile, owner);
+            squad = new Squad(*(world.m_configManager.modelSquadArcher), (&world.m_cameraOffset), tile, owner, *world.m_configManager.modelHealthManager);
             break;
         case SPEARMEN:
-            squad = new SpearSquad(*(world.m_configManager.modelSquadSpearmen), (&world.m_cameraOffset), tile, owner);
+            squad = new SpearSquad(*(world.m_configManager.modelSquadSpearmen), (&world.m_cameraOffset), tile, owner, *world.m_configManager.modelHealthManager);
             break;
         case CROSSBOWMEN:
-            squad = new HookSquad(*(world.m_configManager.modelSquadCrossbowmen), (&world.m_cameraOffset), tile, owner);
+            squad = new HookSquad(*(world.m_configManager.modelSquadCrossbowmen), (&world.m_cameraOffset), tile, owner, *world.m_configManager.modelHealthManager);
             break;
         case KNIGHTS:
-            squad = new Squad(*(world.m_configManager.modelSquadKnights), (&world.m_cameraOffset), tile, owner);
+            squad = new Squad(*(world.m_configManager.modelSquadKnights), (&world.m_cameraOffset), tile, owner, *world.m_configManager.modelHealthManager);
             break;
         default:
             squad = nullptr;
@@ -830,6 +916,7 @@ void Battle::initSquad(SQUAD type, coordinates mapCoor, OWNER owner)
     if(tile != nullptr)
     {
         m_squads.push_back(squad);
+        m_unwalkableTiles[mapCoor.y][mapCoor.x] = true;
     }
 }
 
@@ -852,6 +939,7 @@ void Battle::switchTurn()
 
     if (m_playerTurn == PLAYER1)
     {
+        cout << "AI MAKING TURN" << endl;
         m_playerTurn = PLAYER2;
         m_enemyAI.takeBattlefield();
         m_enemyAI.makeTurn();
@@ -866,7 +954,7 @@ void Battle::switchTurn()
 
 void Battle::takeDamage(Squad* attacker, Squad* defender)
 {
-    defender->m_health -= attacker->m_attackDamage;
+    defender->m_hm.takeDamage(attacker->m_attackDamage);
 }
 
 void Battle::squadActionsCheck()
@@ -889,7 +977,7 @@ void Battle::squadActionsCheck()
             if(!seletedASquad)
             {
                 /// Is it selected by the player in turn
-                if (m_selectedSquad->m_owner == m_playerTurn)
+                if (m_selectedSquad->m_owner == m_playerTurn && m_selectedSquad->m_path.empty())
                 {
                     /// Have we moved the squad
                     if (m_selectedSquad->m_moved == false)
@@ -915,13 +1003,19 @@ void Battle::squadActionsCheck()
             else
             {
                 /// We have selected a Squad
-                if(oldSquad != m_selectedSquad && !(oldSquad->m_attacked) && canShoot(oldSquad, m_selectedSquad->m_mapCoor) && m_selectedSquad->m_owner != oldSquad ->m_owner)
+                if(oldSquad != m_selectedSquad && !(oldSquad->m_attacked) && canShoot(oldSquad, m_selectedSquad->m_tileTaken->m_mapCoordinates) && m_selectedSquad->m_owner != oldSquad ->m_owner)
                 {
                     /// We can shoot it
                     oldSquad->attack(m_selectedSquad);
                     world.m_startShake = time(nullptr);
                     oldSquad->m_attacked = true;
                     oldSquad->m_moved = true;
+                    m_availableShootTiles.clear();
+                    m_availableWalkTiles.clear();
+                    m_selectedSquad = nullptr;
+                }else if(m_selectedSquad->m_owner == m_playerTurn && m_selectedSquad != oldSquad)
+                {
+                    /// We have selected another of out own units, cancel the show Walk/Shooting tiles of the old one
                     m_availableShootTiles.clear();
                     m_availableWalkTiles.clear();
                     m_selectedSquad = nullptr;
@@ -939,20 +1033,24 @@ void Battle::squadActionsCheck()
                     seletedASquad = true;
                 }
             }
-            /// We have selected
+            // TODO (konstantin #1#): Fix bug with clicking a tile before the squad arrives also with shooting
+            /// We have selected the same squad
             if(seletedASquad && m_selectedSquad->m_owner == m_playerTurn)
             {
-                if(!(m_selectedSquad->m_moved))
+                if(m_selectedSquad->m_path.empty())
                 {
-                    m_showFillBtn = true;
-                    m_showAttackTiles = false;
-                    m_availableWalkTiles = showAvailableWalkTiles(m_selectedSquad);
-                }
-                else if(!(m_selectedSquad->m_attacked))
-                {
-                    m_showFillBtn = true;
-                    m_showAttackTiles = true;
-                    m_availableShootTiles = showAvailableShootTiles(m_selectedSquad);
+                    if(!(m_selectedSquad->m_moved))
+                    {
+                        m_showFillBtn = true;
+                        m_showAttackTiles = false;
+                        m_availableWalkTiles = showAvailableWalkTiles(m_selectedSquad);
+                    }
+                    else if(!(m_selectedSquad->m_attacked))
+                    {
+                        m_showFillBtn = true;
+                        m_showAttackTiles = true;
+                        m_availableShootTiles = showAvailableShootTiles(m_selectedSquad);
+                    }
                 }
             }
             else if (!seletedASquad)
@@ -964,6 +1062,7 @@ void Battle::squadActionsCheck()
     // Hide the skip_turn_btn if there is a squad behind it
     for(vector <Squad*> :: iterator it = m_squads.begin(); it != m_squads.end(); it++)
     {
+
         (*it) -> update();
 
         if (checkForCollisionBetweenRects(m_skipTurnFillBtn.objRect, (*it)->m_objectRect))
@@ -972,13 +1071,12 @@ void Battle::squadActionsCheck()
         }
         if(m_selectedSquad != nullptr)
         {
-            cout << "-----------------------------------------------------" << endl;
+            /*
             if(canShoot(m_selectedSquad, (*it)->m_mapCoor) && m_selectedSquad != (*it) && m_availableWalkTiles.size() != 0)
             {
-                cout << "-----------------------------------------------------" << endl;
-
                 m_availableShootTiles.push_back(m_tiles[(*it)->m_mapCoor.y][(*it)->m_mapCoor.x]);
             }
+            */
         }
     }
 }
@@ -1001,3 +1099,56 @@ void Battle::checkForTurnSwitch()
         switchTurn();
     }
 }
+
+/*
+vector<Tile*> returnVector;
+
+    vector<Tile*>* thisStep;
+    vector<Tile*>* nextStep;
+
+    bool foundResult = false;
+    unsigned short step = 0;
+
+    Tile* buff = nullptr;
+    thisStep = new vector<Tile*>;
+    thisStep->push_back(squad->m_tileTaken);
+
+    cout << "START OF CAN SHOOT \n";
+    while(step < squad->m_attackRange)
+    {
+        nextStep = new vector<Tile*>;
+        for(unsigned short i = 0; i < thisStep->size() && !foundResult; i ++)
+        {
+            for(unsigned short j = 0; j < 6 && !foundResult; j ++)
+            {
+                buff = giveNeighbor(((*thisStep)[i]->m_mapCoordinates), j);
+                if(buff != nullptr)
+                {
+                    for (unsigned short k = 0; k < returnVector.size(); k ++)
+                    {
+                        if(buff == returnVector[k])
+                        {
+                            buff = nullptr;
+                            break;
+                        }
+                    }
+                    if(buff != nullptr)
+                    {
+                        if(buff->m_mapCoordinates.x == targetPosition.x && buff->m_mapCoordinates.y == targetPosition.y)
+                        {
+                            foundResult = true;
+                        }
+                        cout << "HERE\n";
+                        returnVector.push_back(buff);
+                        cout << __LINE__ << endl;
+                        nextStep->push_back(buff);
+                        cout << "Here\n";
+                    }
+                }
+            }
+        }
+        thisStep = nextStep;
+        step++;
+    }
+
+*/

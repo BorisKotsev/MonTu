@@ -1,4 +1,6 @@
 #include "Engine.h"
+#include "World.h"
+extern World world;
 
 SDL_Texture* LoadTexture(string file, SDL_Renderer* renderer)
 {
@@ -21,6 +23,36 @@ SDL_Texture* LoadTexture(string file, SDL_Renderer* renderer)
         return NULL;
     }
     return objectTexture;
+}
+
+SDL_Texture* stringToTexture(string input, int FONT_SIZE)
+{
+    SDL_Texture* texture;
+    SDL_Surface* surface;
+    SDL_Rect rect;
+    SDL_Color fcolor;
+    TTF_Font* font;
+
+    string str = "ttf/Perpetua-Titling-MT.ttf";
+    // Basically translates to pixel size
+    font = TTF_OpenFont(str.c_str(), FONT_SIZE);
+
+    if (font == NULL)
+    {
+        fprintf(stderr, "error: font not found\n");
+        exit(EXIT_FAILURE);
+    }
+
+    fcolor.r = 255;
+    fcolor.g = 164;
+    fcolor.b = 92;
+    fcolor.a = 255;
+    const char* t = input.c_str();
+    surface = TTF_RenderText_Blended(font, t, fcolor);
+    texture = SDL_CreateTextureFromSurface(world.m_main_renderer, surface);
+    SDL_FreeSurface(surface);
+
+    return texture;
 }
 
 SDL_Point* LoadPoint(coordinates coor)
@@ -146,8 +178,9 @@ void write(string text, coordinates coor, SDL_Renderer* renderer, int FONT_SIZE)
     fcolor.r = 255;
     fcolor.g = 164;
     fcolor.b = 92;
+    fcolor.a = 255;
     const char* t = text.c_str();
-    surface = TTF_RenderText_Solid(font, t, fcolor);
+    surface = TTF_RenderText_Blended(font, t, fcolor);
     texture = SDL_CreateTextureFromSurface(renderer, surface);
     rect.w = surface->w;
     rect.h = surface->h;

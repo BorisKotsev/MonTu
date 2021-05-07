@@ -20,6 +20,8 @@
 #include "SpearSquad.h"
 #include "HookSquad.h"
 
+#include "Particle.h"
+
 class Battle
 {
     public:
@@ -46,6 +48,9 @@ class Battle
         bool m_showFillBtn;
         bool m_showAttackTiles;
 
+        bool m_squadIsWalking;
+        Squad* m_currentMovingSquad;
+
         coordinates m_selected;
         Squad* m_selectedSquad;
         Tile* m_selectedTile;
@@ -53,8 +58,10 @@ class Battle
         // Those are the coordinates that we use for determining the neighbors of a tile
         coordinates directions[2][6];
 
-        vector<vector<Tile*> > m_tiles;
+        bool** m_unwalkableTiles;
+        vector<vector<Tile*>> m_tiles;
         vector<Squad*> m_squads;
+        vector<Particle*> m_particles;
 
         vector<Tile*> m_availableWalkTiles;
         vector<Tile*> m_availableShootTiles;

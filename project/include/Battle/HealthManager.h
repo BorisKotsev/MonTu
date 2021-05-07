@@ -14,23 +14,24 @@
 #include "Engine.h"
 #include "defines.h"
 
-//TODO (konstantin#1#): change the texture with the one in adobe xd, use health to determine how many soldiers will die
 class HealthManager
 {
     public:
-        SDL_Texture* m_healthBarFullTxtr;
-        SDL_Texture* m_healthBarEmptyTxtr;
+        SDL_Texture* m_objectTexture;
+        SDL_Texture* m_numbersTexture;
 
         SDL_Renderer* m_renderer;
 
-        SDL_Rect m_imgRect;
-        SDL_Rect m_drawBorderRect;
-        SDL_Rect m_drawFillRect;
+        SDL_Rect m_objectRect;
+        SDL_Rect m_numbersRect;
 
-        float m_healthBarWidth;
+        int m_damageDevider;
+        short* m_numberOfUnits;
 
         void init(string configFile, SDL_Renderer* renderer);
-        void drawHealthbar(SDL_Renderer* renderer, SDL_Rect objRect, float health, float maxHealth);
+        void drawHealthbar(SDL_Renderer* renderer, SDL_Rect objRect);
+        void takeDamage(double damage);
+        void updateUnitsNumber();
 
         HealthManager();
         virtual ~HealthManager();
